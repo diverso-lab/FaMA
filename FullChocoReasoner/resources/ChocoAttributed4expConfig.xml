@@ -1,0 +1,3 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion" class="es.us.isa.ChocoReasoner4Exp.attributed.questions.ChocoExplainErrorsQuestion"/>
+</reasoner>

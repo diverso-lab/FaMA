@@ -1,0 +1,19 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.OneProductQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoOneProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoValidQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoSetQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoNumberOfProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoFilterQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoCommonalityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoValidProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoValidConfigurationQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoDetectErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoVariabilityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoValidConfigurationErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.CoreFeaturesQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoCoreFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.UniqueFeaturesQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoUniqueFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.HomogeneityQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoHomogeneityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.VariantFeaturesQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoVariantFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion" class="es.us.isa.ChocoReasoner.questions.ChocoExplainInvalidProductQuestion"/>
+</reasoner>

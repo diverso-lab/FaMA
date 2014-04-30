@@ -1,0 +1,296 @@
+AREA,CARACTERISTIC,FEATURE
+Supported Metaheuristics
+,SD (Steepest Descent / Hill Climbing)
+,,Basic Implementation
+,,Multi-Start 
+,SA (Simulated Annealing)
+,,Basic Impl.
+,,Lineal Annealing
+,,Exponential/Geometric Annealing
+,,Logaritmic Annealing
+,,Termodinamic Annealing 1
+,,Termodinamic Annealing 2
+,TS (Tabu Search)
+,,Basic Impl. Full solution tabu list
+,,Recent Features/Moves Based Tabu Memory
+,,Frecuency Based Tabu Memory
+,,Basic Aspiration Criteria
+,,Grasp Support
+,VNS (Variable Neighborhood Search)
+,,Basic VNS (VNS)
+,,Variable Neighborhood Descent (VND)
+,,Reduced VNS (RVNS)
+,,VNS with Decompsition (VNDS)
+,,Skewed VNS (SVNS)
+,EA (Evolutionary Algorithms)
+,,"Basic EA Implementation (GP,GA,ES)"
+,,GAVaPS
+,,Diploid Individuals support
+,,Niching Methods
+,PSO (Particle Swarn Optimization)
+,,Basic Implementation
+,,Discrete Variable Suppport
+,,Customizable Dinamic Equations
+,,Lifetime support
+,AIS (Artificial Immune Systems)
+,,CLONAG
+,,optIA
+,,Immune Networks
+,,Detritic Cell Algorithms
+,AS/ACO/API
+,,AS
+,,ACO
+,,MMAS
+,,ASrank
+,,API
+,MultiObjective Metaheuristics
+,,PGA
+,,MOGA
+,,NSGA
+,,NSGA-II
+,,NPGA
+,,SPEA
+,,SPEA-II
+,,PAES
+,,PESA
+,,PESA-II
+,,MOMGA
+,,ARMOGA
+,,Multiobjective AS/ACO
+,,Multiobjective PSO
+,,POSA
+,,MOSA
+2 Problem Adaption/Encoding
+,Solution enconding
+,,Bit Vector
+,,Bit Matrix
+,,Bit Map
+,,Bit GrayCode Vector
+,,Integer Vector
+,,Integer Matrix
+,,Integer Map
+,,Real Vector
+,,Real Matrix
+,,Real Map
+,,String Vector
+,,String Matrix
+,,String Map
+,,Permutation
+,,Expression Tree
+,,State-Machine / Graph
+,,Combined / Arbitrary representations
+,Neighborhood Definition
+,,Neighborhood structures for solution encodings
+,,Neighborhood structures for composite solution encondings
+,,Complex Neighborhood structures (using diferent neighborhood structures depending on a probability or rules)
+,E/A Auxiliary Methods
+,,(1Pc) Integer/Bit Vector One Point Crossover
+,,(NPc) Integer/Bit Vector n-Points Crossover (including 2)
+,,(Uc) Integer/Bit Vector Uniform crossover
+,,(PNCTc) Integer/Bit Vector Punctuated Crossover
+,,(Sc) Integer/Bit Vector Shuffled Crossover
+,,(RRc) Integer/Bit Vector Random Respectfull Recombination
+,,(R1Pc) Real Vector One Point Crossover
+,,(RNPc) Real Vector n-Points Crossover (including 2)
+,,(RUc) Real Vector Uniform Crossover
+,,(RAc/BLXc) Real Vector Arithmetic Crossover
+,,(RHc) Real Vector Heuristic Crossover
+,,(RSPLXc) Real Vector Simplex Crossover
+,,(SBXc) Real Vector Simulated Binary crosssover
+,,(F-BSc) Real Vector Fitness Scaning Based Crossover
+,,(DMPc) Real Vector  Diagonal Multi-Parental Crossover
+,,(PDOc) Permutation Davis’ order Crossover
+,,(PPMc) Permutation Partially mapped Crossover
+,,(P2Oc) Permutation Order 2 Crossover
+,,(PPc) Permutation Position Crossover
+,,(PDUc) Permutation Davis Unifform Crossover
+,,(PMPXc) Permuation Maximal Preservative Crossover
+,,(PCc) Permutatio Cycle Crossover
+,,(TCc) Tree Cramer Crossover
+,,(TKc) Tree Koza Crossover
+,,(TMc) Tree Montana Crossover
+,,(SMFc) State Machine Fogel Crossover
+,,(SM1Pc) State Machine Zou & Grefenstette Crossover
+,,(SMUc) State Machine Uniform Crossover
+,,(SMJo) State Machine Joing Operator
+,,(CSc) Composite/Combined Solution Encoding Crossover
+,,(CPXc) Complex Crossover operator (Combining a set of valid crossover operators with a probability of application)
+,,(Bm) Binary/Integer Vector Basic Mutation
+,,(RUm) Real Vector Unifform Mutation
+,,(RNm) Real Vector Normal Mutation
+,,(RCM) Real Vector Cauchy Mutation
+,,(RLm) Real Vector Laplace Mutation
+,,(RSDm) Real Vector Schwefel Dinamic Mutation
+,,(RFDm) Real Vector Fogel Dinamic Mutation
+,,(P2Optm) Permutation 2-Opt mutation
+,,(P3Optm) Permutation 3-Opt mutation
+,,(PKOptm) Permutation K-Opt mutation
+,,(PSWm) Permutation Swap Mutation
+,,(PIm) Permutation Insertion Mutation
+,,(PSCm) Permutation Scramble Mutation
+,,(TGm) Tree Grow Mutation
+,,(TSHm) Tree Shrink Mutation
+,,(TSWm) Tree Swapping Mutation
+,,(TCm) Tree Cycle Mutation
+,,(SMBm) State Machine Basic Mutation Operator
+,,(CSm) Composite/Combined Solution Encoding Mutation
+,,(CPXm) Complex Mutation operator
+,,(DEm) Dinamic probaility mutation
+,Solution Selection
+,,Elitist Selector (Es)
+,,Expected Value Selector (EVs)
+,,Elitist Expected Value Selector (EEVs)
+,,Proportional Selector (Ps)
+,,Determinist Sampling Selector (DSs)
+,,Remaining Stocastic Sampling Selector (RSSs)
+,,Stocastic Tournament Selector (STs)
+,,Stocastic Universal Sampling Selector (SUSs)
+,,Linear Ranking Selector (LRs)
+,,"Mu,Lambda Selector (MLs)"
+,,Mu+Lambda Selector (M+Ls)
+,,Threshold Selector (Ths)
+,,Boltzman Selector (Bs)
+,,Random Selector (RNDs)
+,,Combined Selector (CMBs)
+,Objective Function Specification
+,,DSL for Objective Function Definition (DSLof)
+,,GUI & Graph. tools for Objective Function Definition (GUIof)
+,,Constraint Penalization on Objective Function (CPof)
+,,Interactive Objective Function Definition (Iof)
+3 Advanced Metaheuristic Characteristics
+,Hybridization support
+,,(BEMIh) Batch Execution Multiple Instances Hybridization
+,,(BEMMh) Batch Execution Multiple Metaheuristics Hybridization
+,,(IMMh) Interleaved Multiple Metaheuristics Hybridization
+,,(Ch) Combined Hibridizacion
+,Hyper-Heuristics support
+,,Pre-implemented Parameter Setting meta-problem 
+,,Pre-Implemented Technique selection meta-problem
+,,Pre-implemented Operators/Low level heuristics selection meta-problem
+,,Pre-implemented solution encoding selection meta-problem
+,Parallel and Distributed Optimization
+,,(IPDM) Independent Parallel & Distributed Metaueristics execution
+,,(SSPDM) Shared Solutions (or Populations) Parallel & Distributed Metaheuristics
+,,(LSPDNM) Local Search using Parallel & Dist Neighborhood exporation . Metah.
+,,(PDPEDM) Parallel & Distributed Population Evaluation Metah.
+,,(PDESSM) Paralell & Dist. Evaluation of Single Solution  Metah.
+,Metaheuristic Technique Specification Language
+,,Support for EASEA
+,,FrameworkSpecific DLS to describe metaheuristic techniques
+,,"Helpers for Technique Description edition (debugger, sintax coloring, UI)"
+4 Optimization Process Support
+,Finalization Conditions support
+,,Max iterations terminator
+,,Max execution time terminator
+,,Max objetive function evaluatons terminator
+,,Max iter./exec. time/obj. func. ev. without improvement terminator
+,,Composite Logical combinations terminator
+,,Techique specific
+,, Customization support
+,Batch processing
+,,Automated repetition of a single optimization task
+,,Automated repeticion of a task varying parameters of the technique
+,,Automated repetition of different tasks (possibly varying the parameter of each one)
+,,Automated repetition of different tasks (possibly varying the parameter of each one) over different instances of the problem
+,,Random execution of planified tasks
+,Experiments Design Support
+,,Hypothesis Definition Support
+,,Experiment Modelling Support (Definition of Dependent and Independent Variables)
+,,"Experiment Design Suppoort (Factorial, fractional, latin squares, nested, etc.)"
+,,Experiment Execution Support
+,Statistical Analysis features
+,,T-Student
+,,One way ANOVA
+,,Two way ANOVA
+,,Multi-way ANOVA
+,,Wilcoxon
+,,Mann-Withney
+,,Kolmogorov-Smirnov
+,User Interface & Graphical Reports
+,,Design & Usability
+,,Metaheuristic techniques configuration & spec.
+,,"Problem definition, modelling and data import"
+,,Support for planning of optimization tasks
+,,Graphical Support for methodological guidance
+,,Charting
+,Interoperability
+,,Data Export
+,,Data Import
+,,Web Services Facade
+,,XML usage for projects & config
+,Methodological Guidance
+
+
+
+
+
+"Design, Implementation & licensing"
+,Implementation Language
+,,C
+,,C++
+,,Java
+,,.NET C#
+,Licensing
+,,LGPL (Open Source)
+,,GPL (Open Source)
+,,Free
+,,Privative
+,Supported Plattforms
+,,Linux
+,,MAC OS
+,,Windows
+,Sof. Eng. Best Practices
+,,Desing patterns application
+,,Documentation of Extension/Variantion Points
+,,UML Diagrams of the Framework
+,,Unit Test Coverage
+,,Reflexive Capabilities (Depence Injection Mechanism/Framework or dynamic loading of classes)
+,Size
+,,Packages / Modules
+,,Classes / Files (for non OO languages)
+,,Lines of Code
+"Documentation, samples & suppport"
+,Preimplemented Problem types / Tutorials
+,,ZDT Problem Family
+,,DTLZ Problem Family
+,,WFG Problem Family
+,,CEC2009 Problem Family
+,,LOTZ  & MLOTZ Problem Familiy
+,,Kursawe problem
+,,Fonseca problem
+,,Schaffer problem
+,,Srinivas Constrained Problem
+,,Tanaka Constrained Problem
+,,Osyczka2 Constrained Problem
+,,Huygens problem
+,,TSP
+,,SAT
+,,QAP
+,,Job Shop Scheduling
+,,Flow Shop Scheduling
+,,Multiobjective 0/1 Knapsack
+,,Prisoner's Dilemma
+,,Symbolic Regression
+,,N-Queens
+,,Graph-Coloring
+,,Protein Structure Prediction
+,,BBV - Biobjective Binary Value Problem
+,,MMPN - Multiprocessor Mappings of Process Networks
+,,Sudoku
+,,Ad-hoc Fucntion
+,Papers
+,,Papers on Journals
+,,Papers on Conferences
+,,Other publications
+,Documentation
+,,User Manual /Tutorial
+,,Developer Manual
+,,How To
+,,FAQ
+,,Web Site
+,"Community of users, Support & Activity"
+,,Used only by its developers
+,,Used by researchers out of the development teaml (possibli of the same research group)
+,,Used by various researchers and research groups
+,,Used by researchers and industrial practitioners
+,,"Used by different rearchers and industrial practitioners, with a growing and active user base"

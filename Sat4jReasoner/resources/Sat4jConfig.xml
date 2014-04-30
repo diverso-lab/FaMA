@@ -1,0 +1,12 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jValidQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jSetQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jNumberOfProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jFilterQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jDefaultCommonalityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jValidProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jValidConfigurationQuestion"></question>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jVariabilityQuestion"></question>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" class="es.us.isa.Sat4jReasoner.questions.Sat4jDetectErrorsQuestion"></question>
+</reasoner>
