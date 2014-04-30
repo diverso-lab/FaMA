@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../feature-model-schema.xsd">
+  <feature name="A">
+  	<binaryRelation name="r-1">
+  		<cardinality max="1" min="0" />
+  		<solitaryFeature name="A"></solitaryFeature>
+  	</binaryRelation></feature>
+</feature-model>

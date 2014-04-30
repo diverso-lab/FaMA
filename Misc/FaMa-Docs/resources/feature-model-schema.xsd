@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!-- a feature model coprises a root and 0..* constraints -->
+	<xs:element name="feature-model">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="feature"/>
+				<xs:element ref="requires" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="excludes" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- a root is comprises with 0..* relations that can be either binary or set relations-->
+	<!-- a general relation has an atribute name to indentify it -->
+	<xs:complexType name="generalRelation">
+		<xs:attribute name="name" use="required"/>
+	</xs:complexType>
+	<!-- a relation is of the type generalRelation -->
+	<xs:element name="relation" type="generalRelation"/>
+	<!-- a binary relation is of an extended type of generalRelation and comprises only one solitaryFeature -->
+	<xs:element name="binaryRelation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="generalRelation">
+					<xs:sequence>
+						<xs:element ref="cardinality" />
+						<xs:element ref="solitaryFeature" />
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- a set relation is of an extended type of generalRelation and comprises 0..* cadninalities and 2..* groupedFeature -->
+	<xs:element name="setRelation">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="generalRelation">
+					<xs:sequence>
+						<xs:element ref="cardinality" maxOccurs="unbounded"/>
+						<xs:element ref="groupedFeature" minOccurs="2" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- a generalFeature is a type that has an attribute called name to identified it and comprises 0..* relations, it also has an element called attribute -->
+	<xs:complexType name="generalFeature">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="binaryRelation" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="setRelation" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required"/>
+	</xs:complexType>
+
+	<!-- a feature is of the type generalFeature -->
+	<xs:element name="feature" type="generalFeature"/>
+
+	<!--  solitaryFeature is of an extended type of generalFeature and comprises of 1..* cardinalities -->
+	<xs:element name="solitaryFeature" type="generalFeature"/>
+		
+	<!--  groupedFeature is of an extended type of generalFeature  and has implicitly the cardinality [1..1]-->
+	<xs:element name="groupedFeature" type="generalFeature"/>
+	<!-- a cardinality comprises two attributes called min and max indicating the boundaries of the cardinalities-->
+	<xs:element name="cardinality">
+		<xs:complexType>
+			<xs:attribute name="min" use="required"/>
+			<xs:attribute name="max" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- requires and  excludes constraints  an attribute called name to identify it-->
+	<xs:element name="requires">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="feature" use="required"/>
+			<xs:attribute name="requires" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="excludes">
+		<xs:complexType>
+			<xs:attribute name="name" use="required"/>
+			<xs:attribute name="feature" use="required"/>
+			<xs:attribute name="excludes" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

@@ -1,0 +1,16 @@
+%Relationships
+Modules: [1,4]{Calendar Forum CongressManagement Repository};
+
+%Attributes
+Modules.version: Integer[0 to 10], 1, 0;
+Calendar.version:Integer[0 to 10], 1, 0;
+Forum.version:Integer[0 to 10], 1, 0;
+CongressManagement.version: Integer[0 to 10], 1, 0;
+Repository.version: Integer[0 to 10], 1, 0;
+
+%Constraints
+Modules.version == max(Calendar.version,Forum.version,CongressManagement.version);
+Calendar.version == 5;
+Forum.version == 5;
+CongressManagement.version == 4;
+Repository.version == 4;

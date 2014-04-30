@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="A">
+	<setRelation name="SR-1">
+		<cardinality min="1" max="1"/>
+		<groupedFeature name="B">
+			<setRelation name="SR-3">
+				<cardinality min="1" max="2"/>
+				<groupedFeature name="F">
+				</groupedFeature>
+				<groupedFeature name="G">
+				</groupedFeature>
+			</setRelation>
+		</groupedFeature>
+		<groupedFeature name="C">
+		</groupedFeature>
+	</setRelation>
+	<setRelation name="SR-2">
+		<cardinality min="1" max="2"/>
+		<groupedFeature name="D">
+		</groupedFeature>
+		<groupedFeature name="E">
+			<setRelation name="SR-4">
+				<cardinality min="1" max="1"/>
+				<groupedFeature name="H">
+				</groupedFeature>
+				<groupedFeature name="I">
+				</groupedFeature>
+			</setRelation>
+		</groupedFeature>
+	</setRelation>
+	</feature>
+</feature-model>

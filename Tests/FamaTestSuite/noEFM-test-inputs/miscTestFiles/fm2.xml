@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="feature-model-schema.xsd">
+  <feature name="C1">
+  	<binaryRelation name="R1">
+  		<cardinality max="1" min="0" />
+  		<solitaryFeature name="C2">
+  			<binaryRelation name="R3">
+  				<cardinality max="1" min="1" />
+  				<solitaryFeature name="C4"></solitaryFeature>
+  			</binaryRelation></solitaryFeature>
+  	</binaryRelation>
+  	<binaryRelation name="R2">
+  		<cardinality max="1" min="1" />
+  		<solitaryFeature name="C3"></solitaryFeature>
+  	</binaryRelation></feature>
+</feature-model>

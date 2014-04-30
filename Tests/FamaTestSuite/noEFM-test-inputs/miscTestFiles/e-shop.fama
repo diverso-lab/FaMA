@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="E-Shop">
+	<binaryRelation name="BR-1">
+		<cardinality min="1" max="1"/>
+		<solitaryFeature name="Catalog">
+			<binaryRelation name="BR-6">
+				<cardinality min="0" max="1"/>
+				<solitaryFeature name="Offers">
+				</solitaryFeature>
+			</binaryRelation>
+			<binaryRelation name="BR-7">
+				<cardinality min="1" max="1"/>
+				<solitaryFeature name="Info">
+					<setRelation name="SR-1">
+						<cardinality min="1" max="3"/>
+						<groupedFeature name="Picture">
+						</groupedFeature>
+						<groupedFeature name="Description">
+						</groupedFeature>
+						<groupedFeature name="Price">
+						</groupedFeature>
+					</setRelation>
+				</solitaryFeature>
+			</binaryRelation>
+			<binaryRelation name="BR-8">
+				<cardinality min="0" max="1"/>
+				<solitaryFeature name="Search">
+					<setRelation name="SR-2">
+						<cardinality min="1" max="2"/>
+						<groupedFeature name="Basic">
+						</groupedFeature>
+						<groupedFeature name="Advanced">
+						</groupedFeature>
+					</setRelation>
+				</solitaryFeature>
+			</binaryRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	<binaryRelation name="BR-2">
+		<cardinality min="1" max="1"/>
+		<solitaryFeature name="Payment">
+			<setRelation name="SR-3">
+				<cardinality min="1" max="2"/>
+				<groupedFeature name="BankDraft">
+				</groupedFeature>
+				<groupedFeature name="CreditCard">
+					<setRelation name="SR-4">
+						<cardinality min="1" max="2"/>
+						<groupedFeature name="Visa">
+						</groupedFeature>
+						<groupedFeature name="AmericanExpress">
+						</groupedFeature>
+					</setRelation>
+				</groupedFeature>
+			</setRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	<binaryRelation name="BR-3">
+		<cardinality min="0" max="1"/>
+		<solitaryFeature name="Security">
+			<setRelation name="SR-6">
+				<cardinality min="1" max="1"/>
+				<groupedFeature name="Basic2">
+				</groupedFeature>
+				<groupedFeature name="High">
+				</groupedFeature>
+			</setRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	<binaryRelation name="BR-4">
+		<cardinality min="1" max="1"/>
+		<solitaryFeature name="GUI">
+			<setRelation name="SR-7">
+				<cardinality min="1" max="2"/>
+				<groupedFeature name="PC">
+				</groupedFeature>
+				<groupedFeature name="Mobile">
+				</groupedFeature>
+			</setRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	<binaryRelation name="BR-5">
+		<cardinality min="0" max="1"/>
+		<solitaryFeature name="Banners">
+		</solitaryFeature>
+	</binaryRelation>
+	</feature>
+	<requires name="Re-1" feature="CreditCard" requires="High"/>
+	<excludes name="Ex-1" feature="Mobile" excludes="Banners"/>
+</feature-model>

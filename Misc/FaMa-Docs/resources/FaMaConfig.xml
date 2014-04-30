@@ -1,0 +1,39 @@
+<questionTrader>
+	<reasoner id="Choco" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner.ChocoReasoner"/>
+	<reasoner id="Choco4exp" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner4Exp.ChocoReasoner"/>
+	<reasoner id="ChocoAttributed" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner.attributed.ChocoReasoner"/>
+	<reasoner id="ChocoAttributed4exp" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner4Exp.attributed.ChocoReasoner"/>
+	<reasoner id="JaCoP" file="lib/JaCoPReasoner-1.0.1.jar" class="es.us.isa.JaCoPReasoner.JaCoPReasoner"/>
+	<reasoner id="Sat4j" file="lib/Sat4jReasoner-1.0.1.jar" class="es.us.isa.Sat4jReasoner.Sat4jReasoner"/>
+	<reasoner id="JavaBDD" file="lib/JavaBDDReasoner-1.0.0.jar" class="es.us.isa.JavaBDDReasoner.JavaBDDReasoner"/>
+	<criteriaSelector name="default" class="es.us.isa.FAMA.Reasoner.DefaultCriteriaSelector"/>
+	<question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion"/>
+	<question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion"/>
+	<question id="ValidConfigurationErrors" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion"/>
+	<question id="ExplainProduct" interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion"/>
+	<question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion"/>
+	<question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion"/>
+	<question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion"/>
+	<question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion"/>
+	<question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion"/>
+	<question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion"/>
+	<question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion"/>
+	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion"/>
+	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion"/>
+	<question id="Core" interface="es.us.isa.FAMA.Reasoner.questions.CoreFeaturesQuestion"/>
+	<question id="ExplainInvalidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion"/>
+	<question id="Homogeneity" interface="es.us.isa.FAMA.Reasoner.questions.HomogeneityQuestion"/>
+	<question id="UniqueFeatures" interface="es.us.isa.FAMA.Reasoner.questions.UniqueFeaturesQuestion"/>
+
+	<models>
+		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+		<reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaAttributedModel-1.0.4.jar"/>
+		<reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+		<writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaAttributedModel-1.0.4.jar"/>
+		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+	</models>
+	<transform id="AtomicSet" interface="es.us.isa.FAMA.Reasoner.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+	<UserInterface file="lib/FaMaShell-0.1.1.jar" mainclass="es.us.isa.FAMA.shell.ShellMain"/>
+</questionTrader>

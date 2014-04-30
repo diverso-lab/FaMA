@@ -1,0 +1,6 @@
+%Relationships
+Player: HighDefinition Connectivity;
+Connectivity: [1,1]{Wifi Data3G};
+
+%Constraints
+HighDefinition REQUIRES Wifi;

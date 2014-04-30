@@ -1,0 +1,18 @@
+<questionTrader>
+	<reasoner id="Choco" file="lib_noscm/ChocoReasoner.jar" class="es.us.isa.ChocoReasoner.ChocoReasoner"/>
+	<question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" file="lib_noscm/FAMAquestions.jar"/>
+	<models>
+		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib_noscm/FAMAmodel.jar"/>
+		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib_noscm/FAMAmodel.jar"/>
+	</models>
+</questionTrader>

@@ -1,0 +1,28 @@
+<feature_model name="allrelationships">
+<meta>
+<data name="description"></data>
+<data name="creator"></data>
+<data name="email"></data>
+<data name="date"></data>
+<data name="department"></data>
+<data name="organization"></data>
+<data name="address">null</data>
+<data name="phone">null</data>
+<data name="website">null</data>
+<data name="reference">null</data>
+</meta><feature_tree>
+r: A (A)
+	:m B (B)
+		:g [1,1]
+			: D (D)
+			: E (E)
+	:o C (C)
+		:g [1,2]
+			: F (F)
+			: G (G)
+</feature_tree>
+<constraints>
+EX-1: ~D or ~G
+RE-1: ~E or F
+</constraints>
+</feature_model>

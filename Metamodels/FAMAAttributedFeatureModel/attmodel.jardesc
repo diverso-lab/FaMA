@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="Libraries/FaMaAttributedModel.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/FAMAAttributedFeatureModel/attmodel.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/FAMAAttributedFeatureModel/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/FAMAAttributedFeatureModel/parser/AnasintTokenTypes.txt"/>
+        <folder path="/FAMAAttributedFeatureModel/META-INF"/>
+        <file path="/FAMAAttributedFeatureModel/parser/AnalexTokenTypes.txt"/>
+        <javaElement handleIdentifier="=FAMAAttributedFeatureModel/src"/>
+        <file path="/FAMAAttributedFeatureModel/parser/FaMaTreeParserTokenTypes.txt"/>
+        <file path="/FAMAAttributedFeatureModel/parser/Analex.smap"/>
+        <javaElement handleIdentifier="=FAMAAttributedFeatureModel/parser&lt;es.us.isa.FAMA.parser"/>
+        <file path="/FAMAAttributedFeatureModel/parser/Anasint.smap"/>
+        <file path="/FAMAAttributedFeatureModel/parser/FaMaTreeParser.smap"/>
+    </selectedElements>
+</jardesc>

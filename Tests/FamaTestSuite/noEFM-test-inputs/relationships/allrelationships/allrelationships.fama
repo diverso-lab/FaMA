@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="A">
+	<binaryRelation name="BR-1">
+		<cardinality min="1" max="1"/>
+		<solitaryFeature name="B">
+			<setRelation name="SR-1">
+				<cardinality min="1" max="1"/>
+				<groupedFeature name="D">
+				</groupedFeature>
+				<groupedFeature name="E">
+				</groupedFeature>
+			</setRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	<binaryRelation name="BR-2">
+		<cardinality min="0" max="1"/>
+		<solitaryFeature name="C">
+			<setRelation name="SR-2">
+				<cardinality min="1" max="2"/>
+				<groupedFeature name="F">
+				</groupedFeature>
+				<groupedFeature name="G">
+				</groupedFeature>
+			</setRelation>
+		</solitaryFeature>
+	</binaryRelation>
+	</feature>
+	<excludes name="EX-1" feature="D" excludes="G"/>
+	<requires name="RE-1" feature="E" requires="F"/>
+</feature-model>

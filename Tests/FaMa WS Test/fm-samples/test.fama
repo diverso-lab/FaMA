@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="root">
+		<binaryRelation name="Opt01">
+			<cardinality max="1" min="0" />
+			<solitaryFeature name="child01" />
+		</binaryRelation>
+		<binaryRelation name="Opt02">
+			<cardinality max="1" min="0" />
+			<solitaryFeature name="child02" />
+		</binaryRelation>
+	</feature>
+</feature-model>
