@@ -1,0 +1,167 @@
+%Relationships
+
+Computing: OS Storage Instance Use Location;
+
+OS: [1,1]{LinuxBased WindowsBased};
+LinuxBased: [1,1]{Linux Suse RedHat};
+WindowsBased: [1,1]{Windows WindowsSQLServer};
+WindowsSQLServer: [1,1]{WindowsSQLWeb WindowsSQLStd WindowsSQLEnterprise};
+
+Storage: [SSD] Redundancy;
+Redundancy: [1,1]{LRS GRS RA_GRS};
+
+Instance: [1,1]{A0 A1 A2 A3 A4 A5 A6 A7};
+
+Location: [1,1]{NorthAmerica Europe AsiaOceania SouthAmerica};
+NorthAmerica: [1,1]{VA CA IL TX ORE};
+AsiaOceania: [1,1]{SIN HK JP AUS};
+Europe: [1,1]{IR UK NT};
+IL: Chicago;
+TX: Texas;
+JP: [1,1]{Saitama Osaka Tokyo};
+UK: London;
+AUS: Sydney;
+SouthAmerica: SaoPaulo;
+
+Use:[1,1]{OnDemand PaymentDiscounts};
+
+PaymentDiscounts: [1,1]{Commitment PayInAdvance};
+Commitment: [1,1]{Commitment6Months Commitment12Months};
+PayInAdvance: [1,1]{PayInAdvance6Months PayInAdvance12Months};
+
+
+%Attributes
+
+## Computing atts
+Computing.costMonth: Real[0.000 to 100000.000],0,0;
+Computing.upfrontCost: Real[0.000 to 100000.000],0,0;
+Computing.totalCost: Real[0.00 to 1000000.00],0,0;
+
+## Instance atts
+Instance.cores: Integer[1 to 8],0,0; ## maximum: 8 cores 
+Instance.ram: Real[1 to 56],0,0; ## from 256 MB to 56 GB
+Instance.costHour: Real[0.000 to 5.800],0,0;
+
+#Storage atts
+Storage.size: Integer[0 to 100000],0,0; ## from 0 GB to 100 TB
+
+## Usage atts
+Use.usage: Integer[0 to 730],0,0; ##hours per month
+Use.period: Integer[0 to 36],0,0; ##months (0 implies on demand)
+
+
+## Extra atts
+Computing.grossCostMonth: Real[0.000 to 100000.000],0,0; ##dollars per month 
+Computing.discount: Real [0 to 100000],0,0; ## dollars
+Storage.costGB: Real[0.000 to 0.100],0,0; ## dollars
+Storage.cost: Real[0.00 to 50000.00],0,0; ## dollars per month
+
+
+%Constraints
+
+## Non-available locations
+NOT (IL OR TX OR ORE OR UK OR Tokyo OR AUS OR SouthAmerica);
+
+## Non-available OS
+NOT (Suse OR RedHat);
+
+## Instances characteristics ##
+A0 IMPLIES (Instance.cores == 1 AND Instance.ram == 1.0 AND Storage.size <= 1000);
+A1 IMPLIES (Instance.cores == 1 AND Instance.ram == 2.0 AND Storage.size <= 2000);
+A2 IMPLIES (Instance.cores == 2 AND Instance.ram == 4.0 AND Storage.size <= 4000);
+A3 IMPLIES (Instance.cores == 4 AND Instance.ram == 7.0 AND Storage.size <= 8000);
+A4 IMPLIES (Instance.cores == 8 AND Instance.ram == 14.0 AND Storage.size <= 16000);
+A5 IMPLIES (Instance.cores == 2 AND Instance.ram == 14.0 AND Storage.size <= 4000);
+A6 IMPLIES (Instance.cores == 4 AND Instance.ram == 28.0 AND Storage.size <= 8000);
+A7 IMPLIES (Instance.cores == 8 AND Instance.ram == 56.0 AND Storage.size <= 16000);
+
+##Cost policies##
+Computing.grossCostMonth == Instance.costHour*Use.usage + Storage.cost;
+Computing.totalCost == Computing.costMonth*Use.period + Computing.upfrontCost;
+
+(NOT PayInAdvance) IMPLIES (Computing.costMonth == Computing.grossCostMonth - Computing.discount);
+(NOT PayInAdvance) IMPLIES (Computing.upfrontCost == 0);
+PayInAdvance IMPLIES Computing.costMonth == 0;
+PayInAdvance IMPLIES Computing.upfrontCost == (Computing.grossCostMonth - Computing.discount)*Use.period;
+
+
+
+## Storage cost ##
+Storage.cost == Storage.costGB*Storage.size;
+
+(Storage.size <= 1000  AND LRS) IMPLIES Storage.costGB==0.05;
+(Storage.size > 1000  AND LRS) IMPLIES Storage.costGB==0.05;
+(Storage.size <= 1000  AND GRS) IMPLIES Storage.costGB==0.095;
+(Storage.size > 1000  AND GRS) IMPLIES Storage.costGB==0.08;
+(Storage.size <= 1000  AND RA_GRS) IMPLIES Storage.costGB==0.12;
+(Storage.size > 1000  AND RA_GRS) IMPLIES Storage.costGB==0.1;
+
+
+
+##Discount policies##
+(NOT PaymentDiscounts) IMPLIES (Computing.discount == 0);
+
+Commitment IMPLIES (Use.period >= 6 AND Computing.grossCostMonth >= 500);
+
+(Commitment AND Computing.grossCostMonth >= 500 AND Computing.grossCostMonth < 15000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.20;
+(Commitment AND Computing.grossCostMonth >= 15000 AND Computing.grossCostMonth < 40000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.23;
+(Commitment AND Computing.grossCostMonth >= 40000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.27;
+(Commitment AND Computing.grossCostMonth >= 500 AND Computing.grossCostMonth < 15000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.225;
+(Commitment AND Computing.grossCostMonth >= 15000 AND Computing.grossCostMonth < 40000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.255;
+(Commitment AND Computing.grossCostMonth >= 40000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.295;
+
+PayInAdvance IMPLIES (Use.period >= 6 AND Computing.grossCostMonth >= 500);
+
+(PayInAdvance AND Computing.grossCostMonth >= 500 AND Computing.grossCostMonth < 15000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.225;
+(PayInAdvance AND Computing.grossCostMonth >= 15000 AND Computing.grossCostMonth < 40000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.255;
+(PayInAdvance AND Computing.grossCostMonth >= 40000 AND Use.period >= 6 AND Use.period <12) IMPLIES Computing.discount == Computing.grossCostMonth*0.295;
+(PayInAdvance AND Computing.grossCostMonth >= 500 AND Computing.grossCostMonth < 15000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.25;
+(PayInAdvance AND Computing.grossCostMonth >= 15000 AND Computing.grossCostMonth < 40000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.28;
+(PayInAdvance AND Computing.grossCostMonth >= 40000 AND Use.period >=12) IMPLIES Computing.discount == Computing.grossCostMonth*0.32;
+
+
+##Cost details#
+(Windows AND A0) IMPLIES Instance.costHour==0.02;
+(Windows AND A1) IMPLIES Instance.costHour==0.09;
+(Windows AND A2) IMPLIES Instance.costHour==0.18;
+(Windows AND A3) IMPLIES Instance.costHour==0.36;
+(Windows AND A4) IMPLIES Instance.costHour==0.72;
+(Windows AND A5) IMPLIES Instance.costHour==0.4;
+(Windows AND A6) IMPLIES Instance.costHour==0.8;
+(Windows AND A7) IMPLIES Instance.costHour==1.6;
+
+(Linux AND A0) IMPLIES Instance.costHour==0.02;
+(Linux AND A1) IMPLIES Instance.costHour==0.06;
+(Linux AND A2) IMPLIES Instance.costHour==0.12;
+(Linux AND A3) IMPLIES Instance.costHour==0.24;
+(Linux AND A4) IMPLIES Instance.costHour==0.48;
+(Linux AND A5) IMPLIES Instance.costHour==0.32;
+(Linux AND A6) IMPLIES Instance.costHour==0.64;
+(Linux AND A7) IMPLIES Instance.costHour==1.29;
+
+(WindowsSQLWeb AND A0) IMPLIES Instance.costHour==0.065;
+(WindowsSQLWeb AND A1) IMPLIES Instance.costHour==0.135;
+(WindowsSQLWeb AND A2) IMPLIES Instance.costHour==0.225;
+(WindowsSQLWeb AND A3) IMPLIES Instance.costHour==0.405;
+(WindowsSQLWeb AND A4) IMPLIES Instance.costHour==0.81;
+(WindowsSQLWeb AND A5) IMPLIES Instance.costHour==0.445;
+(WindowsSQLWeb AND A6) IMPLIES Instance.costHour==0.845;
+(WindowsSQLWeb AND A7) IMPLIES Instance.costHour==1.69;
+
+(WindowsSQLStd AND A0) IMPLIES Instance.costHour==0.57;
+(WindowsSQLStd AND A1) IMPLIES Instance.costHour==0.64;
+(WindowsSQLStd AND A2) IMPLIES Instance.costHour==0.73;
+(WindowsSQLStd AND A3) IMPLIES Instance.costHour==0.91;
+(WindowsSQLStd AND A4) IMPLIES Instance.costHour==1.82;
+(WindowsSQLStd AND A5) IMPLIES Instance.costHour==0.95;
+(WindowsSQLStd AND A6) IMPLIES Instance.costHour==1.35;
+(WindowsSQLStd AND A7) IMPLIES Instance.costHour==2.7;
+
+(WindowsSQLEnterprise AND A0) IMPLIES Instance.costHour==2.12;
+(WindowsSQLEnterprise AND A1) IMPLIES Instance.costHour==2.19;
+(WindowsSQLEnterprise AND A2) IMPLIES Instance.costHour==2.28;
+(WindowsSQLEnterprise AND A3) IMPLIES Instance.costHour==2.46;
+(WindowsSQLEnterprise AND A4) IMPLIES Instance.costHour==4.92;
+(WindowsSQLEnterprise AND A5) IMPLIES Instance.costHour==2.5;
+(WindowsSQLEnterprise AND A6) IMPLIES Instance.costHour==2.9;
+(WindowsSQLEnterprise AND A7) IMPLIES Instance.costHour==5.8;

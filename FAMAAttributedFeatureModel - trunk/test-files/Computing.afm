@@ -1,0 +1,24 @@
+%Relationships
+
+VM: OS Storage Area TechSpecs Use;
+OS: [1,1]{LinuxBased WindowsBased};
+Area: [1,1]{NorthAmerica SouthAmerica Europe AsiaOceania};
+
+
+%Attributes
+
+## Costs
+VM.costMonth: Real[0.000 to 100000.000],0,0;
+VM.costHour: Real[0.000 to 10.000],0,0;
+VM.fixedCost: Real[0.000 to 100000.000],0,0;
+
+## Tech specs
+Storage.size: Integer[0 to 100000],0,0; ## from 0 GB to 100 TB
+TechSpecs.cores: Integer[1 to 32],0,0; ## maximum: 32 cores 
+TechSpecs.ram: Real[0.000 to 120],0,0; ## from 256 MB to 120 GB
+
+## Usage
+Use.usage: Integer[0 to 720],0,0; ##hours per month
+Use.period: Integer[0 to 36],0,0; ##months (0 implies on demand)
+
+

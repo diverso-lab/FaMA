@@ -1,0 +1,44 @@
+%Relationships
+
+Computing: OS Storage Instance Use Location;
+
+OS: [1,1]{LinuxBased WindowsBased};
+LinuxBased: [1,1]{Linux Suse RedHat};
+WindowsBased: [1,1]{Windows WindowsSQLServer};
+WindowsSQLServer: [1,1]{WindowsSQLWeb WindowsSQLStd WindowsSQLEnterprise};
+
+Storage: [SSD];
+
+Location: [1,1]{NorthAmerica Europe AsiaOceania SouthAmerica};
+NorthAmerica: [1,1]{VA CA IL TX ORE};
+AsiaOceania: [1,1]{SIN HK JP AUS};
+Europe: [1,1]{IR UK NT};
+IL: Chicago;
+TX: Texas;
+JP: [1,1]{Saitama Osaka Tokyo};
+UK: London;
+AUS: Sydney;
+SouthAmerica: SaoPaulo;
+
+Use:[1,1]{OnDemand PaymentDiscounts};
+
+%Attributes
+
+## Computing atts
+Computing.costMonth: Real[0.000 to 100000.000],0,0;
+Computing.upfrontCost: Real[0.000 to 100000.000],0,0;
+Computing.totalCost: Real[0.00 to 1000000.00],0,0;
+
+## Instance atts
+Instance.cores: Integer[1 to 32],0,0; ## maximum: 32 cores 
+Instance.ram: Real[0.000 to 250],0,0; ## from 256 MB to 120 GB
+Instance.costHour: Real[0.000 to 10.000],0,0;
+
+## Storage atts
+Storage.size: Integer[0 to 100000],0,0; ## from 0 GB to 100 TB
+
+## Usage atts
+Use.usage: Integer[0 to 730],0,0; ##hours per month
+Use.period: Integer[0 to 36],0,0; ##months (0 implies on demand)
+
+

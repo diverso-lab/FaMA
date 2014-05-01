@@ -1,0 +1,36 @@
+<questionTrader>
+	<reasoner id="CPOpt" file="lib/CPOptimizerReasoner-0.2.0.jar" class="es.us.isa.cpoptimizer.CPOptReasoner"/>
+	<!-- <reasoner id="Choco" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner.ChocoReasoner"/>
+	<reasoner id="Choco4exp" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner4Exp.ChocoReasoner"/>
+	<reasoner id="ChocoAttributed" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner.attributed.ChocoReasoner"/>
+	<reasoner id="ChocoAttributed4exp" file="lib/ChocoReasoner-1.1.1.jar" class="es.us.isa.ChocoReasoner4Exp.attributed.ChocoReasoner"/>-->
+	<criteriaSelector name="default" class="es.us.isa.FAMA.Reasoner.DefaultCriteriaSelector"/>
+	<constraintLoader id="FaMaCL" class="es.us.isa.FAMA.parser.FaMaAttsConstraintLoader" file="lib/FaMaAttributedModel-1.1.0.jar"/>
+	<question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion"/>
+	<question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion"/>
+	<question id="ValidConfigurationErrors" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion"/>
+	<question id="ExplainProduct" interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion"/>
+	<question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion"/>
+	<question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion"/>
+	<question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion"/>
+	<question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion"/>
+	<question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion"/>
+	<question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion"/>
+	<question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion"/>
+	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion"/>
+	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion"/>
+	<question id="Core" interface="es.us.isa.FAMA.Reasoner.questions.CoreFeaturesQuestion"/>
+	<question id="ExplainInvalidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion"/>
+	<question id="Homogeneity" interface="es.us.isa.FAMA.Reasoner.questions.HomogeneityQuestion"/>
+	<question id="UniqueFeatures" interface="es.us.isa.FAMA.Reasoner.questions.UniqueFeaturesQuestion"/>
+	<question id="Optimising" interface="es.us.isa.FAMA.Reasoner.questions.OptimisingConfigurationQuestion"/>
+	<question id="OptimisingPrefs" interface="es.us.isa.FAMA.Reasoner.questions.OptimisingPreferencesQuestion"/>
+
+	<models>
+		
+		<reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaAttributedModel-1.1.0.jar"/>
+		<writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaAttributedModel-1.1.0.jar"/>
+		
+	</models>
+	<transform id="AtomicSet" interface="es.us.isa.FAMA.Reasoner.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaFeatureModel-0.9.1.jar"/>
+</questionTrader>

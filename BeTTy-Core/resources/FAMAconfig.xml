@@ -1,0 +1,80 @@
+<!--
+
+    	This file is part of Betty.
+
+        Betty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU Lesser General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        Betty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU Lesser General Public License for more details.
+
+        You should have received a copy of the GNU Lesser General Public License
+        along with Betty.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--
+
+    	This file is part of Betty.
+
+        Betty is free software: you can redistribute it and/or modify
+        it under the terms of the GNU Lesser General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        Betty is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU Lesser General Public License for more details.
+
+        You should have received a copy of the GNU Lesser General Public License
+        along with FaMaTS.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--
+
+    	This file is part of FaMaTS.
+
+        FaMaTS is free software: you can redistribute it and/or modify
+        it under the terms of the GNU Lesser General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        FaMaTS is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU Lesser General Public License for more details.
+
+        You should have received a copy of the GNU Lesser General Public License
+        along with FaMaTS.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<questionTrader>
+	<!-- 
+	<reasoner id="JavaBDD" file="lib/JavaBDDReasoner.jar" class="es.us.isa.JavaBDDReasoner.JavaBDDReasoner"/>
+	<reasoner id="JaCoP" file="lib/JaCoPReasoner-1.0.0.jar" class="es.us.isa.JaCoPReasoner.JaCoPReasoner"/>
+	-->
+	<reasoner id="Choco" file="lib/ChocoReasoner-1.0.1.jar" class="es.us.isa.ChocoReasoner.ChocoReasoner"/>
+	
+	<criteriaSelector name="default" class="es.us.isa.FAMA.Reasoner.DefaultCriteriaSelector"/>
+	<question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="OneProduct" interface="es.us.isa.FAMA.Reasoner.questions.OneProductQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="ValidConfigurationErrors" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" file="lib/FaMaSDK.jar"/>
+	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" file="lib/FaMaSDK.jar"/>
+	<models>
+		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-0.8.3.jar"/>
+		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaFeatureModel-0.8.3.jar"/>
+	</models>
+</questionTrader>

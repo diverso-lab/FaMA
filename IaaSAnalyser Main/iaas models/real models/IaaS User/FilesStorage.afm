@@ -1,0 +1,8 @@
+%Relationships
+FilesStorage: Area Redundancy Bandwidth;
+Area: [1,1]{NorthAmerica SouthAmerica Europe AsiaOceania};
+Redundancy: [1,1]{HighRedundancy LowRedundancy};
+
+%Attributes
+FilesStorage.cost: Real [0.000 to 50000.000],0,0; ## dollars 
+FilesStorage.size: Integer [0 to 1000000],0,0; ## from 0 to 1 000 000 GB (1 000 TBs)

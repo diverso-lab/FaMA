@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="Libraries/ChocoReasoner.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/FullChocoReasoner/choco.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" manifestLocation="/FullChocoReasoner/META-INF/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <file path="/FullChocoReasoner/ChocoAttributed4expConfig.xml"/>
+        <folder path="/FullChocoReasoner/lib"/>
+        <file path="/FullChocoReasoner/ChocoConfig.xml"/>
+        <folder path="/FullChocoReasoner/META-INF"/>
+        <file path="/FullChocoReasoner/ChocoAttributedConfig.xml"/>
+        <file path="/FullChocoReasoner/Choco4expConfig.xml"/>
+        <javaElement handleIdentifier="=FullChocoReasoner/src"/>
+    </selectedElements>
+</jardesc>

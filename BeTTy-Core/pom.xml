@@ -1,0 +1,158 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.us.isa</groupId>
+	<artifactId>Betty</artifactId>
+	<packaging>jar</packaging>
+	<name>Betty</name>
+	<version>1.0b1</version>
+	<description>BeTTy</description>
+	<!-- 
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaSDK</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	 -->
+	<pluginRepositories>
+		<!-- 
+		<pluginRepository>
+			<id>doodleproject-repo</id>
+			<name>DoodleProject Maven 2 Repository</name>
+			<url>http://doodleproject.sourceforge.net/maven2/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		 -->
+		<pluginRepository>
+			<id>mc-release</id>
+			<name>Local Maven repository of releases</name>
+			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>forja</id>
+			<name>Rediris's forge's repository</name>
+			<url>https://forja.rediris.es/svn/betty/trunk/artifacts</url>
+		</repository>
+
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>forja</id>
+			<name>Rediris's forge's repository</name>
+			<url>https://forja.rediris.es/svn/betty/trunk/artifacts</url>
+		</repository>
+	</distributionManagement>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>target</directory>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+			<!--
+				<plugin> <groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions> <version>1.4.0</version>
+				<configuration> <manifestLocation>META-INF</manifestLocation>
+				<instructions>
+				<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+				<Bundle-Name>${pom.artifactId}</Bundle-Name> <Built-By>FaMa
+				Team</Built-By> <Export-Package>es.us.isa.*</Export-Package>
+				<Bundle-Activator>es.us.isa.FAMA.osgi.Activator</Bundle-Activator>
+				<Import-Package>org.osgi.framework,*;resolution:=optional</Import-Package>
+				</instructions> </configuration> </plugin>
+			
+			<plugin>
+				<groupId>net.sf.doodleproject</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<configuration>
+					<executable>${doxygenExecutable}</executable>
+					<configurationFile>./resources/config.doxyfile</configurationFile>
+				</configuration>
+			</plugin>-->
+			<plugin>
+				<groupId>com.google.code.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<configuration>
+					<header>resources/copyrightNotice.txt</header>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>5</source>
+					<target>5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>lib_noscm</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<excludeResources>true</excludeResources>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,37 @@
+Manifest-Version: 1.0
+Export-Package: es.us.isa.JavaBDDReasoner.osgi;uses:="es.us.isa.JavaBD
+ DReasoner,es.us.isa.FAMA.Reasoner.questions,es.us.isa.JavaBDDReasoner
+ .questions,es.us.isa.FAMA.Reasoner,org.osgi.framework",es.us.isa.Java
+ BDDReasoner;uses:="es.us.isa.util,es.us.isa.FAMA.Benchmarking,es.us.i
+ sa.FAMA.stagedConfigManager,es.us.isa.FAMA.models.variabilityModel,es
+ .us.isa.FAMA.Exceptions,es.us.isa.FAMA.Reasoner,net.sf.javabdd,es.us.
+ isa.FAMA.models.featureModel",es.us.isa.JavaBDDReasoner.questions;use
+ s:="es.us.isa.FAMA.Benchmarking,es.us.isa.JavaBDDReasoner,es.us.isa.F
+ AMA.Reasoner.questions,es.us.isa.FAMA.Reasoner.questions.defaultImpl,
+ es.us.isa.FAMA.Exceptions,es.us.isa.FAMA.stagedConfigManager,es.us.is
+ a.FAMA.models.variabilityModel,es.us.isa.FAMA.Reasoner,net.sf.javabdd
+ ,es.us.isa.FAMA.models.featureModel"
+Private-Package: lib
+Built-By: jesus
+Tool: Bnd-0.0.238
+Bundle-Name: JavaBDDReasoner
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.6.0_65
+Bundle-Version: 1.1.0
+Bnd-LastModified: 1398693747369
+Bundle-ManifestVersion: 2
+Bundle-Activator: es.us.isa.JavaBDDReasoner.osgi.Activator
+Bundle-Description: Solver based on JavaBDD (Binary Decision Tree)
+Import-Package: es.us.isa.FAMA.Benchmarking;resolution:=optional,es.us
+ .isa.FAMA.Exceptions;resolution:=optional,es.us.isa.FAMA.Reasoner;res
+ olution:=optional,es.us.isa.FAMA.Reasoner.questions;resolution:=optio
+ nal,es.us.isa.FAMA.Reasoner.questions.defaultImpl;resolution:=optiona
+ l,es.us.isa.FAMA.models.featureModel;resolution:=optional,es.us.isa.F
+ AMA.models.variabilityModel;resolution:=optional,es.us.isa.FAMA.stage
+ dConfigManager;resolution:=optional,es.us.isa.JavaBDDReasoner;resolut
+ ion:=optional,es.us.isa.JavaBDDReasoner.osgi;resolution:=optional,es.
+ us.isa.JavaBDDReasoner.questions;resolution:=optional,es.us.isa.util;
+ resolution:=optional,net.sf.javabdd;resolution:=optional,org.osgi.fra
+ mework
+Bundle-SymbolicName: es.us.isa.JavaBDDReasoner
+

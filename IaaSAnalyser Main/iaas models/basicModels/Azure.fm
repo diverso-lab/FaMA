@@ -1,0 +1,44 @@
+%Relationships
+
+Computing: OS Storage Instance Use Location;
+
+OS: [1,1]{LinuxBased WindowsBased};
+LinuxBased: [1,1]{Linux Suse RedHat};
+WindowsBased: [1,1]{Windows WindowsSQLServer};
+WindowsSQLServer: [1,1]{WindowsSQLWeb WindowsSQLStd WindowsSQLEnterprise};
+
+
+Instance: [1,1]{A0 A1 A2 A3 A4 A5 A6 A7};
+
+Location: [1,1]{NorthAmerica Europe AsiaOceania SouthAmerica};
+NorthAmerica: [1,1]{VA CA IL TX ORE};
+AsiaOceania: [1,1]{SIN HK JP AUS};
+Europe: [1,1]{IR UK NT};
+IL: Chicago;
+TX: Texas;
+JP: [1,1]{Saitama Osaka Tokyo};
+UK: London;
+AUS: Sydney;
+SouthAmerica: SaoPaulo;
+
+Use:[1,1]{OnDemand PaymentDiscounts};
+
+PaymentDiscounts: [1,1]{Commitment PayInAdvance};
+Commitment: [1,1]{Commitment6Months Commitment12Months};
+PayInAdvance: [1,1]{PayInAdvance6Months PayInAdvance12Months};
+
+
+%Constraints
+
+## Location constraint
+NOT IL;
+NOT TX;
+NOT ORE;
+NOT UK;
+NOT Tokyo;
+NOT AUS;
+NOT SouthAmerica;
+
+## OS constraints
+NOT Suse;
+NOT RedHat;
