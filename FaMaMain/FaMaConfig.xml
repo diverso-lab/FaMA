@@ -26,16 +26,16 @@
 	<question id="UniqueFeatures" interface="es.us.isa.FAMA.Reasoner.questions.UniqueFeaturesQuestion"/> -->
 
 	<models>
-		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-1.0.1.jar"/>
-		<reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaFeatureModel-1.0.1.jar"/>
-		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaFeatureModel-1.0.1.jar"/>
-		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-1.0.1.jar"/>
-		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-1.0.1.jar"/>
+		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaSDK-1.2.0.jar"/>
+		<reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaSDK-1.2.0.jar"/>
+		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaSDK-1.2.0.jar"/>
+		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaSDK-1.2.0.jar"/>
+		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaSDK-1.2.0.jar"/>
 		
-		<reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaAttributedModel-1.1.0.jar"/>
-		<writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaAttributedModel-1.1.0.jar"/>
+		<reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaSDK-1.2.0.jar"/>
+		<writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaSDK-1.2.0.jar"/>
 	</models>
-	<transform id="AtomicSet" class="es.us.isa.FAMA.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaFeatureModel-1.0.1.jar"/>
-	<transform id="Extended2Basic" class="es.us.isa.transformations.Extended2BasicModel" file="lib/FaMaTransformations-0.1.0.jar"/>
+	<transform id="AtomicSet" class="es.us.isa.FAMA.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaSDK-1.2.0.jar"/>
+	<transform id="Extended2Basic" class="es.us.isa.FAMA.models.variabilityModel.transformations.Extended2BasicModel" file="lib/FaMaSDK-1.2.0.jar"/>
 	<!-- <UserInterface file="lib/FaMaShell-0.1.1.jar" mainclass="es.us.isa.FAMA.shell.ShellMain"/> -->
 </questionTrader>

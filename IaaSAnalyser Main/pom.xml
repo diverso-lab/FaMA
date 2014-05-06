@@ -11,12 +11,17 @@
 			<version>1.2.0</version>
 			<scope>compile</scope>
 		</dependency>
-		 <dependency>
+		<dependency>
 			<groupId>com.ibm.cplex</groupId>
 			<artifactId>CPOptimizer</artifactId>
 			<version>12.5.1</version>
 			<scope>compile</scope>
-		</dependency> 
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -65,14 +70,9 @@
 									<outputDirectory>${project.basedir}/lib</outputDirectory>
 									<!-- <destFileName>optional-new-name.jar</destFileName> -->
 								</artifactItem>
-								<!-- <artifactItem>
-									<groupId>com.ibm.cplex</groupId>
-									<artifactId>CPOptimizer</artifactId>
-									<version>12.5.1</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.build.directory}/lib</outputDirectory>
-								</artifactItem> -->
+								<!-- <artifactItem> <groupId>com.ibm.cplex</groupId> <artifactId>CPOptimizer</artifactId> 
+									<version>12.5.1</version> <type>jar</type> <overWrite>false</overWrite> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
+									</artifactItem> -->
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/wars</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
