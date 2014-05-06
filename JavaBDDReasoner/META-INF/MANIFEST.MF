@@ -6,19 +6,19 @@ Export-Package: es.us.isa.JavaBDDReasoner.osgi;uses:="es.us.isa.JavaBD
  sa.FAMA.stagedConfigManager,es.us.isa.FAMA.models.variabilityModel,es
  .us.isa.FAMA.Exceptions,es.us.isa.FAMA.Reasoner,net.sf.javabdd,es.us.
  isa.FAMA.models.featureModel",es.us.isa.JavaBDDReasoner.questions;use
- s:="es.us.isa.FAMA.Benchmarking,es.us.isa.JavaBDDReasoner,es.us.isa.F
- AMA.Reasoner.questions,es.us.isa.FAMA.Reasoner.questions.defaultImpl,
- es.us.isa.FAMA.Exceptions,es.us.isa.FAMA.stagedConfigManager,es.us.is
- a.FAMA.models.variabilityModel,es.us.isa.FAMA.Reasoner,net.sf.javabdd
+ s:="es.us.isa.JavaBDDReasoner,es.us.isa.FAMA.Benchmarking,es.us.isa.F
+ AMA.Reasoner.questions,es.us.isa.FAMA.stagedConfigManager,es.us.isa.F
+ AMA.Reasoner.questions.defaultImpl,es.us.isa.FAMA.models.variabilityM
+ odel,es.us.isa.FAMA.Exceptions,es.us.isa.FAMA.Reasoner,net.sf.javabdd
  ,es.us.isa.FAMA.models.featureModel"
 Private-Package: lib
 Built-By: jesus
 Tool: Bnd-0.0.238
 Bundle-Name: JavaBDDReasoner
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.6.0_65
+Build-Jdk: 1.7.0_51
 Bundle-Version: 1.1.0
-Bnd-LastModified: 1398693747369
+Bnd-LastModified: 1399370132947
 Bundle-ManifestVersion: 2
 Bundle-Activator: es.us.isa.JavaBDDReasoner.osgi.Activator
 Bundle-Description: Solver based on JavaBDD (Binary Decision Tree)

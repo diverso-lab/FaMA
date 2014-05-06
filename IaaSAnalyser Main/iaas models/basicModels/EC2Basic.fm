@@ -31,8 +31,8 @@ Use: [1,1]{OnDemand PaymentDiscounts};
 
 PaymentDiscounts: PayInAdvance;
 PayInAdvance: [1,1]{OneYearTerm ThreeYearsTerm};
-OneYearTerm:[1,1]{OneYearMedium OneYearHeavy}; 
-ThreeYearsTerm:[1,1] {ThreeYearsMedium ThreeYearsHeavy};
+OneYearTerm:[1,1]{OneYearLight OneYearMedium OneYearHeavy}; 
+ThreeYearsTerm:[1,1] {ThreeYearsLight ThreeYearsMedium ThreeYearsHeavy};
 
 
 

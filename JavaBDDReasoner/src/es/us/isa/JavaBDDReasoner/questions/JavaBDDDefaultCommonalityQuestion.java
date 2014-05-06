@@ -38,7 +38,7 @@ public class JavaBDDDefaultCommonalityQuestion extends JavaBDDQuestion
 		implements CommonalityQuestion {
 
 	private DefCommonalityQuestion cq;
-	
+
 	public JavaBDDDefaultCommonalityQuestion() {
 		super();
 		cq = new DefCommonalityQuestion();
@@ -48,30 +48,28 @@ public class JavaBDDDefaultCommonalityQuestion extends JavaBDDQuestion
 		return cq.getCommonality();
 	}
 
-
-	
-	public void preAnswer(Reasoner r){
+	public void preAnswer(Reasoner r) {
 		this.cq.preAnswer(r);
 	}
-	
+
 	@Override
 	public PerformanceResult answer(Reasoner r) {
-		if(r==null){
+		if (r == null) {
 			throw new FAMAParameterException("Reasoner :Not specified");
 		}
 		JavaBDDReasoner bdd = (JavaBDDReasoner) r;
 		this.cq.setFeatures(bdd.getAllFeatures());
 		return this.cq.answer(r);
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return this.cq.toString();
 	}
-	
-	class DefCommonalityQuestion extends DefaultCommonalityQuestion{
+
+	class DefCommonalityQuestion extends DefaultCommonalityQuestion {
 
 		Collection<GenericFeature> c;
-		
+
 		@Override
 		public NumberOfProductsQuestion numberOfProductsQuestionFactory() {
 			return new JavaBDDNumberOfProductsQuestion();
@@ -86,17 +84,14 @@ public class JavaBDDDefaultCommonalityQuestion extends JavaBDDQuestion
 			return null;
 		}
 
-		public void setFeatures(Collection<GenericFeature> c){
+		public void setFeatures(Collection<GenericFeature> c) {
 			this.c = c;
 		}
-		
-	
-		
+
 	}
 
-	@Override
 	public void setConfiguration(Configuration conf) {
-this.cq.setConfiguration(conf);		
+		this.cq.setConfiguration(conf);
 	}
 
 }

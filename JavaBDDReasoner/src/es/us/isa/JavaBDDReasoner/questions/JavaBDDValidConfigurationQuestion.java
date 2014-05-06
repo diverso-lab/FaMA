@@ -101,7 +101,6 @@ public class JavaBDDValidConfigurationQuestion extends JavaBDDQuestion
 
 	}
 
-	@Override
 	public void setConfiguration(Configuration c) {
 		if (c == null) {
 			throw new FAMAParameterException("product :Not specified");
