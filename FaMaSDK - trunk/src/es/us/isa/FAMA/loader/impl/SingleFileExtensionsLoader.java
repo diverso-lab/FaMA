@@ -38,6 +38,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import spitz.ayal.jarjar.JarJarClassLoader;
 import es.us.isa.FAMA.Reasoner.ConfigurableQuestionFactory;
 import es.us.isa.FAMA.Reasoner.CriteriaSelector;
 import es.us.isa.FAMA.Reasoner.Question;
@@ -193,7 +194,7 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 					String fileName = fileNode.getNodeValue();
 					URL url = new URL("jar:file:"+fileName + "!/");
 					url.openConnection();
-					Class c = Class.forName(classNode.getNodeValue());
+					Class<IVariabilityModelTransform> c = (Class<IVariabilityModelTransform>)Class.forName(classNode.getNodeValue());
 					if (c != null){
 						transformationsMap.put(idNode.getNodeValue(), c );
 					}
@@ -393,14 +394,16 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 			try {
 				//URL url = new URL("jar:file:"+ fileName + "!/");
 				//url.openConnection();
-//				ClassLoader loader = new JarJarClassLoader(fileName);
-				Class<Reasoner>cl = (Class<Reasoner>) Class.forName(className);
-				InputStream configStream = new FileInputStream(idName+"Config.xml");
-//				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
+				ClassLoader loader = new JarJarClassLoader(fileName);
+//				Class<Reasoner> cl = (Class<Reasoner>) Class.forName(className);
+				Class<Reasoner> cl = (Class<Reasoner>) loader.loadClass(className);
+//				InputStream configStream = new FileInputStream(idName+"Config.xml");
+				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
 				if (cl != null) {
 					Reasoner reasoner = cl.newInstance();
 					ConfigurableQuestionFactory qFact = new ConfigurableQuestionFactory();
-					qFact.setClassLoader(this.getClass().getClassLoader());
+					qFact.setClassLoader(loader);
+//					qFact.setClassLoader(this.getClass().getClassLoader());
 					qFact.parseConfigFile(configStream);
 					reasoner.setFactory(qFact);
 					//reasoner.setConfigFile(configStream,loader);
