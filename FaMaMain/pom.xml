@@ -27,4 +27,22 @@
 			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
 		</repository>
 	</repositories>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>target</directory>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>resources</directory>
+			</testResource>
+		</testResources>
+	</build>
 </project>
