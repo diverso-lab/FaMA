@@ -386,7 +386,7 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 		Node idNode = reasonerNode.getAttributes().getNamedItem("id");
 		if (fileNode != null && classNode != null) {
 			String className = classNode.getNodeValue();
-			String fileName = fileNode.getNodeValue();
+//			String fileName = fileNode.getNodeValue();
 			String idName = className;
 			if (idNode != null)
 				idName = idNode.getNodeValue();
@@ -394,16 +394,16 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 			try {
 				//URL url = new URL("jar:file:"+ fileName + "!/");
 				//url.openConnection();
-				ClassLoader loader = new JarJarClassLoader(fileName);
-//				Class<Reasoner> cl = (Class<Reasoner>) Class.forName(className);
-				Class<Reasoner> cl = (Class<Reasoner>) loader.loadClass(className);
-//				InputStream configStream = new FileInputStream(idName+"Config.xml");
-				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
+//				ClassLoader loader = new JarJarClassLoader(fileName);
+				Class<Reasoner> cl = (Class<Reasoner>) Class.forName(className);
+//				Class<Reasoner> cl = (Class<Reasoner>) loader.loadClass(className);
+				InputStream configStream = new FileInputStream(idName+"Config.xml");
+//				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
 				if (cl != null) {
 					Reasoner reasoner = cl.newInstance();
 					ConfigurableQuestionFactory qFact = new ConfigurableQuestionFactory();
-					qFact.setClassLoader(loader);
-//					qFact.setClassLoader(this.getClass().getClassLoader());
+//					qFact.setClassLoader(loader);
+					qFact.setClassLoader(this.getClass().getClassLoader());
 					qFact.parseConfigFile(configStream);
 					reasoner.setFactory(qFact);
 					//reasoner.setConfigFile(configStream,loader);

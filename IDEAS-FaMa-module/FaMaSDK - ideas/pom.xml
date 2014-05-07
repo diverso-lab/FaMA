@@ -35,6 +35,10 @@
 		</pluginRepository>
 	</pluginRepositories>
 	<distributionManagement>
+		<repository>
+			<id>ideas</id>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
+		</repository>
 	</distributionManagement>
 	<repositories>
 		<repository>
@@ -53,6 +57,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
 		</dependency>
 	</dependencies>
 	<build>

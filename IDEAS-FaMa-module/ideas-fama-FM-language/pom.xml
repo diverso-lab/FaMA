@@ -12,7 +12,6 @@
 	
 	<groupId>es.us.isa.ideas.module.language</groupId>
 	<artifactId>ideas-FM-language</artifactId>
-	<version>0.1.0</version>
 	<packaging>war</packaging>
 
 	<name>ideas-FM-language</name>
