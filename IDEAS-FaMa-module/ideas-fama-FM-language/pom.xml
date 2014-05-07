@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>es.us.isa.ideas.module</groupId>
+		<artifactId>fama-module</artifactId>
+		<version>0.1.0</version>
+		<relativePath>./../pom.xml</relativePath>
+	</parent>
+	
+	<groupId>es.us.isa.ideas.module.language</groupId>
+	<artifactId>ideas-FM-language</artifactId>
+	<version>0.1.0</version>
+	<packaging>war</packaging>
+
+	<name>ideas-FM-language</name>
+
+	<!-- Properties -->
+	<properties>
+		<!--- VERSIONING -->
+		<java.version>1.6</java.version>
+		<ideas.version>0.0.1-SNAPSHOT</ideas.version>
+	</properties>
+	
+	<!-- Repositories to download components and plugins -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<url>http://ci.repository.codehaus.org/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<repositories>
+
+		<repository>
+			<id>org.springframework.maven.release</id>
+			<name>Spring Maven Release Repository</name>
+			<url>http://repo.springsource.org/release</url>
+		</repository>
+
+		<repository>
+			<id>central</id>
+			<url>http://repo.maven.apache.org/maven2</url>
+		</repository>
+		
+		<!-- IDEAS repository -->
+		<repository>
+			<id>ideas</id>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
+		</repository>
+
+	</repositories>
+	
+	<dependencies>
+
+		<!-- IDEAS Depebdencies -->
+		<dependency>
+			<groupId>es.us.isa.ideas</groupId>
+			<artifactId>ideas-core</artifactId>
+			<version>${ideas.version}</version>
+		</dependency>
+		
+		<!-- FAMA dependency -->
+		<dependency>
+			<groupId>es.us.isa.ideas.module</groupId>
+			<artifactId>fama-ideas</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+		
+		<!-- Google -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>15.0</version>
+			<classifier>cdi1.0</classifier>
+		</dependency>
+		
+	</dependencies>
+	
+	<!-- BUILD CONFIGURATION -->
+	<build>
+
+		<plugins>
+			<!-- Maven Eclipse Plugin -->
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

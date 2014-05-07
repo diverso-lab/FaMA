@@ -1,0 +1,16 @@
+{
+				id: "ideas-plaintext-language",
+				extension: "txt",
+				name: "Text",
+				formats: [
+				 	{
+				 		format: "txt",
+				 		checkLanguage: "true"
+				 	}
+				],
+				 
+				operations: [],
+				             
+				inspectorLoader: "function(loader, format) {}"
+
+			}

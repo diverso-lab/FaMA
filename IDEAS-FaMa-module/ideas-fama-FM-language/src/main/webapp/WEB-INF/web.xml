@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ * web.xml
+ *
+ * Copyright (C) 2012 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>ideas-txt-module</display-name>
+  <servlet>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <servlet-class>
+                       org.springframework.web.servlet.DispatcherServlet
+                </servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>
+                      org.springframework.web.context.ContextLoaderListener
+                </listener-class>
+  </listener>
+</web-app>
