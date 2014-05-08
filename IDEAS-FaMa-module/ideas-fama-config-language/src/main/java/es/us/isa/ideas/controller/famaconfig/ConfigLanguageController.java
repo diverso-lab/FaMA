@@ -19,7 +19,12 @@ public class ConfigLanguageController extends BaseLanguageController {
 	@RequestMapping(value = "/operation/{id}/execute", method = RequestMethod.POST)
 	@ResponseBody
 	public AppResponse executeOperation(String id, String content, String fileUri) {
-		
+		/**
+		 * XXX List of operations:
+		 * - Valid config
+		 * - Number of products fulfilling this config
+		 * - Optimal config
+		 */
 		AppResponse response = null;
 		
 		return response;

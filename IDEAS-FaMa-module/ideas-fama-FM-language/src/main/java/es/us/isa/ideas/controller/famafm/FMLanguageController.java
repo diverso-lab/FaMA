@@ -20,6 +20,12 @@ public class FMLanguageController extends BaseLanguageController {
 	@ResponseBody
 	public AppResponse executeOperation(String id, String content, String fileUri) {
 		
+		/**
+		 * XXX List of operations:
+		 * - Valid FM
+		 * - Number of products
+		 * - Products listing
+		 */
 		AppResponse response = null;
 		
 		return response;
