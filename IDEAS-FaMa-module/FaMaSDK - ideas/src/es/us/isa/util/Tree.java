@@ -94,4 +94,13 @@ public class Tree<T> {
             walk(data, list);
         }
     }
+    
+    public boolean equals(Object o){
+    	boolean result = false;
+    	if (o instanceof Tree){
+    		Tree<T> aux = (Tree<T>) o;
+    		result = this.rootElement.equals(aux.rootElement);
+    	}
+    	return result;
+    }
 }

@@ -11,3 +11,8 @@
 /ConfigAnalexTokenTypes.txt
 /ConfigTreeParser.smap
 /ConfigTreeParserTokenTypes.txt
+/ConfigAnalex.java
+/ConfigAnasint.java
+/ConfigAnasintTokenTypes.java
+/ConfigTreeParser.java
+/ConfigTreeParserTokenTypes.java

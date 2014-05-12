@@ -84,13 +84,13 @@ public ConfigTreeParser() {
 		Collection<Tree<String>> cons = new LinkedList<Tree<String>>(); ExtendedConfiguration auxRes = new ExtendedConfiguration();
 		
 		try {      // for error handling
-			AST __t1322 = _t;
+			AST __t236 = _t;
 			AST tmp1_AST_in = (AST)_t;
 			match(_t,CONFIGURACION);
 			_t = _t.getFirstChild();
 			cons=constraints(_t);
 			_t = _retTree;
-			_t = __t1322;
+			_t = __t236;
 			_t = _t.getNextSibling();
 			auxRes.setAttConfigs(cons); res = auxRes;
 		}
@@ -110,8 +110,8 @@ public ConfigTreeParser() {
 		
 		try {      // for error handling
 			{
-			int _cnt1325=0;
-			_loop1325:
+			int _cnt239=0;
+			_loop239:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==CONSTRAINT)) {
@@ -120,10 +120,10 @@ public ConfigTreeParser() {
 					constraints.add(aux.getAST());
 				}
 				else {
-					if ( _cnt1325>=1 ) { break _loop1325; } else {throw new NoViableAltException(_t);}
+					if ( _cnt239>=1 ) { break _loop239; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt1325++;
+				_cnt239++;
 			} while (true);
 			}
 		}
@@ -143,7 +143,7 @@ public ConfigTreeParser() {
 		AST e = null;
 		
 		try {      // for error handling
-			AST __t1327 = _t;
+			AST __t241 = _t;
 			AST tmp2_AST_in = (AST)_t;
 			match(_t,CONSTRAINT);
 			_t = _t.getFirstChild();
@@ -154,7 +154,7 @@ public ConfigTreeParser() {
 			expresion(_t);
 			_t = _retTree;
 			c = ASTtoConstraint(e,n);
-			_t = __t1327;
+			_t = __t241;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -174,7 +174,7 @@ public ConfigTreeParser() {
 			switch ( _t.getType()) {
 			case IFF:
 			{
-				AST __t1329 = _t;
+				AST __t243 = _t;
 				AST tmp3_AST_in = (AST)_t;
 				match(_t,IFF);
 				_t = _t.getFirstChild();
@@ -182,13 +182,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1329;
+				_t = __t243;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMPLIES:
 			{
-				AST __t1330 = _t;
+				AST __t244 = _t;
 				AST tmp4_AST_in = (AST)_t;
 				match(_t,IMPLIES);
 				_t = _t.getFirstChild();
@@ -196,13 +196,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1330;
+				_t = __t244;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case EXCLUDES:
 			{
-				AST __t1331 = _t;
+				AST __t245 = _t;
 				AST tmp5_AST_in = (AST)_t;
 				match(_t,EXCLUDES);
 				_t = _t.getFirstChild();
@@ -210,13 +210,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1331;
+				_t = __t245;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case REQUIRES:
 			{
-				AST __t1332 = _t;
+				AST __t246 = _t;
 				AST tmp6_AST_in = (AST)_t;
 				match(_t,REQUIRES);
 				_t = _t.getFirstChild();
@@ -224,13 +224,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1332;
+				_t = __t246;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OR:
 			{
-				AST __t1333 = _t;
+				AST __t247 = _t;
 				AST tmp7_AST_in = (AST)_t;
 				match(_t,OR);
 				_t = _t.getFirstChild();
@@ -238,13 +238,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1333;
+				_t = __t247;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case AND:
 			{
-				AST __t1334 = _t;
+				AST __t248 = _t;
 				AST tmp8_AST_in = (AST)_t;
 				match(_t,AND);
 				_t = _t.getFirstChild();
@@ -252,25 +252,25 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1334;
+				_t = __t248;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOT:
 			{
-				AST __t1335 = _t;
+				AST __t249 = _t;
 				AST tmp9_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getFirstChild();
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1335;
+				_t = __t249;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAYOR:
 			{
-				AST __t1336 = _t;
+				AST __t250 = _t;
 				AST tmp10_AST_in = (AST)_t;
 				match(_t,MAYOR);
 				_t = _t.getFirstChild();
@@ -278,13 +278,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1336;
+				_t = __t250;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOR:
 			{
-				AST __t1337 = _t;
+				AST __t251 = _t;
 				AST tmp11_AST_in = (AST)_t;
 				match(_t,MENOR);
 				_t = _t.getFirstChild();
@@ -292,13 +292,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1337;
+				_t = __t251;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAYOR_IGUAL:
 			{
-				AST __t1338 = _t;
+				AST __t252 = _t;
 				AST tmp12_AST_in = (AST)_t;
 				match(_t,MAYOR_IGUAL);
 				_t = _t.getFirstChild();
@@ -306,13 +306,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1338;
+				_t = __t252;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOR_IGUAL:
 			{
-				AST __t1339 = _t;
+				AST __t253 = _t;
 				AST tmp13_AST_in = (AST)_t;
 				match(_t,MENOR_IGUAL);
 				_t = _t.getFirstChild();
@@ -320,13 +320,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1339;
+				_t = __t253;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IGUAL:
 			{
-				AST __t1340 = _t;
+				AST __t254 = _t;
 				AST tmp14_AST_in = (AST)_t;
 				match(_t,IGUAL);
 				_t = _t.getFirstChild();
@@ -334,13 +334,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1340;
+				_t = __t254;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DISTINTO:
 			{
-				AST __t1341 = _t;
+				AST __t255 = _t;
 				AST tmp15_AST_in = (AST)_t;
 				match(_t,DISTINTO);
 				_t = _t.getFirstChild();
@@ -348,13 +348,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1341;
+				_t = __t255;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAS:
 			{
-				AST __t1342 = _t;
+				AST __t256 = _t;
 				AST tmp16_AST_in = (AST)_t;
 				match(_t,MAS);
 				_t = _t.getFirstChild();
@@ -362,13 +362,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1342;
+				_t = __t256;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOS:
 			{
-				AST __t1343 = _t;
+				AST __t257 = _t;
 				AST tmp17_AST_in = (AST)_t;
 				match(_t,MENOS);
 				_t = _t.getFirstChild();
@@ -376,13 +376,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1343;
+				_t = __t257;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MULT:
 			{
-				AST __t1344 = _t;
+				AST __t258 = _t;
 				AST tmp18_AST_in = (AST)_t;
 				match(_t,MULT);
 				_t = _t.getFirstChild();
@@ -390,13 +390,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1344;
+				_t = __t258;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DIV:
 			{
-				AST __t1345 = _t;
+				AST __t259 = _t;
 				AST tmp19_AST_in = (AST)_t;
 				match(_t,DIV);
 				_t = _t.getFirstChild();
@@ -404,13 +404,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1345;
+				_t = __t259;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MOD:
 			{
-				AST __t1346 = _t;
+				AST __t260 = _t;
 				AST tmp20_AST_in = (AST)_t;
 				match(_t,MOD);
 				_t = _t.getFirstChild();
@@ -418,13 +418,13 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1346;
+				_t = __t260;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case POW:
 			{
-				AST __t1347 = _t;
+				AST __t261 = _t;
 				AST tmp21_AST_in = (AST)_t;
 				match(_t,POW);
 				_t = _t.getFirstChild();
@@ -432,19 +432,19 @@ public ConfigTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1347;
+				_t = __t261;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOS_UNARIO:
 			{
-				AST __t1348 = _t;
+				AST __t262 = _t;
 				AST tmp22_AST_in = (AST)_t;
 				match(_t,MENOS_UNARIO);
 				_t = _t.getFirstChild();
 				expresion(_t);
 				_t = _retTree;
-				_t = __t1348;
+				_t = __t262;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -528,7 +528,7 @@ public ConfigTreeParser() {
 		AST id_att_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t1350 = _t;
+			AST __t264 = _t;
 			AST tmp27_AST_in = (AST)_t;
 			match(_t,ATRIBUTO);
 			_t = _t.getFirstChild();
@@ -538,7 +538,7 @@ public ConfigTreeParser() {
 			AST tmp29_AST_in = (AST)_t;
 			match(_t,IDENT);
 			_t = _t.getNextSibling();
-			_t = __t1350;
+			_t = __t264;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
