@@ -19,9 +19,12 @@ package es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;
 
 import java.io.File;
 
+import javax.naming.OperationNotSupportedException;
+
 import es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.plain.FaMaPlainTextParser;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 public class FMPlainTextReader implements IReader {
 
@@ -45,5 +48,6 @@ public class FMPlainTextReader implements IReader {
 	public VariabilityModel parseString(String data) throws Exception {
 		return parser.parseModelFromString(data);
 	}
+
 
 }

@@ -46,6 +46,7 @@ import es.us.isa.FAMA.Reasoner.QuestionTrader;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.Factory.QuestionAbstractFactory;
 import es.us.isa.FAMA.loader.ExtensionsLoader;
+import es.us.isa.FAMA.models.variabilityModel.parsers.IConfigReader;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IWriter;
 import es.us.isa.FAMA.models.variabilityModel.parsers.ModelParser;
@@ -235,10 +236,48 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 				} else if (modelNode.getNodeName().equalsIgnoreCase("writer")) {
 					processWriterNode(modelNode);
 				}
+				else if (modelNode.getNodeName().equalsIgnoreCase("configreader")){
+					processConfigNode(modelNode);
+				}
 			}
 		}
 	}
 	
+	private void processConfigNode(Node readerNode) {
+		// TODO Auto-generated method stub
+		try {
+			Node extNode = readerNode.getAttributes()
+					.getNamedItem("extensions");
+			Node classNode = readerNode.getAttributes().getNamedItem("class");
+			Node fileNode = readerNode.getAttributes().getNamedItem("file");
+			if (extNode != null && classNode != null && fileNode != null) {
+				String fileName = fileNode.getNodeValue();
+				String className = classNode.getNodeValue();
+				try {
+					//URL url = new URL("jar:file:" + fileName + "!/");
+					//url.openConnection();
+					Class<IConfigReader> rcl = (Class<IConfigReader>) Class.forName(className);
+					if (rcl != null) {
+						String readerId = rcl.getName();
+						IConfigReader reader = rcl.newInstance();
+						mp.addConfigReader(reader, readerId);
+						StringTokenizer st = new StringTokenizer(extNode
+								.getNodeValue(), ",");
+						while (st.hasMoreTokens()) {
+							//FIXME cuidado, es posible que no este bien
+							mp.addConfigReaderType(st.nextToken(), readerId);
+							
+						}
+					}
+				} catch (ClassNotFoundException e) {
+				} catch (ClassCastException e) {
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	private void processReaderNode(Node readerNode) {
 		try {

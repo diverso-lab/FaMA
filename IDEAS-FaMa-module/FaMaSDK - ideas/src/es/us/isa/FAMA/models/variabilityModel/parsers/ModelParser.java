@@ -20,6 +20,7 @@ package es.us.isa.FAMA.models.variabilityModel.parsers;
 import java.util.Collection;
 
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 public interface ModelParser {
 
@@ -30,6 +31,8 @@ public interface ModelParser {
 	public VariabilityModel read(String path);
 	
 	public VariabilityModel read(String path, String readerId);
+	
+	public Configuration readConfiguration(VariabilityModel vm, String path);
 	
 	public Collection<String> getReadersId();
 	

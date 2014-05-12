@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+import javax.naming.OperationNotSupportedException;
+
 import com.csvreader.CsvReader;
 
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
@@ -29,6 +31,7 @@ import es.us.isa.FAMA.models.FAMAfeatureModel.Relation;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 public class CSVReader implements IReader {
 
@@ -125,4 +128,5 @@ public class CSVReader implements IReader {
 		X3DWriter writer = new X3DWriter();
 		writer.writeFile("./test.dot", vm);
 	}
+
 }

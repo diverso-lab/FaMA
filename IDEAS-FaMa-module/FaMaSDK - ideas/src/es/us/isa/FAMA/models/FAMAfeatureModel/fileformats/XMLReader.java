@@ -23,14 +23,16 @@ package es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;
 
 
 import java.io.IOException;
-
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import javax.naming.OperationNotSupportedException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+
 
 
 import org.w3c.dom.Document;
@@ -38,6 +40,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+
 
 //import es.us.isa.FAMA.models.FAMAfeatureModel.Attribute;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Dependency;
@@ -50,6 +54,7 @@ import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
 import es.us.isa.FAMA.models.variabilityModel.parsers.WrongFormatException;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 import es.us.isa.FAMA.Exceptions.*;
 
 /**
@@ -354,4 +359,6 @@ public class XMLReader implements IReader{
 		} 
 		
 	}
+
+	
 }

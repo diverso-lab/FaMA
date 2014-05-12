@@ -34,6 +34,9 @@
 		
 		<reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaSDK-1.2.0.jar"/>
 		<writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaSDK-1.2.0.jar"/>
+		
+		<!-- Reader for the Feature Model Configuration (.fmc) language -->
+		<configreader extensions="fmc" class="es.us.isa.FAMA.models.config.ExtendedConfigParser" file="lib/FaMaSDK-1.2.0.jar"/>
 	</models>
 	<transform id="AtomicSet" class="es.us.isa.FAMA.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaSDK-1.2.0.jar"/>
 	<transform id="Extended2Basic" class="es.us.isa.FAMA.models.variabilityModel.transformations.Extended2BasicModel" file="lib/FaMaSDK-1.2.0.jar"/>

@@ -500,10 +500,10 @@ public class QuestionTrader {
 
 		return result;
 	}
-//	
-//	public GenericFeatureModel extended2Basic(GenericAttributedFeatureModel afm){
-//		//TODO
-//		return null;
-//	}
+
+	
+	public Configuration loadConfigurationFile(VariabilityModel vm, String path){
+		return this.mp.readConfiguration(vm, path);
+	}
 
 }

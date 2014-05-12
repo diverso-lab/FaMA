@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.naming.OperationNotSupportedException;
+
 import constraints.BooleanVariable;
 import constraints.PropositionalFormula;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Dependency;
@@ -33,6 +35,7 @@ import es.us.isa.FAMA.models.FAMAfeatureModel.RequiresDependency;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 import fm.FeatureGroup;
 import fm.FeatureModel;
 import fm.FeatureModelStatistics;
@@ -179,5 +182,6 @@ public class SPLXReader implements IReader {
 			}
 		}
 	}
+
 
 }

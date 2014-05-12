@@ -27,6 +27,8 @@ public class ConfigLanguageController extends BaseLanguageController {
 		 */
 		AppResponse response = null;
 		
+		//XXX create analyser delegate
+		
 		return response;
 	}
 

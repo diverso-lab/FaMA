@@ -25,8 +25,13 @@ import java.util.LinkedList;
 import java.util.Map;
 
 
+
+
+
+import es.us.isa.FAMA.Exceptions.FAMAConfigurationException;
 import es.us.isa.FAMA.Exceptions.FAMAException;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 public class ModelParserImpl implements ModelParser {
 
@@ -35,6 +40,10 @@ public class ModelParserImpl implements ModelParser {
 
 	// writerId -> IWriter
 	private Map<String, IWriter> writers;
+	
+	private Map<String,IConfigReader> configReaders;
+	
+	private Map<String,Collection<String>> typeToConfig;
 
 	private Map<String, Collection<String>> typeToReader;
 
@@ -45,6 +54,8 @@ public class ModelParserImpl implements ModelParser {
 		writers = new HashMap<String, IWriter>();
 		typeToReader = new HashMap<String, Collection<String>>();
 		typeToWriter = new HashMap<String, Collection<String>>();
+		configReaders = new HashMap<String, IConfigReader>();
+		typeToConfig = new HashMap<String, Collection<String>>();
 	}
 
 	public Collection<String> getReadersId() {
@@ -136,7 +147,7 @@ public class ModelParserImpl implements ModelParser {
 		}
 		return res;
 	}
-
+	
 	public void write(VariabilityModel vm, String path) {
 		// pillar el primero que coincida
 		// con la extension del fichero
@@ -185,6 +196,10 @@ public class ModelParserImpl implements ModelParser {
 
 	public void addWriter(IWriter r, String id) {
 		writers.put(id, r);
+	}
+	
+	public void addConfigReader(IConfigReader r, String id){
+		configReaders.put(id, r);
 	}
 
 //	private String getFileType(String path) {
@@ -236,6 +251,36 @@ public class ModelParserImpl implements ModelParser {
 			aux.add(writerId);
 			typeToWriter.put(type, aux);
 		}
+	}
+
+	@Override
+	public Configuration readConfiguration(VariabilityModel vm, String path) {
+		// since we only have a single configuration reader, we do not make any check
+		//XXX test this method
+		String extension = path.substring(path.lastIndexOf(".")+1);
+		String type = 
+		IConfigReader reader = configReaders.get(extension);
+		Configuration result = null;
+		try {
+			result = reader.parseConfiguration(vm, path);
+		} catch (FAMAConfigurationException e) {
+			// TODO errors parsing the configuration file
+			// what should i do with the errors?
+			Collection<String> errors = e.getSyntacticErrors();
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public void addConfigReaderType(String extension, String readerId) {
+		Collection<String> exts = typeToConfig.get(readerId);
+		if (exts == null){
+			exts = new LinkedList<String>();
+		}
+		if (!exts.contains(extension)){
+			exts.add(extension);
+		}
+		typeToConfig.put(readerId, exts);
 	}
 
 }
