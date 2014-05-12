@@ -232,8 +232,8 @@ public class EC2Scraper {
 		
 		String costAtt = this.attNames.getProperty("cost");
 		String upfrontCostAtt = this.attNames.getProperty("upfrontCost");
-		String[] aYearArray = {"OneYearMedium", "OneYearHeavy"};
-		String[] threeYearsArray = {"ThreeYearsMedium", "ThreeYearsHeavy"};
+		String[] aYearArray = {"OneYearLight","OneYearMedium", "OneYearHeavy"};
+		String[] threeYearsArray = {"ThreeYearsLight","ThreeYearsMedium", "ThreeYearsHeavy"};
 		
 		boolean reserved = false;
 //		String[] reservingArray = {"NOT PayInAdvance","Light","Medium","Heavy"};
@@ -487,12 +487,16 @@ public class EC2Scraper {
 	}
 
 	public static void main(String[] args) {
-		EC2Scraper scraper = new EC2Scraper("./ec2 pricing snapshopts/AprilEC2.html","./properties");
-//		scraper.setOutput("AWS Constraints.txt");
-//		scraper.setIntegerFormat(false);
-//		scraper.parseInstances();
-//		scraper.parsePrices();
-		scraper.attributed2Basic("AmazonEC2Atts.afm", "EC2Basic.fm");
+		EC2Scraper scraper = new EC2Scraper("./ec2-by-date/9-5-2014/pricing.html","./properties");
+		scraper.setOutput("Current AWS Constraints.txt");
+		scraper.parseInstances();
+		scraper.parsePrices();
+		
+		scraper = new EC2Scraper("./ec2-by-date/9-5-2014/previous-generation.html","./properties");
+		scraper.setOutput("Previous AWS Constraints.txt");
+		scraper.parseInstances();
+		scraper.parsePrices();
+//		scraper.attributed2Basic("AmazonEC2Atts.afm", "EC2Basic.fm");
 	}
 
 }
