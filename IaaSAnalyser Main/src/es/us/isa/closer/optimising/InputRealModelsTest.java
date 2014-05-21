@@ -23,11 +23,11 @@ public class InputRealModelsTest extends AbstractModelsTest {
 		config.addAttConfig(qt.parseConstraint("Storage.size >= 1000;"));
 		config.addAttConfig(qt.parseConstraint("Instance.cores >= 4;"));
 		config.addAttConfig(qt.parseConstraint("Instance.ram >= 20;"));
-		
+		config.addElement(this.vm.searchFeatureByName("VA"), 1);
 		
 		analyse(config);
 		
-		checkCost(0.136);
+		checkCost(0.082);
 	}
 	
 	@Test

@@ -84,6 +84,9 @@ Storage.size == Storage.extraSpace + Instance.defaultStorage;
 
 SSD IMPLIES Storage.costGB == 0.5;
 NOT SSD IMPLIES Storage.costGB == 0.12;
+SSD IMPLIES (NOT FirstGen);
+FirstGen IMPLIES Storage.extraSpace == 0;
+
 
 ## Non-available locations
 NOT (CA OR ORE OR IR OR NT OR SIN OR JP OR SouthAmerica);

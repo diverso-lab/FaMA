@@ -29,6 +29,9 @@ SouthAmerica: SaoPaulo;
 Use:[1,1]{OnDemand PaymentDiscounts};
 
 PaymentDiscounts: [1,1]{Commitment PayInAdvance};
+Commitment: [1,1]{Commitment6Months Commitment12Months Commitment18Months Commitment24Months Commitment30Months Commitment36Months};
+PayInAdvance: [1,1]{PayInAdvance6Months PayInAdvance12Months PayInAdvance18Months PayInAdvance24Months PayInAdvance30Months PayInAdvance36Months};
+
 
 
 
@@ -81,6 +84,9 @@ Storage.size == Storage.extraSpace + Instance.defaultStorage;
 
 SSD IMPLIES Storage.costGB == 0.5;
 NOT SSD IMPLIES Storage.costGB == 0.12;
+SSD IMPLIES (NOT FirstGen);
+FirstGen IMPLIES Storage.extraSpace == 0;
+
 
 ## Non-available locations
 NOT (CA OR ORE OR IR OR NT OR SIN OR JP OR SouthAmerica);

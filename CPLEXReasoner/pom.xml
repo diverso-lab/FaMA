@@ -82,6 +82,11 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>clinker-3rdparty</id>
+			<name>clinker-3rdparty</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
+		</repository>
 	</repositories>
 
 
