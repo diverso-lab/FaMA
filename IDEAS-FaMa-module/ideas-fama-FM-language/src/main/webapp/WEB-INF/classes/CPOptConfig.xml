@@ -1,0 +1,4 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.OptimisingConfigurationQuestion" class="es.us.isa.cpoptimizer.questions.CPOptOptimisingQuestion"/>
+<!-- 	<question interface="es.us.isa.FAMA.Reasoner.questions.OptimisingPreferencesQuestion" class="es.us.isa.cpoptimizer.questions.CPOptOptimisingPrefsQuestion"/> -->
+</reasoner>

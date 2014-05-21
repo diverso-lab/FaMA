@@ -1,12 +1,11 @@
 package es.us.isa.ideas.controller.famafm;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.us.isa.FAMA.ideas.FAMAAnalyserDelegate;
 import es.us.isa.ideas.common.AppResponse;
 import es.us.isa.ideas.common.AppResponse.Status;
 import es.us.isa.ideas.module.controller.BaseLanguageController;
@@ -16,6 +15,8 @@ import es.us.isa.ideas.module.controller.BaseLanguageController;
 @RequestMapping("/language")
 public class FMLanguageController extends BaseLanguageController {
 
+	private final static String EXTENSION = ".fm";
+	
 	@RequestMapping(value = "/operation/{id}/execute", method = RequestMethod.POST)
 	@ResponseBody
 	public AppResponse executeOperation(String id, String content, String fileUri) {
@@ -26,7 +27,9 @@ public class FMLanguageController extends BaseLanguageController {
 		 * - Number of products
 		 * - Products listing
 		 */
-		AppResponse response = null;
+		FAMAAnalyserDelegate analyser = FAMAAnalyserDelegate.getInstance();
+		AppResponse response = analyser.analyseForIDEAS(content, id, EXTENSION);
+		response.setFileUri(fileUri);
 		
 		return response;
 	}
@@ -34,7 +37,7 @@ public class FMLanguageController extends BaseLanguageController {
 	@RequestMapping(value = "/format/{format}/checkLanguage", method = RequestMethod.POST)
 	@ResponseBody
 	public AppResponse checkLanguage(String id, String content, String fileUri) {
-		
+		//TODO
 		AppResponse appResponse = new AppResponse();
 		
 		boolean problems = false;
@@ -54,6 +57,7 @@ public class FMLanguageController extends BaseLanguageController {
 	@RequestMapping(value = "/convert", method = RequestMethod.POST)
 	@ResponseBody
 	public AppResponse convertFormat(String currentFormat, String desiredFormat, String fileUri, String content) {
+		//TODO
 		AppResponse appResponse = new AppResponse();
 		
 		return appResponse;

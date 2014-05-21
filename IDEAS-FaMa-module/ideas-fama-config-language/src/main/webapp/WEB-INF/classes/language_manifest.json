@@ -1,15 +1,43 @@
-{
-				id: "ideas-plaintext-language",
-				extension: "txt",
-				name: "Text",
+		{
+				id: "ideas-config-language",
+				extension: "fmc",
+				name: "FM Configuration",
 				formats: [
 				 	{
-				 		format: "txt",
+				 		format: "fmc",
+				 		editorModeId: "ace/mode/sample",
+				 		_editorModeURI: "mode-fmc.js",
+				 		editorThemeId: "ace/mode/sample",
+				 		_editorThemeURI: "theme-fmc.js",
 				 		checkLanguage: "true"
 				 	}
 				],
 				 
-				operations: [],
+				operations: [
+
+				             {
+				            	 id: "validConfig",
+				            	 name: "Valid Config",
+				            	 data: {},
+				            	 _remoteExecution: "false",
+				            	 action: "function(operationStructure) {CommandApi.fetchFileContentsBeforeExecutingOperation(operationStructure, fileUri, 'afm', 'validConfig', 'Valid Configuration', 'Select an Extended FM to check config validity with', 'Valid Config', function(result){}, function(result){})}"
+				             },
+				             {
+				            	 id: "numberOfConfigurations",
+				            	 name: "Number of Configurations",
+				            	 data: {},
+				            	 _remoteExecution: "false",
+				            	 action: "function(operationStructure) {CommandApi.fetchFileContentsBeforeExecutingOperation(operationStructure, fileUri, 'afm', 'numberOfConfigurations', 'Number of Configurations', 'Select an Extended FM to get the number of configurations that fulfill this partial config.', 'Number of Configurations', function(result){}, function(result){})}"
+				             },
+				              {
+				            	 id: "optimalConfig",
+				            	 name: "Optimal Configuration",
+				            	 data: {},
+				            	 _remoteExecution: "false",
+				            	 action: "function(operationStructure) {CommandApi.fetchFileContentsBeforeExecutingOperation(operationStructure, fileUri, 'afm', 'optimalConfig', 'Optimal Configuration', 'Select an Extended FM to check its optimal config.', 'Optimal Configuration', function(result){}, function(result){})}"
+				             }
+				             
+				             ],
 				             
 				inspectorLoader: "function(loader, format) {}"
 

@@ -1,15 +1,36 @@
-{
-				id: "ideas-plaintext-language",
-				extension: "txt",
-				name: "Text",
+		{
+				id: "ideas-ExtendedFM-language",
+				extension: "afm",
+				name: "Extended FM",
 				formats: [
 				 	{
-				 		format: "txt",
+				 		format: "afm",
+				 		editorModeId: "ace/mode/sample",
+				 		_editorModeURI: "mode-afm.js",
+				 		editorThemeId: "ace/mode/sample",
+				 		_editorThemeURI: "theme-afm.js",
 				 		checkLanguage: "true"
 				 	}
 				],
 				 
-				operations: [],
+				operations: [
+
+				             {
+				            	 id: "validFM",
+				            	 name: "Valid Model",
+				            	 data: {},
+				            	 _remoteExecution: "true",
+				            	 action: "function(result) {console.log(result);}"
+				             },
+				             {
+				            	 id: "numberOfConfigurations",
+				            	 name: "Number of Configurations",
+				            	 data: {},
+				            	 _remoteExecution: "true",
+				            	 action: "function(result) {console.log(result);}"
+				             }
+				             
+				             ],
 				             
 				inspectorLoader: "function(loader, format) {}"
 

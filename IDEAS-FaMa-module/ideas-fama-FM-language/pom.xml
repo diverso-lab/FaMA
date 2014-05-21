@@ -69,7 +69,7 @@
 		
 		<!-- FAMA dependency -->
 		<dependency>
-			<groupId>es.us.isa.ideas.module</groupId>
+			<groupId>es.us.isa.ideas.module.language</groupId>
 			<artifactId>fama-ideas</artifactId>
 			<version>0.1.0</version>
 		</dependency>

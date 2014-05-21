@@ -1,0 +1,169 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.us.isa.ideas.module</groupId>
+		<artifactId>fama-module</artifactId>
+		<version>0.1.0</version>
+		<relativePath>./../pom.xml</relativePath>
+	</parent>
+	<groupId>es.us.isa.ideas.module.language</groupId>
+	<artifactId>fama-ideas</artifactId>
+	<packaging>jar</packaging>
+	<name>FaMa IDEAS</name>
+	<!-- Properties -->
+	<properties>
+		<!--- VERSIONING -->
+		<java.version>1.6</java.version>
+		<ideas.version>0.0.1-SNAPSHOT</ideas.version>
+	</properties>
+	<description>FaMa version for IDEAS studio</description>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mc-release</id>
+			<name>Local Maven repository of releases</name>
+			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<url>http://ci.repository.codehaus.org/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>ideas</id>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
+		</repository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://repo.maven.apache.org/maven2</url>
+		</repository>
+		<!-- IDEAS repository -->
+		<repository>
+			<id>ideas</id>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
+		</repository>
+		
+		
+		<repository>
+			<id>org.springframework.maven.release</id>
+			<name>Spring Maven Release Repository</name>
+			<url>http://repo.springsource.org/release</url>
+		</repository>
+		<repository>
+			<id>clinker-3rdparty</id>
+			<name>clinker-3rdparty</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
+		</repository>
+		
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+		<!-- IDEAS Depebdencies -->
+		<dependency>
+			<groupId>es.us.isa.ideas</groupId>
+			<artifactId>ideas-core</artifactId>
+			<version>${ideas.version}</version>
+		</dependency>
+		<!-- Java BDD -->
+		<dependency>
+			<groupId>org.java.bdd</groupId>
+			<artifactId>javaBDD</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibm.cplex</groupId>
+			<artifactId>CPOptimizer</artifactId>
+			<version>12.5.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.csvreader</groupId>
+			<artifactId>CSVReader</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.splot</groupId>
+			<artifactId>SPLOTFMapi</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>target</directory>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>resources</directory>
+			</testResource>
+		</testResources>
+		<plugins>
+			<!-- Maven Eclipse Plugin -->
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/**.xml/**</exclude>
+					</excludes>
+					<header>copyrightNotice.txt</header>
+				</configuration>
+				<executions>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>6</source>
+					<target>6</target>
+				</configuration>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>copy-dependencies</id> <phase>process-resources</phase> 
+				<goals> <goal>copy-dependencies</goal> </goals> <configuration> <outputDirectory>lib_noscm</outputDirectory> 
+				<overWriteReleases>true</overWriteReleases> <overWriteSnapshots>false</overWriteSnapshots> 
+				<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> </executions> 
+				</plugin> -->
+
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,13 @@
+%Configuration
+
+## Feature config
+WindowsBased;
+NOT Europe;
+OnDemand;
+
+## Att config
+Computing.totalCost < 500000;
+Use.period == 12;
+Use.usage == 600;
+Instance.cores >= 4;
+Instance.ram >= 6;
