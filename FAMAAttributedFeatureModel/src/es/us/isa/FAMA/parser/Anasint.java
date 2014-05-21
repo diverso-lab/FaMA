@@ -379,17 +379,17 @@ public Anasint(ParserSharedInputState state) {
 			tmp3_AST = astFactory.create(LT(1));
 			match(SECCION_ATRIBUTOS);
 			{
-			int _cnt257=0;
-			_loop257:
+			int _cnt356=0;
+			_loop356:
 			do {
 				if ((LA(1)==IDENT)) {
 					declaracion_atributo();
 				}
 				else {
-					if ( _cnt257>=1 ) { break _loop257; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt356>=1 ) { break _loop356; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt257++;
+				_cnt356++;
 			} while (true);
 			}
 		}
@@ -451,13 +451,13 @@ public Anasint(ParserSharedInputState state) {
 			declaracion_feature();
 			r_AST = (AST)returnAST;
 			{
-			_loop238:
+			_loop337:
 			do {
 				if ((LA(1)==IDENT)) {
 					declaracion_feature();
 				}
 				else {
-					break _loop238;
+					break _loop337;
 				}
 				
 			} while (true);
@@ -557,18 +557,18 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			int _cnt243=0;
-			_loop243:
+			int _cnt342=0;
+			_loop342:
 			do {
 				if ((LA(1)==IDENT||LA(1)==CORCHETE_ABRIR)) {
 					relacion();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt243>=1 ) { break _loop243; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt342>=1 ) { break _loop342; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt243++;
+				_cnt342++;
 			} while (true);
 			}
 			lista_relaciones_AST = (AST)currentAST.root;
@@ -594,10 +594,10 @@ public Anasint(ParserSharedInputState state) {
 		AST of_AST = null;
 		
 		try {      // for error handling
-			boolean synPredMatched246 = false;
+			boolean synPredMatched345 = false;
 			if (((LA(1)==CORCHETE_ABRIR) && (LA(2)==LIT_ENTERO))) {
-				int _m246 = mark();
-				synPredMatched246 = true;
+				int _m345 = mark();
+				synPredMatched345 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -605,12 +605,12 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched246 = false;
+					synPredMatched345 = false;
 				}
-				rewind(_m246);
+				rewind(_m345);
 inputState.guessing--;
 			}
-			if ( synPredMatched246 ) {
+			if ( synPredMatched345 ) {
 				relacion_cardinalidad();
 				r_AST = (AST)returnAST;
 				if ( inputState.guessing==0 ) {
@@ -819,18 +819,18 @@ inputState.guessing--;
 			feature();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			int _cnt254=0;
-			_loop254:
+			int _cnt353=0;
+			_loop353:
 			do {
 				if ((LA(1)==IDENT)) {
 					feature();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt254>=1 ) { break _loop254; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt353>=1 ) { break _loop353; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt254++;
+				_cnt353++;
 			} while (true);
 			}
 			match(LLAVE_CERRAR);
@@ -1156,18 +1156,18 @@ inputState.guessing--;
 		
 		try {      // for error handling
 			{
-			int _cnt265=0;
-			_loop265:
+			int _cnt364=0;
+			_loop364:
 			do {
 				if ((LA(1)==CORCHETE_ABRIR)) {
 					rangoInt();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt265>=1 ) { break _loop265; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt364>=1 ) { break _loop364; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt265++;
+				_cnt364++;
 			} while (true);
 			}
 			if ( inputState.guessing==0 ) {
@@ -1320,7 +1320,7 @@ inputState.guessing--;
 			literal();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop271:
+			_loop370:
 			do {
 				if ((LA(1)==COMA)) {
 					match(COMA);
@@ -1328,7 +1328,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop271;
+					break _loop370;
 				}
 				
 			} while (true);
@@ -1406,18 +1406,18 @@ inputState.guessing--;
 		
 		try {      // for error handling
 			{
-			int _cnt279=0;
-			_loop279:
+			int _cnt378=0;
+			_loop378:
 			do {
 				if ((_tokenSet_14.member(LA(1)))) {
 					constraint();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt279>=1 ) { break _loop279; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt378>=1 ) { break _loop378; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt279++;
+				_cnt378++;
 			} while (true);
 			}
 			lista_constraints_AST = (AST)currentAST.root;
@@ -1671,18 +1671,18 @@ inputState.guessing--;
 		
 		try {      // for error handling
 			{
-			int _cnt289=0;
-			_loop289:
+			int _cnt388=0;
+			_loop388:
 			do {
 				if ((_tokenSet_14.member(LA(1)))) {
 					declaracion_invariante();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt289>=1 ) { break _loop289; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt388>=1 ) { break _loop388; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt289++;
+				_cnt388++;
 			} while (true);
 			}
 			lista_invariantes_AST = (AST)currentAST.root;
@@ -1799,7 +1799,7 @@ inputState.guessing--;
 			expresion_nivel_2();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop297:
+			_loop396:
 			do {
 				if ((LA(1)==OR)) {
 					AST tmp39_AST = null;
@@ -1810,7 +1810,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop297;
+					break _loop396;
 				}
 				
 			} while (true);
@@ -1838,7 +1838,7 @@ inputState.guessing--;
 			expresion_nivel_3();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop300:
+			_loop399:
 			do {
 				if ((LA(1)==AND)) {
 					AST tmp40_AST = null;
@@ -1849,7 +1849,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop300;
+					break _loop399;
 				}
 				
 			} while (true);
@@ -2040,7 +2040,7 @@ inputState.guessing--;
 			exp_mult();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop309:
+			_loop408:
 			do {
 				if ((LA(1)==MAS||LA(1)==MENOS)) {
 					{
@@ -2071,7 +2071,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop309;
+					break _loop408;
 				}
 				
 			} while (true);
@@ -2099,7 +2099,7 @@ inputState.guessing--;
 			expresion_unaria();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop313:
+			_loop412:
 			do {
 				if (((LA(1) >= MULT && LA(1) <= POW))) {
 					{
@@ -2146,7 +2146,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop313;
+					break _loop412;
 				}
 				
 			} while (true);
@@ -2447,7 +2447,7 @@ inputState.guessing--;
 			expresion();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop322:
+			_loop421:
 			do {
 				if ((LA(1)==COMA)) {
 					match(COMA);
@@ -2455,7 +2455,7 @@ inputState.guessing--;
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop322;
+					break _loop421;
 				}
 				
 			} while (true);

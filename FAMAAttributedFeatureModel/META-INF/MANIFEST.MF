@@ -33,12 +33,13 @@ Built-By: jesus
 Tool: Bnd-0.0.238
 Bundle-Name: FaMaAttributedModel
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.6.0_65
+Build-Jdk: 1.7.0_51
 Bundle-Version: 1.1.0
-Bnd-LastModified: 1398693598928
+Bnd-LastModified: 1400690019803
 Bundle-ManifestVersion: 2
 Bundle-Activator: es.us.isa.FAMA.models.FAMAAttributed.osgi.Activator
 Bundle-Description: Attributed Metamodel for fama
+Bundle-SymbolicName: es.us.isa.FaMaAttributedModel
 Import-Package: es.us.isa.FAMA.Exceptions;resolution:=optional,es.us.i
  sa.FAMA.Reasoner;resolution:=optional,es.us.isa.FAMA.errors;resolutio
  n:=optional,es.us.isa.FAMA.models.FAMAAttributed.osgi;resolution:=opt
@@ -56,5 +57,4 @@ Import-Package: es.us.isa.FAMA.Exceptions;resolution:=optional,es.us.i
  ution:=optional,javax.swing;resolution:=optional,javax.swing.event;re
  solution:=optional,javax.swing.tree;resolution:=optional,org.osgi.fra
  mework
-Bundle-SymbolicName: es.us.isa.FaMaAttributedModel
 

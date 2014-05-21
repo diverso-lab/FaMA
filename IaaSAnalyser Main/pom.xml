@@ -29,6 +29,13 @@
 			<version>2.7.7</version>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>clinker-3rdparty</id>
+			<name>clinker-3rdparty</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
+		</repository>
+	</repositories>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>

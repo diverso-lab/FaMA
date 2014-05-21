@@ -215,7 +215,7 @@ public FaMaTreeParser() {
 		AttributedFeature root; Collection<Constraint> cons = new LinkedList<Constraint>();
 		
 		try {      // for error handling
-			AST __t145 = _t;
+			AST __t244 = _t;
 			AST tmp1_AST_in = (AST)_t;
 			match(_t,FEATURE_MODEL);
 			_t = _t.getFirstChild();
@@ -240,7 +240,7 @@ public FaMaTreeParser() {
 			}
 			}
 			}
-			_t = __t145;
+			_t = __t244;
 			_t = _t.getNextSibling();
 			res = createFeatureModel(root,cons);
 		}
@@ -258,13 +258,13 @@ public FaMaTreeParser() {
 		AST seccion_rels_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t148 = _t;
+			AST __t247 = _t;
 			AST tmp2_AST_in = (AST)_t;
 			match(_t,SECCION_RELACIONES);
 			_t = _t.getFirstChild();
 			root=feature(_t);
 			_t = _retTree;
-			_t = __t148;
+			_t = __t247;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -282,12 +282,12 @@ public FaMaTreeParser() {
 		Constraint aux;
 		
 		try {      // for error handling
-			AST __t229 = _t;
+			AST __t328 = _t;
 			AST tmp3_AST_in = (AST)_t;
 			match(_t,CONSTRAINTS);
 			_t = _t.getFirstChild();
 			{
-			_loop231:
+			_loop330:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==CONSTRAINT)) {
@@ -296,12 +296,12 @@ public FaMaTreeParser() {
 					res.add(aux);
 				}
 				else {
-					break _loop231;
+					break _loop330;
 				}
 				
 			} while (true);
 			}
-			_t = __t229;
+			_t = __t328;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -321,7 +321,7 @@ public FaMaTreeParser() {
 		Collection<Constraint> invs;Domain d;
 		
 		try {      // for error handling
-			AST __t150 = _t;
+			AST __t249 = _t;
 			AST tmp4_AST_in = (AST)_t;
 			match(_t,FEATURE);
 			_t = _t.getFirstChild();
@@ -340,7 +340,7 @@ public FaMaTreeParser() {
 			invs=invariantes(_t);
 			_t = _retTree;
 			addInvariants(feat,invs);
-			_t = __t150;
+			_t = __t249;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -360,7 +360,7 @@ public FaMaTreeParser() {
 		Range r;
 		
 		try {      // for error handling
-			AST __t152 = _t;
+			AST __t251 = _t;
 			AST tmp5_AST_in = (AST)_t;
 			match(_t,DOMINIO);
 			_t = _t.getFirstChild();
@@ -372,7 +372,7 @@ public FaMaTreeParser() {
 			_t = _t.getNextSibling();
 			r = createRange(min,max);
 				d.addRange(r);
-			_t = __t152;
+			_t = __t251;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -390,12 +390,12 @@ public FaMaTreeParser() {
 		GenericAttribute aux;
 		
 		try {      // for error handling
-			AST __t154 = _t;
+			AST __t253 = _t;
 			AST tmp6_AST_in = (AST)_t;
 			match(_t,ATRIBUTOS);
 			_t = _t.getFirstChild();
 			{
-			_loop156:
+			_loop255:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==ATRIBUTO)) {
@@ -404,12 +404,12 @@ public FaMaTreeParser() {
 					atts.add(aux);
 				}
 				else {
-					break _loop156;
+					break _loop255;
 				}
 				
 			} while (true);
 			}
-			_t = __t154;
+			_t = __t253;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -427,12 +427,12 @@ public FaMaTreeParser() {
 		Relation aux;
 		
 		try {      // for error handling
-			AST __t188 = _t;
+			AST __t287 = _t;
 			AST tmp7_AST_in = (AST)_t;
 			match(_t,RELACIONES);
 			_t = _t.getFirstChild();
 			{
-			_loop190:
+			_loop289:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==RELACION)) {
@@ -441,12 +441,12 @@ public FaMaTreeParser() {
 					rels.add(aux);
 				}
 				else {
-					break _loop190;
+					break _loop289;
 				}
 				
 			} while (true);
 			}
-			_t = __t188;
+			_t = __t287;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -464,12 +464,12 @@ public FaMaTreeParser() {
 		Constraint aux;
 		
 		try {      // for error handling
-			AST __t194 = _t;
+			AST __t293 = _t;
 			AST tmp8_AST_in = (AST)_t;
 			match(_t,INVARIANTES);
 			_t = _t.getFirstChild();
 			{
-			_loop196:
+			_loop295:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==CONSTRAINT)) {
@@ -478,12 +478,12 @@ public FaMaTreeParser() {
 					invs.add(aux);
 				}
 				else {
-					break _loop196;
+					break _loop295;
 				}
 				
 			} while (true);
 			}
-			_t = __t194;
+			_t = __t293;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -502,7 +502,7 @@ public FaMaTreeParser() {
 		Domain d;Object defVal, nullVal;
 		
 		try {      // for error handling
-			AST __t158 = _t;
+			AST __t257 = _t;
 			AST tmp9_AST_in = (AST)_t;
 			match(_t,ATRIBUTO);
 			_t = _t.getFirstChild();
@@ -515,7 +515,7 @@ public FaMaTreeParser() {
 			_t = _retTree;
 			nullVal=null_value(_t);
 			_t = _retTree;
-			_t = __t158;
+			_t = __t257;
 			_t = _t.getNextSibling();
 			att = new GenericAttribute(n.getText(),d,nullVal,defVal);
 		}
@@ -533,7 +533,7 @@ public FaMaTreeParser() {
 		AST dominio_att_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t160 = _t;
+			AST __t259 = _t;
 			AST tmp10_AST_in = (AST)_t;
 			match(_t,DOMINIO);
 			_t = _t.getFirstChild();
@@ -564,7 +564,7 @@ public FaMaTreeParser() {
 			}
 			}
 			}
-			_t = __t160;
+			_t = __t259;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -581,13 +581,13 @@ public FaMaTreeParser() {
 		AST default_value_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t182 = _t;
+			AST __t281 = _t;
 			AST tmp11_AST_in = (AST)_t;
 			match(_t,DEF_VALUE);
 			_t = _t.getFirstChild();
 			o=valor(_t);
 			_t = _retTree;
-			_t = __t182;
+			_t = __t281;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -604,13 +604,13 @@ public FaMaTreeParser() {
 		AST null_value_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t184 = _t;
+			AST __t283 = _t;
 			AST tmp12_AST_in = (AST)_t;
 			match(_t,NULL_VALUE);
 			_t = _t.getFirstChild();
 			o=valor(_t);
 			_t = _retTree;
-			_t = __t184;
+			_t = __t283;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -628,13 +628,13 @@ public FaMaTreeParser() {
 		Collection<Range> ranges;
 		
 		try {      // for error handling
-			AST __t163 = _t;
+			AST __t262 = _t;
 			AST tmp13_AST_in = (AST)_t;
 			match(_t,INTEGER);
 			_t = _t.getFirstChild();
 			ranges=rangos(_t);
 			_t = _retTree;
-			_t = __t163;
+			_t = __t262;
 			_t = _t.getNextSibling();
 			d = new RangeIntegerDomain(ranges);
 		}
@@ -653,17 +653,17 @@ public FaMaTreeParser() {
 		Collection<Object> c = new LinkedList<Object>();Object aux;
 		
 		try {      // for error handling
-			AST __t171 = _t;
+			AST __t270 = _t;
 			AST tmp14_AST_in = (AST)_t;
 			match(_t,ENUM);
 			_t = _t.getFirstChild();
-			AST __t172 = _t;
+			AST __t271 = _t;
 			AST tmp15_AST_in = (AST)_t;
 			match(_t,VALORES);
 			_t = _t.getFirstChild();
 			{
-			int _cnt174=0;
-			_loop174:
+			int _cnt273=0;
+			_loop273:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==LIT_ENTERO||_t.getType()==LIT_REAL||_t.getType()==LIT_STRING)) {
@@ -672,15 +672,15 @@ public FaMaTreeParser() {
 					c.add(aux);
 				}
 				else {
-					if ( _cnt174>=1 ) { break _loop174; } else {throw new NoViableAltException(_t);}
+					if ( _cnt273>=1 ) { break _loop273; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt174++;
+				_cnt273++;
 			} while (true);
 			}
-			_t = __t172;
+			_t = __t271;
 			_t = _t.getNextSibling();
-			_t = __t171;
+			_t = __t270;
 			_t = _t.getNextSibling();
 			d = createEnumeratedDomain(c);
 		}
@@ -698,13 +698,13 @@ public FaMaTreeParser() {
 		AST dominio_real_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t176 = _t;
+			AST __t275 = _t;
 			AST tmp16_AST_in = (AST)_t;
 			match(_t,REAL);
 			_t = _t.getFirstChild();
 			d=rangoReal(_t);
 			_t = _retTree;
-			_t = __t176;
+			_t = __t275;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -722,13 +722,13 @@ public FaMaTreeParser() {
 		Range aux = null;
 		
 		try {      // for error handling
-			AST __t165 = _t;
+			AST __t264 = _t;
 			AST tmp17_AST_in = (AST)_t;
 			match(_t,RANGOS);
 			_t = _t.getFirstChild();
 			{
-			int _cnt167=0;
-			_loop167:
+			int _cnt266=0;
+			_loop266:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==RANGO)) {
@@ -737,13 +737,13 @@ public FaMaTreeParser() {
 					ranges.add(aux);
 				}
 				else {
-					if ( _cnt167>=1 ) { break _loop167; } else {throw new NoViableAltException(_t);}
+					if ( _cnt266>=1 ) { break _loop266; } else {throw new NoViableAltException(_t);}
 				}
 				
-				_cnt167++;
+				_cnt266++;
 			} while (true);
 			}
-			_t = __t165;
+			_t = __t264;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -762,7 +762,7 @@ public FaMaTreeParser() {
 		AST max = null;
 		
 		try {      // for error handling
-			AST __t169 = _t;
+			AST __t268 = _t;
 			AST tmp18_AST_in = (AST)_t;
 			match(_t,RANGO);
 			_t = _t.getFirstChild();
@@ -772,7 +772,7 @@ public FaMaTreeParser() {
 			max = (AST)_t;
 			match(_t,LIT_ENTERO);
 			_t = _t.getNextSibling();
-			_t = __t169;
+			_t = __t268;
 			_t = _t.getNextSibling();
 			r = createRange(min,max);
 		}
@@ -843,7 +843,7 @@ public FaMaTreeParser() {
 		AST max = null;
 		
 		try {      // for error handling
-			AST __t178 = _t;
+			AST __t277 = _t;
 			AST tmp19_AST_in = (AST)_t;
 			match(_t,RANGO);
 			_t = _t.getFirstChild();
@@ -853,7 +853,7 @@ public FaMaTreeParser() {
 			max = _t==ASTNULL ? null : (AST)_t;
 			val_lit(_t);
 			_t = _retTree;
-			_t = __t178;
+			_t = __t277;
 			_t = _t.getNextSibling();
 			d = createRealDomain(min,max);
 		}
@@ -910,7 +910,7 @@ public FaMaTreeParser() {
 		Collection<AttributedFeature> children;
 		
 		try {      // for error handling
-			AST __t192 = _t;
+			AST __t291 = _t;
 			AST tmp22_AST_in = (AST)_t;
 			match(_t,RELACION);
 			_t = _t.getFirstChild();
@@ -922,7 +922,7 @@ public FaMaTreeParser() {
 			_t = _retTree;
 			children=features(_t);
 			_t = _retTree;
-			_t = __t192;
+			_t = __t291;
 			_t = _t.getNextSibling();
 			r = createRelation(n,c,children);
 		}
@@ -939,7 +939,7 @@ public FaMaTreeParser() {
 		AST card_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t227 = _t;
+			AST __t326 = _t;
 			AST tmp23_AST_in = (AST)_t;
 			match(_t,CARDINALIDAD);
 			_t = _t.getFirstChild();
@@ -949,7 +949,7 @@ public FaMaTreeParser() {
 			AST tmp25_AST_in = (AST)_t;
 			match(_t,LIT_ENTERO);
 			_t = _t.getNextSibling();
-			_t = __t227;
+			_t = __t326;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -966,12 +966,12 @@ public FaMaTreeParser() {
 		AttributedFeature aux;
 		
 		try {      // for error handling
-			AST __t223 = _t;
+			AST __t322 = _t;
 			AST tmp26_AST_in = (AST)_t;
 			match(_t,FEATURES);
 			_t = _t.getFirstChild();
 			{
-			_loop225:
+			_loop324:
 			do {
 				if (_t==null) _t=ASTNULL;
 				if ((_t.getType()==FEATURE)) {
@@ -980,12 +980,12 @@ public FaMaTreeParser() {
 					feats.add(aux);
 				}
 				else {
-					break _loop225;
+					break _loop324;
 				}
 				
 			} while (true);
 			}
-			_t = __t223;
+			_t = __t322;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -1004,7 +1004,7 @@ public FaMaTreeParser() {
 		AST e = null;
 		
 		try {      // for error handling
-			AST __t198 = _t;
+			AST __t297 = _t;
 			AST tmp27_AST_in = (AST)_t;
 			match(_t,CONSTRAINT);
 			_t = _t.getFirstChild();
@@ -1015,7 +1015,7 @@ public FaMaTreeParser() {
 			expresion(_t);
 			_t = _retTree;
 			c = ASTtoConstraint(e,n);
-			_t = __t198;
+			_t = __t297;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
@@ -1035,7 +1035,7 @@ public FaMaTreeParser() {
 			switch ( _t.getType()) {
 			case IFF:
 			{
-				AST __t200 = _t;
+				AST __t299 = _t;
 				AST tmp28_AST_in = (AST)_t;
 				match(_t,IFF);
 				_t = _t.getFirstChild();
@@ -1043,13 +1043,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t200;
+				_t = __t299;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IMPLIES:
 			{
-				AST __t201 = _t;
+				AST __t300 = _t;
 				AST tmp29_AST_in = (AST)_t;
 				match(_t,IMPLIES);
 				_t = _t.getFirstChild();
@@ -1057,13 +1057,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t201;
+				_t = __t300;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case EXCLUDES:
 			{
-				AST __t202 = _t;
+				AST __t301 = _t;
 				AST tmp30_AST_in = (AST)_t;
 				match(_t,EXCLUDES);
 				_t = _t.getFirstChild();
@@ -1071,13 +1071,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t202;
+				_t = __t301;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case REQUIRES:
 			{
-				AST __t203 = _t;
+				AST __t302 = _t;
 				AST tmp31_AST_in = (AST)_t;
 				match(_t,REQUIRES);
 				_t = _t.getFirstChild();
@@ -1085,13 +1085,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t203;
+				_t = __t302;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case OR:
 			{
-				AST __t204 = _t;
+				AST __t303 = _t;
 				AST tmp32_AST_in = (AST)_t;
 				match(_t,OR);
 				_t = _t.getFirstChild();
@@ -1099,13 +1099,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t204;
+				_t = __t303;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case AND:
 			{
-				AST __t205 = _t;
+				AST __t304 = _t;
 				AST tmp33_AST_in = (AST)_t;
 				match(_t,AND);
 				_t = _t.getFirstChild();
@@ -1113,25 +1113,25 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t205;
+				_t = __t304;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case NOT:
 			{
-				AST __t206 = _t;
+				AST __t305 = _t;
 				AST tmp34_AST_in = (AST)_t;
 				match(_t,NOT);
 				_t = _t.getFirstChild();
 				expresion(_t);
 				_t = _retTree;
-				_t = __t206;
+				_t = __t305;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAYOR:
 			{
-				AST __t207 = _t;
+				AST __t306 = _t;
 				AST tmp35_AST_in = (AST)_t;
 				match(_t,MAYOR);
 				_t = _t.getFirstChild();
@@ -1139,13 +1139,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t207;
+				_t = __t306;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOR:
 			{
-				AST __t208 = _t;
+				AST __t307 = _t;
 				AST tmp36_AST_in = (AST)_t;
 				match(_t,MENOR);
 				_t = _t.getFirstChild();
@@ -1153,13 +1153,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t208;
+				_t = __t307;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAYOR_IGUAL:
 			{
-				AST __t209 = _t;
+				AST __t308 = _t;
 				AST tmp37_AST_in = (AST)_t;
 				match(_t,MAYOR_IGUAL);
 				_t = _t.getFirstChild();
@@ -1167,13 +1167,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t209;
+				_t = __t308;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOR_IGUAL:
 			{
-				AST __t210 = _t;
+				AST __t309 = _t;
 				AST tmp38_AST_in = (AST)_t;
 				match(_t,MENOR_IGUAL);
 				_t = _t.getFirstChild();
@@ -1181,13 +1181,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t210;
+				_t = __t309;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case IGUAL:
 			{
-				AST __t211 = _t;
+				AST __t310 = _t;
 				AST tmp39_AST_in = (AST)_t;
 				match(_t,IGUAL);
 				_t = _t.getFirstChild();
@@ -1195,13 +1195,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t211;
+				_t = __t310;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DISTINTO:
 			{
-				AST __t212 = _t;
+				AST __t311 = _t;
 				AST tmp40_AST_in = (AST)_t;
 				match(_t,DISTINTO);
 				_t = _t.getFirstChild();
@@ -1209,13 +1209,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t212;
+				_t = __t311;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MAS:
 			{
-				AST __t213 = _t;
+				AST __t312 = _t;
 				AST tmp41_AST_in = (AST)_t;
 				match(_t,MAS);
 				_t = _t.getFirstChild();
@@ -1223,13 +1223,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t213;
+				_t = __t312;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOS:
 			{
-				AST __t214 = _t;
+				AST __t313 = _t;
 				AST tmp42_AST_in = (AST)_t;
 				match(_t,MENOS);
 				_t = _t.getFirstChild();
@@ -1237,13 +1237,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t214;
+				_t = __t313;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MULT:
 			{
-				AST __t215 = _t;
+				AST __t314 = _t;
 				AST tmp43_AST_in = (AST)_t;
 				match(_t,MULT);
 				_t = _t.getFirstChild();
@@ -1251,13 +1251,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t215;
+				_t = __t314;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case DIV:
 			{
-				AST __t216 = _t;
+				AST __t315 = _t;
 				AST tmp44_AST_in = (AST)_t;
 				match(_t,DIV);
 				_t = _t.getFirstChild();
@@ -1265,13 +1265,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t216;
+				_t = __t315;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MOD:
 			{
-				AST __t217 = _t;
+				AST __t316 = _t;
 				AST tmp45_AST_in = (AST)_t;
 				match(_t,MOD);
 				_t = _t.getFirstChild();
@@ -1279,13 +1279,13 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t217;
+				_t = __t316;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case POW:
 			{
-				AST __t218 = _t;
+				AST __t317 = _t;
 				AST tmp46_AST_in = (AST)_t;
 				match(_t,POW);
 				_t = _t.getFirstChild();
@@ -1293,19 +1293,19 @@ public FaMaTreeParser() {
 				_t = _retTree;
 				expresion(_t);
 				_t = _retTree;
-				_t = __t218;
+				_t = __t317;
 				_t = _t.getNextSibling();
 				break;
 			}
 			case MENOS_UNARIO:
 			{
-				AST __t219 = _t;
+				AST __t318 = _t;
 				AST tmp47_AST_in = (AST)_t;
 				match(_t,MENOS_UNARIO);
 				_t = _t.getFirstChild();
 				expresion(_t);
 				_t = _retTree;
-				_t = __t219;
+				_t = __t318;
 				_t = _t.getNextSibling();
 				break;
 			}
@@ -1348,7 +1348,7 @@ public FaMaTreeParser() {
 		AST id_att_AST_in = (_t == ASTNULL) ? null : (AST)_t;
 		
 		try {      // for error handling
-			AST __t221 = _t;
+			AST __t320 = _t;
 			AST tmp49_AST_in = (AST)_t;
 			match(_t,ATRIBUTO);
 			_t = _t.getFirstChild();
@@ -1358,7 +1358,7 @@ public FaMaTreeParser() {
 			AST tmp51_AST_in = (AST)_t;
 			match(_t,IDENT);
 			_t = _t.getNextSibling();
-			_t = __t221;
+			_t = __t320;
 			_t = _t.getNextSibling();
 		}
 		catch (RecognitionException ex) {
