@@ -52,6 +52,9 @@ tokens{
 	VALORES;
 	ENUM;
 	MENOS_UNARIO;
+	//VALORES LOGICOS
+	TRUE_VALUE;
+	FALSE_VALUE;
 }
 
 
@@ -88,6 +91,9 @@ tokens{
 	
 	//al procesar un conjunto de invariantes, feature a la que pertenecen estas
 	String currentFeature;
+	
+	// Helper structures for table constraints
+	Map<Integer,AST> attsTableLeft, attsTableRight;
 	
 	public AST AST_feature(AST f){
 		String featName = f.getText();
@@ -272,6 +278,84 @@ tokens{
 		}
 		return false;
 	}
+	
+	public void processHeader(List<AST> left, List<AST> right){
+		//TODO here we have to identify the position of the attributes to create the constraints
+		// in the table
+		attsTableLeft = new HashMap<Integer,AST>();
+		attsTableRight = new HashMap<Integer,AST>();
+		int index = 0;
+		for (AST a: left){
+			if (a.getType() == ATRIBUTO){
+				attsTableLeft.put(index,a);
+			}
+			index++;
+		}
+		index = 0;
+		for (AST a: right){
+			if (a.getType() == ATRIBUTO){
+				attsTableRight.put(index,a);
+			}
+			index++;
+		}
+	}
+	
+	public AST createTableConstraint(List<AST> left, List<AST> right){
+		//TODO I have to create a synthetic IMPLIES constraint (left IMPLIES right)
+		//AST res =  #(#[CONSTRAINT,"Constraint"],name,e);
+		AST resLeft = createAnd(left,0,attsTableLeft);
+		AST resRight = createAnd(right,0,attsTableRight);
+		
+		AST aux = #(#[IMPLIES,"IMPLIES"],resLeft,resRight);
+		AST res = constraintExpresion(aux);
+		
+		return res;
+	}
+	
+	public AST createAnd(List<AST> list, int index,Map<Integer,AST> attsTableIndex){
+		if (list.size() == 1){
+			return createTableExpr(list.get(0),index,attsTableIndex);
+		}
+		else{
+			AST aux = createTableExpr(list.remove(0),index,attsTableIndex);
+			AST result = #(#[AND,"AND"],aux,createAnd(list,index+1,attsTableIndex));
+			return result;
+		}
+	}
+	
+	public AST createTableExpr(AST a, int index, Map<Integer,AST> attsTableIndex){
+		if (a.getType() ==  IDENT){
+			// feature
+			return getRowExprValue(a);
+		}
+		else if (a.getType() == MULT){
+			// kleene's star
+			return #[TRUE_VALUE,"TRUE"];
+		}
+		else{
+			//XXX another kind of literal. we have to create an EQ constraint
+			AST att = getRowAttribute(index,attsTableIndex);
+			AST value = getRowExprValue(a);
+			AST result =  #(#[IGUAL,"=="],att,value);
+			return result;
+		}
+	}
+	
+	public AST getRowAttribute(int index, Map<Integer,AST> attsTableIndex){
+		//XXX be careful here copying the attribute
+		AST aux = attsTableIndex.get(index);
+		String rootName = aux.getFirstChild().getText();
+		String attName = aux.getFirstChild().getNextSibling().getText();
+		AST result =  #(#[ATRIBUTO,"Attribute"],#[IDENT,rootName],#[IDENT,attName]);
+		return result;
+	}
+	
+	public AST getRowExprValue(AST a){
+		//XXX to avoid bad experiences when appending branches of the AST, 
+		//we create a new AST
+		AST result = #[a.getType(),a.getText()];
+		return result;
+	}
 		
 }
 
@@ -384,7 +468,7 @@ lista_constraints: (constraint)+;
 
 
 
-constraint: (declaracion_invariantes | declaracion_expresion | dependencia_simple);
+constraint: (declaracion_invariantes | declaracion_expresion | dependencia_simple | tabla);
 
 dependencia_simple: (exclusion | inclusion) PyC!;
 
@@ -463,3 +547,35 @@ exp_base: a:att {resuelveNombreAtributo(#a);}
 		 ;
 
 att: f:IDENT !PUNTO a:IDENT {## = #(#[ATRIBUTO,"Attribute"],#f,#a);};
+
+tabla: INICIO_TABLA! cabecera_tabla cuerpo_tabla FIN_TABLA!;
+
+//cabecera_tabla!: left:(att | IDENT)+ IMPLICACION_TABLA right:(att | IDENT)+ PyC! {processHeader(#left,#right);};
+
+cabecera_tabla!{List<AST> left = new LinkedList<AST>(), right = new LinkedList<AST>();}:
+ (aux:IDENT {left.add(#aux);})+ IMPLIES (aux2:exp_cabecera {right.add(#aux2);})+ PyC 
+{processHeader(left,right);}; 
+
+//cabecera_tabla: (aux:IDENT)+ IMPLICACION_TABLA (aux2:exp_cabecera)+ PyC; 
+
+exp_cabecera: (att | IDENT);
+
+cuerpo_tabla: (fila_tabla)+;
+
+//fila_tabla!{List<AST> left = new LinkedList<AST>(), right = new LinkedList<AST>();}:
+// (aux:IDENT {left.add(#aux);})+ IMPLIES (aux2:exp_tabla{right.add(#aux2);})+ PyC 
+//{## = createTableConstraint(left,right);};
+
+fila_tabla!{List<AST> left = new LinkedList<AST>(), right = new LinkedList<AST>();}:
+ (aux:exp_tabla {left.add(#aux);})+ IMPLIES (aux2:exp_tabla{right.add(#aux2);})+ PyC 
+{## = createTableConstraint(left,right);};  
+
+exp_tabla: b:IDENT {resuelveNombre(#b);}//feature, o atributo dentro de una invariante
+		 | LIT_REAL 
+		 | LIT_ENTERO 
+		 | LIT_STRING 
+		 | clausura_kleene;
+		 
+clausura_kleene: MULT;
+		 
+

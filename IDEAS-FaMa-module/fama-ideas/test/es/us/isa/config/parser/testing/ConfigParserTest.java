@@ -8,11 +8,10 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.us.isa.FAMA.Reasoner.QuestionTrader;
+import es.us.isa.FAMA.models.FAMAAttributedfeatureModel.FAMAAttributedFeatureModel;
 import es.us.isa.FAMA.models.config.ConfigParser;
 import es.us.isa.FAMA.models.config.ConfigParserResult;
 import es.us.isa.FAMA.models.config.ExtendedConfigParser;
-import es.us.isa.FAMA.models.featureModel.extended.GenericAttributedFeatureModel;
 import es.us.isa.FAMA.parser.FMFParser;
 import es.us.isa.FAMA.stagedConfigManager.ExtendedConfiguration;
 import es.us.isa.util.Tree;
@@ -20,7 +19,7 @@ import es.us.isa.util.Tree;
 public class ConfigParserTest {
 
 	private ConfigParser parser;
-	private GenericAttributedFeatureModel afm;
+	private FAMAAttributedFeatureModel afm;
 	private ConfigParserResult result;
 	private FMFParser fmParser;
 	
@@ -57,6 +56,8 @@ public class ConfigParserTest {
 		Collection<Tree<String>> constraints2 = loadConstraints();
 		assertTrue(constraints2.containsAll(constraints));
 	}
+	
+	
 	
 	private Collection<Tree<String>> loadConstraints(){
 		Collection<Tree<String>> constraints2 = new LinkedList<Tree<String>>();

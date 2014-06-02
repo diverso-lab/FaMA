@@ -57,8 +57,8 @@
 			<id>ideas</id>
 			<url>http://clinker.isagroup.es/nexus/content/repositories/ideas</url>
 		</repository>
-		
-		
+
+
 		<repository>
 			<id>org.springframework.maven.release</id>
 			<name>Spring Maven Release Repository</name>
@@ -69,7 +69,11 @@
 			<name>clinker-3rdparty</name>
 			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
 		</repository>
-		
+		<repository>
+			<id>clinker-fama</id>
+			<name>clinker-fama</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/fama/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -89,7 +93,6 @@
 			<artifactId>ideas-core</artifactId>
 			<version>${ideas.version}</version>
 		</dependency>
-		<!-- Java BDD -->
 		<dependency>
 			<groupId>org.java.bdd</groupId>
 			<artifactId>javaBDD</artifactId>
@@ -100,6 +103,16 @@
 			<artifactId>CPOptimizer</artifactId>
 			<version>12.5.1</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>CPOptimizerReasoner</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>JavaBDDReasoner</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.csvreader</groupId>

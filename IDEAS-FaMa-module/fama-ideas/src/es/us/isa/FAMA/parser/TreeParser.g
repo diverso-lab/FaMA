@@ -274,7 +274,9 @@ null_value returns [Object o = null;]: #(NULL_VALUE o = valor);
 
 valor returns [Object o = null;]: (i:LIT_ENTERO {o = astToInteger(i);} 
 					      | r:LIT_REAL {o = astToFloat(r);} 
-					      | s:LIT_STRING {o = s.getText();});
+					      | s:LIT_STRING {o = s.getText();}
+					      | b1:TRUE_VALUE {o = b1.getText();}
+					      | b2:FALSE_VALUE {o = b2.getText();});
 
 relaciones returns [Collection<Relation> rels = new LinkedList<Relation>();] {Relation aux;}: 
 	#(RELACIONES (aux = relacion

@@ -52,6 +52,15 @@ tokens{
 	
 	//OTROS
 	TO = "to";
+	
+	//TABLAS
+	INICIO_TABLA = "TABLE";
+	FIN_TABLA = "ENDTABLE";
+	//IMPLICACION_TABLA = "=>";
+	//IMPLICACION_TABLA = "||";
+	
+	//ORDERS
+	ORDER = "Order";
 }
 
 //protected TANTO_POR: '%';
@@ -115,7 +124,9 @@ MENOR_IGUAL: "<=";
 IGUAL: "==";
 DISTINTO: "!=";
 
+
 //SECCIONES
 SECCION_RELACIONES: "%Relationships";
 SECCION_ATRIBUTOS: "%Attributes";
 SECCION_CONSTRAINTS: "%Constraints";
+
