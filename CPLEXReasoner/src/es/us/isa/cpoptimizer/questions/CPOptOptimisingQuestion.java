@@ -80,6 +80,8 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 			}
 			cp.add(obj);
 			cp.propagate();
+			// XXX trying multi-point search
+//			cp.setParameter(IloCP.IntParam.SearchType, IloCP.ParameterValues.MultiPoint);
 			long initTime = System.currentTimeMillis();
 			boolean b = cp.solve();
 			long time = System.currentTimeMillis() - initTime;

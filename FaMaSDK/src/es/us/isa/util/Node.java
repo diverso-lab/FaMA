@@ -17,6 +17,7 @@
 package es.us.isa.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -133,5 +134,24 @@ public class Node<T> {
         }
         sb.append("]").append("}");
         return sb.toString();
+    }
+    
+    public boolean equals(Object o){
+    	boolean result = false;
+    	if (o instanceof Node){
+    		Node<T> aux = (Node<T>) o;
+    		if (aux.data.equals(data) && (aux.children.size() == this.children.size())){
+    			Iterator<Node<T>> it = this.children.iterator();
+    			Iterator<Node<T>> secondIt = aux.children.iterator();
+    			boolean childrenResult = true;
+    			while (it.hasNext() && secondIt.hasNext() && childrenResult){
+    				Node<T> thisChild = it.next();
+    				Node<T> anotherChild = secondIt.next();
+    				childrenResult = thisChild.equals(anotherChild);
+    			}
+    			result = childrenResult;
+    		}
+    	}
+    	return result;
     }
 }

@@ -46,6 +46,16 @@
 			<artifactId>antlr</artifactId>
 			<version>2.7.7</version>
 		</dependency>
+		<dependency>
+			<groupId>com.csvreader</groupId>
+			<artifactId>CSVReader</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.splot</groupId>
+			<artifactId>SPLOTFMapi</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<distributionManagement>
 		<repository>
@@ -70,6 +80,16 @@
 				<updatePolicy>never</updatePolicy>
 				<checksumPolicy>warn</checksumPolicy>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>clinker-3rdparty</id>
+			<name>clinker-3rdparty</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
+		</repository>
+		<repository>
+			<id>clinker-fama</id>
+			<name>clinker-fama</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/fama/</url>
 		</repository>
 	</repositories>
 	<build>
@@ -159,7 +179,8 @@
 						<Export-Package>es.us.isa.*</Export-Package>
 						<Bundle-Activator>es.us.isa.FAMA.models.FAMAfeatureModel.osgi.Activator</Bundle-Activator>
 						<Import-Package>org.osgi.framework,*;resolution:=optional</Import-Package>
-						<Bundle-ClassPath>lib/antlr.jar, .</Bundle-ClassPath>
+						<Bundle-ClassPath> .</Bundle-ClassPath>
+<!-- 						<Bundle-ClassPath>lib/antlr.jar, .</Bundle-ClassPath> -->
 					</instructions>
 				</configuration>
 			</plugin>

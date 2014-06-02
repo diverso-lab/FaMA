@@ -23,11 +23,10 @@
 	</pluginRepositories>
 	<distributionManagement>
 		<repository>
-			<id>isa.devel</id>
-			<name>ISA archiva</name>
-			<url>http://devel.isa.us.es/glassfish/archiva/repository/internal</url>
+			<id>clinker-fama</id>
+			<name>clinker-fama</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/fama/</url>
 		</repository>
-
 	</distributionManagement>
 	<repositories>
 		<repository>
@@ -87,6 +86,12 @@
 			<name>clinker-3rdparty</name>
 			<url>http://clinker.isagroup.es/nexus/content/repositories/thirdparty/</url>
 		</repository>
+		<repository>
+			<id>clinker-fama</id>
+			<name>clinker-fama</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/fama/</url>
+		</repository>
+		
 	</repositories>
 
 

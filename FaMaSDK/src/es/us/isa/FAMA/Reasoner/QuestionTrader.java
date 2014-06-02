@@ -18,6 +18,7 @@
 
 package es.us.isa.FAMA.Reasoner;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -79,6 +80,8 @@ public class QuestionTrader {
 	 *            The path for the FaMaConfig file.
 	 */
 	public QuestionTrader(String str) {
+		File f = new File(".");
+		System.out.println(f.getAbsolutePath());
 		selectedReasoner = null;
 		extFactory = new ExtensionsLoaderFactory();
 		extLoad = extFactory.createExtensionsLoader(str, this);
@@ -500,10 +503,10 @@ public class QuestionTrader {
 
 		return result;
 	}
-//	
-//	public GenericFeatureModel extended2Basic(GenericAttributedFeatureModel afm){
-//		//TODO
-//		return null;
-//	}
+
+	
+	public Configuration loadConfigurationFile(VariabilityModel vm, String path){
+		return this.mp.readConfiguration(vm, path);
+	}
 
 }

@@ -18,6 +18,7 @@
 package es.us.isa.FAMA.loader.impl;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
@@ -46,6 +47,7 @@ import es.us.isa.FAMA.Reasoner.QuestionTrader;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.Factory.QuestionAbstractFactory;
 import es.us.isa.FAMA.loader.ExtensionsLoader;
+import es.us.isa.FAMA.models.variabilityModel.parsers.IConfigReader;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IWriter;
 import es.us.isa.FAMA.models.variabilityModel.parsers.ModelParser;
@@ -89,8 +91,9 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
 		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document configDocument = builder.parse(configFile);
+			DocumentBuilder builder = factory.newDocumentBuilder();			
+			Document configDocument = builder.parse(loadStream(configFile));
+//			Document configDocument = builder.parse(configFile);
 			reasonersMap.clear();
 			if (configDocument ==null){
 				System.err.println("Please put a config file for FaMa");
@@ -235,10 +238,48 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 				} else if (modelNode.getNodeName().equalsIgnoreCase("writer")) {
 					processWriterNode(modelNode);
 				}
+				else if (modelNode.getNodeName().equalsIgnoreCase("configreader")){
+					processConfigNode(modelNode);
+				}
 			}
 		}
 	}
 	
+	private void processConfigNode(Node readerNode) {
+		// TODO Auto-generated method stub
+		try {
+			Node extNode = readerNode.getAttributes()
+					.getNamedItem("extensions");
+			Node classNode = readerNode.getAttributes().getNamedItem("class");
+			Node fileNode = readerNode.getAttributes().getNamedItem("file");
+			if (extNode != null && classNode != null && fileNode != null) {
+				String fileName = fileNode.getNodeValue();
+				String className = classNode.getNodeValue();
+				try {
+					//URL url = new URL("jar:file:" + fileName + "!/");
+					//url.openConnection();
+					Class<IConfigReader> rcl = (Class<IConfigReader>) Class.forName(className);
+					if (rcl != null) {
+						String readerId = rcl.getName();
+						IConfigReader reader = rcl.newInstance();
+						mp.addConfigReader(reader, readerId);
+						StringTokenizer st = new StringTokenizer(extNode
+								.getNodeValue(), ",");
+						while (st.hasMoreTokens()) {
+							//FIXME cuidado, es posible que no este bien
+							mp.addConfigReaderType(st.nextToken(), readerId);
+							
+						}
+					}
+				} catch (ClassNotFoundException e) {
+				} catch (ClassCastException e) {
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@SuppressWarnings("unchecked")
 	private void processReaderNode(Node readerNode) {
 		try {
@@ -386,7 +427,7 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 		Node idNode = reasonerNode.getAttributes().getNamedItem("id");
 		if (fileNode != null && classNode != null) {
 			String className = classNode.getNodeValue();
-			String fileName = fileNode.getNodeValue();
+//			String fileName = fileNode.getNodeValue();
 			String idName = className;
 			if (idNode != null)
 				idName = idNode.getNodeValue();
@@ -394,16 +435,17 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 			try {
 				//URL url = new URL("jar:file:"+ fileName + "!/");
 				//url.openConnection();
-				ClassLoader loader = new JarJarClassLoader(fileName);
-//				Class<Reasoner> cl = (Class<Reasoner>) Class.forName(className);
-				Class<Reasoner> cl = (Class<Reasoner>) loader.loadClass(className);
-//				InputStream configStream = new FileInputStream(idName+"Config.xml");
-				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
+//				ClassLoader loader = new JarJarClassLoader(fileName);
+				Class<Reasoner> cl = (Class<Reasoner>) Class.forName(className);
+//				Class<Reasoner> cl = (Class<Reasoner>) loader.loadClass(className);
+				InputStream configStream = loadStream(idName+"Config.xml");
+//				new FileInputStream(idName+"Config.xml");
+//				InputStream configStream = loader.getResourceAsStream(idName+"Config.xml");
 				if (cl != null) {
 					Reasoner reasoner = cl.newInstance();
 					ConfigurableQuestionFactory qFact = new ConfigurableQuestionFactory();
-					qFact.setClassLoader(loader);
-//					qFact.setClassLoader(this.getClass().getClassLoader());
+//					qFact.setClassLoader(loader);
+					qFact.setClassLoader(this.getClass().getClassLoader());
 					qFact.parseConfigFile(configStream);
 					reasoner.setFactory(qFact);
 					//reasoner.setConfigFile(configStream,loader);
@@ -442,4 +484,16 @@ public class SingleFileExtensionsLoader implements ExtensionsLoader{
 		return cl;
 	}
 
+	private InputStream loadStream(String s){
+		InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(s);
+		if (stream == null){
+			try {
+				stream = new FileInputStream(s);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		return stream;
+	}
+	
 }

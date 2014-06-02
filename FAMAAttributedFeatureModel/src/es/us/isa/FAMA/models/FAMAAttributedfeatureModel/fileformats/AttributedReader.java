@@ -20,13 +20,17 @@ package es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats;
 import java.io.File;
 
 import es.us.isa.FAMA.models.FAMAAttributedfeatureModel.FAMAAttributedFeatureModel;
+import es.us.isa.FAMA.models.config.ExtendedConfigParser;
+import es.us.isa.FAMA.models.featureModel.extended.GenericAttributedFeatureModel;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
 import es.us.isa.FAMA.parser.FMFParser;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 public class AttributedReader implements IReader {
 
 	private FMFParser parser;
+	private ExtendedConfigParser configParser;
 	
 	public AttributedReader(){
 		parser = new FMFParser();
@@ -51,5 +55,6 @@ public class AttributedReader implements IReader {
 		FAMAAttributedFeatureModel res = parser.parseModelFromString(data);
 		return res;
 	}
+
 
 }

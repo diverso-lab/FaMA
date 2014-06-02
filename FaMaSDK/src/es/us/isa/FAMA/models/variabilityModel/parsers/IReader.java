@@ -20,9 +20,10 @@
  */
 package es.us.isa.FAMA.models.variabilityModel.parsers;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 
 /**
- * @author trinidad
+ * @author trinidad & Jesus
  */
 public interface IReader {
 	public VariabilityModel parseFile ( String fileName ) throws Exception;

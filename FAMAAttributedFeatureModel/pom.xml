@@ -47,6 +47,11 @@
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.7</version>
+		</dependency>
 	</dependencies>
 	<distributionManagement>
 		<repository>
@@ -160,7 +165,8 @@
 						<Export-Package>es.us.isa.*</Export-Package>
 						<Bundle-Activator>es.us.isa.FAMA.models.FAMAAttributed.osgi.Activator</Bundle-Activator>
 						<Import-Package>org.osgi.framework,*;resolution:=optional</Import-Package>
-						<Bundle-ClassPath>lib/antlr.jar, .</Bundle-ClassPath>
+						<Bundle-ClassPath> .</Bundle-ClassPath>
+<!-- 						<Bundle-ClassPath>lib/antlr.jar, .</Bundle-ClassPath> -->
 					</instructions>
 				</configuration>
 			</plugin>

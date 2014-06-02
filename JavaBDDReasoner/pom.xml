@@ -41,12 +41,17 @@
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.java.bdd</groupId>
+			<artifactId>JavaBDD</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>isa.devel</id>
-			<name>ISA archiva</name>
-			<url>http://devel.isa.us.es/glassfish/archiva/repository/internal</url>
+			<id>clinker-fama</id>
+			<name>clinker-fama</name>
+			<url>http://clinker.isagroup.es/nexus/content/repositories/fama/</url>
 		</repository>
 	</distributionManagement>
 	<repositories>
