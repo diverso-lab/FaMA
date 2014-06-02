@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.us.isa.FAMA.ideas.Extended2BasicModel;
 import es.us.isa.FAMA.models.FAMAAttributedfeatureModel.FAMAAttributedFeatureModel;
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
-import es.us.isa.FAMA.models.variabilityModel.transformations.Extended2BasicModel;
 import es.us.isa.FAMA.parser.FMFParser;
 
 public class TransformationTests {
@@ -18,7 +18,7 @@ public class TransformationTests {
 	@Before
 	public void setUp(){
 		FMFParser parser = new FMFParser();
-		afm = parser.parseModel("tests/AmazonEC2Atts.afm");
+		afm = parser.parseModel("test/AmazonEC2Atts.afm");
 		transformer = new Extended2BasicModel();
 	}
 

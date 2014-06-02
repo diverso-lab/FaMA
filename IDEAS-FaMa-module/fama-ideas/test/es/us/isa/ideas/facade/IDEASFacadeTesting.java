@@ -37,9 +37,9 @@ public class IDEASFacadeTesting {
 	
 	@Test
 	public void testConfig() {
-		AppResponse resp = analyser.analyseForIDEAS(fmContent, FAMAAnalyserDelegate.OPTIMAL_OP, ".afm",configContent);
+		AppResponse resp = analyser.analyseForIDEAS(fmContent, FAMAAnalyserDelegate.OPTIMAL_OP, ".fmc",configContent);
 		System.out.println(resp.getMessage());
-		assertEquals(resp.getStatus(), Status.ERROR);
+		assertEquals(resp.getStatus(), Status.OK);
 	}
 
 	private String loadContent(String path){

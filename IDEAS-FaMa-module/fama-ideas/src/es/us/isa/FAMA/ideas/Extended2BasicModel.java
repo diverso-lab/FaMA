@@ -1,4 +1,4 @@
-package es.us.isa.FAMA.models.variabilityModel.transformations;
+package es.us.isa.FAMA.ideas;
 
 import java.util.Collection;
 import java.util.Iterator;

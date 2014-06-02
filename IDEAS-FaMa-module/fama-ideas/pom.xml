@@ -124,6 +124,21 @@
 			<artifactId>SPLOTFMapi</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaSDK</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaAttributedModel</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaFeatureModel</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<defaultGoal>install</defaultGoal>

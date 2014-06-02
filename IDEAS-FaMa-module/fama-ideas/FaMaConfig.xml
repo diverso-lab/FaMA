@@ -41,6 +41,6 @@
 		<configreader extensions="fmc" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedConfigReader" file="lib/FaMaSDK-1.2.0.jar"/>
 	</models>
 	<transform id="AtomicSet" class="es.us.isa.FAMA.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaSDK-1.2.0.jar"/>
-	<transform id="Extended2Basic" class="es.us.isa.FAMA.models.variabilityModel.transformations.Extended2BasicModel" file="lib/FaMaSDK-1.2.0.jar"/>
+	<transform id="Extended2Basic" class="es.us.isa.FAMA.ideas.Extended2BasicModel" file="lib/FaMaSDK-1.2.0.jar"/>
 	<!-- <UserInterface file="lib/FaMaShell-0.1.1.jar" mainclass="es.us.isa.FAMA.shell.ShellMain"/> -->
 </questionTrader>
