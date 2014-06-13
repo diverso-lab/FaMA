@@ -16,7 +16,7 @@
 
  */
 header{
-    package es.us.isa.FAMA.parser;    
+    package es.us.isa.FAMA.order.parser;    
 }
 class Analex extends Lexer;
 
@@ -30,12 +30,12 @@ options{
 tokens{
 	
 	//OPERADORES PREFIJOS
-	ABS = "abs";
-	MAX = "max";
-	MIN = "min";
-	COS = "cos";
-	SIN = "sin";
-	SUM = "sum";
+	ABS = "ABS";
+	MAX = "MAX";
+	MIN = "MIN";
+	COS = "COS";
+	SIN = "SIN";
+	SUM = "SUM";
 	
 	//OPERADORES LOGICOS
 	AND = "AND";
@@ -61,6 +61,9 @@ tokens{
 	
 	//Configuration keyword
 	CONFIGURATION = "Configuration";
+	
+	//Order keyword
+	ORDER = "Order";
 	
 	
 }
@@ -128,7 +131,6 @@ DISTINTO: "!=";
 
 
 //SECCIONES
-SECCION_RELACIONES: "%Relationships";
-SECCION_ATRIBUTOS: "%Attributes";
+SECCION_PROPIEDADES: "%Properties";
 SECCION_CONSTRAINTS: "%Constraints";
 

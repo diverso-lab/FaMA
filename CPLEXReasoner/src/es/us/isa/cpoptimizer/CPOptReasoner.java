@@ -476,10 +476,17 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 					IloConstraint e1 = translateLogical(children.get(0));
 					res = cp.not(e1);
 				}
+				
 			} else {
 				if (isFeature(tree)) {
 					IloIntVar feat = featureVars.get(data);
 					res = cp.gt(feat, 0);
+				}
+				else if (data.equals(KeyWords.TRUE)){
+					res = cp.trueConstraint();
+				}
+				else if (data.equals(KeyWords.FALSE)){
+					res = cp.falseConstraint();
 				}
 			}
 			return res;

@@ -22,12 +22,15 @@ package es.us.isa.FAMA.models.FAMAAttributedfeatureModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 
+
+import java.util.Map;
 
 import es.us.isa.FAMA.errors.Observation;
 import es.us.isa.FAMA.errors.Observation.ErrorLevel;
@@ -50,7 +53,9 @@ public class FAMAAttributedFeatureModel extends GenericAttributedFeatureModel{
 	
 	protected AttributedFeature root;
 	
-	//protected List<Dependency> dependencies;
+	//XXX i'm not really sure about global attributes 
+	//in a specific FM
+	protected Map<String, GenericAttribute> globalAtts;
 	
 	protected List<Constraint> constraints;
 	
@@ -61,6 +66,7 @@ public class FAMAAttributedFeatureModel extends GenericAttributedFeatureModel{
 		root = null;
 		//dependencies = new ArrayList<Dependency>();
 		constraints = new ArrayList<Constraint>();
+		globalAtts = new HashMap<String, GenericAttribute>();
 	}
 	
 	public FAMAAttributedFeatureModel(AttributedFeature root){
@@ -452,4 +458,8 @@ public class FAMAAttributedFeatureModel extends GenericAttributedFeatureModel{
 
 	}
 
+	public void addGlobalAttribute(GenericAttribute att){
+		globalAtts.put(att.getName(), att);
+	}
+	
 }

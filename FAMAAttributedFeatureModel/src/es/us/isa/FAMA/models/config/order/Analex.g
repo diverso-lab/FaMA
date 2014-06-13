@@ -16,16 +16,17 @@
 
  */
 header{
-    package es.us.isa.FAMA.parser;    
+    package es.us.isa.FAMA.models.config.order;    
 }
-class Analex extends Lexer;
+class ConfigAnalex extends Lexer;
 
 options{
 	charVocabulary = '\3'..'\377' | '\u1000'..'\u1fff';
 	k = 2;
-	importVocab = Anasint; 	
+	importVocab = ConfigAnasint; 	
 	testLiterals=false;
 }
+
 
 tokens{
 	
@@ -43,26 +44,7 @@ tokens{
 	NOT = "NOT";
 	IFF = "IFF";
 	IMPLIES = "IMPLIES";
-	REQUIRES = "REQUIRES";
-	EXCLUDES = "EXCLUDES";
 
-	//TIPOS
-	INTEGER = "Integer";
-	REAL = "Real";
-	
-	//OTROS
-	TO = "to";
-	
-	//TABLAS
-	INICIO_TABLA = "TABLE";
-	FIN_TABLA = "ENDTABLE";
-	//IMPLICACION_TABLA = "=>";
-	//IMPLICACION_TABLA = "||";
-	
-	//Configuration keyword
-	CONFIGURATION = "Configuration";
-	
-	
 }
 
 //protected TANTO_POR: '%';
@@ -98,15 +80,10 @@ NUMERO : ((DIGITO)+ '.') => (DIGITO)+ '.' (DIGITO)+ {$setType(LIT_REAL);}
 | ((DIGITO)+) => (DIGITO)+ {$setType(LIT_ENTERO);};
 
 
-COMA : ',';
 PyC : ';';
-DOSPUNTOS: ':';
 PARENTESIS_ABRIR:'(';
 PARENTESIS_CERRAR: ')';
-LLAVE_ABRIR: '{';
-LLAVE_CERRAR: '}';
-CORCHETE_ABRIR: '[';
-CORCHETE_CERRAR: ']';
+
 
 
 //OPERADORES ARITMETICOS	
@@ -126,9 +103,7 @@ MENOR_IGUAL: "<=";
 IGUAL: "==";
 DISTINTO: "!=";
 
-
 //SECCIONES
-SECCION_RELACIONES: "%Relationships";
-SECCION_ATRIBUTOS: "%Attributes";
-SECCION_CONSTRAINTS: "%Constraints";
+SECCION_CONFIGURACION: "%Configuration";
+SECCION_PEDIDO: "%Order";
 

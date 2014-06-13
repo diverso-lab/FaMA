@@ -62,4 +62,8 @@ public abstract class KeyWords {
 	public static final String ATTRIBUTE = "Attribute";
 	
 	public static final String UNARY_MINUS = "Unary Minus";
+	
+	public static final String TRUE = "TRUE";
+	
+	public static final String FALSE = "FALSE";
 }

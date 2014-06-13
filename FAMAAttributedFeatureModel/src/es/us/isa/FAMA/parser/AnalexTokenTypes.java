@@ -75,7 +75,7 @@ public interface AnalexTokenTypes {
 	int SUM = 71;
 	int INICIO_TABLA = 72;
 	int FIN_TABLA = 73;
-	int ORDER = 74;
+	int CONFIGURATION = 74;
 	int SALTO = 75;
 	int BLANCO = 76;
 	int LETRA = 77;

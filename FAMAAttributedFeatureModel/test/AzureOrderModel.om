@@ -1,0 +1,52 @@
+%Properties
+
+## set by the user
+period: Integer[0 to 36],0,0;
+payInAdvance: Integer[0 to 1],0,0;
+commitment: Integer[0 to 1],0,0;
+
+## obtained by the models
+costMonthPreDiscount: Real[0.000 to 100000.000],0,0; ##dollars per month 
+costMonthDiscount: Real[0.000 to 100000.000],0,0; ##dollars per month 
+finalCostMonth: Real[0.000 to 100000.000],0,0; ##dollars per month 
+
+upfrontPreDiscount: Real[0.000 to 100000.000],0,0; ##dollars
+finalUpfront: Real[0.000 to 100000.000],0,0; ##dollars
+
+totalCostPreDiscount: Real[0.000 to 1000000.000],0,0; ##dollars
+finalTotalCost: Real[0.000 to 1000000.000],0,0; ##dollars 
+
+
+%Constraints
+
+## Aggregation functions
+costMonthPreDiscount == SUM(Configuration.costMonth);
+upfrontPreDiscount == SUM(Configuration.upfrontCost);
+totalCostPreDiscount == costMonthPreDiscount*period + upfrontPreDiscount;
+
+## Final costs
+(payInAdvance == 1) IMPLIES ((finalUpfront ==  (costMonthPreDiscount - costMonthDiscount)*period + upfrontPreDiscount) AND (finalCostMonth == 0));
+(payInAdvance == 0) IMPLIES ((finalCostMonth == costMonthPreDiscount - costMonthDiscount) AND (finalUpfront == 0));
+finalTotalCost == finalCostMonth*period + finalUpfront;
+
+
+## Discount policies
+(commitment == 0 AND payInAdvance == 0) IMPLIES (costMonthDiscount == 0);
+payInAdvance == 1 IMPLIES commitment == 0;
+commitment == 1 IMPLIES payInAdvance == 0; 
+
+commitment == 1 IMPLIES (period >= 6 AND costMonthPreDiscount >= 500);
+(commitment == 1 AND costMonthPreDiscount >= 500 AND costMonthPreDiscount < 15000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.20;
+(commitment == 1 AND costMonthPreDiscount >= 15000 AND costMonthPreDiscount < 40000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.23;
+(commitment == 1 AND costMonthPreDiscount >= 40000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.27;
+(commitment == 1 AND costMonthPreDiscount >= 500 AND costMonthPreDiscount < 15000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.225;
+(commitment == 1 AND costMonthPreDiscount >= 15000 AND costMonthPreDiscount < 40000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.255;
+(commitment == 1 AND costMonthPreDiscount >= 40000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.295;
+
+payInAdvance == 1 IMPLIES (period >= 6 AND costMonthPreDiscount >= 500);
+(payInAdvance == 1 AND costMonthPreDiscount >= 500 AND costMonthPreDiscount < 15000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.225;
+(payInAdvance == 1 AND costMonthPreDiscount >= 15000 AND costMonthPreDiscount < 40000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.255;
+(payInAdvance == 1 AND costMonthPreDiscount >= 40000 AND period >= 6 AND period <12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.295;
+(payInAdvance == 1 AND costMonthPreDiscount >= 500 AND costMonthPreDiscount < 15000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.25;
+(payInAdvance == 1 AND costMonthPreDiscount >= 15000 AND costMonthPreDiscount < 40000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.28;
+(payInAdvance == 1 AND costMonthPreDiscount >= 40000 AND period >=12) IMPLIES costMonthDiscount == costMonthPreDiscount*0.32;

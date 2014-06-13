@@ -441,6 +441,12 @@ public class JavaBDDReasoner extends FeatureModelReasoner {
 //					res = feat.apply(one,
 //							BDDFactory.biimp);
 				}
+				else if (data.equals(KeyWords.TRUE)){
+					res = ((BDDFactory) getBDDFactory()).one();
+				}
+				else if (data.equals(KeyWords.FALSE)){
+					res = ((BDDFactory) getBDDFactory()).zero();
+				}
 				else {
 					throw new IllegalArgumentException("Non recognized token: "+data);
 				}
