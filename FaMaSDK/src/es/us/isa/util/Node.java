@@ -121,19 +121,45 @@ public class Node<T> {
         this.data = data;
     }
      
+    private String constraint2String(){
+    	String result = "";
+    	int size = children.size();
+    	if (size == 0){
+    		result = data.toString();
+    	}
+    	else if (data.equals("Attribute") && size == 2){
+    		result = children.get(0)+"."+children.get(1);
+    	}
+    	else{
+    		if (size == 1){
+        		result = "("+data.toString()+" "+children.get(0)+")";
+        	}
+        	if (size >= 2){
+        		result = "("+children.get(0);
+        		for (int i = 1; i < size; i++){
+        			result += " "+data.toString()+" "+children.get(i);
+        		}
+        		result += ")";
+        	}
+    	}
+    	return result;
+    }
+    
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{").append(getData().toString()).append(",[");
-        int i = 0;
-        for (Node<T> e : getChildren()) {
-            if (i > 0) {
-                sb.append(",");
-            }
-            sb.append(e.getData().toString());
-            i++;
-        }
-        sb.append("]").append("}");
-        return sb.toString();
+    	return constraint2String();
+//    	return data.toString();
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("{").append(getData().toString()).append(",[");
+//        int i = 0;
+//        for (Node<T> e : getChildren()) {
+//            if (i > 0) {
+//                sb.append(",");
+//            }
+//            sb.append(e.getData().toString());
+//            i++;
+//        }
+//        sb.append("]").append("}");
+//        return sb.toString();
     }
     
     public boolean equals(Object o){

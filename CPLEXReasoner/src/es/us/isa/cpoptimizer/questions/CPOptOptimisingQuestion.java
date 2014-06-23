@@ -30,6 +30,7 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 	private String optVar;
 	private boolean maximise;
 	private int timeLimit;
+	private boolean valid;
 
 	public ExtendedConfiguration getOptimalConfiguration() {
 		return result;
@@ -56,42 +57,42 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 
 	@Override
 	public PerformanceResult answer(Reasoner r) {
+		valid = false;
 		CPOptReasoner reasoner = (CPOptReasoner) r;
+		reasoner.restore();
 		IloCP cp = reasoner.getCp();
 		CPOptResult perfResult = new CPOptResult();
-
-		//0. add the attributes
-		reasoner.addAttributedElements();
 		
-		// 1. map the config
-		// we invoke staged config method. it considers also complex constraints
-		reasoner.applyStagedConfiguration(config);
-
-		// 2. maximise/minimise
-		IloNumVar optIloVar = reasoner.getAttVars().get(optVar);
-		IloObjective obj;
-		
+		// 0. add the attributes
+		// reasoner.addAttributedElements();
 		try {
-			
-			if (maximise) {
-				obj = cp.maximize(optIloVar);
-			} else {
-				obj = cp.minimize(optIloVar);
+			// 1. map the config
+			// we invoke staged config method. it considers also complex
+			// constraints
+			reasoner.applyStagedConfiguration(config);
+			valid = cp.propagate();
+			if (valid) {
+				// 2. maximise/minimise
+				IloNumVar optIloVar = reasoner.getAttVars().get(optVar);
+				IloObjective obj;
+
+				if (maximise) {
+					obj = cp.maximize(optIloVar);
+				} else {
+					obj = cp.minimize(optIloVar);
+				}
+				cp.add(obj);
+
+				long initTime = System.currentTimeMillis();
+				cp.solve();
+				long time = System.currentTimeMillis() - initTime;
+				perfResult.setTime(time);
 			}
-			cp.add(obj);
-			cp.propagate();
-			// XXX trying multi-point search
-//			cp.setParameter(IloCP.IntParam.SearchType, IloCP.ParameterValues.MultiPoint);
-			long initTime = System.currentTimeMillis();
-			boolean b = cp.solve();
-			long time = System.currentTimeMillis() - initTime;
-			perfResult.setTime(time);
 		} catch (IloException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
-		// cp.getModelImpl().getEnv().
+		reasoner.unapplyStagedConfigurations();
 
 		// 3. obtain the values
 		result = new ExtendedConfiguration();
@@ -108,7 +109,8 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 				VariabilityElement v = features.get(e.getKey());
 				result.addElement(v, val);
 			} catch (Exception exception) {
-				System.err.println(e.getKey()+" => "+exception.getMessage());
+				System.err
+						.println(e.getKey() + " => " + exception.getMessage());
 			}
 		}
 
@@ -119,11 +121,16 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 				GenericAttribute v = atts.get(e.getKey());
 				result.addAttValue(v, val);
 			} catch (Exception exception) {
-				System.err.println(e.getKey()+" => "+exception.getMessage());
+				System.err
+						.println(e.getKey() + " => " + exception.getMessage());
 			}
 		}
 
 		return perfResult;
+	}
+
+	public boolean isValid() {
+		return valid;
 	}
 
 }

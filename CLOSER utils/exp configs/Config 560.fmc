@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Suse;
+Dedicated;
+Europe;
+## Complex Constraints 
+(EC2.storageSize >= 121);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 55);
+(Use.usage >= 102);
+(Use.period >= 21);
+(Instance.ram >= 34);

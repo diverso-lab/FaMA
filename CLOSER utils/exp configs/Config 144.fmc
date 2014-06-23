@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+VA;
+Dedicated;
+Windows;
+## Complex Constraints 
+(EC2.storageSize >= 5435);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 50);
+(Use.usage >= 697);
+(Use.period >= 35);
+(Instance.ram >= 105);

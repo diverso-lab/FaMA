@@ -20,17 +20,24 @@ public class InputRealModelsTest extends AbstractModelsTest {
 		config.addAttValue(vm.searchAttributeByName("Use.usage"),700);
 		config.addAttValue(vm.searchAttributeByName("Use.period"),12);
 		
-		config.addAttConfig(qt.parseConstraint("Storage.size >= 1000;"));
-		config.addAttConfig(qt.parseConstraint("Instance.cores >= 4;"));
+		config.addAttConfig(qt.parseConstraint("EC2.storageSize >= 1000;"));
+		config.addAttConfig(qt.parseConstraint("Instance.ecu >= 8;"));
 		config.addAttConfig(qt.parseConstraint("Instance.ram >= 20;"));
 		
 		config.addElement(this.vm.searchFeatureByName("VA"), 1);
 		config.addElement(this.vm.searchFeatureByName("Windows"), 1);
 		config.addElement(this.vm.searchFeatureByName("OnDemand"), 1);
+		config.addElement(this.vm.searchFeatureByName("Public"), 1);
 		
-		analyse(config);
+//		analyse(config);
 		
-		checkCost(0.082);
+		question.setConfiguration(config);
+		
+//		question.minimise("Computing.costMonth");
+		question.minimise("EC2.totalCost");
+		qt.ask(question);
+		System.out.println(question.getOptimalConfiguration());
+//		checkCost(0.069);
 	}
 	
 	@Test

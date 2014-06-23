@@ -307,4 +307,8 @@ public class AttributedFeature extends GenericAttributedFeature{
         }
         return true;
     }
+	
+	public boolean isLeaf(){
+		return this.relations.isEmpty();
+	}
 }

@@ -70,7 +70,6 @@ public class CPOptOptimisingPrefsQuestion extends CPOptQuestion implements
 		Map<String, GenericAttribute> atts = reasoner.getAtts();
 
 		//0. add the attributes
-		reasoner.addAttributedElements();
 		
 		// 1. map the config
 		// we invoke staged config method. it considers also complex constraints

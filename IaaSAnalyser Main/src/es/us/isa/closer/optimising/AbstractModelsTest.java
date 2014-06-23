@@ -17,7 +17,7 @@ public abstract class AbstractModelsTest {
 	protected OptimisingConfigurationQuestion question;
 	
 	protected void setUp(String path){
-		qt = new QuestionTrader();
+		qt = new QuestionTrader("single-file");
 		vm = (GenericAttributedFeatureModel) qt.openFile(path);
 		qt.setVariabilityModel(vm);
 		question = (OptimisingConfigurationQuestion) qt.createQuestion("Optimising");

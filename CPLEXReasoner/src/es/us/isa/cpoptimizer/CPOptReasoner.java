@@ -49,10 +49,11 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 	protected Map<String, GenericFeature> features;
 	protected Map<String, GenericAttribute> atts;
 	protected IloCP cp;
-	
+	protected ilog.concert.IloSolution sol;
+
 	// we use this collection to store constraints for attributes
 	// we add them just before the analysis, for each operation
-	protected Collection<IloConstraint> attConstraints;
+//	protected Collection<IloConstraint> attConstraints;
 
 	protected Stack<IloConstraint> configs;
 
@@ -60,6 +61,63 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 
 	public CPOptReasoner() {
 		reset();
+	}
+
+	public IloConstraint config2Constraint(Configuration conf) {
+		// XXX we do not consider configs over cardinalities (for now)
+		IloConstraint configConstraint = null;
+		Set<Entry<VariabilityElement, Integer>> elems = conf.getElements()
+				.entrySet();
+		
+		try {
+			IloConstraint[] array = new IloConstraint[elems.size()];
+			int i = 0;
+			for (Entry<VariabilityElement, Integer> e : elems) {
+				IloConstraint c = null;
+				if (e.getKey() instanceof GenericFeature) {
+					IloIntVar feature = featureVars.get(e.getKey().getName());
+					c = cp.eq(feature, e.getValue());
+				} else if (e.getKey() instanceof GenericAttribute) {
+					IloNumVar att = attVars.get(e.getKey().getName());
+					c = cp.eq(att, e.getValue());
+				}
+				array[i] = c;
+				i++;
+			}
+
+			// and here using also complex constraints
+			configConstraint = cp.and(array);
+			if (conf instanceof ExtendedConfiguration) {
+				ExtendedConfiguration extConf = (ExtendedConfiguration) conf;
+				Set<Entry<GenericAttribute, Double>> atts = extConf
+						.getAttValues().entrySet();
+				Collection<Tree<String>> constraints = extConf.getAttConfigs();
+				IloConstraint[] array2 = new IloConstraint[constraints.size()
+						+ atts.size()];
+				i = 0;
+
+				for (Entry<GenericAttribute, Double> e : atts) {
+					IloNumVar att = attVars.get(e.getKey().getFullName());
+					IloConstraint c = cp.eq(att, e.getValue());
+					array2[i] = c;
+					i++;
+				}
+
+				for (Tree<String> t : constraints) {
+					IloConstraint c = parser.translateToConstraint(t);
+					array2[i] = c;
+					i++;
+				}
+				configConstraint = cp.and(cp.and(array), cp.and(array2));
+			} else {
+				configConstraint = cp.and(array);
+			}
+//			cp.add(configConstraint);
+//			configs.push(configConstraint);
+		} catch (IloException e1) {
+			e1.printStackTrace();
+		}
+		return configConstraint;
 	}
 
 	@Override
@@ -85,59 +143,14 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 
 	@Override
 	public void applyStagedConfiguration(Configuration conf) {
-		// XXX we do not consider configs over cardinalities (for now) 
-		Set<Entry<VariabilityElement, Integer>> elems = conf.getElements()
-				.entrySet();
-		
-		
-		
+		// XXX we do not consider configs over cardinalities (for now)
+		IloConstraint configConstraint = config2Constraint(conf);
 		try {
-			IloConstraint[] array = new IloConstraint[elems.size()];
-			int i = 0;
-			for (Entry<VariabilityElement, Integer> e : elems) {
-				IloConstraint c = null;
-				if (e.getKey() instanceof GenericFeature) {
-					IloIntVar feature = featureVars.get(e.getKey().getName());
-					c = cp.eq(feature, e.getValue());
-				} else if (e.getKey() instanceof GenericAttribute) {
-					IloNumVar att = attVars.get(e.getKey().getName());
-					c = cp.eq(att, e.getValue());
-				}
-				array[i] = c;
-				i++;
-			}
-
-			// and here using also complex constraints
-			IloConstraint configConstraint = cp.and(array);
-			if (conf instanceof ExtendedConfiguration) {
-				ExtendedConfiguration extConf = (ExtendedConfiguration) conf;
-				Set<Entry<GenericAttribute, Double>> atts = extConf.getAttValues()
-						.entrySet();
-				Collection<Tree<String>> constraints = extConf.getAttConfigs();
-				IloConstraint[] array2 = new IloConstraint[constraints.size() + atts.size()];
-				i = 0;
-				
-				for(Entry<GenericAttribute, Double> e:atts){
-					IloNumVar att = attVars.get(e.getKey().getFullName());
-					IloConstraint c = cp.eq(att, e.getValue());
-					array2[i] = c;
-					i++;
-				}
-				
-				
-				for (Tree<String> t : constraints) {
-					IloConstraint c = parser.translateToConstraint(t);
-					array2[i] = c;
-					i++;
-				}
-				configConstraint = cp.and(cp.and(array), cp.and(array2));
-			} else {
-				configConstraint = cp.and(array);
-			}
 			cp.add(configConstraint);
 			configs.push(configConstraint);
-		} catch (IloException e1) {
-			e1.printStackTrace();
+		} catch (IloException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -234,13 +247,14 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 
 				var = cp.intVar(arrayVals, a.getFullName());
 				attVars.put(a.getFullName(), var);
-				
+
 			}
-			atts.put(a.getFullName(),a);
+			atts.put(a.getFullName(), a);
 			// XXX we consider 0 as the default value of every attribute
 			IloConstraint aux = cp.imply(cp.eq(featureVar, 0), cp.eq(var, 0));
-			attConstraints.add(aux);
-//			cp.add();
+			cp.add(aux);
+//			attConstraints.add(aux);
+			// cp.add();
 		}
 
 	}
@@ -252,7 +266,7 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 			IloIntVar fVar = cp.boolVar(feature.getName());
 			this.features.put(feature.getName(), feature);
 			this.featureVars.put(feature.getName(), fVar);
-//			cp.add(fVar);
+			// cp.add(fVar);
 		} catch (IloException e) {
 			e.printStackTrace();
 		}
@@ -348,16 +362,16 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 	public void addConstraint(Constraint c) {
 		IloConstraint constraint = parser.translateToConstraint(c.getAST());
 		try {
-			if (!containsAtts(c)){
+			if (!containsAtts(c)) {
 				// if it does not contain attributes, we add it as usual
 				cp.add(constraint);
-			}
-			else{
+			} else {
 				// if it contains attributes, we store it in the collection
 				// to add it later
-				attConstraints.add(constraint);
+				cp.add(constraint);
+//				attConstraints.add(constraint);
 			}
-			
+
 		} catch (IloException e) {
 			e.printStackTrace();
 		}
@@ -366,21 +380,19 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 	private boolean containsAtts(Constraint constraint) {
 		return containsAtts(constraint.getAST().getRootElement());
 	}
-	
-	private boolean containsAtts(Node<String> node){
-		if (node.getData().contains(".")){
+
+	private boolean containsAtts(Node<String> node) {
+		if (node.getData().contains(".")) {
 			return true;
-		}
-		else{
+		} else {
 			List<Node<String>> children = node.getChildren();
-			if (children.size() > 0){
+			if (children.size() > 0) {
 				boolean val = false;
-				for (Node<String> n: children){
+				for (Node<String> n : children) {
 					val = val || containsAtts(n);
 				}
 				return val;
-			}
-			else{
+			} else {
 				return false;
 			}
 		}
@@ -395,7 +407,8 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 		featureVars = new HashMap<String, IloIntVar>();
 		attVars = new HashMap<String, IloNumVar>();
 		configs = new Stack<IloConstraint>();
-		attConstraints = new LinkedList<IloConstraint>();
+		sol = null;
+//		attConstraints = new LinkedList<IloConstraint>();
 	}
 
 	protected class CPOptParser {
@@ -476,16 +489,14 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 					IloConstraint e1 = translateLogical(children.get(0));
 					res = cp.not(e1);
 				}
-				
+
 			} else {
 				if (isFeature(tree)) {
 					IloIntVar feat = featureVars.get(data);
 					res = cp.gt(feat, 0);
-				}
-				else if (data.equals(KeyWords.TRUE)){
+				} else if (data.equals(KeyWords.TRUE)) {
 					res = cp.trueConstraint();
-				}
-				else if (data.equals(KeyWords.FALSE)){
+				} else if (data.equals(KeyWords.FALSE)) {
 					res = cp.falseConstraint();
 				}
 			}
@@ -714,17 +725,31 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 	public IloCP getCp() {
 		return cp;
 	}
-
-	/**
-	 * This method adds to the solver the attributes and their constraints
-	 */
-	public void addAttributedElements(){
-		for (IloConstraint c:attConstraints){
-			try {
-				cp.add(c);
-			} catch (IloException e) {
-				e.printStackTrace();
+	
+	public void restore() {
+		try {
+			if (sol == null) {
+				cp.propagate();
+				sol = cp.solution();
+			} else {
+				cp.restore(sol);
 			}
+		} catch (IloException e) {
+			e.printStackTrace();
 		}
+
 	}
+
+//	/**
+//	 * This method adds to the solver the attributes and their constraints
+//	 */
+//	public void addAttributedElements() {
+//		for (IloConstraint c : attConstraints) {
+//			try {
+//				cp.add(c);
+//			} catch (IloException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 }

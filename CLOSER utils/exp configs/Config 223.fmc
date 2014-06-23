@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+WindowsSQLServer;
+Dedicated;
+SouthAmerica;
+## Complex Constraints 
+(EC2.storageSize >= 627);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 12);
+(Use.usage >= 50);
+(Use.period >= 6);
+(Instance.ram >= 5);

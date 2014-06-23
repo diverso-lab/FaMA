@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+WindowsBased;
+Public;
+NorthAmerica;
+## Complex Constraints 
+(EC2.storageSize >= 72);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 9);
+(Use.usage >= 559);
+(Use.period >= 33);
+(Instance.ram >= 7);

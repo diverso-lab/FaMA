@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Dedicated;
+Europe;
+RedHat;
+## Complex Constraints 
+(EC2.storageSize >= 2291);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 61);
+(Use.usage >= 581);
+(Use.period >= 33);
+(Instance.ram >= 46);

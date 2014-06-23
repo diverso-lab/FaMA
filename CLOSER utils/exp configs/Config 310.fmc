@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+LinuxBased;
+VA;
+Dedicated;
+## Complex Constraints 
+(EC2.storageSize >= 361);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 6);
+(Use.usage >= 313);
+(Use.period >= 25);
+(Instance.ram >= 4);

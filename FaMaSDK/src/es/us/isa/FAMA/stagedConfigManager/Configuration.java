@@ -28,7 +28,7 @@ import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
 
 public class Configuration {
 
-	private Map<VariabilityElement, Integer> elements;
+	protected Map<VariabilityElement, Integer> elements;
 
 	public Configuration(Map<VariabilityElement, Integer> elements) {
 		this.elements = elements;

@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+LinuxBased;
+Public;
+JP;
+## Complex Constraints 
+(EC2.storageSize >= 9895);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 52);
+(Use.usage >= 598);
+(Use.period >= 13);
+(Instance.ram >= 56);

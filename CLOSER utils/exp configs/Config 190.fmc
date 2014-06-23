@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+AUS;
+WindowsBased;
+Dedicated;
+## Complex Constraints 
+(EC2.storageSize >= 729);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 15);
+(Use.usage >= 395);
+(Use.period >= 26);
+(Instance.ram >= 6);

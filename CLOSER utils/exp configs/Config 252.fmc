@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+SIN;
+Dedicated;
+WindowsSQLWeb;
+## Complex Constraints 
+(EC2.storageSize >= 4671);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 21);
+(Use.usage >= 230);
+(Use.period >= 8);
+(Instance.ram >= 200);

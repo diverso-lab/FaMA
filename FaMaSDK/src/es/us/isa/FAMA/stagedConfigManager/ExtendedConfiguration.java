@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import es.us.isa.FAMA.models.featureModel.GenericFeature;
 import es.us.isa.FAMA.models.featureModel.extended.GenericAttribute;
+import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
 import es.us.isa.util.Tree;
 /**
  * Extended configuration for attributes and cardinalities.
@@ -53,14 +55,51 @@ public class ExtendedConfiguration extends Configuration{
 	}
 
 	public String toString(){
-		String result = super.toString();
-		Set<Entry<GenericAttribute,Double>> entries = attValues.entrySet();
-		for (Entry<GenericAttribute,Double> e:entries){
-			result+= "\n" +e.getKey().getFullName() + " = "+e.getValue();
+		// generates the config in the plain-text format
+		String result = "";
+		
+		if (!elements.isEmpty()){
+			result += "## Features \n";
+			for (Entry<VariabilityElement,Integer> e:elements.entrySet()){
+				if (e.getKey() instanceof GenericFeature)
+				{
+					if (e.getValue() == 0)
+					{
+						result += "NOT "+e.getKey().getName()+";\n";
+					}
+					else
+					{
+						result += e.getKey().getName()+";\n";
+					}
+				}
+			}
 		}
-		for (Tree<String> tree:attConfigs){
-			result += "\n "+tree;
+		
+		if (!attValues.isEmpty()){
+			result += "## Attributes \n";
+			for (Entry<GenericAttribute,Double> e:attValues.entrySet()){
+				if (e.getKey() instanceof GenericAttribute)
+				{
+					result += e.getKey().getName()+" == "+e.getValue()+";\n";
+				}
+			}
 		}
+		
+		if (!attConfigs.isEmpty()){
+			result += "## Complex Constraints \n";
+			for (Tree<String> t:attConfigs){
+				result += t.toString()+";\n";
+			}
+		}
+		
+//		String result = super.toString();
+//		Set<Entry<GenericAttribute,Double>> entries = attValues.entrySet();
+//		for (Entry<GenericAttribute,Double> e:entries){
+//			result+= "\n" +e.getKey().getFullName() + " = "+e.getValue();
+//		}
+//		for (Tree<String> tree:attConfigs){
+//			result += "\n "+tree;
+//		}
 		return result;
 	}
 }

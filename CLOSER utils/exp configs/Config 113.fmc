@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+AUS;
+Public;
+WindowsSQLWeb;
+## Complex Constraints 
+(EC2.storageSize >= 244);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 36);
+(Use.usage >= 221);
+(Use.period >= 19);
+(Instance.ram >= 32);

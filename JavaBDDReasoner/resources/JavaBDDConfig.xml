@@ -8,4 +8,5 @@
 	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" class="es.us.isa.JavaBDDReasoner.questions.JavaBDDValidProductQuestion"/>
 	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" class="es.us.isa.JavaBDDReasoner.questions.JavaBDDValidConfigurationQuestion"/>
 	<question interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" class="es.us.isa.JavaBDDReasoner.questions.JavaBDDVariabilityQuestion"/>
+<!-- 	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationSetQuestion" class="es.us.isa.JavaBDDReasoner.questions.JavaBDDValidConfigSetQuestion"/> -->
 </reasoner>

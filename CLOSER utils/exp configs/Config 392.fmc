@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Suse;
+AUS;
+Dedicated;
+## Complex Constraints 
+(EC2.storageSize >= 627);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 53);
+(Use.usage >= 656);
+(Use.period >= 23);
+(Instance.ram >= 27);

@@ -28,6 +28,47 @@
 			<artifactId>antlr</artifactId>
 			<version>2.7.7</version>
 		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FAMATransformations</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.java.bdd</groupId> -->
+<!-- 			<artifactId>javaBDD</artifactId> -->
+<!-- 			<version>1.0.0</version> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>CPOptimizerReasoner</artifactId>
+			<version>0.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>JavaBDDReasoner</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.csvreader</groupId>
+			<artifactId>CSVReader</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.splot</groupId>
+			<artifactId>SPLOTFMapi</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaAttributedModel</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaFeatureModel</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 		<repository>
@@ -48,82 +89,83 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
-				<executions>
-					<!-- <execution> <id>copy-dependencies</id> <phase>compile</phase> <goals> 
-						<goal>copy-dependencies</goal> </goals> <configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
-						<overWriteReleases>false</overWriteReleases> <overWriteSnapshots>false</overWriteSnapshots> 
-						<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> -->
-					<execution>
-						<id>copy</id>
-						<phase>test</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>es.us.isa</groupId>
-									<artifactId>FaMaAttributedModel</artifactId>
-									<version>1.1.0</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.basedir}/lib</outputDirectory>
-									<!-- <destFileName>optional-new-name.jar</destFileName> -->
-								</artifactItem>
-								<artifactItem>
-									<groupId>es.us.isa</groupId>
-									<artifactId>CPOptimizerReasoner</artifactId>
-									<version>0.2.0</version>
-									<type>jar</type>
-									<overWrite>false</overWrite>
-									<outputDirectory>${project.basedir}/lib</outputDirectory>
-									<!-- <destFileName>optional-new-name.jar</destFileName> -->
-								</artifactItem>
-								<!-- <artifactItem> <groupId>com.ibm.cplex</groupId> <artifactId>CPOptimizer</artifactId> 
-									<version>12.5.1</version> <type>jar</type> <overWrite>false</overWrite> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
-									</artifactItem> -->
-							</artifactItems>
-							<outputDirectory>${project.build.directory}/wars</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<!-- copy-dependency plugin -->
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[1.0.0,)</versionRange>
-										<goals>
-											<goal>copy-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 				<artifactId>maven-dependency-plugin</artifactId> -->
+<!-- 				<version>2.8</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> <id>copy-dependencies</id> <phase>compile</phase> <goals>  -->
+<!-- 						<goal>copy-dependencies</goal> </goals> <configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory>  -->
+<!-- 						<overWriteReleases>false</overWriteReleases> <overWriteSnapshots>false</overWriteSnapshots>  -->
+<!-- 						<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> --> 
+<!-- 					<execution> -->
+<!-- 						<id>copy</id> -->
+<!-- 						<phase>test</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>copy</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<artifactItems> -->
+<!-- 								<artifactItem> -->
+<!-- 									<groupId>es.us.isa</groupId> -->
+<!-- 									<artifactId>FaMaAttributedModel</artifactId> -->
+<!-- 									<version>1.1.0</version> -->
+<!-- 									<type>jar</type> -->
+<!-- 									<overWrite>false</overWrite> -->
+<!-- 									<outputDirectory>${project.basedir}/lib</outputDirectory> -->
+<!-- 									<destFileName>optional-new-name.jar</destFileName> -->
+<!-- 								</artifactItem> -->
+<!-- 								<artifactItem> -->
+<!-- 									<groupId>es.us.isa</groupId> -->
+<!-- 									<artifactId>CPOptimizerReasoner</artifactId> -->
+<!-- 									<version>0.2.0</version> -->
+<!-- 									<type>jar</type> -->
+<!-- 									<overWrite>false</overWrite> -->
+<!-- 									<outputDirectory>${project.basedir}/lib</outputDirectory> -->
+<!-- 									<destFileName>optional-new-name.jar</destFileName> -->
+<!-- 								</artifactItem> -->
+<!-- 								<artifactItem> <groupId>com.ibm.cplex</groupId> <artifactId>CPOptimizer</artifactId>  -->
+<!-- 									<version>12.5.1</version> <type>jar</type> <overWrite>false</overWrite> <outputDirectory>${project.build.directory}/lib</outputDirectory>  -->
+<!-- 									</artifactItem> -->
+<!-- 							</artifactItems> -->
+<!-- 							<outputDirectory>${project.build.directory}/wars</outputDirectory> -->
+<!-- 							<overWriteReleases>false</overWriteReleases> -->
+<!-- 							<overWriteSnapshots>true</overWriteSnapshots> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
+
+<!-- 		</plugins>  -->
+<!-- 		<pluginManagement> -->
+<!-- 			<plugins> -->
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.eclipse.m2e</groupId> -->
+<!-- 					<artifactId>lifecycle-mapping</artifactId> -->
+<!-- 					<version>1.0.0</version> -->
+<!-- 					<configuration> -->
+<!-- 						<lifecycleMappingMetadata> -->
+<!-- 							<pluginExecutions> -->
+<!-- 								copy-dependency plugin -->
+<!-- 								<pluginExecution> -->
+<!-- 									<pluginExecutionFilter> -->
+<!-- 										<groupId>org.apache.maven.plugins</groupId> -->
+<!-- 										<artifactId>maven-dependency-plugin</artifactId> -->
+<!-- 										<versionRange>[1.0.0,)</versionRange> -->
+<!-- 										<goals> -->
+<!-- 											<goal>copy-dependencies</goal> -->
+<!-- 										</goals> -->
+<!-- 									</pluginExecutionFilter> -->
+<!-- 									<action> -->
+<!-- 										<ignore /> -->
+<!-- 									</action> -->
+<!-- 								</pluginExecution> -->
+<!-- 							</pluginExecutions> -->
+<!-- 						</lifecycleMappingMetadata> -->
+<!-- 					</configuration> -->
+<!-- 				</plugin> -->
+<!-- 			</plugins> -->
+<!-- 		</pluginManagement> -->
 	</build>
 </project>

@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Public;
+SouthAmerica;
+Linux;
+## Complex Constraints 
+(EC2.storageSize >= 9918);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 101);
+(Use.usage >= 640);
+(Use.period >= 16);
+(Instance.ram >= 240);

@@ -149,4 +149,5 @@ public class JavaBDDProductsQuestion extends JavaBDDQuestion implements
 		System.out.println("String ready");
 		return res;
 	}
+
 }

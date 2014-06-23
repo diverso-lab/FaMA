@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Public;
+AsiaOceania;
+RedHat;
+## Complex Constraints 
+(EC2.storageSize >= 848);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 1);
+(Use.usage >= 547);
+(Use.period >= 4);
+(Instance.ram >= 1);

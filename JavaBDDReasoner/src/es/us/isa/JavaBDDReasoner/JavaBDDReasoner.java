@@ -22,6 +22,7 @@ import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Reasoner.Question;
 
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,6 +47,7 @@ import es.us.isa.FAMA.models.featureModel.GenericRelation;
 import es.us.isa.FAMA.models.featureModel.KeyWords;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
 import es.us.isa.FAMA.stagedConfigManager.Configuration;
+import es.us.isa.FAMA.stagedConfigManager.ExtendedConfiguration;
 import es.us.isa.util.Node;
 import es.us.isa.util.Tree;
 
@@ -88,6 +90,19 @@ public class JavaBDDReasoner extends FeatureModelReasoner {
 		factory = JFactory.init(1000000, 10000); // This can be optimized taking
 		numvar = 1;								 // into account the size of
 		parser = new BDDParser();
+	}
+	
+	public BDD parseConfiguration(Configuration config){
+		BDD result = ((BDDFactory) getBDDFactory()).one();
+		if (config instanceof ExtendedConfiguration){
+			ExtendedConfiguration extConfig = (ExtendedConfiguration) config;
+			Collection<Tree<String>> constraints = extConfig.getAttConfigs();
+			for (Tree<String> t:constraints){
+				BDD aux = parser.translateToConstraint(t);
+				result = result.and(aux);
+			}
+		}
+		return result;
 	}
 
 	public BDD getBDD() {

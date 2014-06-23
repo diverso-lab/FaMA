@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+WindowsBased;
+Public;
+SIN;
+## Complex Constraints 
+(EC2.storageSize >= 1900);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 24);
+(Use.usage >= 563);
+(Use.period >= 5);
+(Instance.ram >= 75);

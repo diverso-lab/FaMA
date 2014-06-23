@@ -17,4 +17,6 @@ public interface OptimisingConfigurationQuestion extends Question {
 	
 	public void setTimeLimit(int miliseconds);
 	
+	public boolean isValid();
+	
 }

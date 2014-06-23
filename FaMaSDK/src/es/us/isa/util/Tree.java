@@ -78,7 +78,8 @@ public class Tree<T> {
      * @return the String representation of the Tree.
      */
     public String toString() {
-        return toList().toString();
+    	return rootElement.toString();
+//        return toList().toString();
     }
      
     /**
@@ -89,10 +90,24 @@ public class Tree<T> {
      * @param list the output of the walk.
      */
     private void walk(Node<T> element, List<Node<T>> list) {
-        list.add(element);
-        for (Node<T> data : element.getChildren()) {
-            walk(data, list);
+    	List<Node<T>> children = element.getChildren();
+    	int numberOfChildren = children.size();
+        if (numberOfChildren >= 1){
+        	walk(children.get(0),list);
+        	list.add(element);
+        	int index = 1;
+        	for (int i = index; i < numberOfChildren; i++){
+        		walk(children.get(i),list);
+        	}
         }
+        else{
+        	list.add(element);
+        }
+//        list.add(element);
+//        for (Node<T> data : element.getChildren()) {
+//            walk(data, list);
+//        }
+        
     }
     
     public boolean equals(Object o){

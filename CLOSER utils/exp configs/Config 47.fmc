@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Public;
+SIN;
+RedHat;
+## Complex Constraints 
+(EC2.storageSize >= 583);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 25);
+(Use.usage >= 176);
+(Use.period >= 35);
+(Instance.ram >= 26);

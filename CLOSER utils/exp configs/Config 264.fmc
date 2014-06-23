@@ -1,0 +1,12 @@
+%Configuration
+## Features 
+Dedicated;
+Europe;
+WindowsSQLStd;
+## Complex Constraints 
+(EC2.storageSize >= 4360);
+(Instance.ssdBacked >= 0);
+(Instance.ecu >= 73);
+(Use.usage >= 410);
+(Use.period >= 33);
+(Instance.ram >= 221);

@@ -1,0 +1,3 @@
+<reasoner>
+ 	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationSetQuestion" class="es.us.isa.basic.cpoptimizer.questions.CPOptValidConfigSetQuestion"/>
+</reasoner>
