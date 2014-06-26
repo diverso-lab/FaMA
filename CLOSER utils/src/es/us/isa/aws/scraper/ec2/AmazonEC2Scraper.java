@@ -1,16 +1,13 @@
 package es.us.isa.aws.scraper.ec2;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,9 @@ import es.us.isa.aws.aux.table.ConstraintTable;
 
 public class AmazonEC2Scraper {
 
+	private double maxCostHour;
+	private double maxUpfrontCost;
+	
 	private String currentGenPage;
 	private String prevGenPage;
 	private String dedicatedPage;
@@ -75,9 +75,13 @@ public class AmazonEC2Scraper {
 	}
 
 	public void parseEC2Constraints(String targetPath) {
+		maxCostHour = 0;
+		maxUpfrontCost = 0;
 		try {
 			System.setOut(new PrintStream(targetPath));
 			parseEC2();
+			System.out.println("Max cost hour = "+maxCostHour);
+			System.out.println("Max upfront cost = "+maxUpfrontCost);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -280,6 +284,8 @@ public class AmazonEC2Scraper {
 									auxList.add("0");
 									auxList.add(costHour);
 									pricingConstraints.add(auxList);
+									
+									checkMaxCostHour(costHour);
 								}
 								else{
 									String s = "(" + areasArray[k] + " AND "
@@ -315,6 +321,9 @@ public class AmazonEC2Scraper {
 									auxList.add(fixed1);
 									auxList.add(hour1);
 									pricingConstraints.add(auxList);
+									
+//									checkMaxPrice(hour1,maxCostHour);
+									checkMaxUpfrontCost(fixed1);
 								} else {
 									// we got a N/A
 									String s = "(" + instanceName + " AND "
@@ -353,6 +362,8 @@ public class AmazonEC2Scraper {
 									auxList.add(hour3);
 									pricingConstraints.add(auxList);
 
+//									checkMaxPrice(hour3,maxCostHour);
+									checkMaxUpfrontCost(fixed3);
 								} else {
 									// we got a N/A
 									String s = "(" + instanceName + " AND "
@@ -391,6 +402,26 @@ public class AmazonEC2Scraper {
 			// so we need to consider all the instances
 			instanceTypes = getAllTypes();
 		}
+	}
+	
+	private void checkMaxCostHour(String s){
+		try{
+			Double aux = Double.parseDouble(s);
+			if (aux > maxCostHour){
+				maxCostHour = aux;
+			}
+		}
+		catch(NumberFormatException exp){}
+	}
+	
+	private void checkMaxUpfrontCost(String s){
+		try{
+			Double aux = Double.parseDouble(s);
+			if (aux > maxUpfrontCost){
+				maxUpfrontCost = aux;
+			}
+		}
+		catch(NumberFormatException exp){}
 	}
 
 	/**
@@ -549,46 +580,9 @@ public class AmazonEC2Scraper {
 			}
 
 		}
-
-		// XXX print non available instances per area
-		// we compare each area to Virginia, which has all the kinds of
-		// instances
-//		System.out.println();
-//		System.out.println("## Location constraints");
-//		Collection<String> allInstances = areaInstances.get(areasArray[0]);
-//		Set<Entry<String, Collection<String>>> entries2 = areaInstances
-//				.entrySet();
-//		for (Entry<String, Collection<String>> e : entries2) {
-//			Collection<String> nonAvailableInstances = new ArrayList<String>(
-//					allInstances);
-//			nonAvailableInstances.removeAll(e.getValue());
-//			if (!nonAvailableInstances.isEmpty()) {
-//				String line = "("+e.getKey() + " AND OnDemand) IMPLIES (";
-//				for (String s : nonAvailableInstances) {
-//					String s1 = this.processInstances(s);
-//					if (s1 != null) {
-//						line += "NOT " + s1 + " AND ";
-//					}
-//
-//				}
-//				line = line.substring(0, line.length() - 5);
-//				line += ");";
-//
-//				System.out.println(line);
-//			}
-//		}
 	}
 
-	// protected void parsePublic(Document currentGen, Document prevGen){
-	// parseCurrentGenOnDemand(currentGen);
-	// parsePrevGenOnDemand(prevGen);
-	// parseReserved(currentGen);
-	// }
-	//
-	// protected void parseDedicated(Document dedicated){
-	// parseOnDemandDedicated(dedicated);
-	// parseDedicatedAndReserved(dedicated);
-	// }
+
 
 	private String processCPU(String s) {
 		return s;
@@ -658,66 +652,6 @@ public class AmazonEC2Scraper {
 	protected void processConfiguration(String config){
 		System.out.println(config);
 	}
-
-	// public Collection<EC2Configuration> getAllEC2Configurations() {
-	// // XXX IMPORTANT, we exclude micro instances. they're used just for
-	// // boost purposes
-	// Collection<EC2Configuration> result = new HashSet<EC2Configuration>();
-	//
-	// loadPropertyFiles();
-	// try {
-	// System.setOut(new PrintStream("auxFile.txt"));
-	//
-	// Document currentGenDoc = getJSoupDoc(currentGenPage);
-	// Document prevGenDoc = getJSoupDoc(prevGenPage);
-	//
-	// // parseInstanceCharacteristics(currentGenDoc, prevGenDoc);
-	// parsePublic(currentGenDoc, prevGenDoc);
-	//
-	// Document dedicated = getJSoupDoc(dedicatedPage);
-	// parseDedicated(dedicated);
-	//
-	// System.out.close();
-	//
-	//
-	// BufferedReader bf = new BufferedReader(new FileReader("auxFile.txt"));
-	// String aux;
-	// while ((aux = bf.readLine()) != null){
-	// EC2Configuration config = line2Config(aux);
-	// if (config != null){
-	// result.add(config);
-	// }
-	// }
-	// bf.close();
-	//
-	// } catch (FileNotFoundException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// return result;
-	// }
-	//
-	// private EC2Configuration line2Config(String aux) {
-	// String[] leftAndRight = divideLine(aux);
-	// if (!leftAndRight[1].contains("NOT")){
-	// // if the instance is available
-	// String[] values = parseConfigValues(leftAndRight[0]);
-	// // we check that it is not a micro
-	// }
-	// return null;
-	// }
-	//
-	// private String[] parseConfigValues(String string) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
-	//
-	// private String[] divideLine(String aux) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
 	
 	public ConstraintTable getCharsTable() {
 		return charsTable;
@@ -726,13 +660,12 @@ public class AmazonEC2Scraper {
 	public ConstraintTable getPricingTable() {
 		return pricingTable;
 	}
-	
 
 	public static void main(String... args) {
 		AmazonEC2Scraper scraper = new AmazonEC2Scraper(
-				"./ec2-by-date/2014-6-12/current-pricing.html",
-				"./ec2-by-date/2014-6-12/prev-gen-pricing.html",
-				"./ec2-by-date/2014-6-12/dedicated-pricing.html",
+				"./ec2-by-date/2014-6-24/current-pricing.html",
+				"./ec2-by-date/2014-6-24/prev-gen-pricing.html",
+				"./ec2-by-date/2014-6-24/dedicated-pricing.html",
 				"./properties");
 
 		scraper.parseEC2Constraints("./NewAmazonEC2Constrains.txt");

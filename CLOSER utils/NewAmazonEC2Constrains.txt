@@ -20372,6 +20372,26 @@ C1_xlarge IMPLIES (Instance.cores==8 AND Instance.ram==7 AND Instance.defaultSto
 (HI1_4xlarge AND SaoPaulo AND WindowsSQLStd AND Dedicated) IMPLIES NOT OneYearHeavy;
 (HI1_4xlarge AND SaoPaulo AND WindowsSQLStd AND Dedicated) IMPLIES NOT ThreeYearsHeavy;
 (SaoPaulo AND WindowsSQLStd AND Dedicated AND (OneYearHeavy OR ThreeYearsHeavy)) IMPLIES NOT CG1_4xlarge;
+Max cost hour = 17.016
+Max upfront cost = 135816.0
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
+Starting optimisation
+End of the optimisation
 Starting optimisation
 End of the optimisation
 Starting optimisation

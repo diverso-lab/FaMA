@@ -35,15 +35,15 @@ Dedication: [1,1]{Public Dedicated};
 %Attributes
 
 ## Computing atts
-EC2.costMonth: Real[0 to 1000000],0,0;
-EC2.upfrontCost: Real[0 to 100000],0,0;
-EC2.totalCost:Real[0.00 to 1000000.00],0,0;
+EC2.costMonth: Real[0 to 20000],0,0;
+EC2.upfrontCost: Real[0 to 150000],0,0;
+EC2.totalCost:Real[0.00 to 800000.00],0,0;
 
 ## Instance atts
 Instance.cores: Integer[1 to 32],0,0; ## maximum: 32 cores 
 Instance.ecu: Real[0 to 108],0,0; ## Amazon compute units. maximum = 108
 Instance.ram: Real[0.000 to 250],0,0; ## from 256 MB to 120 GB
-Instance.costHour: Real[0.000 to 10.000],0,0;
+Instance.costHour: Real[0.000 to 18.000],0,0;
 
 ## Dedicated fee
 Instance.dedicatedFee: Integer[0 to 2],0,0;
@@ -63,8 +63,8 @@ Use.signedUsage: Integer[0 to 730],0,0; ##hours per month
 ## Extra atts for the storage
 Instance.defaultStorage: Integer[0 to 50000],0,0; ## from 0 to 50 000 GB (50 TB)
 EBS.extraSpace: Integer[0 to 1000],0,0; ## 0 to 1000 GB (1 TB)
-EBS.costGB: Real [0 to 0.12],0,0; ## dollars
-EBS.costMonth: Real[0.00 to 50000.00],0,0; ## dollars per month
+EBS.costGB: Real [0 to 0.19],0,0; ## dollars
+EBS.costMonth: Real[0.00 to 200.00],0,0; ## dollars per month
 
 
 %Constraints
