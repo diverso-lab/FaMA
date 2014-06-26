@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-VA;
-Public;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 821);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 29);
-(Use.usage >= 289);
-(Use.period >= 12);
-(Instance.ram >= 38);
+Dedicated;
+LinuxBased;
+JP;
+(Use.period >= 37);
+(EC2.storageSize >= 989);
+(Use.usage >= 82);
+(Instance.ecu >= 39.0);
+(Instance.ram >= 29.0);
+(Instance.ssdBacked >= 1);

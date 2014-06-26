@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Dedicated;
-AsiaOceania;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 116);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 51);
-(Use.usage >= 179);
-(Use.period >= 33);
-(Instance.ram >= 32);
+Dedicated;
+Linux;
+Europe;
+(Use.period >= 42);
+(EC2.storageSize >= 562);
+(Use.usage >= 655);
+(Instance.ecu >= 47.0);
+(Instance.ram >= 28.0);
+(Instance.ssdBacked >= 1);

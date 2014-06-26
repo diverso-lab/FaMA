@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsBased;
-Public;
-AsiaOceania;
 ## Complex Constraints 
-(EC2.storageSize >= 965);
+Public;
+WindowsBased;
+AsiaOceania;
+(Use.period >= 5);
+(EC2.storageSize >= 813);
+(Use.usage >= 715);
+(Instance.ecu >= 16.0);
+(Instance.ram >= 6.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 7);
-(Use.usage >= 392);
-(Use.period >= 2);
-(Instance.ram >= 3);

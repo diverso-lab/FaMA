@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+Europe;
+Linux;
+Dedicated;
+(Instance.ecu >= 57.0);
+(Use.period >= 40);
+(Instance.ram >= 35.0);
+(EC2.storageSize >= 448);
+(Use.usage >= 646);
+(Instance.ssdBacked >= 0);

@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsSQLServer;
-Dedicated;
-JP;
 ## Complex Constraints 
-(EC2.storageSize >= 56);
+Public;
+WindowsBased;
+SIN;
+(Use.period >= 14);
+(EC2.storageSize >= 438);
+(Use.usage >= 229);
+(Instance.ecu >= 18.0);
+(Instance.ram >= 8.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 19);
-(Use.usage >= 521);
-(Use.period >= 13);
-(Instance.ram >= 7);

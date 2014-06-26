@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Dedicated;
-AsiaOceania;
-WindowsSQLStd;
 ## Complex Constraints 
-(EC2.storageSize >= 2519);
+Public;
+LinuxBased;
+AUS;
+(Use.period >= 22);
+(EC2.storageSize >= 4861);
+(Use.usage >= 166);
+(Instance.ecu >= 21.0);
+(Instance.ram >= 69.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 100);
-(Use.usage >= 415);
-(Use.period >= 31);
-(Instance.ram >= 104);

@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-AUS;
-WindowsSQLServer;
-Dedicated;
 ## Complex Constraints 
-(EC2.storageSize >= 9792);
+Public;
+Suse;
+AsiaOceania;
+(Use.period >= 13);
+(EC2.storageSize >= 7792);
+(Use.usage >= 365);
+(Instance.ecu >= 73.0);
+(Instance.ram >= 212.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 60);
-(Use.usage >= 218);
-(Use.period >= 14);
-(Instance.ram >= 101);

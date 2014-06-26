@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+SouthAmerica;
+RedHat;
+Dedicated;
+(Instance.ecu >= 4.0);
+(Use.period >= 8);
+(Instance.ram >= 4.0);
+(EC2.storageSize >= 584);
+(Use.usage >= 130);
+(Instance.ssdBacked >= 0);

@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-SIN;
-Dedicated;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 8131);
+Public;
+Windows;
+SouthAmerica;
+(Use.period >= 12);
+(EC2.storageSize >= 5388);
+(Use.usage >= 176);
+(Instance.ecu >= 88.0);
+(Instance.ram >= 93.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 44);
-(Use.usage >= 621);
-(Use.period >= 31);
-(Instance.ram >= 186);

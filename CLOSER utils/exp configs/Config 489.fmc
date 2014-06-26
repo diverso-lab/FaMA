@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Suse;
-Dedicated;
-JP;
 ## Complex Constraints 
-(EC2.storageSize >= 9976);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 24);
-(Use.usage >= 57);
-(Use.period >= 23);
-(Instance.ram >= 41);
+Dedicated;
+Suse;
+AUS;
+(Use.period >= 10);
+(EC2.storageSize >= 3795);
+(Use.usage >= 187);
+(Instance.ecu >= 59.0);
+(Instance.ram >= 224.0);
+(Instance.ssdBacked >= 1);

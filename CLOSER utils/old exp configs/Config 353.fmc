@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+JP;
+RedHat;
+Dedicated;
+(Instance.ecu >= 19.0);
+(Use.period >= 35);
+(Instance.ram >= 24.0);
+(EC2.storageSize >= 245);
+(Use.usage >= 435);
+(Instance.ssdBacked >= 0);

@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AsiaOceania;
+Suse;
+Dedicated;
+(Instance.ecu >= 82.0);
+(Use.period >= 1);
+(Instance.ram >= 162.0);
+(EC2.storageSize >= 2811);
+(Use.usage >= 303);
+(Instance.ssdBacked >= 1);

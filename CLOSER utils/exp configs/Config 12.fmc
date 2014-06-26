@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Public;
-AsiaOceania;
-WindowsSQLStd;
 ## Complex Constraints 
-(EC2.storageSize >= 3545);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 23);
-(Use.usage >= 610);
-(Use.period >= 6);
-(Instance.ram >= 195);
+Public;
+Suse;
+ORE;
+(Use.period >= 19);
+(EC2.storageSize >= 2285);
+(Use.usage >= 709);
+(Instance.ecu >= 91.0);
+(Instance.ram >= 213.0);
+(Instance.ssdBacked >= 1);

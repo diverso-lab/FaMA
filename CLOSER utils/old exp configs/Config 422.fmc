@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AUS;
+LinuxBased;
+Dedicated;
+(Instance.ecu >= 15.0);
+(Use.period >= 22);
+(Instance.ram >= 23.0);
+(EC2.storageSize >= 536);
+(Use.usage >= 220);
+(Instance.ssdBacked >= 0);

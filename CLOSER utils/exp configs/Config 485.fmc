@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Public;
-NorthAmerica;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 890);
+Public;
+RedHat;
+NorthAmerica;
+(Use.period >= 29);
+(EC2.storageSize >= 341);
+(Use.usage >= 675);
+(Instance.ecu >= 6.0);
+(Instance.ram >= 20.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 25);
-(Use.usage >= 307);
-(Use.period >= 3);
-(Instance.ram >= 39);

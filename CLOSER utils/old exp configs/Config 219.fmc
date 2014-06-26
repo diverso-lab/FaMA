@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AUS;
+WindowsSQLServer;
+Dedicated;
+(Instance.ecu >= 42.0);
+(Use.period >= 7);
+(Instance.ram >= 154.0);
+(EC2.storageSize >= 2167);
+(Use.usage >= 261);
+(Instance.ssdBacked >= 1);

@@ -1,0 +1,111 @@
+%Relationships
+
+EC2: OS Instance Use Location Dedication [EBS];
+
+OS: [1,1]{LinuxBased WindowsBased};
+LinuxBased: [1,1]{Linux Suse RedHat};
+WindowsBased: [1,1]{Windows WindowsSQLServer};
+WindowsSQLServer: [1,1]{WindowsSQLWeb WindowsSQLStd};
+
+EBS: [1,1]{StdEBS ssdEBS};
+
+Instance: [1,1]{GeneralInstance ComputeOpt GPU MemoryOpt StorageOpt};
+GeneralInstance: [1,1]{M3_medium M3_large M3_xlarge M3_2xlarge M1_small M1_medium M1_large M1_xlarge};
+ComputeOpt: [1,1]{C3_large C3_xlarge C3_2xlarge C3_4xlarge C3_8xlarge C1_medium C1_xlarge CC2_8xlarge};
+GPU: [1,1]{G2_2xlarge CG1_4xlarge};
+MemoryOpt: [1,1]{M2_xlarge M2_2xlarge M2_4xlarge CR1_8xlarge R3_large R3_xlarge R3_2xlarge R3_4xlarge R3_8xlarge};
+StorageOpt: [1,1]{I2_xlarge I2_2xlarge I2_4xlarge I2_8xlarge HS1_8xlarge HI1_4xlarge};
+
+Location: [1,1]{NorthAmerica Europe AsiaOceania SouthAmerica};
+NorthAmerica: [1,1]{VA CA ORE};
+AsiaOceania: [1,1]{SIN JP AUS};
+Europe: IR;
+JP: Tokyo;
+AUS: Sydney;
+SouthAmerica: SaoPaulo;
+
+Use: [1,1]{OnDemand PaymentDiscounts}; 
+PaymentDiscounts: PayInAdvance;
+PayInAdvance: [1,1]{OneYearTerm ThreeYearsTerm};
+OneYearTerm:[1,1]{OneYearLight OneYearMedium OneYearHeavy}; 
+ThreeYearsTerm:[1,1] {ThreeYearsLight ThreeYearsMedium ThreeYearsHeavy};
+
+Dedication: [1,1]{Public Dedicated};
+
+%Attributes
+
+## Computing atts
+EC2.costMonth: Integer[0 to 10000000],0,0;
+EC2.upfrontCost: Integer[0 to 50000],0,0;
+EC2.totalCost:Integer[0 to 400000],0,0;
+
+## Instance atts
+Instance.cores: Integer[1 to 32],0,0; ## maximum: 32 cores 
+Instance.ecu: Real[0 to 108],0,0; ## Amazon compute units. maximum = 108
+Instance.ram: Real[0.000 to 250],0,0; ## from 256 MB to 120 GB
+Instance.costHour: Real[0.000 to 10.000],0,0;
+
+## Dedicated fee
+Instance.dedicatedFee: [0,2000],0,0;
+
+## SSD Instance
+Instance.ssdBacked: Integer[0 to 1],0,0;
+
+
+## Storage atts
+EC2.storageSize: Integer[0 to 50000],0,0; ## from 0 GB to 50 000 (50 TB)
+
+## Usage atts
+Use.usage: Integer[0 to 730],0,0; ##hours per month
+Use.period: Integer[0 to 48],0,0; ##months (0 implies on demand)
+Use.signedUsage: Integer[0 to 730],0,0; ##hours per month
+
+## Extra atts for the storage
+Instance.defaultStorage: Integer[0 to 50000],0,0; ## from 0 to 50 000 GB (50 TB)
+EBS.extraSpace: Integer[0 to 1000],0,0; ## 0 to 1000 GB (1 TB)
+EBS.costGB: Real [0 to 0.19],0,0; ## dollars
+EBS.costMonth: Integer[0 to 50000],0,0; ## dollars per month
+
+
+%Constraints
+
+
+
+##Cost constraints##
+EC2.totalCost == ((EC2.costMonth*Use.period)/1000) + EC2.upfrontCost;
+EC2.costMonth == (Instance.costHour + Instance.dedicatedFee)*Use.signedUsage + EBS.costMonth;
+EBS.costMonth == EBS.extraSpace * EBS.costGB;
+EC2.storageSize == EBS.extraSpace + Instance.defaultStorage;
+
+## Dedicated fee
+Dedicated IMPLIES Instance.dedicatedFee == 2000;
+Public IMPLIES Instance.dedicatedFee == 0;
+
+##Extra storage (EBS)
+(StdEBS AND VA) IMPLIES EBS.costGB==0.05;
+(StdEBS AND ORE) IMPLIES EBS.costGB==0.05;
+(StdEBS AND CA) IMPLIES EBS.costGB==0.08;
+(StdEBS AND SIN) IMPLIES EBS.costGB==0.08;
+(StdEBS AND Sydney) IMPLIES EBS.costGB==0.08;
+(StdEBS AND IR) IMPLIES EBS.costGB==0.055;
+(StdEBS AND Tokyo) IMPLIES EBS.costGB==0.08;
+(StdEBS AND SaoPaulo) IMPLIES EBS.costGB==0.12;
+
+(ssdEBS AND VA) IMPLIES EBS.costGB==0.1;
+(ssdEBS AND ORE) IMPLIES EBS.costGB==0.1;
+(ssdEBS AND CA) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND SIN) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND Sydney) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND Tokyo) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND IR) IMPLIES EBS.costGB==0.11;
+(ssdEBS AND SaoPaulo) IMPLIES EBS.costGB==0.19;
+
+##Other constraints
+OneYearTerm IMPLIES Use.period >= 12;
+ThreeYearsTerm IMPLIES Use.period >= 36;
+(Dedicated AND PayInAdvance) IMPLIES NOT WindowsSQLWeb;
+
+## Heavy reservation implies the payment of all the hours per month
+(OneYearHeavy OR ThreeYearsHeavy) IMPLIES Use.signedUsage == 730;
+(OneYearLight OR OneYearMedium OR ThreeYearsLight OR ThreeYearsMedium OR OnDemand) IMPLIES Use.signedUsage == Use.usage;
+

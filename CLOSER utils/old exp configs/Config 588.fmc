@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+ORE;
+LinuxBased;
+Dedicated;
+(Instance.ecu >= 20.0);
+(Use.period >= 13);
+(Instance.ram >= 166.0);
+(EC2.storageSize >= 4145);
+(Use.usage >= 36);
+(Instance.ssdBacked >= 0);

@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+VA;
+RedHat;
+Dedicated;
+(Instance.ecu >= 15.0);
+(Use.period >= 11);
+(Instance.ram >= 3.0);
+(EC2.storageSize >= 3);
+(Use.usage >= 301);
+(Instance.ssdBacked >= 0);

@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+SouthAmerica;
+LinuxBased;
+Dedicated;
+(Instance.ecu >= 59.0);
+(Use.period >= 40);
+(Instance.ram >= 21.0);
+(EC2.storageSize >= 544);
+(Use.usage >= 103);
+(Instance.ssdBacked >= 1);

@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-NorthAmerica;
-Dedicated;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 588);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 13);
-(Use.usage >= 313);
-(Use.period >= 2);
-(Instance.ram >= 19);
+Dedicated;
+WindowsSQLStd;
+SouthAmerica;
+(Use.period >= 42);
+(EC2.storageSize >= 954);
+(Use.usage >= 484);
+(Instance.ecu >= 14.0);
+(Instance.ram >= 11.0);
+(Instance.ssdBacked >= 1);

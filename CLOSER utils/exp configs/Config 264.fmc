@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Dedicated;
-Europe;
-WindowsSQLStd;
 ## Complex Constraints 
-(EC2.storageSize >= 4360);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 73);
-(Use.usage >= 410);
-(Use.period >= 33);
-(Instance.ram >= 221);
+Dedicated;
+WindowsSQLServer;
+ORE;
+(Use.period >= 13);
+(EC2.storageSize >= 5322);
+(Use.usage >= 117);
+(Instance.ecu >= 82.0);
+(Instance.ram >= 236.0);
+(Instance.ssdBacked >= 1);

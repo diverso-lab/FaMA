@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-SIN;
-Dedicated;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 3607);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 96);
-(Use.usage >= 596);
+Public;
+WindowsSQLWeb;
+NorthAmerica;
 (Use.period >= 17);
-(Instance.ram >= 205);
+(EC2.storageSize >= 5023);
+(Use.usage >= 696);
+(Instance.ecu >= 95.0);
+(Instance.ram >= 210.0);
+(Instance.ssdBacked >= 0);

@@ -1,0 +1,12 @@
+sep=;
+Input;Time (ms);Desired Location;Desired OS;Desired dedication;Desired period;Desired usage;Desired ECU;Desired RAM;Desired storage;Desired ssd;Result Location;Result OS;Result Dedication;Result Purchase;Result Instance;Result EBS;Total Cost;Cost Month;Cost Hour;ECU;Cores;RAM;SSD;Storage;EBS Storage;Signed Usage;Period;
+Config 1.fmc; 143748;ORE;Windows;Dedicated;13.0;38;10.0;655;562;1;ORE;Windows;Dedicated;OneYearMedium;R3_xlarge;StdEBS;51397.212;1294.374;0.252;13.0;4.0;30.5;1.0;655.0;575.0;null;38.0;
+Config 10.fmc; 260236;ORE;Suse;Dedicated;7.0;19;3.0;893;677;1;ORE;Suse;Dedicated;OneYearMedium;C3_large;StdEBS;27950.36;1444.44;0.07;7.0;2.0;3.75;1.0;893.0;861.0;null;19.0;
+Config 100.fmc; 315857;JP;WindowsSQLServer;Dedicated;9.0;13;9.0;109;166;0;Tokyo;WindowsSQLWeb;Dedicated;OnDemand;M3_xlarge;ssdEBS;6092.034000168531;468.618000012964;0.823;13.0;4.0;15.0;1.0;109.0;29.0;null;13.0;
+Config 101.fmc; 353953;JP;WindowsSQLServer;Dedicated;9.0;13;15.0;232;530;0;Tokyo;WindowsSQLWeb;Dedicated;OnDemand;M3_xlarge;ssdEBS;19450.470000739508;1496.190000056885;0.823;13.0;4.0;15.0;1.0;589.0;509.0;null;13.0;
+Config 102.fmc; 39551;Europe;RedHat;Dedicated;82.0;32;236.0;2994;409;1;IR;RedHat;Dedicated;OneYearMedium;I2_8xlarge;null;75003.984;1970.562;2.818;104.0;32.0;244.0;1.0;6400.0;0.0;null;32.0;
+Config 103.fmc; 127927;SIN;Windows;Dedicated;18.0;42;8.0;858;409;1;SIN;Windows;Dedicated;OneYearMedium;C3_2xlarge;StdEBS;47411.976;1091.4279999999999;0.532;28.0;8.0;15.0;1.0;858.0;698.0;null;42.0;
+Config 104.fmc; 63994;CA;WindowsSQLStd;Dedicated;56.0;42;23.0;986;533;1;CA;WindowsSQLStd;Dedicated;OneYearMedium;CR1_8xlarge;StdEBS;145342.276;2941.078;3.406;88.0;32.0;244.0;1.0;986.0;746.0;null;42.0;
+Config 105.fmc; Invalid;
+Config 106.fmc; 12885375;NorthAmerica;WindowsSQLStd;Dedicated;11.0;3;1.0;611;44;0;ORE;WindowsSQLStd;Dedicated;OnDemand;I2_xlarge;null;442.596;147.53199999999998;1.353;14.0;4.0;30.5;1.0;800.0;0.0;null;3.0;
+Config 107.fmc; 3672002;SouthAmerica;WindowsSQLServer;Dedicated;24.0;22;30.0;734;44;0;SaoPaulo;WindowsSQLWeb;Dedicated;OnDemand;M2_4xlarge;null;4503.136;204.688;2.652;26.0;8.0;68.4;0.0;1680.0;0.0;null;22.0;

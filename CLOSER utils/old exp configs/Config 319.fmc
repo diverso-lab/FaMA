@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AsiaOceania;
+RedHat;
+Dedicated;
+(Instance.ecu >= 3.0);
+(Use.period >= 35);
+(Instance.ram >= 3.0);
+(EC2.storageSize >= 3);
+(Use.usage >= 197);
+(Instance.ssdBacked >= 0);

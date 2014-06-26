@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+VA;
+Suse;
+Dedicated;
+(Instance.ecu >= 47.0);
+(Use.period >= 19);
+(Instance.ram >= 192.0);
+(EC2.storageSize >= 4468);
+(Use.usage >= 364);
+(Instance.ssdBacked >= 0);

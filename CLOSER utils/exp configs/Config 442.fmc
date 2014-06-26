@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-AUS;
-Dedicated;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 19);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 5);
-(Use.usage >= 343);
+Dedicated;
+WindowsSQLStd;
+ORE;
 (Use.period >= 21);
-(Instance.ram >= 7);
+(EC2.storageSize >= 77);
+(Use.usage >= 178);
+(Instance.ecu >= 17.0);
+(Instance.ram >= 7.0);
+(Instance.ssdBacked >= 1);

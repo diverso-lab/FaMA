@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Suse;
-Dedicated;
-SouthAmerica;
 ## Complex Constraints 
-(EC2.storageSize >= 251);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 7);
-(Use.usage >= 206);
-(Use.period >= 26);
-(Instance.ram >= 1);
+Dedicated;
+RedHat;
+CA;
+(Use.period >= 14);
+(EC2.storageSize >= 566);
+(Use.usage >= 353);
+(Instance.ecu >= 6.0);
+(Instance.ram >= 6.0);
+(Instance.ssdBacked >= 1);

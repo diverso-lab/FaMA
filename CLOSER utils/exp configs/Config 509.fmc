@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-AUS;
-Dedicated;
-Windows;
 ## Complex Constraints 
-(EC2.storageSize >= 383);
+Public;
+Linux;
+SIN;
+(Use.period >= 48);
+(EC2.storageSize >= 848);
+(Use.usage >= 680);
+(Instance.ecu >= 28.0);
+(Instance.ram >= 35.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 50);
-(Use.usage >= 621);
-(Use.period >= 28);
-(Instance.ram >= 33);

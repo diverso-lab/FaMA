@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-ORE;
-Dedicated;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 500);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 34);
-(Use.usage >= 304);
-(Use.period >= 17);
-(Instance.ram >= 34);
+Dedicated;
+RedHat;
+VA;
+(Use.period >= 5);
+(EC2.storageSize >= 165);
+(Use.usage >= 546);
+(Instance.ecu >= 58.0);
+(Instance.ram >= 11.0);
+(Instance.ssdBacked >= 1);

@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+SouthAmerica;
+Windows;
+Dedicated;
+(Instance.ecu >= 63.0);
+(Use.period >= 48);
+(Instance.ram >= 113.0);
+(EC2.storageSize >= 7750);
+(Use.usage >= 67);
+(Instance.ssdBacked >= 1);

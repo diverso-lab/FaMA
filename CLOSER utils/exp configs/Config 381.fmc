@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Suse;
-VA;
-Dedicated;
 ## Complex Constraints 
-(EC2.storageSize >= 9188);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 80);
-(Use.usage >= 138);
-(Use.period >= 19);
-(Instance.ram >= 114);
+Dedicated;
+WindowsSQLStd;
+JP;
+(Use.period >= 3);
+(EC2.storageSize >= 2567);
+(Use.usage >= 409);
+(Instance.ecu >= 23.0);
+(Instance.ram >= 238.0);
+(Instance.ssdBacked >= 1);

@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-SIN;
-Dedicated;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 2406);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 85);
-(Use.usage >= 624);
-(Use.period >= 33);
-(Instance.ram >= 232);
+Dedicated;
+WindowsSQLServer;
+AsiaOceania;
+(Use.period >= 25);
+(EC2.storageSize >= 3106);
+(Use.usage >= 393);
+(Instance.ecu >= 21.0);
+(Instance.ram >= 112.0);
+(Instance.ssdBacked >= 1);

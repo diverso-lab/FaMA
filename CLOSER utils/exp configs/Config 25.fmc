@@ -1,12 +1,11 @@
 %Configuration
-## Features 
+## Complex Constraints 
 Public;
 Windows;
-Europe;
-## Complex Constraints 
-(EC2.storageSize >= 872);
+AUS;
+(Use.period >= 48);
+(EC2.storageSize >= 720);
+(Use.usage >= 97);
+(Instance.ecu >= 8.0);
+(Instance.ram >= 8.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 19);
-(Use.usage >= 325);
-(Use.period >= 33);
-(Instance.ram >= 7);

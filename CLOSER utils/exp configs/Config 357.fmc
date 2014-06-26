@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-CA;
-Public;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 8057);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 104);
-(Use.usage >= 157);
-(Use.period >= 7);
-(Instance.ram >= 241);
+Dedicated;
+Linux;
+CA;
+(Use.period >= 12);
+(EC2.storageSize >= 4153);
+(Use.usage >= 52);
+(Instance.ecu >= 48.0);
+(Instance.ram >= 105.0);
+(Instance.ssdBacked >= 1);

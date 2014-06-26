@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AsiaOceania;
+WindowsBased;
+Dedicated;
+(Instance.ecu >= 13.0);
+(Use.period >= 13);
+(Instance.ram >= 7.0);
+(EC2.storageSize >= 237);
+(Use.usage >= 290);
+(Instance.ssdBacked >= 0);

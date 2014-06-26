@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Dedicated;
-Europe;
-WindowsSQLStd;
 ## Complex Constraints 
-(EC2.storageSize >= 792);
+Dedicated;
+Linux;
+CA;
+(Use.period >= 12);
+(EC2.storageSize >= 196);
+(Use.usage >= 407);
+(Instance.ecu >= 56.0);
+(Instance.ram >= 25.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 45);
-(Use.usage >= 284);
-(Use.period >= 9);
-(Instance.ram >= 16);

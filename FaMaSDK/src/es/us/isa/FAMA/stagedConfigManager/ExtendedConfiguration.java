@@ -80,7 +80,7 @@ public class ExtendedConfiguration extends Configuration{
 			for (Entry<GenericAttribute,Double> e:attValues.entrySet()){
 				if (e.getKey() instanceof GenericAttribute)
 				{
-					result += e.getKey().getName()+" == "+e.getValue()+";\n";
+					result += e.getKey().getFullName()+" == "+e.getValue()+";\n";
 				}
 			}
 		}

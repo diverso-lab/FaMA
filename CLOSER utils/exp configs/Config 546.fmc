@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsSQLServer;
-Dedicated;
-SouthAmerica;
 ## Complex Constraints 
-(EC2.storageSize >= 9014);
+Public;
+LinuxBased;
+AsiaOceania;
+(Use.period >= 7);
+(EC2.storageSize >= 6258);
+(Use.usage >= 89);
+(Instance.ecu >= 46.0);
+(Instance.ram >= 198.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 56);
-(Use.usage >= 404);
-(Use.period >= 30);
-(Instance.ram >= 99);

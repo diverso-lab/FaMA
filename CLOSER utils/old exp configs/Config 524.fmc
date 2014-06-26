@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+SIN;
+RedHat;
+Dedicated;
+(Instance.ecu >= 43.0);
+(Use.period >= 2);
+(Instance.ram >= 29.0);
+(EC2.storageSize >= 298);
+(Use.usage >= 472);
+(Instance.ssdBacked >= 1);

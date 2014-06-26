@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsBased;
-Dedicated;
-AsiaOceania;
 ## Complex Constraints 
-(EC2.storageSize >= 8070);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 35);
-(Use.usage >= 556);
-(Use.period >= 12);
-(Instance.ram >= 88);
+Dedicated;
+Windows;
+JP;
+(Use.period >= 21);
+(EC2.storageSize >= 6024);
+(Use.usage >= 617);
+(Instance.ecu >= 52.0);
+(Instance.ram >= 199.0);
+(Instance.ssdBacked >= 1);

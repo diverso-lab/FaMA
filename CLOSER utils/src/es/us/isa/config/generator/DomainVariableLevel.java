@@ -27,10 +27,27 @@ public class DomainVariableLevel {
 	
 	public int getRandomValue(){
 		int range = max - min;
-		Random r = new Random();
-		int val = r.nextInt(range);
+		Random r = new Random(System.currentTimeMillis());
+		int val;
+		if (range > 1){
+			val = r.nextInt(range+1);
+		}
+		else{
+			int aux = r.nextInt(100);
+			if (aux < 50){
+				val = 0;
+			}
+			else{
+				val = 1;
+			}
+		}
+		
 		int result = min + val;
 		return result;
+	}
+	
+	public double getRandomValueAsDouble(){
+		return ((double)getRandomValue());
 	}
 	
 }

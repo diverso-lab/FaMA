@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Suse;
-Public;
-Europe;
 ## Complex Constraints 
-(EC2.storageSize >= 541);
+Dedicated;
+WindowsSQLWeb;
+JP;
+(Use.period >= 35);
+(EC2.storageSize >= 724);
+(Use.usage >= 150);
+(Instance.ecu >= 4.0);
+(Instance.ram >= 4.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 2);
-(Use.usage >= 388);
-(Use.period >= 16);
-(Instance.ram >= 3);

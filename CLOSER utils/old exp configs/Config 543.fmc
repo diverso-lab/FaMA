@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+Europe;
+Windows;
+Dedicated;
+(Instance.ecu >= 99.0);
+(Use.period >= 12);
+(Instance.ram >= 190.0);
+(EC2.storageSize >= 5738);
+(Use.usage >= 25);
+(Instance.ssdBacked >= 1);

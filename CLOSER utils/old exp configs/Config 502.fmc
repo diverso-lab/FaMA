@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+JP;
+WindowsSQLServer;
+Dedicated;
+(Instance.ecu >= 9.0);
+(Use.period >= 1);
+(Instance.ram >= 9.0);
+(EC2.storageSize >= 809);
+(Use.usage >= 236);
+(Instance.ssdBacked >= 0);

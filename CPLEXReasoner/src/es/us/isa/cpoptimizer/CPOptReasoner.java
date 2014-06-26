@@ -149,7 +149,6 @@ public class CPOptReasoner extends AttributedFeatureModelReasoner {
 			cp.add(configConstraint);
 			configs.push(configConstraint);
 		} catch (IloException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

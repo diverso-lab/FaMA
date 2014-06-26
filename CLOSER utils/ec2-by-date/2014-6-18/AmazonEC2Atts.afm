@@ -57,8 +57,8 @@ EC2.storageSize: Integer[0 to 50000],0,0; ## from 0 GB to 50 000 (50 TB)
 
 ## Usage atts
 Use.usage: Integer[0 to 730],0,0; ##hours per month
-Use.period: Integer[0 to 36],0,0; ##months (0 implies on demand)
-Use.auxUsage: Integer[0 to 730],0,0; ##hours per month
+Use.period: Integer[0 to 48],0,0; ##months (0 implies on demand)
+Use.signedUsage: Integer[0 to 730],0,0; ##hours per month
 
 ## Extra atts for the storage
 Instance.defaultStorage: Integer[0 to 50000],0,0; ## from 0 to 50 000 GB (50 TB)
@@ -73,7 +73,7 @@ EBS.costMonth: Real[0.00 to 50000.00],0,0; ## dollars per month
 
 ##Cost constraints##
 EC2.totalCost == EC2.costMonth*Use.period + EC2.upfrontCost;
-EC2.costMonth == (Instance.costHour + Instance.dedicatedFee)*Use.auxUsage + EBS.costMonth;
+EC2.costMonth == (Instance.costHour + Instance.dedicatedFee)*Use.signedUsage + EBS.costMonth;
 EBS.costMonth == EBS.extraSpace * EBS.costGB;
 EC2.storageSize == EBS.extraSpace + Instance.defaultStorage;
 (NOT PayInAdvance) IMPLIES EC2.upfrontCost == 0;
@@ -100,8 +100,8 @@ ThreeYearsTerm IMPLIES Use.period >= 36;
 (Dedicated AND PayInAdvance) IMPLIES (NOT WindowsSQLWeb);
 
 ## Heavy reservation implies the payment of all the hours per month
-(OneYearHeavy OR ThreeYearsHeavy) IMPLIES Use.auxUsage == 730;
-(OneYearLight OR OneYearMedium OR ThreeYearsLight OR ThreeYearsMedium OR OnDemand) IMPLIES Use.auxUsage == Use.usage;
+(OneYearHeavy OR ThreeYearsHeavy) IMPLIES Use.signedUsage == 730;
+(OneYearLight OR OneYearMedium OR ThreeYearsLight OR ThreeYearsMedium OR OnDemand) IMPLIES Use.signedUsage == Use.usage;
 
 
 

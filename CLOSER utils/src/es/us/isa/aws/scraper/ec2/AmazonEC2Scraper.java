@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -21,6 +22,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import es.us.isa.aws.aux.table.ConstraintTable;
 
 public class AmazonEC2Scraper {
 
@@ -35,6 +38,11 @@ public class AmazonEC2Scraper {
 	protected Properties attNames;
 	
 	private Collection<String> instanceTypes;
+	
+	private ConstraintTable charsTable;
+	private List<List<String>> charConstraints;
+	private ConstraintTable pricingTable;
+	private List<List<String>>pricingConstraints;
 
 	public AmazonEC2Scraper(String currentGenPage, String prevGenPage,
 			String dedicatedPage, String propertiesDir) {
@@ -82,11 +90,49 @@ public class AmazonEC2Scraper {
 		Document prevGenDoc = getJSoupDoc(prevGenPage);
 		Document dedicated = getJSoupDoc(dedicatedPage);
 
-		
+		initsCharsTable();
 		parseInstanceCharacteristics(currentGenDoc, prevGenDoc);
 		
+		initPricingTable();
 		parsePublic(currentGenDoc, prevGenDoc);
 		parseDedicated(dedicated);
+		
+		postProcessTables();
+	}
+
+	private void postProcessTables() {
+		String[][] array1 = list2dToArray(charConstraints);
+		String[][] array2 = list2dToArray(pricingConstraints);
+		charsTable.setCombinations(array1);
+		pricingTable.setCombinations(array2);
+	}
+
+	private String[][] list2dToArray(List<List<String>> list2d) {
+		String[][] result = new String[list2d.size()][];
+		int i = 0;
+		for (List<String> l2:list2d){
+			String[] array = l2.toArray(new String[1]);
+			result[i] = array;
+			i++;
+		}
+		return result;
+	}
+
+	private void initPricingTable() {
+		pricingTable = new ConstraintTable();
+		String[] header = new String[]{"Instance","Location","OS",
+				"Dedication","Use","EC2.upfrontCost","Instance.costHour"};
+		pricingTable.setHeader(header);
+		pricingConstraints = new LinkedList<List<String>>();
+		
+	}
+
+	private void initsCharsTable() {
+		charsTable = new ConstraintTable();
+		String[] header = new String[]{"Instance","Instance.cores","Instance.ram", 
+				"Instance.defaultStorage", "Instance.ecu", "Instance.ssdBacked"};
+		charsTable.setHeader(header);
+		charConstraints = new LinkedList<List<String>>();
 	}
 
 	private void parseDedicated(Document dedicated) {
@@ -208,18 +254,32 @@ public class AmazonEC2Scraper {
 							types.remove(instanceName);
 							// it is not a micro instance.
 							// we do not consider micro instances
+							
+							
 							if (!reserved) {
+								
 								String costHour = this.processPricePerHour(rows
 										.select(".rate").text());
 								String onDemand = "OnDemand";
 								if (costHour != null) {
+									
 									String s = "(" + instanceName
 											+ " AND " + areasArray[k] + " AND "
 											+ ossArray[j] + " AND "
 											+ dedication + " AND "+onDemand+")"
-											+ " IMPLIES (" + costAtt + "=="
-											+ costHour + ");";
+											+ " IMPLIES (" +upfrontCostAtt+ "==0 AND " 
+											+ costAtt + "==" + costHour + ");";
 									processConfiguration(s);
+									
+									List<String> auxList = new ArrayList<String>();
+									auxList.add(instanceName);
+									auxList.add(areasArray[k]);
+									auxList.add(ossArray[j]);
+									auxList.add(dedication);
+									auxList.add(onDemand);
+									auxList.add("0");
+									auxList.add(costHour);
+									pricingConstraints.add(auxList);
 								}
 								else{
 									String s = "(" + areasArray[k] + " AND "
@@ -245,7 +305,16 @@ public class AmazonEC2Scraper {
 											+ " AND " + costAtt + "==" + hour1
 											+ ");";
 									processConfiguration(s1);
-
+									
+									List<String> auxList = new ArrayList<String>();
+									auxList.add(instanceName);
+									auxList.add(areasArray[k]);
+									auxList.add(ossArray[j]);
+									auxList.add(dedication);
+									auxList.add(aYearArray[i - 1]);
+									auxList.add(fixed1);
+									auxList.add(hour1);
+									pricingConstraints.add(auxList);
 								} else {
 									// we got a N/A
 									String s = "(" + instanceName + " AND "
@@ -273,6 +342,16 @@ public class AmazonEC2Scraper {
 											+ " AND " + costAtt + "==" + hour3
 											+ ");";
 									processConfiguration(s2);
+									
+									List<String> auxList = new ArrayList<String>();
+									auxList.add(instanceName);
+									auxList.add(areasArray[k]);
+									auxList.add(ossArray[j]);
+									auxList.add(dedication);
+									auxList.add(threeYearsArray[i - 1]);
+									auxList.add(fixed3);
+									auxList.add(hour3);
+									pricingConstraints.add(auxList);
 
 								} else {
 									// we got a N/A
@@ -284,7 +363,9 @@ public class AmazonEC2Scraper {
 									processConfiguration(s);
 								}
 							}
+							
 						}
+						
 					}// end for each instance
 					for (String instanceName:types){
 						//for each type undefined, we forbid it
@@ -457,6 +538,14 @@ public class AmazonEC2Scraper {
 						+ s1 + " AND " + ramAtt + "==" + s2 + " AND " + diskAtt
 						+ "==" + s3 + " AND " + ecuAtt + "==" + s4 + " AND "
 						+ ssdAtt + "==" + s5 + ");");
+				List<String> aux = new ArrayList<String>();
+				aux.add(iName);
+				aux.add(s1);
+				aux.add(s2);
+				aux.add(s3);
+				aux.add(s4);
+				aux.add(s5);
+				charConstraints.add(aux);
 			}
 
 		}
@@ -629,6 +718,15 @@ public class AmazonEC2Scraper {
 	// // TODO Auto-generated method stub
 	// return null;
 	// }
+	
+	public ConstraintTable getCharsTable() {
+		return charsTable;
+	}
+
+	public ConstraintTable getPricingTable() {
+		return pricingTable;
+	}
+	
 
 	public static void main(String... args) {
 		AmazonEC2Scraper scraper = new AmazonEC2Scraper(
@@ -639,4 +737,6 @@ public class AmazonEC2Scraper {
 
 		scraper.parseEC2Constraints("./NewAmazonEC2Constrains.txt");
 	}
+
+	
 }

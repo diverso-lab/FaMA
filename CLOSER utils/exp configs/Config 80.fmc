@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-SIN;
-Dedicated;
-Windows;
 ## Complex Constraints 
-(EC2.storageSize >= 758);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 43);
-(Use.usage >= 248);
-(Use.period >= 30);
-(Instance.ram >= 24);
+Dedicated;
+LinuxBased;
+ORE;
+(Use.period >= 25);
+(EC2.storageSize >= 777);
+(Use.usage >= 291);
+(Instance.ecu >= 7.0);
+(Instance.ram >= 28.0);
+(Instance.ssdBacked >= 1);

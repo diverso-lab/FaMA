@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-AUS;
-Public;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 91);
+Public;
+Suse;
+ORE;
+(Use.period >= 31);
+(EC2.storageSize >= 447);
+(Use.usage >= 540);
+(Instance.ecu >= 7.0);
+(Instance.ram >= 7.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 8);
-(Use.usage >= 394);
-(Use.period >= 17);
-(Instance.ram >= 9);

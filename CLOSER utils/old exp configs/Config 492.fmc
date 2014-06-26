@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+NorthAmerica;
+Suse;
+Dedicated;
+(Instance.ecu >= 108.0);
+(Use.period >= 1);
+(Instance.ram >= 205.0);
+(EC2.storageSize >= 6236);
+(Use.usage >= 112);
+(Instance.ssdBacked >= 0);

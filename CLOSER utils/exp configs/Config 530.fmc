@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-LinuxBased;
-Dedicated;
-Europe;
 ## Complex Constraints 
-(EC2.storageSize >= 576);
+Public;
+Windows;
+JP;
+(Use.period >= 27);
+(EC2.storageSize >= 619);
+(Use.usage >= 451);
+(Instance.ecu >= 29.0);
+(Instance.ram >= 20.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 33);
-(Use.usage >= 492);
-(Use.period >= 12);
-(Instance.ram >= 32);

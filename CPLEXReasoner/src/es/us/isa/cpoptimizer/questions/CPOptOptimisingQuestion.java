@@ -65,6 +65,7 @@ public class CPOptOptimisingQuestion extends CPOptQuestion implements
 		
 		// 0. add the attributes
 		// reasoner.addAttributedElements();
+//		cp.
 		try {
 			// 1. map the config
 			// we invoke staged config method. it considers also complex

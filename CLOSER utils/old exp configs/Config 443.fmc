@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+Europe;
+WindowsSQLWeb;
+Dedicated;
+(Instance.ecu >= 52.0);
+(Use.period >= 2);
+(Instance.ram >= 37.0);
+(EC2.storageSize >= 42);
+(Use.usage >= 224);
+(Instance.ssdBacked >= 0);

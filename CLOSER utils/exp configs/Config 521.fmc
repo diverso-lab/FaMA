@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Public;
-SouthAmerica;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 604);
+Public;
+Suse;
+ORE;
+(Use.period >= 37);
+(EC2.storageSize >= 117);
+(Use.usage >= 206);
+(Instance.ecu >= 7.0);
+(Instance.ram >= 25.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 41);
-(Use.usage >= 56);
-(Use.period >= 6);
-(Instance.ram >= 18);

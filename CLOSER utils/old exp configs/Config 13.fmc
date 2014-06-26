@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+VA;
+WindowsSQLServer;
+Dedicated;
+(Instance.ecu >= 15.0);
+(Use.period >= 37);
+(Instance.ram >= 1.0);
+(EC2.storageSize >= 541);
+(Use.usage >= 84);
+(Instance.ssdBacked >= 1);

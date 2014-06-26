@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-VA;
-Dedicated;
-WindowsSQLWeb;
 ## Complex Constraints 
-(EC2.storageSize >= 8151);
+Public;
+LinuxBased;
+SIN;
+(Use.period >= 40);
+(EC2.storageSize >= 3905);
+(Use.usage >= 619);
+(Instance.ecu >= 46.0);
+(Instance.ram >= 102.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 60);
-(Use.usage >= 161);
-(Use.period >= 24);
-(Instance.ram >= 79);

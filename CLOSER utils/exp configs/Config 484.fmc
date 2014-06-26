@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-SIN;
-Dedicated;
-WindowsSQLStd;
 ## Complex Constraints 
-(EC2.storageSize >= 812);
+Public;
+WindowsBased;
+NorthAmerica;
+(Use.period >= 47);
+(EC2.storageSize >= 231);
+(Use.usage >= 320);
+(Instance.ecu >= 1.0);
+(Instance.ram >= 1.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 17);
-(Use.usage >= 576);
-(Use.period >= 25);
-(Instance.ram >= 5);

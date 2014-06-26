@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsBased;
-Public;
-JP;
 ## Complex Constraints 
-(EC2.storageSize >= 1370);
+Public;
+WindowsBased;
+ORE;
+(Use.period >= 23);
+(EC2.storageSize >= 8500);
+(Use.usage >= 479);
+(Instance.ecu >= 46.0);
+(Instance.ram >= 176.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 67);
-(Use.usage >= 191);
-(Use.period >= 20);
-(Instance.ram >= 182);

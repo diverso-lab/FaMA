@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Suse;
-Dedicated;
-JP;
 ## Complex Constraints 
-(EC2.storageSize >= 105);
+Public;
+Windows;
+SIN;
+(Use.period >= 24);
+(EC2.storageSize >= 932);
+(Use.usage >= 225);
+(Instance.ecu >= 52.0);
+(Instance.ram >= 34.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 8);
-(Use.usage >= 558);
-(Use.period >= 23);
-(Instance.ram >= 11);

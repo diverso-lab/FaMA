@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AsiaOceania;
+WindowsSQLServer;
+Dedicated;
+(Instance.ecu >= 3.0);
+(Use.period >= 31);
+(Instance.ram >= 3.0);
+(EC2.storageSize >= 183);
+(Use.usage >= 148);
+(Instance.ssdBacked >= 1);

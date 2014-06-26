@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+JP;
+Windows;
+Dedicated;
+(Instance.ecu >= 54.0);
+(Use.period >= 39);
+(Instance.ram >= 34.0);
+(EC2.storageSize >= 519);
+(Use.usage >= 434);
+(Instance.ssdBacked >= 0);

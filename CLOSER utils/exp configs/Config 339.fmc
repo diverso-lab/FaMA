@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-LinuxBased;
-Dedicated;
-JP;
 ## Complex Constraints 
-(EC2.storageSize >= 3316);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 65);
-(Use.usage >= 434);
-(Use.period >= 28);
-(Instance.ram >= 146);
+Dedicated;
+WindowsSQLServer;
+CA;
+(Use.period >= 22);
+(EC2.storageSize >= 7331);
+(Use.usage >= 414);
+(Instance.ecu >= 101.0);
+(Instance.ram >= 45.0);
+(Instance.ssdBacked >= 1);

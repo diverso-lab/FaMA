@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>AWSutils</artifactId>
 	<version>0.1.0</version>
+	<groupId>es.us.isa</groupId>
 	<dependencies>
 		<!-- <dependency> <groupId>org.apache.jclouds</groupId> <artifactId>jclouds-all</artifactId> 
 			<version>1.7.0</version> </dependency> -->
@@ -160,5 +161,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	<groupId>es.us.isa</groupId>
 </project>

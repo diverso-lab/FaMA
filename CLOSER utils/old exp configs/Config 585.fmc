@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+VA;
+WindowsSQLWeb;
+Dedicated;
+(Instance.ecu >= 24.0);
+(Use.period >= 23);
+(Instance.ram >= 81.0);
+(EC2.storageSize >= 7856);
+(Use.usage >= 22);
+(Instance.ssdBacked >= 0);

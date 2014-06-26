@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 
 
 import es.us.isa.FAMA.models.domain.SetIntegerDomain;
@@ -310,5 +312,59 @@ public class AttributedFeature extends GenericAttributedFeature{
 	
 	public boolean isLeaf(){
 		return this.relations.isEmpty();
+	}
+
+	public List<AttributedFeature> getAllSubfeatures() {
+		List<AttributedFeature> result = new LinkedList<AttributedFeature>();
+		if (relations.isEmpty()){
+			// leaf feature
+			result.add(this);
+			return result;
+		}
+		else{
+			// abstract feature
+			for (Relation r:relations){
+				Iterator<AttributedFeature> it = r.getDestination();
+				while (it.hasNext()){
+					result.addAll(it.next().getAllSubfeatures());
+				}
+			}
+			result.add(this);
+		}
+		return result;
+	}
+	
+	public List<AttributedFeature> getLeafSubfeatures() {
+		List<AttributedFeature> result = new LinkedList<AttributedFeature>();
+		if (relations.isEmpty()){
+			// leaf feature
+			result.add(this);
+			return result;
+		}
+		else{
+			// abstract feature
+			for (Relation r:relations){
+				Iterator<AttributedFeature> it = r.getDestination();
+				while (it.hasNext()){
+					result.addAll(it.next().getLeafSubfeatures());
+				}
+			}
+		}
+		return result;
+	}
+
+	public boolean isDescendantOf(AttributedFeature attributedFeature) {
+		boolean result = false;
+		if (parent_relation != null){
+			AttributedFeature parent = parent_relation.getParent(); 
+			if (parent.equals(attributedFeature)){
+				return true;
+			}
+			else{
+				return parent.isDescendantOf(attributedFeature);
+			}
+		}
+		return result;
+
 	}
 }

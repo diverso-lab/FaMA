@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-ORE;
-LinuxBased;
-Public;
 ## Complex Constraints 
-(EC2.storageSize >= 507);
+Public;
+WindowsSQLServer;
+SIN;
+(Use.period >= 10);
+(EC2.storageSize >= 218);
+(Use.usage >= 311);
+(Instance.ecu >= 53.0);
+(Instance.ram >= 20.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 59);
-(Use.usage >= 698);
-(Use.period >= 14);
-(Instance.ram >= 29);

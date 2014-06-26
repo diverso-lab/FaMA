@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-ORE;
-Dedicated;
-Windows;
 ## Complex Constraints 
-(EC2.storageSize >= 450);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 28);
-(Use.usage >= 63);
-(Use.period >= 16);
-(Instance.ram >= 19);
+Public;
+Windows;
+AUS;
+(Use.period >= 12);
+(EC2.storageSize >= 940);
+(Use.usage >= 169);
+(Instance.ecu >= 54.0);
+(Instance.ram >= 32.0);
+(Instance.ssdBacked >= 1);

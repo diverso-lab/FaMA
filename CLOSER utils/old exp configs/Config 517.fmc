@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+CA;
+Linux;
+Dedicated;
+(Instance.ecu >= 16.0);
+(Use.period >= 12);
+(Instance.ram >= 3.0);
+(EC2.storageSize >= 923);
+(Use.usage >= 350);
+(Instance.ssdBacked >= 0);

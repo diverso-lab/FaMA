@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Dedicated;
-AsiaOceania;
-RedHat;
 ## Complex Constraints 
-(EC2.storageSize >= 22);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 59);
-(Use.usage >= 498);
-(Use.period >= 31);
-(Instance.ram >= 14);
+Dedicated;
+WindowsSQLWeb;
+SouthAmerica;
+(Use.period >= 14);
+(EC2.storageSize >= 694);
+(Use.usage >= 477);
+(Instance.ecu >= 9.0);
+(Instance.ram >= 40.0);
+(Instance.ssdBacked >= 1);

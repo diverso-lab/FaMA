@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-WindowsBased;
-Dedicated;
-Europe;
 ## Complex Constraints 
-(EC2.storageSize >= 670);
-(Instance.ssdBacked >= 0);
-(Instance.ecu >= 6);
-(Use.usage >= 397);
-(Use.period >= 29);
-(Instance.ram >= 6);
+Dedicated;
+WindowsBased;
+VA;
+(Use.period >= 17);
+(EC2.storageSize >= 865);
+(Use.usage >= 448);
+(Instance.ecu >= 5.0);
+(Instance.ram >= 5.0);
+(Instance.ssdBacked >= 1);

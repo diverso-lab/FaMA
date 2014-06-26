@@ -1,12 +1,11 @@
 %Configuration
-## Features 
-Public;
-SIN;
-Linux;
 ## Complex Constraints 
-(EC2.storageSize >= 261);
+Public;
+Suse;
+NorthAmerica;
+(Use.period >= 1);
+(EC2.storageSize >= 601);
+(Use.usage >= 621);
+(Instance.ecu >= 9.0);
+(Instance.ram >= 9.0);
 (Instance.ssdBacked >= 0);
-(Instance.ecu >= 19);
-(Use.usage >= 634);
-(Use.period >= 4);
-(Instance.ram >= 7);

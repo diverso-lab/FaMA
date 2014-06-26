@@ -1,0 +1,11 @@
+%Configuration
+## Complex Constraints 
+AUS;
+RedHat;
+Dedicated;
+(Instance.ecu >= 20.0);
+(Use.period >= 2);
+(Instance.ram >= 13.0);
+(EC2.storageSize >= 250);
+(Use.usage >= 299);
+(Instance.ssdBacked >= 1);

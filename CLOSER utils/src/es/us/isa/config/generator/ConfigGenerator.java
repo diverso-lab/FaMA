@@ -20,7 +20,6 @@ public class ConfigGenerator {
 
 	public Collection<ExtendedConfiguration> generateConfigurations(
 			FAMAAttributedFeatureModel fm, int n) {
-		// TODO
 		Collection<ExtendedConfiguration> result = new LinkedList<ExtendedConfiguration>();
 
 		ConfigSelectionMethod area1 = createArea1(fm);
@@ -135,7 +134,7 @@ public class ConfigGenerator {
 
 		// period
 		GenericAttribute period = ec2fm.searchAttributeByName("Use.period");
-		DomainVariableLevel periodLevel = new DomainVariableLevel(1, 36);
+		DomainVariableLevel periodLevel = new DomainVariableLevel(1, 48);
 		attGroups.put(period, periodLevel);
 
 		// ssd backed
