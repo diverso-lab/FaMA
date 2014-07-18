@@ -65,7 +65,8 @@ public class AdhocEC2AnalysisCases extends FaMaEC2AnalysisCases{
 		AdhocEC2AnalysisCases tests = new AdhocEC2AnalysisCases();
 		try {
 //			tests.executeTest("./ec2-by-date/2014-6-24/AmazonEC2Atts.afm", "old exp configs", "adhocResults.csv");
-			tests.executeTest("./ec2-by-date/2014-6-24/AmazonEC2Atts.afm", "exp configs", "adhocResults.csv");
+//			tests.executeTest("./ec2-by-date/2014-6-24/AmazonEC2Atts.afm", "exp configs", "adhocResults.csv");
+			tests.executeTest("./ec2-by-date/2014-6-24/AmazonEC2Atts.afm", "CloudScreener configs", "CSResults.csv");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

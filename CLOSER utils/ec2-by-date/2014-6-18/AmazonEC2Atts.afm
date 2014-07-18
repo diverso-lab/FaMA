@@ -83,16 +83,26 @@ Dedicated IMPLIES Instance.dedicatedFee == 2;
 Public IMPLIES Instance.dedicatedFee == 0;
 
 ##Extra storage (EBS)
-(StdEBS AND (VA OR ORE)) IMPLIES EBS.costGB==0.05;
-(StdEBS AND (CA OR SIN OR Sydney)) IMPLIES EBS.costGB==0.08;
+(StdEBS AND VA) IMPLIES EBS.costGB==0.05;
+(StdEBS AND ORE) IMPLIES EBS.costGB==0.05;
+(StdEBS AND CA) IMPLIES EBS.costGB==0.08;
+(StdEBS AND SIN) IMPLIES EBS.costGB==0.08;
+(StdEBS AND Sydney) IMPLIES EBS.costGB==0.08;
 (StdEBS AND IR) IMPLIES EBS.costGB==0.055;
 (StdEBS AND Tokyo) IMPLIES EBS.costGB==0.08;
 (StdEBS AND SaoPaulo) IMPLIES EBS.costGB==0.12;
 
-(ssdEBS AND (VA OR ORE)) IMPLIES EBS.costGB==0.1;
-(ssdEBS AND (CA OR SIN OR Sydney AND Tokyo)) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND VA) IMPLIES EBS.costGB==0.1;
+(ssdEBS AND ORE) IMPLIES EBS.costGB==0.1;
+(ssdEBS AND CA) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND SIN) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND Sydney) IMPLIES EBS.costGB==0.12;
+(ssdEBS AND Tokyo) IMPLIES EBS.costGB==0.12;
 (ssdEBS AND IR) IMPLIES EBS.costGB==0.11;
 (ssdEBS AND SaoPaulo) IMPLIES EBS.costGB==0.19;
+
+## if we requires sad, extra ebs storage will be also ssd
+(Instance.ssdBacked > 0 AND EBS) IMPLIES ssdEBS;
 
 ##Other constraints
 OneYearTerm IMPLIES Use.period >= 12;

@@ -377,7 +377,7 @@ tryAgain:
 		
 		mALMOADILLA(false);
 		{
-		_loop121:
+		_loop830:
 		do {
 			if ((_tokenSet_0.member(LA(1)))) {
 				{
@@ -385,7 +385,7 @@ tryAgain:
 				}
 			}
 			else {
-				break _loop121;
+				break _loop830;
 			}
 			
 		} while (true);
@@ -434,7 +434,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop125:
+		_loop834:
 		do {
 			switch ( LA(1)) {
 			case 'A':  case 'B':  case 'C':  case 'D':
@@ -468,7 +468,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop125;
+				break _loop834;
 			}
 			}
 		} while (true);
@@ -488,13 +488,13 @@ tryAgain:
 		
 		match('"');
 		{
-		_loop128:
+		_loop837:
 		do {
 			if ((_tokenSet_1.member(LA(1)))) {
 				matchNot('"');
 			}
 			else {
-				break _loop128;
+				break _loop837;
 			}
 			
 		} while (true);
@@ -513,17 +513,17 @@ tryAgain:
 		int _saveIndex;
 		
 		{
-		int _cnt131=0;
-		_loop131:
+		int _cnt840=0;
+		_loop840:
 		do {
 			if (((LA(1) >= '0' && LA(1) <= '9'))) {
 				mDIGITO(false);
 			}
 			else {
-				if ( _cnt131>=1 ) { break _loop131; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt840>=1 ) { break _loop840; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
-			_cnt131++;
+			_cnt840++;
 		} while (true);
 		}
 		_ttype = LIT_ENTERO;

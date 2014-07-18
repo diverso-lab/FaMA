@@ -100,6 +100,9 @@ Public IMPLIES Instance.dedicatedFee == 0;
 (ssdEBS AND IR) IMPLIES EBS.costGB==0.11;
 (ssdEBS AND SaoPaulo) IMPLIES EBS.costGB==0.19;
 
+## if we requires sad, extra ebs storage will be also ssd
+(Instance.ssdBacked > 0 AND EBS) IMPLIES ssdEBS;
+
 ##Other constraints
 OneYearTerm IMPLIES Use.period >= 12;
 ThreeYearsTerm IMPLIES Use.period >= 36;

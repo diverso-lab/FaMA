@@ -42,8 +42,8 @@ public class FaMaEC2AnalysisCases {
 		writer = new PrintWriter(outputCSV);
 		writer.write("sep=;\n");
 		writer.write("Input;Time (ms);Desired Location;Desired OS;"
-				+ "Desired dedication;Desired ECU;Desired period;Desired RAM;Desired storage;"
-				+ "Desired usage;Desired ssd;"
+				+ "Desired dedication;Desired period;Desired storage;Desired usage;"
+				+ "Desired ECU;Desired RAM;Desired ssd;"
 				+ "Result Location;Result OS;Result Dedication;Result Purchase;"
 				+ "Result Instance;Result EBS;"
 				+ "Total Cost;Cost Month;Cost Hour;ECU;Cores;RAM;SSD;"
@@ -52,14 +52,14 @@ public class FaMaEC2AnalysisCases {
 		File f = new File(inputDir);
 		if (f.isDirectory()) {
 			File[] children = f.listFiles();
-//			for (int i = 0; i < children.length; i++) {
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < children.length; i++) {
 				if (children[i].getName().endsWith(".fmc")) {
 					analyse(children[i], writer);
+					writer.flush();
 				}
 			}
 		}
-		writer.flush();
+		
 		writer.close();
 	}
 

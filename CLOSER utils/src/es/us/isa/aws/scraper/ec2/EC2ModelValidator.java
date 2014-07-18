@@ -57,10 +57,15 @@ public class EC2ModelValidator extends AmazonEC2Scraper {
 	}
 	
 	public static void main(String... args){
+//		EC2ModelValidator validator = new EC2ModelValidator(
+//				"./ec2-by-date/2014-6-12/current-pricing.html",
+//				"./ec2-by-date/2014-6-12/prev-gen-pricing.html",
+//				"./ec2-by-date/2014-6-12/dedicated-pricing.html",
+//				"./properties");
 		EC2ModelValidator validator = new EC2ModelValidator(
-				"./ec2-by-date/2014-6-12/current-pricing.html",
-				"./ec2-by-date/2014-6-12/prev-gen-pricing.html",
-				"./ec2-by-date/2014-6-12/dedicated-pricing.html",
+				"./ec2-by-date/fake/current-pricing.html",
+				"./ec2-by-date/fake/prev-gen-pricing.html",
+				"./ec2-by-date/fake/dedicated-pricing.html",
 				"./properties");
 		int configs = validator.countEC2Configs();
 		System.out.println("Configs: "+configs);

@@ -210,18 +210,18 @@ public ConfigAnasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			int _cnt314=0;
-			_loop314:
+			int _cnt499=0;
+			_loop499:
 			do {
 				if ((_tokenSet_1.member(LA(1)))) {
 					declaracion_expresion();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt314>=1 ) { break _loop314; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt499>=1 ) { break _loop499; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt314++;
+				_cnt499++;
 			} while (true);
 			}
 			lista_constraints_AST = (AST)currentAST.root;
@@ -241,18 +241,18 @@ public ConfigAnasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			int _cnt310=0;
-			_loop310:
+			int _cnt495=0;
+			_loop495:
 			do {
 				if ((LA(1)==SECCION_CONFIGURACION)) {
 					config();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt310>=1 ) { break _loop310; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt495>=1 ) { break _loop495; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt310++;
+				_cnt495++;
 			} while (true);
 			}
 			lista_configs_AST = (AST)currentAST.root;
@@ -394,7 +394,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 			expresion_nivel_2();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop321:
+			_loop506:
 			do {
 				if ((LA(1)==OR)) {
 					AST tmp6_AST = null;
@@ -405,7 +405,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop321;
+					break _loop506;
 				}
 				
 			} while (true);
@@ -429,7 +429,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 			expresion_nivel_3();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop324:
+			_loop509:
 			do {
 				if ((LA(1)==AND)) {
 					AST tmp7_AST = null;
@@ -440,7 +440,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop324;
+					break _loop509;
 				}
 				
 			} while (true);
@@ -619,7 +619,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 			exp_mult();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop333:
+			_loop518:
 			do {
 				if ((LA(1)==MAS||LA(1)==MENOS)) {
 					{
@@ -650,7 +650,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop333;
+					break _loop518;
 				}
 				
 			} while (true);
@@ -674,7 +674,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 			expresion_unaria();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop337:
+			_loop522:
 			do {
 				if (((LA(1) >= MULT && LA(1) <= POW))) {
 					{
@@ -721,7 +721,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop337;
+					break _loop522;
 				}
 				
 			} while (true);
@@ -994,7 +994,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 			expresion();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			_loop346:
+			_loop531:
 			do {
 				if ((LA(1)==COMA)) {
 					match(COMA);
@@ -1002,7 +1002,7 @@ public ConfigAnasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop346;
+					break _loop531;
 				}
 				
 			} while (true);
