@@ -55,15 +55,114 @@
 					modules, such as metamodels, operations and reasoners to name a
 					few.
 				</p>
-				<img border="0" src="/images/fama-architecture.png" alt="FAMA Framework Architecture" />
+				<img border="0" src="/images/fama-architecture.png"
+					alt="FAMA Framework Architecture" />
+
+				<h4>
+					<a name="overview-feature-models" class="anchor"
+						href="overview-feature-models"><span
+						class="octicon octicon-link"></span></a>Feature models
+				</h4>
+
+				<p>A feature model is a hierarchical tree structure representing
+					all the products that can be derived from a Software Product Line
+					(SPL) in terms of “features”. Features are distinctive
+					characteristics of a software system. Every feature model comprises
+					features and the relationships among them. The first feature in the
+					feature model, called the root feature, is used to identify the SPL
+					and should always be present in every product. The remaining
+					features emerge from this root feature in a hierarchical tree
+					structure. Relationships between features may be of two types. On
+					the one hand, parental relationships, i.e. between a parent feature
+					and its child features. Parental relationships can be categorized
+					as mandatory, optional or set. On the other hand, non-parental
+					relationships, also known as cross-tree constraints. The most
+					common cross-tree constraints are requires and excludes. All these
+					features are defined as follows:
+				<dl>
+					<dt>Mandatory</dt>
+					<dd>A mandatory relationship states that if a parent feature
+						is present in a product its child feature must be present too.</dd>
+					<dt>Optional</dt>
+					<dd>An optional relationship states that if a parent feature
+						is present in a product its child feature may or may not be
+						present.</dd>
+					<dt>Set</dt>
+					<dd>A set of child features has a set relation with their
+						parent when a number of them can be included in the products in
+						which its parent feature appears. The amount of child features
+						that may be included is given by the relation cardinality. The
+						relation cardinality is expressed as a range of values [x,y],
+						where x ≤ y and y ≤ number of child features. Two special cases of
+						set relations can be identified: Alternative and Or relations.</dd>
+					<dt>Alternative</dt>
+					<dd>A set of child features have an Alternative relation with
+						their parent when only one child can be present when its parent
+						feature is present in the product. In this case the relation
+						cardinality can be expressed as [0,1].</dd>
+					<dt>Or</dt>
+					<dd>A set of child features have an Or relation with their
+						parent when one or more of them can be present when its parent
+						feature is present in the product. In this case the relation
+						cardinality can be expressed as [0,n], where n is the number of
+						child features.</dd>
+					<dt>Requires</dt>
+					<dd>A requires relationship is a cross tree constraint that
+						states that if feature A requires feature B then if feature A is
+						present in a product, feature B must be present too.</dd>
+					<dt>Excludes</dt>
+					<dd>An excludes relationship is a cross tree constraint that
+						states that if feature A excludes feature B then features A and B
+						can not be present at the same time in a product.</dd>
+				</dl>
+				</p>
+
+				<h4>
+					<a name="overview-fama-extensions" class="anchor"
+						href="overview-fama-extensions"><span
+						class="octicon octicon-link"></span></a>Overview of the FAMA
+					Extensions Layer
+				</h4>
+
+				<p>Since the FAMA Framework is component-oriented, it allows for
+					its easy extension to functionality and feature model support
+					through new components that are known as FAMA Extensions. This FAMA
+					Extensions will live in the FAMA Extensions Layer. Currently the
+					FAMA Framework includes several FAMA Extensions that provide
+					support for creating feature models conforming to various feature
+					metamodels, operations over feature models, reasoners, and model
+					transformations. Metamodel extensions provide different approaches
+					to represent a feature model; supported metamodels are Czarnecki’s
+					cardinality-based feature models , Moskitt and an own FAMA
+					metamodel. Operation extensions specify concerns that arise when
+					handling feature models and that need to be solved, such as what
+					products can be derived from a given feature model or are there any
+					errors present in the feature model. Operation extensions are used
+					closely with reasoner extensions. A reasoner is meant to execute
+					the operations over feature models and obtain the required
+					information or properties from it. There are different techniques
+					to perform these operations, and the constraint satisfaction
+					problem technique is one of them. Reasoner extensions are usually
+					implemented to use a specific technique, for example through out
+					this guide we will be developing a new reasoner to support the
+					analysis of feature models represented through constraint
+					satisfaction problems; following sections will explain more about
+					what constraint satisfactions problems are and how are they used to
+					build a representation of feature models. Anyone can create a FAMA
+					Extension that extends the framework in one of these aspects or
+					create one for an entirely new purpose. For more detail on the FAMA
+					Extensions available please refer to [Jesús García Galán. FaMa
+					Framework (MSc. Thesis). Escuela Técnica Superior de Ingeniería
+					Informática, Departamento de Lenguajes y Sistemas Informáticos,
+					Universidad de Sevilla. 2009.].</p>
 			</section>
 
 			<aside id="sidebar">
-				<a href="https://github.com/unicesi/FaMA/zipball/master"
+				<!-- <a href="https://github.com/unicesi/FaMA/zipball/master"
 					class="button"> <small>Download</small> .zip file
 				</a> <a href="https://github.com/unicesi/FaMA/tarball/master"
 					class="button"> <small>Download</small> .tar.gz file
-				</a>
+				</a> -->
 
 				<p class="repo-owner">
 					The <a href="https://github.com/ISA-Research-Group/FaMA">FAMA
@@ -85,11 +184,13 @@
 	</div>
 
 	<footer>
-		<p>
-			This page was generated by <a href="https://pages.github.com">GitHub
-				Pages</a> using the Architect theme by <a
-				href="https://twitter.com/jasonlong">Jason Long</a>.
-		</p>
+		<div class="inner">
+			<p>
+				This page was generated by <a href="https://pages.github.com">GitHub
+					Pages</a> using the Architect theme by <a
+					href="https://twitter.com/jasonlong">Jason Long</a>.
+			</p>
+		</div>
 	</footer>
 
 
