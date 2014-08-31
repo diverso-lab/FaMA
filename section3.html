@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Architects+Daughter'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css"
+	media="screen">
+<link rel="stylesheet" type="text/css"
+	href="stylesheets/pygment_trac.css" media="screen">
+<link rel="stylesheet" type="text/css" href="stylesheets/print.css"
+	media="print">
+
+<!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<title>FAMA Framework</title>
+</head>
+
+<body>
+	<header>
+		<div class="inner">
+			<h1>FAMA Framework</h1>
+			<h2>FAMA Extensions Development Guide</h2>
+			<a href="https://github.com/ISA-Research-Group/FaMA/tree/develop"
+				class="button"><small>View project on</small>GitHub</a>
+		</div>
+	</header>
+
+	<div id="content-wrapper">
+		<div class="inner clearfix">
+			<section id="main-content">
+				<h3>
+					<a name="overview-fama-fw" class="anchor" href="overview-fama-fw"><span
+						class="octicon octicon-link"></span></a>3 Setting up the Development
+					Environment Framework
+				</h3>
+
+				<p>This guide was developed and tested for FAMA Framework 1.2
+					using Eclipse Modeling Tools IDE Kepler Release on OS X 10.9 with
+					Java 1.7 and the most recent release of the necessary plug-ins as
+					of May 2014. All of the requirements are summarized in the table
+					below.</p>
+				<p>You may use any package solution of the Eclipse IDE; just
+					make sure to grab the correct 32-bit or 64-bit version depending on
+					your machine. It is also suggested to use JDK 5 or newer.</p>
+				<p>
+					Before getting started, you will need to install a couple Eclipse
+					plug-ins to help with development. You can use the normal Eclipse
+					process to install these plug-ins through the menu option
+					<code>Help » Install New Software...</code>
+				<ul>
+					<li>A Git plugin (e.g. EGit) (Update site:
+						http://download.eclipse.org/releases/kepler/ under the
+						Collaboration category) or, if you prefer, a standalone Git client
+						(e.g. SourceTree)</li>
+					<li>The Eclipse Maven plug-ins m2e (Maven Integration for
+						Eclipse) and m2e - slf4j (over logback logging) (Update site:
+						http://download.eclipse.org/releases/kepler/ under the
+						Collaboration category)</li>
+					<li>ANTLR UI (Update site:
+						http://antlreclipse.sourceforge.net/updates/)</li>
+					<li>ANTLR plugin for Eclipse 2.7.6. Note: ANTLR plugin for
+						Eclipse 2.7.6 is not available through an Eclipse update site. You
+						must download it from
+						http://sourceforge.net/projects/antlreclipse/ and manually install
+						the jar by placing it in the plugins folder found in your
+						Eclipse’s installation folder.</li>
+				</ul>
+				</p>
+
+				<table class="tg">
+					<tr>
+						<th class="tg-031e">Requirement</th>
+						<th class="tg-031e">Version</th>
+						<th class="tg-031e">URL</th>
+					</tr>
+					<tr>
+						<td class="tg-031e">Java Development Kit</td>
+						<td class="tg-031e">5 or newer</td>
+						<td class="tg-031e">http://www.oracle.com/technetwork/java/javase/downloads/index.html
+						</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">Eclipse</td>
+						<td class="tg-031e">4.3 or newer</td>
+						<td class="tg-031e">https://www.eclipse.org/downloads/
+							(Download the correct 32-bit or 64-bit version depending on your
+							operating system)</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">EGit</td>
+						<td class="tg-031e">3.3.2 or newer</td>
+						<td class="tg-031e">http://download.eclipse.org/releases/kepler/
+							(Eclipse update site under the Collaboration Category)</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">Maven Integration for Eclipse</td>
+						<td class="tg-031e">1.4.0</td>
+						<td class="tg-031e">http://download.eclipse.org/releases/kepler/
+							(Eclipse update site under the Collaboration Category select both
+							m2e and m2e - slf4j)</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">ANTLR UI</td>
+						<td class="tg-031e">4.1.1</td>
+						<td class="tg-031e">http://antlreclipse.sourceforge.net/updates/
+							(Eclipse update site)</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">ANTLR</td>
+						<td class="tg-031e">2.7.6</td>
+						<td class="tg-031e">http://sourceforge.net/projects/antlreclipse/
+							(Download and manually install the jar by placing it in the
+							plugins folder found in your Eclipse’s installation folder)</td>
+					</tr>
+				</table>
+
+				<h4>
+					<a name="overview-fama-checkout" class="anchor"
+						href="overview-fama-checkout"><span
+						class="octicon octicon-link"></span></a>3.1 Checking out the FAMA
+					Framework source code from GitHub using EGit
+				</h4>
+
+				<p>
+				<ol>
+					<li>Switch to the Git perspective in Eclipse.</li>
+					<li>Click the button <code>Clone a Git Repository</code> and type the URL
+						https://github.com/ISA-Research-Group/FaMA. It is strongly
+						recommended you fork the project from this URL and check out the
+						code from the fork. This will make it easier to contribute changes
+						back to the main project later. To create a fork you need to sign
+						up (create an account) or sign in to GitHub. After that you can go
+						back to the FAMA Framework’s GitHub page and click on the <code>Fork</code>
+						button at the top right corner. Then in Eclipse’s <code>Clone a Git
+						Repository</code> wizard type the URL of your fork.</li>
+					<li>The <code>Host</code> and <code>Repository</code> path fields should populate
+						automatically. Click <code>Next ></code>.</li>
+					<li>Keep the <code>develop</code> branch ticked and untick the other
+						checkboxes. Click <code>Next ></code>. (The <code>master</code> branch is for release
+						purposes only and doesn’t contain additional source files required
+						for development)</li>
+					<li>Make any changes you wish in the Local Destination
+						dialogue and click <code>Finish</code>.</li>
+					<li>Wait for the FAMA repository to be cloned.</li>
+				</ol>
+
+				</p>
+
+				<h4>
+					<a name="overview-fama-extensions" class="anchor"
+						href="overview-fama-extensions"><span
+						class="octicon octicon-link"></span></a>2.2 Overview of the FAMA
+					Extensions Layer
+				</h4>
+
+				<p>
+					Since the FAMA Framework is component-oriented, it allows for its
+					easy extension to functionality and feature model support through
+					new components that are known as FAMA Extensions. This FAMA
+					Extensions will live in the FAMA Extensions Layer. Currently the
+					FAMA Framework includes several FAMA Extensions that provide
+					support for creating feature models conforming to various feature
+					metamodels, operations over feature models, reasoners, and model
+					transformations. Metamodel extensions provide different approaches
+					to represent a feature model; supported metamodels are <a
+						href="http://gsd.uwaterloo.ca/fmp">Czarnecki’s
+						cardinality-based feature models</a>, <a
+						href="http://www.moskitt.org/eng/que-es-moskitt/">Moskitt</a> and
+					an own FAMA metamodel. Operation extensions specify concerns that
+					arise when handling feature models and that need to be solved, such
+					as what products can be derived from a given feature model or are
+					there any errors present in the feature model. Operation extensions
+					are used closely with reasoner extensions. A reasoner is meant to
+					execute the operations over feature models and obtain the required
+					information or properties from it. There are different techniques
+					to perform these operations, and the constraint satisfaction
+					problem technique is one of them. Reasoner extensions are usually
+					implemented to use a specific technique, for example through out
+					this guide we will be developing a new reasoner to support the
+					analysis of feature models represented through constraint
+					satisfaction problems; following sections will explain more about
+					what constraint satisfactions problems are and how are they used to
+					build a representation of feature models. Anyone can create a FAMA
+					Extension that extends the framework in one of these aspects or
+					create one for an entirely new purpose. For more detail on the FAMA
+					Extensions available please refer to [Jesús García Galán. FaMa
+					Framework (MSc. Thesis). Escuela Técnica Superior de Ingeniería
+					Informática, Departamento de Lenguajes y Sistemas Informáticos,
+					Universidad de Sevilla. 2009.].
+				</p>
+
+				<h4>
+					<a name="overview-csp" class="anchor" href="overview-csp"><span
+						class="octicon octicon-link"></span></a>2.3 Overview of a Constraint
+					Satisfaction Problem representation of feature models
+				</h4>
+
+				<p>
+					A Constraint Satisfaction Problem (CSP) is defined as a three-tuple
+					composed of a set of problem variables, a set of domain values for
+					each of the variables, and a set of constraints over those
+					variables that restrict the values they can take. A CSP is solved
+					by the assignment of a value to every variable in its domain
+					through search and propagation in such way that all constraints are
+					simultaneously satisfied. A feature model can be mapped to a CSP.
+					The features from the feature model will be represented as
+					variables with a domain equivalent to its specific cardinality. The
+					representations for the relationships are as follows (more detail
+					about these representations can be found <a
+						href="http://dx.doi.org/10.1016/j.is.2010.01.001">here</a>):
+				<dl>
+					<dt>Mandatory:</dt>
+					<dd>A mandatory relation between a parent feature and its
+						child can be represented with the logical expression parent
+						present ⇔ child present.</dd>
+					<dt>Optional:</dt>
+					<dd>An optional relation between a parent feature and its
+						child can be represented with the logical expression parent not
+						present ⇒ child not present.</dd>
+					<dt>Set:</dt>
+					<dd>A set constraint between a parent feature and its children
+						with cardinality [x,y] can be represented with the logical
+						expression (parent present ⇒ x ≤ ∑children present ≤ y) ∧ (parent
+						not present ⇒ children not present), equivalent to an
+						if-then-else. Both the Alternative and Or cases are handled by
+						this expression.</dd>
+					<dt>Requires:</dt>
+					<dd>A Requires relation between an origin feature and its
+						destination can be represented with the logical expression origin
+						present⇒destination present.</dd>
+					<dt>Excludes:</dt>
+					<dd>An Excludes relation between an origin feature and its
+						destination can be represented with the logical expression
+						¬(origin present ∧ destination present) that can also be expressed
+						as origin present ⇒ destination not present.</dd>
+				</dl>
+				A product that can be derived from the feature model represented as
+				a CSP is, thus, one of the possible solutions to the CSP.
+				</p>
+			</section>
+
+			<aside id="sidebar">
+
+				<p class="repo-owner">
+					The <a href="https://github.com/ISA-Research-Group/FaMA">FAMA
+						Framework</a> is maintained by the <a href="http://www.isa.us.es">ISA
+						Research Group</a>.
+				</p>
+
+				<p>The first version of this guide was developed in the context
+					of the FAMA Framework project and the SHIFT project during a
+					research scholarship at University of Seville (Seville, Spain),
+					partly funded by Banco Santander under the program Becas
+					Iberoamérica Jóvenes Profesores Investigadores Colombia and
+					Colciencias (Colombian Administrative Department of Science,
+					Technology and Innovation).</p>
+
+
+			</aside>
+		</div>
+	</div>
+
+	<footer>
+		<div class="inner">
+			<p>
+				This page was generated by <a href="https://pages.github.com">GitHub
+					Pages</a> using the Architect theme by <a
+					href="https://twitter.com/jasonlong">Jason Long</a>.
+			</p>
+		</div>
+	</footer>
+
+
+</body>
+</html>
