@@ -22,6 +22,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup,
 	display: block;
 }
 
+nav {
+	background: transparent url('../images/hr.png') 0 0 no-repeat;
+	margin-top: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 13px;
+}
+
 body {
 	line-height: 1;
 }
