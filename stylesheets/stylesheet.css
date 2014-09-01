@@ -26,7 +26,6 @@ nav {
 	background: transparent url('../images/hr.png') 0 0 no-repeat;
 	margin-top: 5px;
 	padding-top: 5px;
-	padding-bottom: 5px;
 	font-size: 13px;
 }
 
@@ -104,7 +103,7 @@ header h2 {
 
 #content-wrapper {
 	border-top: solid 1px #fff;
-	padding-top: 30px;
+	padding-top: 5px;
 }
 
 #main-content {
