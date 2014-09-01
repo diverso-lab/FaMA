@@ -49,9 +49,265 @@
 				</h3>
 
 				<p>
-					<img alt="This page is under construction"
-						src="images/page-under-construction.gif" />
-				</p>
+					Before getting started, you will need to create a new plug-in
+					project in your workspace and set it to use Maven. You can use the
+					normal Eclipse process to create projects through the menu option
+					<code>File » New » Project...</code>
+				<ol>
+					<li>Select the option <code>Plug-in</code> Project. Click <code>Next
+							></code>.
+					</li>
+					<li>Give the project a name and select as path the path to
+						where the other FAMA project were checked out. In this case we
+						will be adding a new reasoner, CHOCO 3, as a new FAMA Extension so
+						the project’s name is <code>Choco3Reasoner</code>. Click <code>Next
+							></code>.
+					</li>
+					<li>Keep the option <code>Generate an Activator</code> ticked
+						and in the <code>Activator</code> field set the activator’s
+						canonical class name (full name including package) to the
+						following naming pattern: <code>«2-letter country
+							code».«University/Institution».«research group».«project
+							name».osgi.Activator</code>. For the Choco 3 reasoner it is: <code>co.icesi.i2t.Choco3.osgi.Activator</code>.
+						Click <code>Finish</code>. This class is used to connect the FAMA
+						Extension to the FAMA Framework and will be edited once the FAMA
+						Extension you develop is finished.
+					</li>
+					<li>Right click the newly created plug-in project and select
+						the option <code>Configure » Convert to Maven Project</code>.
+					</li>
+					<li>22. A dialog will pop-up prompting to create a new Maven
+						POM file. Fill out the form with the following information and
+						click <code>Finish</code>. <pre>
+Group Id: es.us.isa
+Version: 1.0.0
+Packaging: bundle
+Name: «give the artifact a name». For example, for the Choco 3 reasoner it is: FaMa Choco 3 Reasoner.
+Description: «give a description for the artifact». For example, for the Choco 3 reasoner it is: A reasoner for FaMa, based on Choco Solver v3. Built by I2T Research Group in collaboration with the FaMa Team.
+						</pre>
+					</li>
+					<li>Maven should open the pom file. Switch to the <code>pom.xml</code>
+						tab. Note: Eclipse may mark the line <code>&ltpackaging&gtbundle&lt/packaging&gt</code>
+						in error. This will go away with the following steps.
+					</li>
+					<li>After the <code>&ltdescription&gt&lt/description&gt</code>
+						element and before the closing <code>&lt/project&gt</code> tag
+						paste the following <code>pom.xml</code> fragments:
+						<ul>
+							<li>Plug-in repositories <pre>
+									<code>
+&ltpluginRepositories&gt
+	&ltpluginRepository&gt
+		&ltid&gtmc-release&lt/id&gt
+		&ltname&gtLocal Maven repository of releases&lt/name&gt
+		&lturl&gthttp://mc-repo.googlecode.com/svn/maven2/releases&lt/url&gt
+		&ltsnapshots&gt
+			&ltenabled&gtfalse&lt/enabled&gt
+		&lt/snapshots&gt
+		&ltreleases&gt
+			&ltenabled&gttrue&lt/enabled&gt
+		&lt/releases&gt
+	&lt/pluginRepository&gt
+&lt/pluginRepositories&gt</code>
+						</pre>
+							</li>
+							<li>Distribution management<pre>
+									<code>
+&ltdistributionManagement&gt
+	&ltrepository&gt
+		&ltid&gtisa.devel&lt/id&gt
+		&ltname&gtISA archiva&lt/name&gt
+		&lturl&gthttp://devel.isa.us.es/glassfish/archiva/repository/internal&lt/url&gt
+	&lt/repository&gt
+&lt/distributionManagement&gt
+
+	</code>
+						</pre>
+							</li>
+							<li>c. Repositories. Notice the last repository marked in
+								black; it is specific to the development of the Choco 3
+								reasoner. You should replace this repository with the ones
+								concerning your particular FAMA extension if needed; otherwise
+								you can safely remove those lines. <pre>
+								<code>
+&ltrepositories&gt
+	&ltrepository&gt
+		&ltid&gtisa.devel&lt/id&gt
+		&ltname&gtISA archiva&lt/name&gt
+		&lturl&gthttp://devel.isa.us.es/glassfish/archiva&lt/url&gt
+		&ltlayout&gtdefault&lt/layout&gt
+		&ltreleases&gt
+			&ltenabled&gttrue&lt/enabled&gt
+			&ltupdatePolicy&gtalways&lt/updatePolicy&gt
+			&ltchecksumPolicy&gtwarn&lt/checksumPolicy&gt
+		&lt/releases&gt
+		&ltsnapshots&gt
+			&ltenabled&gtfalse&lt/enabled&gt
+			&ltupdatePolicy&gtnever&lt/updatePolicy&gt
+			&ltchecksumPolicy&gtwarn&lt/checksumPolicy&gt
+		&lt/snapshots&gt
+	&lt/repository&gt</code>
+	&ltrepository&gt
+		&ltid&gtchoco.repos&lt/id&gt
+		&lturl&gthttp://www.emn.fr/z-info/choco-repo/mvn/repository/&lt/url&gt
+	&lt/repository&gt<code>
+&lt/repositories&gt
+
+								</code>
+								</pre>
+							</li>
+							<li>Dependencies. Notice the first dependency marked in
+								black; it is specific to the development of the Choco 3
+								reasoner. You should replace this dependency with the ones
+								concerning your particular FAMA extension, if needed; otherwise
+								you can safely remove those lines. <pre>
+								<code>
+&ltdependencies&gt</code>
+	&ltdependency&gt
+		&ltgroupId&gtchoco&lt/groupId&gt
+		&ltartifactId&gtchoco-solver&lt/artifactId&gt
+		&ltversion&gt3.2.0&lt/version&gt
+	&lt/dependency&gt<code>
+	&ltdependency&gt
+		&ltgroupId&gtes.us.isa&lt/groupId&gt
+		&ltartifactId&gtFaMaSDK&lt/artifactId&gt
+		&ltversion&gt1.2.0&lt/version&gt
+	&lt/dependency&gt
+	&ltdependency&gt
+		&ltgroupId&gtorg.osgi&lt/groupId&gt
+		&ltartifactId&gtosgi_R4_core&lt/artifactId&gt
+		&ltversion&gt1.0&lt/version&gt
+		&ltscope&gtprovided&lt/scope&gt
+		&ltoptional&gttrue&lt/optional&gt
+	&lt/dependency&gt
+	&ltdependency&gt
+		&ltgroupId&gtorg.osgi&lt/groupId&gt
+		&ltartifactId&gtosgi_R4_compendium&lt/artifactId&gt
+		&ltversion&gt1.0&lt/version&gt
+		&ltscope&gtprovided&lt/scope&gt
+		&ltoptional&gttrue&lt/optional&gt
+	&lt/dependency&gt
+&lt/dependencies&gt
+								</code>
+								</pre>
+							</li>
+							<li>Build. Notice in the final lines of this fragment marked
+								in black; they are specific to the development of the Choco 3
+								reasoner. You should replace them according to your particular
+								FAMA extension. <pre>
+								<code>
+&ltbuild&gt
+	&ltdefaultGoal&gttest&lt/defaultGoal&gt
+	&ltdirectory&gttarget&lt/directory&gt
+	&ltsourceDirectory&gtsrc&lt/sourceDirectory&gt
+	&ltoutputDirectory&gttarget/classes&lt/outputDirectory&gt
+	&lttestSourceDirectory&gttest&lt/testSourceDirectory&gt
+	&lttestOutputDirectory&gttarget/test-classes&lt/testOutputDirectory&gt
+	&ltresources&gt
+		&ltresource&gt
+			&ltdirectory&gtresources&lt/directory&gt
+		&lt/resource&gt
+	&lt/resources&gt
+	&lttestResources&gt
+		&lttestResource&gt
+			&ltdirectory&gtresources&lt/directory&gt
+		&lt/testResource&gt
+	&lt/testResources&gt
+	&ltplugins&gt
+		&ltplugin&gt
+			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
+			&ltartifactId&gtmaven-compiler-plugin&lt/artifactId&gt
+			&ltconfiguration&gt
+				&ltsource&gt5&lt/source&gt
+				&lttarget&gt5&lt/target&gt
+			&lt/configuration&gt
+		&lt/plugin&gt
+		&ltplugin&gt
+			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
+			&ltartifactId&gtmaven-jar-plugin&lt/artifactId&gt
+			&ltconfiguration&gt
+				&ltarchive&gt
+					&lt!--&ltmanifestFile&gtMETA-INF/MANIFEST.MF&lt/manifestFile&gt --&gt
+					&ltaddMavenDescriptor&gtfalse&lt/addMavenDescriptor&gt
+					&lt!-- &ltmanifestEntries&gt &ltBuilt-By&gtI2T Research Group in collaboration with FaMa Team&lt/Built-By&gt &lt/manifestEntries&gt --&gt
+				&lt/archive&gt
+			&lt/configuration&gt
+		&lt/plugin&gt
+		&ltplugin&gt
+			&ltgroupId&gtcom.mycila.maven-license-plugin&lt/groupId&gt
+			&ltartifactId&gtmaven-license-plugin&lt/artifactId&gt
+			&ltconfiguration&gt
+				&ltexcludes&gt
+					&ltexclude&gt**/**.xml/**&lt/exclude&gt
+				&lt/excludes&gt
+				&ltheader&gtcopyrightNotice.txt&lt/header&gt
+			&lt/configuration&gt
+			&ltexecutions&gt
+			&lt/executions&gt
+		&lt/plugin&gt
+		&ltplugin&gt
+			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
+			&ltartifactId&gtmaven-source-plugin&lt/artifactId&gt
+			&ltexecutions&gt
+				&ltexecution&gt
+					&ltid&gtjar&lt/id&gt
+					&ltphase&gtpackage&lt/phase&gt
+					&ltgoals&gt
+						&ltgoal&gtjar&lt/goal&gt
+					&lt/goals&gt
+					&ltconfiguration&gt
+						&ltexcludeResources&gttrue&lt/excludeResources&gt
+						&ltoverWriteReleases&gttrue&lt/overWriteReleases&gt
+						&ltoverWriteSnapshots&gtfalse&lt/overWriteSnapshots&gt
+						&ltoverWriteIfNewer&gttrue&lt/overWriteIfNewer&gt
+					&lt/configuration&gt
+				&lt/execution&gt
+			&lt/executions&gt
+		&lt/plugin&gt
+		&ltplugin&gt
+			&ltgroupId&gtorg.apache.felix&lt/groupId&gt
+			&ltartifactId&gtmaven-bundle-plugin&lt/artifactId&gt
+			&ltextensions&gttrue&lt/extensions&gt
+			&ltversion&gt1.4.0&lt/version&gt
+			&ltconfiguration&gt
+				&ltinstructions&gt
+					&ltBundle-SymbolicName&gt${pom.groupId}.${pom.artifactId}&lt/Bundle-SymbolicName&gt
+					&ltBundle-Name&gt${pom.artifactId}&lt/Bundle-Name&gt
+					</code>&ltBuilt-By&gtI2T Research Group in collaboration with FaMa Team&lt/Built-By&gt
+					&ltExport-Package&gtco.icesi.i2t.*&lt/Export-Package&gt
+					&ltBundle-Activator&gtco.icesi.i2t.Choco3.osgi.Activator
+					&lt/Bundle-Activator&gt<code>
+					&ltImport-Package&gtorg.osgi.framework,*;resolution:=optional
+					&lt/Import-Package&gt
+					</code>&ltBundle-ClassPath&gtlib/choco-parser-3.2.0-jar-with-dependencies.jar, .&lt/Bundle-ClassPath&gt<code>
+				&lt/instructions&gt
+			&lt/configuration&gt
+		&lt/plugin&gt
+	&lt/plugins&gt
+&lt/build&gt
+
+								</code>
+								</pre>
+							</li>
+						</ul>
+					</li>
+					<li>Download any third-party libraries used in your FAMA
+						extension and create a folder in your project to store them. The
+						Choco 3 library may be downloaded from <a
+						href="http://www.emn.fr/z-info/choco-repo/mvn/repository/choco/choco-parser/3.2.0/choco-parser-3.2.0-jar-with-dependencies.jar">here</a>
+						<ul>
+							<li>First you will need to create a new source folder. Right
+								click over your FAMA extension project and select the option <code>New
+									» Source folder</code>. Name it <code>resources</code>.
+							</li>
+							<li>Right click over the resources source folder and select
+								the option <code>New » Folder</code>. Name this folder <code>lib</code>.
+							</li>
+							<li>Copy and paste the jar files of the third-party
+								libraries into the lib folder.</li>
+						</ul>
+					</li>
+				</ol>
 
 				<h4>
 					<a name="develop-new-reasoner" class="anchor"
@@ -65,8 +321,8 @@
 				</p>
 
 				<h5>
-					<a name="develop-new-reasoner" class="anchor"
-						href="develop-new-reasoner"><span class="octicon octicon-link"></span></a>Developing
+					<a name="develop-new-question" class="anchor"
+						href="develop-new-question"><span class="octicon octicon-link"></span></a>Developing
 					a new question to be answered by the reasoner
 				</h5>
 
@@ -77,13 +333,13 @@
 					questions.
 				<ol>
 					<li>The new question should extend the abstract class created
-						in step 3 <a>here</a>.
+						in step 3 <a href="section4.html#develop-new-reasoner">here</a>.
 					</li>
 					<li>Provide the implementation for the three phases of the
 						answering process. If you require to use or compose the solutions
 						of already existing questions do not call the answer phase
 						directly. You must use the ask method provided by the reasoner
-						class implemented in step 2 <a>here</a>, as it will ensure that
+						class implemented in step 2 <a href="section4.html#develop-new-reasoner">here</a>, as it will ensure that
 						the three-phased answering process is carried out completely for
 						each question.
 					</li>
@@ -104,7 +360,8 @@
 					the available interfaces. Extensions can be loaded using either
 					OSGi or a Java class loader. Remember the
 					<code>Activator</code>
-					class from step 3 <a>here</a>? This class’s responsibility is to
+					class from step 3 <a
+						href="section4.html#create-fama-extension">here</a>? This class’s responsibility is to
 					load the FAMA Extension using OSGi and make it available to be used
 					by the FAMA Framework. The SPL Core of the FAMA Framework,
 					implemented by the project
@@ -163,12 +420,15 @@ class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt
 					</code>
 				</pre>
 
-				<p>Particularly for a reasoner extension, questions need to be
-					loaded independently. The reasoner project should contain its own
-					loader configuration file, in the <code>resources</code> folder, with
-					interface-class pair tags. For a reasoner extension the loader
-					configuration file needs to follow the format shown in the
-					following listing.</p>
+				<p>
+					Particularly for a reasoner extension, questions need to be loaded
+					independently. The reasoner project should contain its own loader
+					configuration file, in the
+					<code>resources</code>
+					folder, with interface-class pair tags. For a reasoner extension
+					the loader configuration file needs to follow the format shown in
+					the following listing.
+				</p>
 				<pre>
 					<code>
 &ltreasoner&gt
