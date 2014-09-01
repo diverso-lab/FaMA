@@ -315,10 +315,198 @@ Description: «give a description for the artifact». For example, for the Choco
 					Developing a New Reasoner
 				</h4>
 
-				<p>
-					<img alt="This page is under construction"
+				<p>Every new reasoner added to the FAMA Framework should, at
+					least, provide the implementation for handling simple feature
+					models. If the solver used by the reasoner allows its use on
+					extended feature models (e.g. attributed feature models), then an
+					implementation for handling attributed feature models (currently
+					the only extended feature model offered by the FAMA Framework) is
+					strongly suggested. It is also suggested, if possible, to provide
+					an implementation for the question ExplainErrors in both simple
+					feature models and extended feature models. Follow these steps to
+					develop a new reasoner. The development of the Choco 3 reasoner for
+					handling simple feature models is provided as an example. It is
+					suggested you use the Choco 3 reasoner source code to guide your
+					development as it provides documentation and comments describing
+					what the required methods should do and provide in return.</p>
+
+				<ol>
+					<li>Each implementation should comprise 2 packages: one to
+						store the reasoner and abstract question classes, and another one
+						to store the various question implementations. The packages should
+						follow the naming pattern <code>«2-letter country
+							code».«University/Institution».«research group».«project
+							name».«feature model type»</code>. The second package’s name, the one
+						holding the question implementations, should end with <code>questions</code>.
+						For the Choco 3 reasoner we have the packages:
+						<ul>
+							<li>co.icesi.i2t.Choco3Reasoner.simple</li>
+							<li>co.icesi.i2t.Choco3Reasoner.simple.questions</li>
+							<li>co.icesi.i2t.Choco3Reasoner.attributed</li>
+							<li>co.icesi.i2t.Choco3Reasoner.attributed.questions</li>
+							<li>co.icesi.i2t.Choco3Reasoner4Exp.simple</li>
+							<li>co.icesi.i2t.Choco3Reasoner4Exp.simple.questions</li>
+							<li>co.icesi.i2t.Choco3Reasoner4Exp.attributed</li>
+							<li>co.icesi.i2t.Choco3Reasoner4Exp.attributed.questions</li>
+						</ul>
+					</li>
+					<li>For each implementation, the package with the naming
+						pattern <code>«2-letter country
+							code».«University/Institution».«research group».«project
+							name».«feature model type»</code> will contain the reasoner’s class
+						implementation extending from the abstract reasoner class
+						corresponding to the feature model type it will handle. The names
+						of these classes should follow the naming pattern <code>«name
+							of reasoner»Reasoner</code> (using CamelCase). For example, for the
+						simple feature model we created a class in the package <code>co.icesi.i2t.Choco3Reasoner.simple</code>
+						and named it <code>Choco3Reasoner</code> that extends the <code>FeatureModelReasoner</code>
+						abstract class provided by the <code>FaMaSDK</code> project in the
+						package <code>es.us.isa.FAMA.Reasoner</code>. <br /> This
+						reasoner class should define the necessary methods to create a
+						representation of the feature model, as described in Subsections
+						2.3 and 2.4, that the reasoner can use to be able to provide
+						specific information about it. The required methods to implement
+						are:
+						<ul>
+							<li><code>addFeature</code>: Creates a representation of the
+								given feature in the reasoner.</li>
+							<li><code>addRoot</code>: Marks the given feature as the
+								root feature and ensures that it is present in every product.</li>
+							<li><code>addMandatory</code>: Creates a representation of a
+								mandatory relationship between the given parent and child
+								features.</li>
+							<li><code>addOptional</code>: Creates a representation of an
+								optional relationship between the given parent and child
+								features.</li>
+							<li><code>addExcludes</code>: Creates a representation of an
+								excludes relationship between the given origin and destination
+								features.</li>
+							<li><code>addRequires</code>: Creates a representation of a
+								requires relationship between the given origin and destination
+								features.</li>
+							<li><code>addSet</code>: Creates a representation of a set
+								relationship between the given parent and its children features.</li>
+							<li><code>applyStagedConfiguration</code>: Applies a staged
+								configuration to the representation of the feature model in the
+								reasoner.</li>
+							<li><code>unapplyStagedConfiguration</code>: Removes the
+								staged configuration applied with the previous method from the
+								representation of the feature model in the reasoner.</li>
+							<li><code>ask</code>: Provides an answer to a given question
+								about specific information of the feature model, for example the
+								number of products that can be derived from a given feature
+								model. A question represents an analysis operation, like the one
+								in the example, over a given feature model.</li>
+						</ul> Note: For the reasoners in the packages of ExplainErrors (4Exp)
+						you must inherit from the respective implementation’s reasoner
+						created previously in this step and not from the abstract reasoner
+						class provided by the <code>FaMaSDK</code> project.
+					</li>
+					<li>Also, the package from <a
+						href="section4.html#develop-new-reasoner">step 2</a> will also
+						contain an abstract class implementing the interface <code>Question</code>
+						provided by the <code>FaMaSDK</code> project in the package <code>es.us.isa.FAMA.Reasoner</code>.
+						This class will define the required behavior that every question
+						should implement. It is suggested that this abstract class defines
+						a three-phased answering process to provide an answer. The phases
+						should be: pre-answer, answer, and post-answer. The pre-answer
+						phase should prepare the reasoner and other resources needed prior
+						to answering the question. The answer phase should answer the
+						question using the given reasoner. And, finally, the post-answer
+						phase should release any resources associated with answering the
+						question. The name of this class should follow the naming pattern
+						<code>«name of reasoner»Question</code> (using CamelCase). For
+						example, for the simple feature model we created a new class in
+						the package <code>co.icesi.i2t.Choco3Reasoner.simple</code> and
+						named it <code>Choco3Question</code> that implements the <code>Question</code>
+						interface.
+					</li>
+					<li>The package with the naming pattern <code>«2-letter
+							country code».«University/Institution».«research group».«project
+							name»</code> will contain the implementation for the performance result
+						of the implemented reasoner. The names of this class should follow
+						the naming pattern <code>«name of
+							reasoner»PerformanceResult</code> (using CamelCase). For example, for
+						the Choco 3 reasoner we created a class in the package <code>co.icesi.i2t.Choco3Reasoner</code>
+						and named it <code>Choco3PerformanceResult</code> that extends the
+						<code>PerformanceResult</code> abstract class provided by the <code>Benchmark</code>
+						project in the package <code>es.us.isa.FAMA.Benchmarking</code>.
+						This class should retrieve measures recorded from the reasoner
+						while solving a question. The following measures are retrieved for
+						the Choco 3 reasoner:
+						<ul>
+							<li><code>Node count</code>: Gives the amount of nodes in
+								the search tree. A node is possible value assignment to a
+								variable. The search tree represents all possible value
+								assignments to all the variables in the CSP.</li>
+							<li><code>Current depth</code>: Gives the current depth of
+								the search tree. It corresponds to the number of variables.</li>
+							<li><code>Backtrack count</code>: Gives the amount of jumps
+								to the last variable when a conflict with some other value
+								arises.</li>
+							<li><code>Time count</code>: Gives the time, in seconds,
+								taken by the reasoner to solve the CSP. It includes constraint
+								propagation time.</li>
+						</ul>
+					</li>
+					<li>The package with the naming pattern <code>«2-letter
+							country code».«University/Institution».«research group».«project
+							name».«feature model type».questions</code> will contain the
+						implementation for the questions supported by the implemented
+						reasoner. The names of the classes implementing the questions
+						should follow the naming pattern <code>«name of
+							reasoner»«name of question»</code> (using CamelCase). The next
+						subsection will describe how to create a new question. For example
+						the questions implemented in the Choco 3 reasoner for simple
+						feature models are: (the questions marked with a <code>*</code>
+						use the default implementation provided by the <code>FaMaSDK</code>
+						project)
+						<img alt="This page is under construction"
 						src="images/page-under-construction.gif" />
-				</p>
+						<ul>
+							<li><code>Core features*</code>:</li>
+							<li><code>Variant features*</code>:</li>
+							<li><code>Dead features*</code>:</li>
+							<li><code>Unique features*</code>:</li>
+							<li><code>Number of products</code>:</li>
+							<li><code>One product</code>:</li>
+							<li><code>Valid product*</code>:</li>
+							<li><code>Products</code>:</li>
+							<li><code>Valid configuration*</code>:</li>
+							<li><code>Commonality*</code>:</li>
+							<li><code>Variability*</code>:</li>
+							<li><code>Homogeneity*</code>:</li>
+							<li><code>Valid</code>:</li>
+							<li><code>Detect errors*</code>:</li>
+							<li><code>Explain invalid product</code>:</li>
+							<li><code>Valid configuration errors</code>:</li>
+						</ul> Some questions have been deprecated in FAMA Framework 1.2 and
+						therefore are not implemented in the Choco 3 reasoner for simple
+						feature models. These questions are:
+						<ul>
+							<li><code>Filter</code>: This question takes as input a
+								feature model and a partial configuration, and provides as
+								answer the set of products that can be derived from the model
+								and include the features from the input configuration. This
+								question has been deprecated as this operation was included into
+								the existing reasoners, and all additional reasoners must
+								provide native support, through the methods <code>applyStagedConfiguration</code>
+								and <code>unapplyStagedConfiguration</code>.</li>
+							<li><code>Set</code>: This question answers a list of given
+								questions. A question can be added to the list by using the
+								method <code>addQuestion</code>. This question has been
+								deprecated.</li>
+						</ul> Some questions were not implemented:
+						<ul>
+							<li><code>Explain errors in feature model diagram</code>:
+								When a feature model has errors, this question is answered by
+								looking for explanations for those errors.</li>
+							<li><code>Valid configuration errors AW (Another Way)</code>:
+								This question is the same as valid configuration errors but
+								provides a more efficient implementation.</li>
+						</ul>
+					</li>
+				</ol>
 
 				<h5>
 					<a name="develop-new-question" class="anchor"
@@ -339,9 +527,10 @@ Description: «give a description for the artifact». For example, for the Choco
 						answering process. If you require to use or compose the solutions
 						of already existing questions do not call the answer phase
 						directly. You must use the ask method provided by the reasoner
-						class implemented in step 2 <a href="section4.html#develop-new-reasoner">here</a>, as it will ensure that
-						the three-phased answering process is carried out completely for
-						each question.
+						class implemented in step 2 <a
+						href="section4.html#develop-new-reasoner">here</a>, as it will
+						ensure that the three-phased answering process is carried out
+						completely for each question.
 					</li>
 				</ol>
 
@@ -360,11 +549,10 @@ Description: «give a description for the artifact». For example, for the Choco
 					the available interfaces. Extensions can be loaded using either
 					OSGi or a Java class loader. Remember the
 					<code>Activator</code>
-					class from step 3 <a
-						href="section4.html#create-fama-extension">here</a>? This class’s responsibility is to
-					load the FAMA Extension using OSGi and make it available to be used
-					by the FAMA Framework. The SPL Core of the FAMA Framework,
-					implemented by the project
+					class from step 3 <a href="section4.html#create-fama-extension">here</a>?
+					This class’s responsibility is to load the FAMA Extension using
+					OSGi and make it available to be used by the FAMA Framework. The
+					SPL Core of the FAMA Framework, implemented by the project
 					<code>FaMaSDK</code>
 					, has an
 					<code>Activator</code>
