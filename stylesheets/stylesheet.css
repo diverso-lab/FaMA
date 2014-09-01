@@ -6,7 +6,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
 	blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
 	em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
 	b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
-	table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
 	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
 	output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
@@ -46,10 +46,6 @@ blockquote:before, blockquote:after, q:before, q:after {
 	content: none;
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
 
 /* LAYOUT STYLES */
 body {
@@ -208,28 +204,18 @@ hr {
 	background: transparent url('../images/hr.png') 0 0 no-repeat;
 }
 
-table {
-	width: 100%;
-	border: 1px solid #ebebeb;
-}
-
-th {
-	font-weight: 500;
-}
-
-td {
-	border: 1px solid #ebebeb;
-	text-align: center;
-	font-weight: 300;
-}
-
 .tg {
 	border-collapse: collapse;
 	border-spacing: 0;
 	border-color: #999;
+	width: 100%;
+	border: 1px solid #ebebeb;
 }
 
 .tg td {
+	border: 1px solid #ebebeb;
+	text-align: center;
+	font-weight: 300;
 	padding: 10px 5px;
 	border-style: solid;
 	border-width: 0px;
@@ -259,6 +245,30 @@ td {
 form {
 	background: #f2f2f2;
 	padding: 20px;
+}
+
+sup {
+	vertical-align: 0.8ex;
+	font-size: 95%;
+}
+
+sub {
+	vertical-align: -0.6ex;
+	font-size: 95%;
+}
+
+td.upper_line {
+	border-top: solid 1px black;
+}
+
+table.fraction {
+	text-align: center;
+	vertical-align: middle;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	line-height: 2em;
+	width: auto;
+	border: none;
 }
 
 /* GENERAL ELEMENT TYPE STYLES */

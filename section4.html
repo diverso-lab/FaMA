@@ -461,25 +461,104 @@ Description: «give a description for the artifact». For example, for the Choco
 						feature models are: (the questions marked with a <code>*</code>
 						use the default implementation provided by the <code>FaMaSDK</code>
 						project)
-						<img alt="This page is under construction"
-						src="images/page-under-construction.gif" />
 						<ul>
-							<li><code>Core features*</code>:</li>
-							<li><code>Variant features*</code>:</li>
-							<li><code>Dead features*</code>:</li>
-							<li><code>Unique features*</code>:</li>
-							<li><code>Number of products</code>:</li>
-							<li><code>One product</code>:</li>
-							<li><code>Valid product*</code>:</li>
-							<li><code>Products</code>:</li>
-							<li><code>Valid configuration*</code>:</li>
-							<li><code>Commonality*</code>:</li>
-							<li><code>Variability*</code>:</li>
-							<li><code>Homogeneity*</code>:</li>
-							<li><code>Valid</code>:</li>
-							<li><code>Detect errors*</code>:</li>
-							<li><code>Explain invalid product</code>:</li>
-							<li><code>Valid configuration errors</code>:</li>
+							<li><code>Core features*</code>: This question is answered
+								by calculating the features that are present in every product
+								that can be derived from the feature model with the specified
+								constraints. This operation gives the opposite result of the
+								variant features operation.</li>
+							<li><code>Variant features*</code>: This operation
+								calculates the features that are not present on every product
+								that can be derived from the feature model with the specified
+								constraints. This operation gives the opposite result of the
+								core features operation.</li>
+							<li><code>Dead features*</code>: This question is answered
+								by calculating the features that are not present in any product
+								that can be derived from the feature model with the specified
+								constraints. A feature is dead if it cannot appear in any
+								product due to wrong definitions of cross-tree constraints.</li>
+							<li><code>Unique features*</code>: This question is answered
+								by the features that are unique to a product that can be derived
+								from the feature model with the specified constraints.</li>
+							<li><code>Number of products</code>: This question is
+								answered by calculating the number of products that can be
+								derived from the feature model with the specified constraints.</li>
+							<li><code>One product</code>: This question is answered by
+								calculating a valid product of a feature model that can be
+								derived from the feature model with the specified constraints.</li>
+							<li><code>Valid product*</code>: This question is answered
+								by determining if a product is valid or not for a given feature
+								model represented by a CSP. A product is a valid product if it
+								is a solution of the CSP.</li>
+							<li><code>Products</code>: This question is answered by
+								calculating all valid products that can be derived from the
+								feature model with the specified constraints.</li>
+							<li><code>Valid configuration*</code>: This question is
+								answered by analyzing if a configuration is valid or not. A
+								configuration is a non-finished product that can need more
+								features to be a valid product.</li>
+							<li><code>Commonality*</code>: This question is answered by
+								calculating the percentage of products represented by the
+								feature model including the input configuration.
+
+								<table class="fraction" align="center" cellpadding="0"
+									cellspacing="0">
+									<tr>
+										<td rowspan="2" nowrap="nowrap"><i>Commonality</i> =</td>
+										<td nowrap="nowrap"><i>number of products after
+												applying a configuration</i></td>
+									</tr>
+									<tr>
+										<td class="upper_line"><i>number of products</i></td>
+									</tr>
+								</table></li>
+							<li><code>Variability*</code>: This operation calculates the
+								variability degree of a feature model. The variability degree is
+								the ratio between the number of products and 2^n where n is the
+								number of features considered. In particular, 2^n is the
+								potential number of products represented by a feature model
+								assuming that any combination of features is allowed. The root
+								and non-leaf features are often not considered.
+								<table class="fraction" align="center" cellpadding="0"
+									cellspacing="0">
+									<tr>
+										<td rowspan="2" nowrap="nowrap"><i>Variability</i> =</td>
+										<td nowrap="nowrap"><i>number of products</i></td>
+									</tr>
+									<tr>
+										<td class="upper_line">2<sup>n</sup>
+										</td>
+									</tr>
+								</table> Where <code>n</code> is the number of features considered.</li>
+							<li><code>Homogeneity*</code>:This question is answered by
+								calculating the degree of homogeneity for the products that can
+								be derived from the feature model with the specified
+								constraints. Homogeneity is related with the number of unique
+								features among products. The more unique features, the less
+								homogeneous the feature model is.
+								<table class="fraction" align="center" cellpadding="0"
+									cellspacing="0">
+									<tr>
+										<td rowspan="2" nowrap="nowrap"><i>Homogeneity</i> =</td>
+										<td rowspan="2" nowrap="nowrap">1 –</td>
+										<td nowrap="nowrap"><i>number of unique features</i></td>
+									</tr>
+									<tr>
+										<td class="upper_line"><i>number of products</i></td>
+									</tr>
+								</table></li>
+							<li><code>Valid</code>: This question is answered by
+								analyzing if a CSP representing a feature model is valid. A CSP
+								is valid if after propagating the specified constraints at least
+								one solution is found.</li>
+							<li><code>Detect errors*</code>: This question is answered
+								by looking for errors on a feature model.</li>
+							<li><code>Explain invalid product</code>: This question
+								provides as answer the options to repair an invalid product for
+								a given feature model.</li>
+							<li><code>Valid configuration errors</code>: This question
+								is answered by looking for explanations for errors in
+								configurations of a given feature model.</li>
 						</ul> Some questions have been deprecated in FAMA Framework 1.2 and
 						therefore are not implemented in the Choco 3 reasoner for simple
 						feature models. These questions are:
@@ -510,8 +589,8 @@ Description: «give a description for the artifact». For example, for the Choco
 
 				<h4>
 					<a name="develop-new-question" class="anchor"
-						href="develop-new-question"><span class="octicon octicon-link"></span></a>4.2 Developing
-					a new question to be answered by the reasoner
+						href="develop-new-question"><span class="octicon octicon-link"></span></a>4.2
+					Developing a new question to be answered by the reasoner
 				</h4>
 
 				<p>The previous questions are the default questions a reasoner
