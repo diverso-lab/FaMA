@@ -88,32 +88,66 @@
 						is present in a product its child feature may or may not be
 						present.</dd>
 					<dt>Set:</dt>
-					<dd>A set of child features has a set relation with their
-						parent when a number of them can be included in the products in
-						which its parent feature appears. The amount of child features
-						that may be included is given by the relation cardinality. The
-						relation cardinality is expressed as a range of values <code>[x,y]</code>,
-						where <code>x ≤ y</code> and <code>y ≤ number of child features</code>. Two special cases of
-						set relations can be identified: Alternative and Or relations.</dd>
+					<dd>
+						A set of child features has a set relation with their parent when
+						a number of them can be included in the products in which its
+						parent feature appears. The amount of child features that may be
+						included is given by the relation cardinality. The relation
+						cardinality is expressed as a range of values
+						<code>[x,y]</code>
+						, where
+						<code>x ≤ y</code>
+						and
+						<code>y ≤ number of child features</code>
+						. Two special cases of set relations can be identified:
+						Alternative and Or relations.
+					</dd>
 					<dt>Alternative:</dt>
-					<dd>A set of child features have an Alternative relation with
-						their parent when only one child can be present when its parent
-						feature is present in the product. In this case the relation
-						cardinality can be expressed as <code>[0,1]</code>.</dd>
+					<dd>
+						A set of child features have an Alternative relation with their
+						parent when only one child can be present when its parent feature
+						is present in the product. In this case the relation cardinality
+						can be expressed as
+						<code>[0,1]</code>
+						.
+					</dd>
 					<dt>Or:</dt>
-					<dd>A set of child features have an Or relation with their
-						parent when one or more of them can be present when its parent
-						feature is present in the product. In this case the relation
-						cardinality can be expressed as <code>[0,n]</code>, where <code>n</code> is the number of
-						child features.</dd>
+					<dd>
+						A set of child features have an Or relation with their parent when
+						one or more of them can be present when its parent feature is
+						present in the product. In this case the relation cardinality can
+						be expressed as
+						<code>[0,n]</code>
+						, where
+						<code>n</code>
+						is the number of child features.
+					</dd>
 					<dt>Requires:</dt>
-					<dd>A requires relationship is a cross tree constraint that
-						states that if feature <code>A</code> requires feature <code>B</code> then if feature <code>A</code> is
-						present in a product, feature <code>B</code> must be present too.</dd>
+					<dd>
+						A requires relationship is a cross tree constraint that states
+						that if feature
+						<code>A</code>
+						requires feature
+						<code>B</code>
+						then if feature
+						<code>A</code>
+						is present in a product, feature
+						<code>B</code>
+						must be present too.
+					</dd>
 					<dt>Excludes:</dt>
-					<dd>An excludes relationship is a cross tree constraint that
-						states that if feature <code>A</code> excludes feature <code>B</code> then features <code>A</code> and <code>B</code>
-						can not be present at the same time in a product.</dd>
+					<dd>
+						An excludes relationship is a cross tree constraint that states
+						that if feature
+						<code>A</code>
+						excludes feature
+						<code>B</code>
+						then features
+						<code>A</code>
+						and
+						<code>B</code>
+						can not be present at the same time in a product.
+					</dd>
 				</dl>
 				</p>
 
@@ -181,29 +215,44 @@
 						href="http://dx.doi.org/10.1016/j.is.2010.01.001">here</a>):
 				<dl>
 					<dt>Mandatory:</dt>
-					<dd>A mandatory relation between a parent feature and its
-						child can be represented with the logical expression parent
-						<code>present ⇔ child present</code>.</dd>
+					<dd>
+						A mandatory relation between a parent feature and its child can be
+						represented with the logical expression parent
+						<code>present ⇔ child present</code>
+						.
+					</dd>
 					<dt>Optional:</dt>
-					<dd>An optional relation between a parent feature and its
-						child can be represented with the logical expression <code>parent not
-						present ⇒ child not present</code>.</dd>
+					<dd>
+						An optional relation between a parent feature and its child can be
+						represented with the logical expression
+						<code>parent not present ⇒ child not present</code>
+						.
+					</dd>
 					<dt>Set:</dt>
-					<dd>A set constraint between a parent feature and its children
-						with cardinality [x,y] can be represented with the logical
-						expression <code>(parent present ⇒ x ≤ ∑children present ≤ y) ∧ (parent
-						not present ⇒ children not present)</code>, equivalent to an
-						if-then-else. Both the Alternative and Or cases are handled by
-						this expression.</dd>
+					<dd>
+						A set constraint between a parent feature and its children with
+						cardinality [x,y] can be represented with the logical expression
+						<code>(parent present ⇒ x ≤ ∑children present ≤ y) ∧
+							(parent not present ⇒ children not present)</code>
+						, equivalent to an if-then-else. Both the Alternative and Or cases
+						are handled by this expression.
+					</dd>
 					<dt>Requires:</dt>
-					<dd>A Requires relation between an origin feature and its
-						destination can be represented with the logical expression <code>origin
-						present ⇒ destination present</code>.</dd>
+					<dd>
+						A Requires relation between an origin feature and its destination
+						can be represented with the logical expression
+						<code>origin present ⇒ destination present</code>
+						.
+					</dd>
 					<dt>Excludes:</dt>
-					<dd>An Excludes relation between an origin feature and its
-						destination can be represented with the logical expression
-						<code>¬(origin present ∧ destination present)</code> that can also be expressed
-						as <code>origin present ⇒ destination not present</code>.</dd>
+					<dd>
+						An Excludes relation between an origin feature and its destination
+						can be represented with the logical expression
+						<code>¬(origin present ∧ destination present)</code>
+						that can also be expressed as
+						<code>origin present ⇒ destination not present</code>
+						.
+					</dd>
 				</dl>
 				A product that can be derived from the feature model represented as
 				a CSP is, thus, one of the possible solutions to the CSP.
@@ -238,8 +287,9 @@
 					Choco 3 library no longer provides native support for biconditional
 					expressions, so to represent the mandatory relationship with Choco
 					3 an equivalent expression needs to be used. This expression is
-					<code>(parent present ⇒ child present) ∧ (child present ⇒ parent
-					present)</code>.
+					<code>(parent present ⇒ child present) ∧ (child present ⇒
+						parent present)</code>
+					.
 				</p>
 			</section>
 
@@ -258,8 +308,13 @@
 					Iberoamérica Jóvenes Profesores Investigadores Colombia and
 					Colciencias (Colombian Administrative Department of Science,
 					Technology and Innovation).</p>
-
-
+				<p>
+					<img alt="Creative Commons Attribution 4.0 International License"
+						src="images/cc-license.png">This work is licensed under the
+					Creative Commons Attribution 4.0 International License. To view a
+					copy of this license, visit <a
+						href="http://creativecommons.org/licenses/by/4.0/">CreativeCommons.org</a>.
+				</p>
 			</aside>
 		</div>
 	</div>
