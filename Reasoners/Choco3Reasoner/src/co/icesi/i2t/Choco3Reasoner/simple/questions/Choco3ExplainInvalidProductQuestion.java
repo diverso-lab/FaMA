@@ -175,7 +175,7 @@ public class Choco3ExplainInvalidProductQuestion extends Choco3Question
 		collectionVariablesToMinimize.addAll(selections.values());
 		collectionVariablesToMinimize.addAll(deselections.values());
 		IntVar[] variablesToMinimize = (IntVar[]) collectionVariablesToMinimize.toArray();
-		// TODO Review
+		// TODO Check algorithm, and new variables and constraints
 		IntVar sumVariable = VariableFactory.enumerated("sum", 0, variablesToMinimize.length, solver);
 		Constraint sumConstraint = IntConstraintFactory.sum(variablesToMinimize, sumVariable);
 		solver.post(sumConstraint);

@@ -587,8 +587,11 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		// We create an enumerated variable representing the cardinality of the relation in the CSP and add it to the solver.
 		// Enumerated variables may take their value in the range [a, b] where a < b or in an array of ordered values a, b, c, ..., z where a < ... < z.
 		// In this case the cardinality variable will take its value from an array of values given by the cardinality of the relation, therefore we use an enumerated variable.
-		// TODO cp:no_decision
-		// However, for this variable the solver should not calculate a value since it will be given when applying a configuration
+		// However, for this variable the solver should not calculate a value since it will be given when applying a configuration.
+		// Up to Choco 2 this was supported through the options parameter when creating a new variable. Using the option 'cp:no_decision' would tell the solver not to assign 
+		// a value. Since Choco 3 this is no longer supported, and during the creation of this Choco 3 reasoner implementation no alternative way of telling the solver not to 
+		// assign a value to a variable was found.
+		// TODO Tell the Choco 3 solver not to assign a value to the cardinality variable
 		IntVar cardinalityVariable = VariableFactory.enumerated(relation.getName() + "_cardinality", cardinalityDomainValues, this.solver);
 		
 		// We create a constraint that states the parent feature must be present at least one time in a product: parent > 0.
@@ -669,8 +672,8 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		// as it will be used to constraint the values of the child feature's variable.
 		int[] cardinalityDomainValues = getCardinalityDomainValues(cardinalities.iterator());
 		// We create the variable representing the cardinality of the relation and add it to the solver.
-		// TODO cp:no_decision
-		// However, for this variable the solver should not calculate a value since it will be given when applying a configuration
+		// However, for this variable the solver should not calculate a value since it will be given when applying a configuration.
+		// TODO Tell the Choco 3 solver not to assign a value to the cardinality variable
 		IntVar cardinalityVariable = VariableFactory.enumerated(relation.getName() + "_cardinality", cardinalityDomainValues, this.solver);
 		
 		// We create a constraint that states the parent feature must be present in a product: parent > 0.
