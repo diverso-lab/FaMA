@@ -49,15 +49,46 @@
 				</h3>
 
 				<p>
+					FAMA Extensions need to be packaged as
+					<code>.jar</code>
+					files for distribution. Maven automates this process and creates
+					two .jar files in the
+					<code>target</code>
+					folder of your FAMA Extension project. One of the .jar files
+					contains the binaries of your FAMA extension, and the other .jar
+					contains the source files. You just need to select your project,
+					right click over it and select
+					<code>Run as » Maven install</code>
+					.
+
+				</p>
+				<p>
+					<u>Note:</u> Before packaging your extension, make sure the FaMaSDK,
+					FaMaFeatureModel, FaMaAttributedModel, and any other FAMA project
+					you use in your extension have been packaged in .jar files and are
+					located in their respective
+					<code>target</code>
+					folders.
+				</p>
+				<p>
+					Once you have the .jar for your FAMA extension you can choose to
+					deploy the FAMA Framework as a standalone application or in an OSGi
+					container, such as Apache Felix or Eclipse’s Equinox. The
+					standalone application can be built using the
+					<code>FaMaRelease</code>
+					project. This project automates the generation of all the .jar
+					files for the extensions that make up the framework.
+				</p>
+				<p>
 					<img alt="This page is under construction"
 						src="images/page-under-construction.gif" />
 				</p>
-
 			</section>
 
 			<aside id="sidebar">
 				<a href="files/FAMA-Framework-Extensions-Development-Guide.pdf"
-					class="button"> <small>Download Guide</small> .pdf file
+					class="
+			button"> <small>Download Guide</small> .pdf file
 				</a>
 				<p class="repo-owner">
 					The <a href="https://github.com/ISA-Research-Group/FaMA">FAMA
