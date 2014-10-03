@@ -160,7 +160,10 @@ Description: «give a description for the artifact». For example, for the Choco
 								black; it is specific to the development of the Choco 3
 								reasoner. You should replace this dependency with the ones
 								concerning your particular FAMA extension, if needed; otherwise
-								you can safely remove those lines. <pre>
+								you can safely remove those lines. <u>Note</u>: The version
+								numbers for dependencies may change, so be sure to update them
+								when modifying any of the <code>pom.xml</code> files referenced
+								in this guide.<pre>
 								<code>
 &ltdependencies&gt</code>
 	&ltdependency&gt
@@ -397,10 +400,10 @@ Description: «give a description for the artifact». For example, for the Choco
 								number of products that can be derived from a given feature
 								model. A question represents an analysis operation, like the one
 								in the example, over a given feature model.</li>
-						</ul> <u>Note:</u> For the reasoners in the packages of ExplainErrors (4Exp)
-						you must inherit from the respective implementation’s reasoner
-						created previously in this step and not from the abstract reasoner
-						class provided by the <code>FaMaSDK</code> project.
+						</ul> <u>Note:</u> For the reasoners in the packages of ExplainErrors
+						(4Exp) you must inherit from the respective implementation’s
+						reasoner created previously in this step and not from the abstract
+						reasoner class provided by the <code>FaMaSDK</code> project.
 					</li>
 					<li>Also, the package from <a
 						href="section4.html#develop-new-reasoner">step 2</a> will also
@@ -681,8 +684,8 @@ Description: «give a description for the artifact». For example, for the Choco
 				</p>
 				<pre>
 					<code>
-&ltreasoner id="Choco3Simple" 
-file="lib/Choco3Reasoner_1.0.0.jar" 
+&ltreasoner id="Choco3" 
+file="lib/Choco3Reasoner-1.0.0.jar" 
 class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt
 					</code>
 				</pre>

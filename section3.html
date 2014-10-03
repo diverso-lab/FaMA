@@ -48,9 +48,9 @@
 				</h3>
 
 				<p>This guide was developed and tested for FAMA Framework 1.2
-					using Eclipse Modeling Tools IDE Kepler Release on OS X 10.9 with
-					Java 1.7 and the most recent release of the necessary plug-ins as
-					of May 2014. All of the requirements are summarized in the table
+					using Eclipse IDE for Java EE Developers Luna Release on OS X 10.9
+					with Java 1.7 and the most recent release of the necessary plug-ins
+					as of May 2014. All of the requirements are summarized in the table
 					below.</p>
 				<p>You may use any package solution of the Eclipse IDE; just
 					make sure to grab the correct 32-bit or 64-bit version depending on
@@ -71,12 +71,13 @@
 						Collaboration category)</li>
 					<li>ANTLR UI (Update site:
 						http://antlreclipse.sourceforge.net/updates/)</li>
-					<li>ANTLR plugin for Eclipse 2.7.6. <u>Note:</u> ANTLR plugin for
-						Eclipse 2.7.6 is not available through an Eclipse update site. You
-						must download it from
+					<li>ANTLR plugin for Eclipse 2.7.6. <u>Note:</u> ANTLR plugin
+						for Eclipse 2.7.6 is not available through an Eclipse update site.
+						You must download it from
 						http://sourceforge.net/projects/antlreclipse/ and manually install
 						the jar by placing it in the plugins folder found in your
-						Eclipse’s installation folder.</li>
+						Eclipse’s installation folder.
+					</li>
 				</ul>
 				</p>
 
@@ -124,6 +125,12 @@
 						<td class="tg-031e">http://sourceforge.net/projects/antlreclipse/
 							(Download and manually install the jar by placing it in the
 							plugins folder found in your Eclipse’s installation folder)</td>
+					</tr>
+					<tr>
+						<td class="tg-031e">JUnit Testing Framework</td>
+						<td class="tg-031e">4.11.0</td>
+						<td class="tg-031e">Already included in the Eclipse for Java
+							EE Developers Luna Release.</td>
 					</tr>
 				</table>
 
@@ -178,7 +185,7 @@
 					<li>Select the projects you want to import. Click <code>Next
 							></code>. For example, for the development of a new reasoner you would
 						have to select the projects: <code>FaMaAttributedModel</code>, <code>FaMaFeatureModel</code>,
-						<code>FaMaSDK</code>, <code>FaMa-Docs</code>, <code>FaMaTestSuite</code>
+						<code>FaMaSDK</code>, <code>FaMa-Docs</code>, <code>FaMaTestSuite2</code>
 						and <code>Benchmark</code>. The last two will be used for testing
 						purposes.
 					</li>
@@ -221,9 +228,9 @@
 				<p>
 					The typical problems involve missing referenced libraries. To solve
 					these errors, go to the lib folder of the project under the
-					project’s root folder (<u>note:</u> in some projects it is located under a
-					resources folder), select all the libraries in the folder, right
-					click and select the option
+					project’s root folder (<u>note:</u> in some projects it is located
+					under a resources folder), select all the libraries in the folder,
+					right click and select the option
 					<code>Build Path » Configure Build Path...</code>
 				</p>
 
