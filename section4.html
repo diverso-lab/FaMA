@@ -76,14 +76,16 @@
 					<li>Right click the newly created plug-in project and select
 						the option <code>Configure » Convert to Maven Project</code>.
 					</li>
-					<li>A dialog will pop-up prompting to create a new Maven
-						POM file. Fill out the form with the following information and
-						click <code>Finish</code>. <pre>
+					<li>A dialog will pop-up prompting to create a new Maven POM
+						file. Fill out the form with the following information and click <code>Finish</code>.
+						<pre>
+							<code>
 Group Id: es.us.isa
 Version: 1.0.0
 Packaging: bundle
 Name: «give the artifact a name». For example, for the Choco 3 reasoner it is: FaMa Choco 3 Reasoner.
 Description: «give a description for the artifact». For example, for the Choco 3 reasoner it is: A reasoner for FaMa, based on Choco Solver v3. Built by I2T Research Group in collaboration with the FaMa Team.
+						</code>
 						</pre>
 					</li>
 					<li>Maven should open the pom file. Switch to the <code>pom.xml</code>
@@ -96,30 +98,30 @@ Description: «give a description for the artifact». For example, for the Choco
 						<ul>
 							<li>Plug-in repositories <pre>
 									<code>
-&ltpluginRepositories&gt
-	&ltpluginRepository&gt
-		&ltid&gtmc-release&lt/id&gt
-		&ltname&gtLocal Maven repository of releases&lt/name&gt
-		&lturl&gthttp://mc-repo.googlecode.com/svn/maven2/releases&lt/url&gt
-		&ltsnapshots&gt
-			&ltenabled&gtfalse&lt/enabled&gt
-		&lt/snapshots&gt
-		&ltreleases&gt
-			&ltenabled&gttrue&lt/enabled&gt
-		&lt/releases&gt
-	&lt/pluginRepository&gt
-&lt/pluginRepositories&gt</code>
+&lt;pluginRepositories&gt;
+	&lt;pluginRepository&gt;
+		&lt;id&gt;mc-release&lt;/id&gt;
+		&lt;name&gt;Local Maven repository of releases&lt;/name&gt;
+		&lt;url&gt;http://mc-repo.googlecode.com/svn/maven2/releases&lt;/url&gt;
+		&lt;snapshots&gt;
+			&lt;enabled&gt;false&lt;/enabled&gt;
+		&lt;/snapshots&gt;
+		&lt;releases&gt;
+			&lt;enabled&gt;true&lt;/enabled&gt;
+		&lt;/releases&gt;
+	&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;</code>
 						</pre>
 							</li>
 							<li>Distribution management<pre>
 									<code>
-&ltdistributionManagement&gt
-	&ltrepository&gt
-		&ltid&gtisa.devel&lt/id&gt
-		&ltname&gtISA archiva&lt/name&gt
-		&lturl&gthttp://devel.isa.us.es/glassfish/archiva/repository/internal&lt/url&gt
-	&lt/repository&gt
-&lt/distributionManagement&gt
+&lt;distributionManagement&gt;
+	&lt;repository&gt;
+		&lt;id&gt;isa.devel&lt;/id&gt;
+		&lt;name&gt;ISA archiva&lt;/name&gt;
+		&lt;url&gt;http://devel.isa.us.es/glassfish/archiva/repository/internal&lt/url&gt;
+	&lt;/repository&gt;
+&lt;/distributionManagement&gt;
 
 	</code>
 						</pre>
@@ -130,28 +132,28 @@ Description: «give a description for the artifact». For example, for the Choco
 								concerning your particular FAMA extension if needed; otherwise
 								you can safely remove those lines. <pre>
 								<code>
-&ltrepositories&gt
-	&ltrepository&gt
-		&ltid&gtisa.devel&lt/id&gt
-		&ltname&gtISA archiva&lt/name&gt
-		&lturl&gthttp://devel.isa.us.es/glassfish/archiva&lt/url&gt
-		&ltlayout&gtdefault&lt/layout&gt
-		&ltreleases&gt
-			&ltenabled&gttrue&lt/enabled&gt
-			&ltupdatePolicy&gtalways&lt/updatePolicy&gt
-			&ltchecksumPolicy&gtwarn&lt/checksumPolicy&gt
-		&lt/releases&gt
-		&ltsnapshots&gt
-			&ltenabled&gtfalse&lt/enabled&gt
-			&ltupdatePolicy&gtnever&lt/updatePolicy&gt
-			&ltchecksumPolicy&gtwarn&lt/checksumPolicy&gt
-		&lt/snapshots&gt
-	&lt/repository&gt</code>
-	&ltrepository&gt
-		&ltid&gtchoco.repos&lt/id&gt
-		&lturl&gthttp://www.emn.fr/z-info/choco-repo/mvn/repository/&lt/url&gt
-	&lt/repository&gt<code>
-&lt/repositories&gt
+&lt;repositories&gt;
+	&lt;repository&gt;
+		&lt;id&gt;isa.devel&lt;/id&gt;
+		&lt;name&gt;ISA archiva&lt;/name&gt;
+		&lt;url&gt;http://devel.isa.us.es/glassfish/archiva&lt;/url&gt;
+		&lt;layout&gt;default&lt;/layout&gt;
+		&lt;releases&gt;
+			&lt;enabled&gt;true&lt;/enabled&gt;
+			&lt;updatePolicy&gt;always&lt;/updatePolicy&gt;
+			&lt;checksumPolicy&gt;warn&lt;/checksumPolicy&gt;
+		&lt;/releases&gt;
+		&lt;snapshots&gt;
+			&lt;enabled&gt;false&lt;/enabled&gt;
+			&lt;updatePolicy&gt;never&lt;/updatePolicy&gt;
+			&lt;checksumPolicy&gt;warn&lt;/checksumPolicy&gt;
+		&lt;/snapshots&gt;
+	&lt;/repository&gt;</code>
+	&lt;repository&gt;
+		&lt;id&gt;choco.repos&lt;/id&gt;
+		&lt;url&gt;http://www.emn.fr/z-info/choco-repo/mvn/repository/&lt;/url&gt;
+	&lt;/repository&gt;<code>
+&lt;/repositories&gt;
 
 								</code>
 								</pre>
@@ -199,95 +201,95 @@ Description: «give a description for the artifact». For example, for the Choco
 								reasoner. You should replace them according to your particular
 								FAMA extension. <pre>
 								<code>
-&ltbuild&gt
-	&ltdefaultGoal&gtinstall&lt/defaultGoal&gt
-	&ltdirectory&gttarget&lt/directory&gt
-	&ltsourceDirectory&gtsrc&lt/sourceDirectory&gt
-	&ltoutputDirectory&gttarget/classes&lt/outputDirectory&gt
-	&lttestSourceDirectory&gttest&lt/testSourceDirectory&gt
-	&lttestOutputDirectory&gttarget/test-classes&lt/testOutputDirectory&gt
-	&ltresources&gt
-		&ltresource&gt
-			&ltdirectory&gtresources&lt/directory&gt
-		&lt/resource&gt
-	&lt/resources&gt
-	&lttestResources&gt
-		&lttestResource&gt
-			&ltdirectory&gtresources&lt/directory&gt
-		&lt/testResource&gt
-	&lt/testResources&gt
-	&ltplugins&gt
-		&ltplugin&gt
-			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
-			&ltartifactId&gtmaven-compiler-plugin&lt/artifactId&gt
-			&ltconfiguration&gt
-				&ltsource&gt5&lt/source&gt
-				&lttarget&gt5&lt/target&gt
-			&lt/configuration&gt
-		&lt/plugin&gt
-		&ltplugin&gt
-			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
-			&ltartifactId&gtmaven-jar-plugin&lt/artifactId&gt
-			&ltconfiguration&gt
-				&ltarchive&gt
-					&lt!--&ltmanifestFile&gtMETA-INF/MANIFEST.MF&lt/manifestFile&gt --&gt
-					&ltaddMavenDescriptor&gtfalse&lt/addMavenDescriptor&gt
-					&lt!-- &ltmanifestEntries&gt &ltBuilt-By&gtI2T Research Group in collaboration with FaMa Team&lt/Built-By&gt &lt/manifestEntries&gt --&gt
-				&lt/archive&gt
-			&lt/configuration&gt
-		&lt/plugin&gt
-		&ltplugin&gt
-			&ltgroupId&gtcom.mycila.maven-license-plugin&lt/groupId&gt
-			&ltartifactId&gtmaven-license-plugin&lt/artifactId&gt
-			&ltconfiguration&gt
-				&ltexcludes&gt
-					&ltexclude&gt**/**.xml/**&lt/exclude&gt
-				&lt/excludes&gt
-				&ltheader&gtcopyrightNotice.txt&lt/header&gt
-			&lt/configuration&gt
-			&ltexecutions&gt
-			&lt/executions&gt
-		&lt/plugin&gt
-		&ltplugin&gt
-			&ltgroupId&gtorg.apache.maven.plugins&lt/groupId&gt
-			&ltartifactId&gtmaven-source-plugin&lt/artifactId&gt
-			&ltexecutions&gt
-				&ltexecution&gt
-					&ltid&gtjar&lt/id&gt
-					&ltphase&gtpackage&lt/phase&gt
-					&ltgoals&gt
-						&ltgoal&gtjar&lt/goal&gt
-					&lt/goals&gt
-					&ltconfiguration&gt
-						&ltexcludeResources&gttrue&lt/excludeResources&gt
-						&ltoverWriteReleases&gttrue&lt/overWriteReleases&gt
-						&ltoverWriteSnapshots&gtfalse&lt/overWriteSnapshots&gt
-						&ltoverWriteIfNewer&gttrue&lt/overWriteIfNewer&gt
-					&lt/configuration&gt
-				&lt/execution&gt
-			&lt/executions&gt
-		&lt/plugin&gt
-		&ltplugin&gt
-			&ltgroupId&gtorg.apache.felix&lt/groupId&gt
-			&ltartifactId&gtmaven-bundle-plugin&lt/artifactId&gt
-			&ltextensions&gttrue&lt/extensions&gt
-			&ltversion&gt1.4.0&lt/version&gt
-			&ltconfiguration&gt
-				&ltinstructions&gt
-					&ltBundle-SymbolicName&gt${pom.groupId}.${pom.artifactId}&lt/Bundle-SymbolicName&gt
-					&ltBundle-Name&gt${pom.artifactId}&lt/Bundle-Name&gt
-					</code>&ltBuilt-By&gtI2T Research Group in collaboration with FaMa Team&lt/Built-By&gt
-					&ltExport-Package&gtco.icesi.i2t.*&lt/Export-Package&gt
-					&ltBundle-Activator&gtco.icesi.i2t.Choco3.osgi.Activator
-					&lt/Bundle-Activator&gt<code>
-					&ltImport-Package&gtorg.osgi.framework,*;resolution:=optional
-					&lt/Import-Package&gt
-					</code>&ltBundle-ClassPath&gtlib/choco-parser-3.2.0-jar-with-dependencies.jar, .&lt/Bundle-ClassPath&gt<code>
-				&lt/instructions&gt
-			&lt/configuration&gt
-		&lt/plugin&gt
-	&lt/plugins&gt
-&lt/build&gt
+&lt;build&gt;
+	&lt;defaultGoal&gt;install&lt;/defaultGoal&gt;
+	&lt;directory&gt;target&lt;/directory&gt;
+	&lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
+	&lt;outputDirectory&gt;target/classes&lt;/outputDirectory&gt;
+	&lt;testSourceDirectory&gt;test&lt;/testSourceDirectory&gt;
+	&lt;testOutputDirectory&gt;target/test-classes&lt;/testOutputDirectory&gt;
+	&lt;resources&gt;
+		&lt;resource&gt;
+			&lt;directory&gt;resources&lt;/directory&gt;
+		&lt;/resource&gt;
+	&lt;/resources&gt;
+	&lt;testResources&gt;
+		&lt;testResource&gt;
+			&lt;directory&gt;resources&lt;/directory&gt;
+		&lt;/testResource&gt;
+	&lt;/testResources&gt;
+	&lt;plugins&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+			&lt;configuration&gt;
+				&lt;source&gt;5&lt;/source&gt;
+				&lt;target&gt;5&lt;/target&gt;
+			&lt;/configuration&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+			&lt;configuration&gt;
+				&lt;archive&gt;
+					&lt;!--&lt;manifestFile&gt;META-INF/MANIFEST.MF&lt;/manifestFile&gt; --&gt;
+					&lt;addMavenDescriptor&gt;false&lt;/addMavenDescriptor&gt;
+					&lt;!-- &lt;manifestEntries&gt; &lt;Built-By&gt;I2T Research Group in collaboration with FaMa Team&lt;/Built-By&gt; &lt;/manifestEntries&gt; --&gt;
+				&lt;/archive&gt;
+			&lt;/configuration&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;com.mycila.maven-license-plugin&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-license-plugin&lt;/artifactId&gt;
+			&lt;configuration&gt;
+				&lt;excludes&gt;
+					&lt;exclude&gt;**/**.xml/**&lt;/exclude&gt;
+				&lt;/excludes&gt;
+				&lt;header&gt;copyrightNotice.txt&lt;/header&gt;
+			&lt;/configuration&gt;
+			&lt;executions&gt;
+			&lt;/executions&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+			&lt;executions&gt;
+				&lt;execution&gt;
+					&lt;id&gt;jar&lt;/id&gt;
+					&lt;phase&gt;package&lt;/phase&gt;
+					&lt;goals&gt;
+						&lt;goal&gt;jar&lt;/goal&gt;
+					&lt;/goals&gt;
+					&lt;configuration&gt;
+						&lt;excludeResources&gt;true&lt;/excludeResources&gt;
+						&lt;overWriteReleases&gt;true&lt;/overWriteReleases&gt;
+						&lt;overWriteSnapshots&gt;false&lt;/overWriteSnapshots&gt;
+						&lt;overWriteIfNewer&gt;true&lt;/overWriteIfNewer&gt;
+					&lt;/configuration&gt;
+				&lt;/execution&gt;
+			&lt;/executions&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.apache.felix&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-bundle-plugin&lt;/artifactId&gt;
+			&lt;extensions&gt;true&lt;/extensions&gt;
+			&lt;version&gt;1.4.0&lt;/version&gt;
+			&lt;configuration&gt;
+				&lt;instructions&gt;
+					&lt;Bundle-SymbolicName&gt;${pom.groupId}.${pom.artifactId}&lt;/Bundle-SymbolicName&gt;
+					&lt;Bundle-Name&gt;${pom.artifactId}&lt;/Bundle-Name&gt;
+					</code>&lt;Built-By&gt;I2T Research Group in collaboration with FaMa Team&lt;/Built-By&gt;
+					&lt;Export-Package&gt;co.icesi.i2t.*&lt;/Export-Package&gt;
+					&lt;Bundle-Activator&gt;co.icesi.i2t.Choco3.osgi.Activator
+					&lt;/Bundle-Activator&gt;<code>
+					&lt;Import-Package&gt;org.osgi.framework,*;resolution:=optional
+					&lt;/Import-Package&gt;
+					</code>&lt;Bundle-ClassPath&gt;lib/choco-parser-3.2.0-jar-with-dependencies.jar, .&lt;/Bundle-ClassPath&gt;<code>
+				&lt;/instructions&gt;
+			&lt;/configuration&gt;
+		&lt;/plugin&gt;
+	&lt;/plugins&gt;
+&lt;/build&gt;
 
 								</code>
 								</pre>
@@ -684,9 +686,9 @@ Description: «give a description for the artifact». For example, for the Choco
 				</p>
 				<pre>
 					<code>
-&ltreasoner id="Choco3" 
+&lt;reasoner id="Choco3" 
 file="lib/Choco3Reasoner-1.0.0.jar" 
-class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt
+class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt;
 					</code>
 				</pre>
 
@@ -701,9 +703,9 @@ class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt
 				</p>
 				<pre>
 					<code>
-&ltreasoner&gt
-	&ltquestion interface="«interface canonical name»" class="implementation class’s canonical name"/&gt
-&lt/reasoner&gt
+&lt;reasoner&gt;
+	&lt;question interface="«interface canonical name»" class="implementation class’s canonical name"/&gt;
+&lt;/reasoner&gt;
 					</code>
 				</pre>
 				</p>
@@ -712,10 +714,10 @@ class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt
 					feature models looks like the fragment in the following listing.</p>
 				<pre>
 					<code>
-&ltreasoner&gt
-	&ltquestion interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3CommonalityQuestion"/&gt
+&lt;reasoner&gt;
+	&lt;question interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3CommonalityQuestion"/&gt;
 ...
-&lt/reasoner&gt
+&lt;/reasoner&gt;
 
 					</code>
 				</pre>
