@@ -48,11 +48,17 @@
 					Extension
 				</h3>
 
+				<h4>
+					<a name="package-fama-extension" class="anchor"
+						href="package-fama-extension"><span
+						class="octicon octicon-link"></span></a>5.1 Packaging a FAMA Extension
+				</h4>
+
 				<p>
 					FAMA Extensions need to be packaged as
 					<code>.jar</code>
-					files for distribution. Maven automates this process and creates
-					two .jar files in the
+					files for testing and distribution. Maven automates this process
+					and creates two .jar files in the
 					<code>target</code>
 					folder of your FAMA Extension project. One of the .jar files
 					contains the binaries of your FAMA extension, and the other .jar
@@ -60,28 +66,385 @@
 					right click over it and select
 					<code>Run as » Maven install</code>
 					.
-
 				</p>
 				<p>
-					<u>Note:</u> Before packaging your extension, make sure the FaMaSDK,
-					FaMaFeatureModel, FaMaAttributedModel, and any other FAMA project
-					you use in your extension have been packaged in .jar files and are
-					located in their respective
+					<u>Note:</u> Before packaging your extension, make sure the
+					<code>FaMaSDK</code>
+					,
+					<code>FaMaFeatureModel</code>
+					,
+					<code>FaMaAttributedModel</code>
+					, and any other FAMA project you use in your extension have been
+					packaged in .jar files and are located in their respective
 					<code>target</code>
 					folders.
 				</p>
+
+				<h4>
+					<a name="package-fama-extension" class="anchor"
+						href="package-fama-extension"><span
+						class="octicon octicon-link"></span></a>5.2. Creating a test suite for
+					a FAMA Extension
+				</h4>
+
 				<p>
-					Once you have the .jar for your FAMA extension you can choose to
-					deploy the FAMA Framework as a standalone application or in an OSGi
-					container, such as Apache Felix or Eclipse’s Equinox. The
-					standalone application can be built using the
+					Every new FAMA extension should, at least, provide the
+					implementation for basic test cases. The development of the Choco 3
+					reasoner test cases with JUnit4 is provided as an example. Before
+					getting started with testing, you will need to create a new project
+					in your workspace to store the tests for your extension project.
+					You also need to set this new project to use Maven. You can use the
+					normal Eclipse process to create projects through the menu option
+					<code>File » New » Project…</code>
+				</p>
+
+				<ol>
+					<li>Select the option <code>Plug-in Project</code>. Click <code>Next
+							></code>.
+					</li>
+					<li>Give the project a name and select as path the path to
+						where the other FAMA projects were checked out. In this case we
+						gave the Choco 3 Reasoner test suite the name <code>Choco3ReasonerTestSuite</code>.
+						Click <code>Next ></code>.
+					</li>
+					<li>Untick the option <code>Generate an Activator</code>.
+					</li>
+					<li>Right click the newly created plug-in project and select
+						the option <code>Configure » Convert to Maven Project</code>.
+					</li>
+					<li>A dialog will pop-up prompting to create a new Maven POM
+						file. Fill out the form with the following information and click <code>Finish</code>.
+						<pre>
+<code>
+Group Id: es.us.isa
+Version: 1.0.0
+Name: «give the artifact a name». For example, for the Choco 3 reasoner test suite it is: FaMa Choco 3 Reasoner Test Suite.
+Description: «give a description for the artifact». For example, for the Choco 3 reasoner test suite it is: A test suite for the Choco 3 reasoner. Built by I2T Research Group in collaboration with the FaMa Team.
+</code>
+</pre>
+					</li>
+					<li>Maven should open the pom file. Switch to the pom.xml tab.
+					</li>
+					<li>After the <code>&lt;description&gt;&lt;/description&gt;</code>
+						element and before the closing <code>&lt;/project&gt;</code> tag
+						paste the following <code>pom.xml</code> fragments:
+						<ul>
+							<li>Dependencies. Notice the first dependency marked in
+								black; it is specific to the testing of the Choco 3 reasoner.
+								You should replace this dependency with the ones concerning your
+								particular FAMA extension, if needed; otherwise you can safely
+								remove those lines. <pre>
+								<code>
+&lt;dependencies&gt;</code>
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;Choco3Reasoner&lt;/artifactId&gt;
+		&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+	&lt;/dependency&gt;<code>
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;FaMaFeatureModel&lt;/artifactId&gt;
+		&lt;version&gt;1.0.0&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;FaMaAttributedModel&lt;/artifactId&gt;
+		&lt;version&gt;1.0.4&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;FaMaShell&lt;/artifactId&gt;
+		&lt;version&gt;0.1.1&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;FaMaSDK&lt;/artifactId&gt;
+		&lt;version&gt;1.2.0&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+		&lt;artifactId&gt;FaMaTestSuite2&lt;/artifactId&gt;
+		&lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;junit&lt;/groupId&gt;
+		&lt;artifactId&gt;junit&lt;/artifactId&gt;
+		&lt;version&gt;4.11&lt;/version&gt;
+	&lt;/dependency&gt;
+&lt;/dependencies&gt;
+								</code>
+								</pre>
+
+							</li>
+							<li>Build. Notice in the final lines of this fragment marked
+								in black; they are specific to the testing of the Choco 3
+								reasoner. You should replace them according to your particular
+								FAMA extension, if needed; otherwise you can safely remove those
+								lines. <pre>
+								<code>
+&lt;build&gt;
+	&lt;defaultGoal&gt;compile&lt;/defaultGoal&gt;
+	&lt;directory&gt;target&lt;/directory&gt;
+	&lt;sourceDirectory&gt;src&lt;/sourceDirectory&gt;
+	&lt;plugins&gt;
+		&lt;plugin&gt;
+			&lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+			&lt;version&gt;3.1&lt;/version&gt;
+			&lt;configuration&gt;
+				&lt;source&gt;1.7&lt;/source&gt;
+				&lt;target&gt;1.7&lt;/target&gt;
+			&lt;/configuration&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+			&lt;executions&gt;
+				&lt;execution&gt;
+					&lt;id&gt;copy&lt;/id&gt;
+					&lt;phase&gt;install&lt;/phase&gt;
+					&lt;goals&gt;
+						&lt;goal&gt;copy&lt;/goal&gt;
+					&lt;/goals&gt;
+					&lt;configuration&gt;
+						&lt;outputDirectory&gt;lib&lt;/outputDirectory&gt;
+						&lt;overWriteReleases&gt;true&lt;/overWriteReleases&gt;
+					&lt;overWriteSnapshots&gt;false&lt;/overWriteSnapshots&gt;
+						&lt;overWriteIfNewer&gt;true&lt;/overWriteIfNewer&gt;
+						&lt;artifactItems&gt;</code>
+							&lt;artifactItem&gt;
+								&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+						&lt;artifactId&gt;Choco3Reasoner&lt;/artifactId&gt;
+							&lt;version&gt;1.0.0&lt;/version&gt;
+							&lt;/artifactItem&gt;<code>
+							&lt;artifactItem&gt;
+								&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+						&lt;artifactId&gt;FaMaFeatureModel&lt;/artifactId&gt;
+								&lt;version&gt;1.0.0&lt;/version&gt;
+							&lt;/artifactItem&gt;
+							&lt;artifactItem&gt;
+								&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+					&lt;artifactId&gt;FaMaAttributedModel&lt;/artifactId&gt;
+								&lt;version&gt;1.0.4&lt;/version&gt;
+							&lt;/artifactItem&gt;
+							&lt;artifactItem&gt;
+								&lt;groupId&gt;es.us.isa&lt;/groupId&gt;
+							&lt;artifactId&gt;FaMaSDK&lt;/artifactId&gt;
+								&lt;version&gt;1.2.0&lt;/version&gt;
+							&lt;/artifactItem&gt;
+						&lt;/artifactItems&gt;
+					&lt;/configuration&gt;
+				&lt;/execution&gt;
+			&lt;/executions&gt;
+		&lt;/plugin&gt;
+		&lt;plugin&gt;
+			&lt;groupId&gt;com.mycila.maven-license-plugin&lt;/groupId&gt;
+			&lt;artifactId&gt;maven-license-plugin&lt;/artifactId&gt;
+			&lt;version&gt;1.9.0&lt;/version&gt;
+			&lt;configuration&gt;
+				&lt;excludes&gt;
+					&lt;exclude&gt;**/**.xml/**&lt;/exclude&gt;
+				&lt;/excludes&gt;
+				&lt;header&gt;copyrightNotice.txt&lt;/header&gt;
+			&lt;/configuration&gt;
+			&lt;executions&gt;
+			&lt;/executions&gt;
+		&lt;/plugin&gt;
+	&lt;/plugins&gt;
+	&lt;pluginManagement&gt;
+		&lt;plugins&gt;
+			&lt;plugin&gt;
+				&lt;groupId&gt;org.eclipse.m2e&lt;/groupId&gt;
+				&lt;artifactId&gt;lifecycle-mapping&lt;/artifactId&gt;
+				&lt;version&gt;1.0.0&lt;/version&gt;
+				&lt;configuration&gt;
+					&lt;lifecycleMappingMetadata&gt;
+						&lt;pluginExecutions&gt;
+							&lt;pluginExecution&gt;
+							&lt;pluginExecutionFilter&gt;
+					&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+				&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;
+						&lt;versionRange&gt;[2.1,)&lt;/versionRange&gt;
+							&lt;goals&gt;
+								&lt;goal&gt;copy&lt;/goal&gt;
+							&lt;/goals&gt;
+							&lt;/pluginExecutionFilter&gt;
+							&lt;action&gt;
+								&lt;ignore&gt;&lt;/ignore&gt;
+							&lt;/action&gt;
+							&lt;/pluginExecution&gt;
+						&lt;/pluginExecutions&gt;
+					&lt;/lifecycleMappingMetadata&gt;
+				&lt;/configuration&gt;
+			&lt;/plugin&gt;
+		&lt;/plugins&gt;
+	&lt;/pluginManagement&gt;
+&lt;/build&gt;
+								</code>
+								</pre>
+							</li>
+						</ul>
+
+					</li>
+					<li>Your new extension should be tested with both the OSGi and
+						Java class loaders. For the Java class loader you need the FAMA
+						loader configuration file <code>FaMaConfig.xml</code>. For the
+						Choco 3 reasoner test suite we created the following configuration
+						file. <pre>
+						<code>
+&lt;questionTrader&gt;
+	&lt;reasoner id="Choco3" file="lib/Choco3Reasoner-1.0.0.jar" class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt;
+	&lt;criteriaSelector name="default" class="es.us.isa.FAMA.Reasoner.DefaultCriteriaSelector"/&gt;
+	&lt;question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion"/&gt;
+	&lt;question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion"/&gt;
+	&lt;question id="ValidConfigurationErrors" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion"/&gt;
+	&lt;question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion"/&gt;
+	&lt;question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion"/&gt;
+	&lt;question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion"/&gt;
+	&lt;question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion"/&gt;
+	&lt;question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion"/&gt;
+	&lt;question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion"/&gt;
+	&lt;question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion"/&gt;
+	&lt;question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion"/&gt;
+	&lt;question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion"/&gt;
+	&lt;models&gt;
+		&lt;reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-1.0.0.jar"/&gt;
+		&lt;reader extensions="afm,efm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedReader" file="lib/FaMaAttributedModel-1.0.4.jar"/&gt;
+		&lt;reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaFeatureModel-1.0.1.jar"/&gt;
+		&lt;writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaFeatureModel-1.0.0.jar"/&gt;
+		&lt;writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-1.0.0.jar"/&gt;
+		&lt;writer extensions="fm,afm" class="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fileformats.AttributedWriter" file="lib/FaMaAttributedModel-1.0.4.jar"/&gt;
+		&lt;writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-1.0.0.jar"/&gt;
+	&lt;/models&gt;
+	&lt;transform id="AtomicSet" interface="es.us.isa.FAMA.Reasoner.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaFeatureModel-1.0.0.jar"/&gt;
+&lt;/questionTrader&gt;
+						</code>
+						</pre>
+					</li>
+					<li>Test resources, such as feature models, inputs and
+						expected outputs, need to be loaded independently. Your extension
+						test suite should contain its own test loader configuration file,
+						in the <code>test-resources</code> folder. Variability models
+						should be stored in a <code>models</code> folder inside the <code>test-resources</code>
+						folder. For the Choco 3 reasoner test suite we created the
+						following configuration file. <pre>
+						<code>
+&lt;tests&gt;
+	&lt;test modelFile="test-resources/models/HIS.xml"&gt;
+		&lt;question id="CoreFeatures" input="" expectedOutput="HIS;SUPERVISION-SYSTEM;FIRE;INTRUSION;CONTROL;LIGHT-CONTROL;TEMPERATURE" /&gt;
+		&lt;question id="NumberOfProducts" input="" expectedOutput="24" /&gt;
+	&lt;/test&gt;
+	&lt;test modelFile="test-resources/models/test.fama"&gt;
+		&lt;question id="NumberOfProducts" input="" expectedOutput="4" /&gt;
+	&lt;/test&gt;
+&lt;/tests&gt;
+						</code>
+						</pre>
+					</li>
+				</ol>
+
+				<p>It is suggested you use the Choco 3 reasoner test suite
+					source code to guide your test development as it provides
+					documentation and comments describing what the required methods
+					should do and provide in return. The following steps are particular
+					to testing a FAMA reasoner.</p>
+
+				<ol>
+					<li>Each reasoner implementation should comprise two packages,
+						one to store the test cases for the reasoner implementation itself
+						and another one to store the JUnit4 test cases for the various
+						question implementations. The packages should follow the naming
+						pattern <code>«2-letter country
+							code».«University/Institution».«research group».«project name to
+							test».test.«feature model type»</code>. The second package’s name, the
+						one holding the questions tests, should end with <code>questions</code>.
+						For the Choco 3 reasoner tests we have the package: <code>co.icesi.i2t.Choco3Reasoner.tests.simple</code>.
+					</li>
+					<li>For each implemented question in the reasoner, the
+						previous package will contain a test case implementation extending
+						from the abstract test case <code>AbstractReasonerQuestionTestCase</code>
+						found in the <code>FaMaTestSuite2</code> project. The <code>FaMaTestSuite2</code>
+						project uses parameterized tests included in JUnit 4. A
+						parameterized test is run over and over using different input
+						values. For the <code>FaMaTestSuite2</code>, test inputs are
+						specified in the test loader configuration file. The names of
+						these test cases should follow the naming pattern <code>«name
+							of question»TestCase</code> (using CamelCase). For example, for the
+						number of products question we created a test case in the package
+						<code>co.icesi.i2t.Choco3Reasoner.tests.simple</code> and named it
+						<code>Choco3NumberOfPorductsQuestionTestCase</code> that extends
+						the <code>AbstractReasonerQuestionTestCase</code> abstract test
+						case class provided by the <code>FaMaTestSuite2</code> project in
+						the package <code>co.icesi.i2t.FAMA.TestSuite2.reasoners</code>.
+						The following are required fields and methods for a test case
+						implementation:
+						<ul>
+							<li><code>TEST_CONFIG_FILE:</code> Static string constant to
+								specify the path to the test configuration file from the
+								previous step 9.</li>
+							<li><code>Test case class constructor:</code> Constructor
+								for the test case. Should receive as parameters a variability
+								model path, the inputs required by the question being tested,
+								and the expected output of the question for the given
+								variability model and input.</li>
+							<li><code>loadTests():</code> Loads the tests for question
+								being tested. Tests are specified in the test configuration file
+								in XML format. This method needs to be static and return a
+								Collection. The <code>TestLoader</code> class from the <code>FaMaTestSuite2</code>
+								project provides generic loading methods. For the number of
+								products question test case in the Choco 3 reasoner this method
+								returns a collection of 3-tuples (feature model, input, expected
+								output). The 3-tuples are loaded by the <code>loadQuestionTests</code>
+								method in the <code>TestLoader</code> class.</li>
+							<li><code>Test method for the question:</code> The test
+								method for the question being tested. For the number of products
+								question test case in the Choco 3 reasoner this method tests the
+								<code>getNumberOfProducts</code> method from the <code>Choco3NumberOfProductsQuestion</code>
+								class, which is the method that returns the output value after
+								the question is asked to the reasoner.</li>
+						</ul>
+					</li>
+					<li>The package should also contain a JUnit4 test suite class.
+						(<u>Note:</u> This step should only be made after all test cases
+						for the feature model type have been created.) The <code>New
+							JUnit Test Suite</code> wizard should give you a list of the test cases
+						available to be included in the test suite. Select all the test
+						cases that apply.
+					</li>
+					<li>In the package <code>co.icesi.i2t.Choco3Reasoner.tests</code>
+						create an executable class (<i>i.e.</i> a class with a <i>main</i>
+						method) to run all of the test suites in the project. For the
+						Choco 3 reasoner tests we have the class <code>Choco3ReasonerTestRunner</code>.
+						The following are required methods for the test runner class:
+						<ul>
+							<li><code>main():</code> Static main method that uses the <code>runTests</code>
+								method from the <code>TestRunner</code> class in the <code>FaMaTestSuite2</code>
+								project. The runTests method receives as parameter an array of
+								class objects for the test suite classes to be run.</li>
+						</ul>
+					</li>
+					<li>Prior to running the tests, right click over the test
+						suite project and select <code>Run as » Maven install</code>.
+						Maven will copy all the dependencies .jar files into the lib
+						folder. This may take a while.
+					</li>
+					<li>Once Maven has finished copying the dependencies, run the
+						tests by right clicking over the runner class created previously
+						in step 4 and select <code>Run as » Java Application</code>. Tests
+						will begin and a trace of execution messages can be found in the
+						console.
+					</li>
+				</ol>
+
+				<p>
+					Once you have packaged and tested your FAMA extension you can
+					choose to deploy the FAMA Framework as a standalone application or
+					in an OSGi container, such as Apache Felix or Eclipse’s Equinox.
+					The complete standalone version of the FAMA Framework can be built
+					using the
 					<code>FaMaRelease</code>
 					project. This project automates the generation of all the .jar
-					files for the extensions that make up the framework.
-				</p>
-				<p>
-					<img alt="This page is under construction"
-						src="images/page-under-construction.gif" />
+					files for the extensions that make up the framework. The use of
+					this project is out of the scope of this guide.
 				</p>
 			</section>
 
