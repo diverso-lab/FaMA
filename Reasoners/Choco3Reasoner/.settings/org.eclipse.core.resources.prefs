@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/co/icesi/i2t/Choco3/osgi/Activator.java=UTF-8
+encoding//src/co/icesi/i2t/Choco3Reasoner/Choco3PerformanceResult.java=UTF-8
 encoding//src/co/icesi/i2t/Choco3Reasoner/simple/Choco3Question.java=UTF-8
 encoding//src/co/icesi/i2t/Choco3Reasoner/simple/Choco3Reasoner.java=UTF-8
+encoding//src/co/icesi/i2t/Choco3Reasoner/simple/questions/Choco3CommonalityQuestion.java=UTF-8
+encoding//src/co/icesi/i2t/Choco3Reasoner/simple/questions/Choco3NumberOfProductsQuestion.java=UTF-8
