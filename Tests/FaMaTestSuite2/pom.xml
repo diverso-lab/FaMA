@@ -1,0 +1,99 @@
+<!-- This file is part of FaMaTS. FaMaTS is free software: you can redistribute 
+	it and/or modify it under the terms of the GNU Lesser General Public License 
+	as published by the Free Software Foundation, either version 3 of the License, 
+	or (at your option) any later version. FaMaTS is distributed in the hope 
+	that it will be useful, but WITHOUT ANY WARRANTY; without even the implied 
+	warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+	GNU Lesser General Public License for more details. You should have received 
+	a copy of the GNU Lesser General Public License along with FaMaTS. If not, 
+	see <http://www.gnu.org/licenses/>. -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.us.isa</groupId>
+	<artifactId>FaMaTestSuite2</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>FaMa Test Suite 2</name>
+	<description>A more extensible test suite for the FaMa Framework. Built by the I2T Research Group in collaboration with the FaMa Team.</description>
+	<dependencies>
+		<dependency>
+			<groupId>es.us.isa</groupId>
+			<artifactId>FaMaSDK</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>target</directory>
+		<sourceDirectory>src</sourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>5</source>
+					<target>5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.9.0</version>
+				<configuration>
+					<excludes>
+						<exclude>**/**.xml/**</exclude>
+					</excludes>
+					<header>copyrightNotice.txt</header>
+				</configuration>
+				<executions>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<id>jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<excludeResources>true</excludeResources>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>false</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

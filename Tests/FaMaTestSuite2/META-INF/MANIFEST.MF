@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FaMaTestSuite2
+Bundle-SymbolicName: FaMaTestSuite2
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Vendor: I2T Research Group
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
