@@ -32,7 +32,7 @@ import es.us.isa.FAMA.Reasoner.questions.ValidQuestion;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoValidQuestion Choco 2 implementation for the valid question.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3ValidQuestion extends Choco3Question implements
 		ValidQuestion {

@@ -35,7 +35,7 @@ import es.us.isa.FAMA.models.featureModel.GenericFeature;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoUniqueFeaturesQuestion Choco 2 implementation for the unique features question.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3UniqueFeaturesQuestion extends Choco3Question implements
 		UniqueFeaturesQuestion {

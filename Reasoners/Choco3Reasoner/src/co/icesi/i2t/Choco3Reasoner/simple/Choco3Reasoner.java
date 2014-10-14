@@ -51,7 +51,7 @@ import es.us.isa.util.Node;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.ChocoReasoner Choco 2 reasoner implementation.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3Reasoner extends FeatureModelReasoner {
 
@@ -360,9 +360,9 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		IntVar parentVariable = this.variables.get(parent.getName());
 		
 		// We create a constraint that ensures the parent is present in a product: parent = 1.
-		Constraint parentConstraint = IntConstraintFactory.arithm(parentVariable, "=", 1);
+//		Constraint parentConstraint = IntConstraintFactory.arithm(parentVariable, "=", 1);
 		// We create a constraint that ensures the child is present in a product: child = 1.
-		Constraint childConstraint = IntConstraintFactory.arithm(childVariable, "=", 1);
+//		Constraint childConstraint = IntConstraintFactory.arithm(childVariable, "=", 1);
 		
 		// The LogicalConstraintFactory allows us to create constraints involving propositional logic,
 		// for example a constraint of the type: feature 1 variable LOGIC CONNECTOR feature 2 variable,
@@ -370,9 +370,13 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		
 		// We create the mandatory constraint using the previous two constraints to build the
 		// expression (parent present => child present) and (child present => parent present).
-		Constraint mandatoryConstraint = LogicalConstraintFactory.and(
-				LogicalConstraintFactory.ifThen(parentConstraint, childConstraint),
-				LogicalConstraintFactory.ifThen(childConstraint, parentConstraint));
+//		Constraint mandatoryConstraint = LogicalConstraintFactory.and(
+//				LogicalConstraintFactory.ifThen(parentConstraint, childConstraint),
+//		   		LogicalConstraintFactory.ifThen(childConstraint, parentConstraint));
+		
+		// We could create the previous constraints, but in CSP representation the mandatory 
+		// constraint can be reduced to the expression: (parent = child)
+		Constraint mandatoryConstraint = IntConstraintFactory.arithm(parentVariable, "=", childVariable);
 		
 		// Save the mandatory constraint for future reference.
 		this.dependencies.put(relation.getName(), mandatoryConstraint);
@@ -419,12 +423,16 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		IntVar parentVariable = this.variables.get(parent.getName());
 		
 		// We create a constraint that ensures the parent is not present in a product: parent = 0.
-		Constraint parentConstraint = IntConstraintFactory.arithm(parentVariable, "=", 0);
+//		Constraint parentConstraint = IntConstraintFactory.arithm(parentVariable, "=", 0);
 		// We create a constraint that ensures the child is not present in a product: child = 0.
-		Constraint childConstraint = IntConstraintFactory.arithm(childVariable, "=", 0);
+//		Constraint childConstraint = IntConstraintFactory.arithm(childVariable, "=", 0);
 		// We create the optional constraint using the previous two constraints to build the
 		// expression (parent not selected => child not selected).
-		Constraint optionalConstraint = LogicalConstraintFactory.ifThen(childConstraint, parentConstraint);
+//		Constraint optionalConstraint = LogicalConstraintFactory.ifThen(parentConstraint, childConstraint);
+		
+		// We could create the previous constraints, but in CSP representation the optional 
+		// constraint can be reduced to the expression: (parent >= child)
+		Constraint optionalConstraint = IntConstraintFactory.arithm(parentVariable, ">=", childVariable);
 		
 		// Save the optional constraint for future reference.
 		this.dependencies.put(relation.getName(), optionalConstraint);
@@ -665,7 +673,11 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 			childrenVariables.add(this.variables.get(child.getName()));
 		}
 		// Save the children variables into an array to create a set variable from them.
-		IntVar[] auxChildrenVariables = (IntVar[]) childrenVariables.toArray();
+		IntVar[] auxChildrenVariables = new IntVar[childrenVariables.size()];
+		int i = 0;
+		for (IntVar childVariable : childrenVariables) {
+			auxChildrenVariables[i++] = childVariable;
+		}
 		
 		// Save the cardinality in a variable.
 		// Before creating the cardinality constraint a variable must be created with the domain of the cardinality
@@ -741,9 +753,9 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 						this.solver.post(errorConstraint);
 						// ,
 						// no constraint will be created as it will not be a decisional variable and constraint.
-						System.err.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model and cannot be added");
+						System.out.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model and cannot be added");
 					} else {
-						System.err.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model");
+						System.out.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model");
 					}
 				}
 			} else {
@@ -775,9 +787,9 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 						this.solver.post(errorConstraint);
 						// ,
 						// no constraint will be created as it will not be a decisional variable and constraint.
-						System.err.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model and cannot be added");
+						System.out.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model and cannot be added");
 					} else {
-						System.err.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model");
+						System.out.println("The feature " + variabilityElement.getName() + " does not exist in the CSP model");
 					}
 				}
 			}

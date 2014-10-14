@@ -48,7 +48,7 @@ import es.us.isa.FAMA.models.featureModel.Product;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoValidConfigurationErrorsQuestion Choco 2 implementation for the valid configuration errors question
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3ValidConfigurationErrorsQuestion extends Choco3Question
 		implements ValidConfigurationErrorsQuestion {

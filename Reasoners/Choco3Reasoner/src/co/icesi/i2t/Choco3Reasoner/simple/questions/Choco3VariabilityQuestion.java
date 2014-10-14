@@ -37,7 +37,7 @@ import es.us.isa.FAMA.Reasoner.questions.defaultImpl.DefaultVariabilityQuestion;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoVariabilityQuestion Choco 2 implementation for the variability question
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3VariabilityQuestion extends Choco3Question implements
 		VariabilityQuestion {

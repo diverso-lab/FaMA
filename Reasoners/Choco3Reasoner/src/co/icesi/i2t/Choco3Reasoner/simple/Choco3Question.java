@@ -26,7 +26,7 @@ import es.us.isa.FAMA.Reasoner.Reasoner;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.ChocoQuestion Choco 2 abstract question definition.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public abstract class Choco3Question implements Question {
 

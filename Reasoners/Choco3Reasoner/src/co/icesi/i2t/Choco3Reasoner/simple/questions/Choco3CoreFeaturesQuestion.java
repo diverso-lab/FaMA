@@ -36,7 +36,7 @@ import es.us.isa.FAMA.models.featureModel.GenericFeature;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoCoreFeaturesQuestion Choco 2 implementation for the core features question.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3CoreFeaturesQuestion extends Choco3Question implements
 		CoreFeaturesQuestion {

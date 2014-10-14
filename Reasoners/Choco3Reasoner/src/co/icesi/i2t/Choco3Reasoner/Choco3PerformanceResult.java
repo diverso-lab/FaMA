@@ -30,7 +30,7 @@ import es.us.isa.FAMA.Benchmarking.PerformanceResult;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.ChocoResult Choco 2 performance result implementation.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3PerformanceResult extends PerformanceResult {
 

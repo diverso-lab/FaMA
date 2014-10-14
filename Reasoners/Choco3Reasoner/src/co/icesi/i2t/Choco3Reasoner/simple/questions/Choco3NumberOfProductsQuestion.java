@@ -31,7 +31,7 @@ import es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion;
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoNumberOfProductsQuestion Choco 2 implementation for the number of products question.
- * @version 0.1, June 2014
+ * @version 1.0, June 2014
  */
 public class Choco3NumberOfProductsQuestion extends Choco3Question implements
 		NumberOfProductsQuestion {
@@ -88,13 +88,13 @@ public class Choco3NumberOfProductsQuestion extends Choco3Question implements
 		// Get the solver
 		Solver solver = choco3Reasoner.getSolver();
 		
-		// Set the heuristic or strategy to be used by the reasoner
+		// Set the heuristic or strategy to be used by the reasoner.
 		// TODO Set heuristic MinDomain
 		
-		// The finAllSolutions method attempts to find all the possible solutions to the CSP
-		// and returns the number of solutions obtained
-		// in this case it will represent the number of products that can be derived from the feature model
-		// with the applied constraints
+		// The findAllSolutions method attempts to find all the possible solutions to the CSP
+		// and returns the number of solutions obtained.
+		// In this case it will represent the number of products that can be derived from the feature model
+		// with the applied constraints.
 		this.numberOfProducts = solver.findAllSolutions();
 		
 		// Create and return performance result
