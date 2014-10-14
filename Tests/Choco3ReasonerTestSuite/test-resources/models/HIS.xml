@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="HIS">
+		<binaryRelation name="R-1">
+			<cardinality max="1" min="1" />
+			<solitaryFeature name="SUPERVISION-SYSTEM">
+				<binaryRelation name="R-4">
+					<cardinality max="1" min="1" />
+					<solitaryFeature name="FIRE" />
+				</binaryRelation>
+				<binaryRelation name="R-5">
+					<cardinality max="1" min="1" />
+					<solitaryFeature name="INTRUSION" />
+				</binaryRelation>
+				<binaryRelation name="R-6">
+					<cardinality max="1" min="0" />
+					<solitaryFeature name="FLOOD" />
+				</binaryRelation>
+			</solitaryFeature>
+		</binaryRelation>
+		<binaryRelation name="R-2">
+			<cardinality max="1" min="1" />
+			<solitaryFeature name="CONTROL">
+				<binaryRelation name="R-7">
+					<cardinality max="1" min="1" />
+					<solitaryFeature name="LIGHT-CONTROL" />
+				</binaryRelation>
+				<binaryRelation name="R-8">
+					<cardinality max="1" min="0" />
+					<solitaryFeature name="APPLIANCES-CONTROL" />
+				</binaryRelation>
+				<binaryRelation name="R-9">
+					<cardinality max="1" min="1" />
+					<solitaryFeature name="TEMPERATURE" />
+				</binaryRelation>
+			</solitaryFeature>
+		</binaryRelation>
+		<binaryRelation name="R-3">
+			<cardinality max="1" min="0" />
+			<solitaryFeature name="SERVICES">
+				<setRelation name="R-10">
+					<cardinality max="2" min="1" />
+					<groupedFeature name="VIDEO" />
+					<groupedFeature name="INTERNET">
+						<setRelation name="R-11">
+							<cardinality max="1" min="1" />
+							<groupedFeature name="POWER-LINE" />
+							<groupedFeature name="ADSL" />
+							<groupedFeature name="WIRELESS" />
+						</setRelation>
+					</groupedFeature>
+				</setRelation>
+			</solitaryFeature>
+		</binaryRelation>
+	</feature>
+	<excludes name="ex-1" feature="LIGHT-CONTROL" excludes="POWER-LINE" />
+</feature-model>

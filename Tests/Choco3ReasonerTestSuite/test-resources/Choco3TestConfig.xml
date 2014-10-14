@@ -1,0 +1,24 @@
+<tests>
+	<test modelFile="test-resources/models/HIS.xml">
+		<question id="Commonality" input="" expectedOutput="" />
+		<question id="CoreFeatures" input="" expectedOutput="" />
+		<question id="DeadFeatures" input="" expectedOutput="" />
+		<question id="DetectErrors" input="" expectedOutput="" />
+		<question id="ExplainErrors" input="" expectedOutput="" />
+		<question id="ExplainInvalidProduct" input="" expectedOutput="" />
+		<question id="Homogeneity" input="" expectedOutput="" />
+		<question id="NumberOfProducts" input="" expectedOutput="24" />
+		<question id="OneProduct" input="" expectedOutput="" />
+		<question id="Products" input="" expectedOutput="" />
+		<question id="UniqueFeatures" input="" expectedOutput="" />
+		<question id="ValidConfigurationErrors" input="" expectedOutput="" />
+		<question id="ValidConfiguration" input="" expectedOutput="" />
+		<question id="ValidProduct" input="" expectedOutput="" />
+		<question id="Valid" input="" expectedOutput="" />
+		<question id="Variability" input="" expectedOutput="" />
+		<question id="Variant" input="" expectedOutput="" />
+	</test>
+	<test modelFile="test-resources/models/test.fama">
+		<question id="NumberOfProducts" input="" expectedOutput="4" />
+	</test>
+</tests>

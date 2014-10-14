@@ -1,0 +1,23 @@
+<questionTrader>
+	<reasoner id="Choco3" file="lib/Choco3Reasoner-1.0.0-SNAPSHOT.jar" class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" />
+	<criteriaSelector name="default" class="es.us.isa.FAMA.Reasoner.DefaultCriteriaSelector"/>
+	<question id="Products" interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion"/>
+	<question id="#Products" interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion"/>
+	<question id="ValidConfigurationErrors" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion"/>
+	<question id="Commonality" interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion"/>
+	<question id="Filter" interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion"/>
+	<question id="Valid" interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion"/>
+	<question id="DetectErrors" interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion"/>
+	<question id="Explanations" interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion"/>
+	<question id="Set" interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion"/>
+	<question id="ValidProduct" interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion"/>
+	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion"/>
+	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion"/>
+	<models>
+		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-1.0.0.jar"/>
+		<reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaFeatureModel-1.0.0.jar"/>
+		<writer extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLWriter" file="lib/FaMaFeatureModel-1.0.0.jar"/>
+		<writer extensions="dot,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.GraphVizWriter" file="lib/FaMaFeatureModel-1.0.0.jar"/>
+	</models>
+	<transform id="AtomicSet" interface="es.us.isa.FAMA.Reasoner.models.FAMAfeatureModel.transformations.AtomicSet" file="lib/FaMaFeatureModel-1.0.0.jar"/>
+</questionTrader>
