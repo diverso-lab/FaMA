@@ -16,16 +16,18 @@
 		<question id="ValidProduct" input="" expectedOutput="" />
 		<question id="Valid" input="" expectedOutput="" />
 		<question id="Variability" input="" expectedOutput="" />
-		<question id="Variant" input="" expectedOutput="" />
+		<question id="Variant" input="" expectedOutput="FLOOD;APPLIANCES-CONTROL;SERVICES;VIDEO;INTERNET;ADSL;WIRELESS" />
 	</test>
 	<test modelFile="test-resources/models/test.fama">
 		<question id="#Products" input="" expectedOutput="4" />
 		<question id="CoreFeatures" input="" expectedOutput="root" />
 		<question id="Products" input="" expectedOutput="root;root:child01;root:child02;root:child01:child02" />
+		<question id="Variant" input="" expectedOutput="child01;child02" />
 	</test>
 	<test modelFile="test-resources/models/Car.xml">
-		<question id="#Products" input="" expectedOutput="8" />
+		<question id="#Products" input="" expectedOutput="12" />
 		<question id="CoreFeatures" input="" expectedOutput="Car;Body;Transmission;Engine" />
 		<question id="Products" input="" expectedOutput="" />
+		<question id="Variant" input="" expectedOutput="Automatic;Manual;Electric;Gasoline;Cruise" />
 	</test>
 </tests>

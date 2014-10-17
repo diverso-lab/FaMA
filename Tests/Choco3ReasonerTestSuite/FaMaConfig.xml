@@ -14,6 +14,7 @@
 	<question id="ValidConfiguration" interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion"/>
 	<question id="Variability" interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion"/>
 	<question id="CoreFeatures" interface="es.us.isa.FAMA.Reasoner.questions.CoreFeaturesQuestion"/>
+	<question id="Variant" interface="es.us.isa.FAMA.Reasoner.questions.VariantFeaturesQuestion"/>
 	<models>
 		<reader extensions="xml,fama" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.XMLReader" file="lib/FaMaFeatureModel-1.0.0.jar"/>
 		<reader extensions="fm,fmf" class="es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.FMPlainTextReader" file="lib/FaMaFeatureModel-1.0.0.jar"/>
