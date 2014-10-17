@@ -16,14 +16,13 @@
  */
 package co.icesi.i2t.Choco3Reasoner.tests.simple;
 
-import static org.junit.Assert.*;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
@@ -46,6 +45,7 @@ import es.us.isa.FAMA.models.FAMAfeatureModel.Relation;
 import es.us.isa.FAMA.models.FAMAfeatureModel.RequiresDependency;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.featureModel.GenericFeature;
+import es.us.isa.util.Node;
 
 /**
  * Test case for the Choco 3 Reasoner.
@@ -119,7 +119,11 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testUnapplyStagedConfigurations() {
-		fail("Not yet implemented"); // TODO
+//		System.out.println("\n[TEST] Unapply staged configuration");
+//		System.out.println("For model: \"" + variabilityModelPath + "\"");
+//		System.out.println("For configuration: ");
+		// TODO How to create a configuration object?
+//		fail("Not yet implemented");
 	}
 
 	/**
@@ -129,7 +133,11 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testApplyStagedConfiguration() {
-		fail("Not yet implemented"); // TODO
+//		System.out.println("\n[TEST] Apply staged configuration");
+//		System.out.println("For model: \"" + variabilityModelPath + "\"");
+//		System.out.println("For configuration: ");
+		// TODO
+//		fail("Not yet implemented");
 	}
 
 	/**
@@ -160,7 +168,9 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 			for (int i = 0; featuresIterator.hasNext() && i <= randomFeatureIndex; i++) {
 				feature = (Feature) featuresIterator.next();
 			}
-			choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+			Collection<Cardinality> cardinalities = getFeatureCardinalities(feature);
+			
+			choco3Reasoner.addFeature(feature, cardinalities);
 			Map<String, IntVar> variables = choco3Reasoner.getVariables();
 
 			System.out.println("For feature: " + feature.getName());
@@ -218,9 +228,10 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 		}
 
 		choco3Reasoner.addFeature(root, cardinalities);
+		
 		choco3Reasoner.addRoot(root);
 		Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
-
+		
 		System.out.println("For root feature: " + root.getName());
 		System.out.println("Obtained constraint: " + dependencies.get("Root"));
 	}
@@ -614,17 +625,21 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 				}
 			}
 			
-			// TODO Add the features involved in the constraint.
-//			choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+			Node<String> rootNode = constraintDependency.getAST().getRootElement();
+			List<Node<String>> children = rootNode.getChildren();
+			for (Node<String> node : children) {
+				if (node.getChildren().size() == 0) {
+					Feature feature = new Feature(node.getData());
+					choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+				}
+			}
 			choco3Reasoner.addConstraint(constraintDependency);
 
 			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			// TODO Show involved features.
-			System.out.println("For features: ?");
+			System.out.println("For features: " + choco3Reasoner.getAllFeatures());
 			System.out.println("Relationship name: " + constraintDependency.getName());
 			System.out.println("Obtained constraint: " + dependencies.get(constraintDependency.getName()));
-			fail("Not yet finished implementation"); // TODO
 		} else {
 			System.out.println("The model has no custom constraints.");
 		}

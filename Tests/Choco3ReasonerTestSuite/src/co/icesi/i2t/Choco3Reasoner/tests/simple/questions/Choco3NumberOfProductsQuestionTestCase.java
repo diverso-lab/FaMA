@@ -25,9 +25,12 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import solver.Solver;
+import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3NumberOfProductsQuestion;
 import co.icesi.i2t.FAMA.TestSuite2.reasoners.AbstractReasonerQuestionTestCase;
 import co.icesi.i2t.FAMA.TestSuite2.TestLoader;
+import es.us.isa.FAMA.Reasoner.Reasoner;
 
 /**
  * Test case for the Number of products question in the Choco 3 Reasoner.
@@ -42,6 +45,11 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 	 * Test configuration file path
 	 */
 	private static final String TEST_CONFIG_FILE = "test-resources/Choco3TestConfig.xml";
+
+	/**
+	 * Question name
+	 */
+	private static final String QUESTION = "#Products";
 	
 	/**
 	 * Rounding delta needed when comparing two double variables.
@@ -74,7 +82,7 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 	@Parameters
 	public static Collection<?> loadTests() throws FileNotFoundException,
 			Exception {
-		return Arrays.asList(TestLoader.loadQuestionTests(TEST_CONFIG_FILE, "NumberOfProducts"));
+		return Arrays.asList(TestLoader.loadQuestionTests(TEST_CONFIG_FILE, QUESTION));
 	}
 
 	/**
@@ -89,23 +97,45 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 		// Load the variability model that will be evaluated during the test.
 		variabilityModel = questionTrader.openFile(variabilityModelPath);
 		questionTrader.setVariabilityModel(variabilityModel);
+		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
-		Choco3NumberOfProductsQuestion choco3NumberOfProductsQuestion = (Choco3NumberOfProductsQuestion) questionTrader
-				.createQuestion("#Products");
-		if (choco3NumberOfProductsQuestion == null) {
-			fail("Current reasoner does not accept this operation.");
-		} else {
+		Choco3NumberOfProductsQuestion choco3NumberOfProductsQuestion = (Choco3NumberOfProductsQuestion) questionTrader.createQuestion(QUESTION);
+		
+		if (choco3NumberOfProductsQuestion != null) {
 			questionTrader.ask(choco3NumberOfProductsQuestion);
 			
-			double output = choco3NumberOfProductsQuestion
-					.getNumberOfProducts();
+			Choco3Reasoner choco3Reasoner = null;
+			for (String reasonerID : questionTrader.getAvaliableReasoners(QUESTION)) {
+				Reasoner reasoner = questionTrader.getReasonerById(reasonerID);
+				if (reasoner instanceof Choco3Reasoner) {
+					choco3Reasoner = (Choco3Reasoner) reasoner;
+				}
+			}
 			
-			System.out.println("For model: \"" + variabilityModelPath + "\"");
-			System.out
-					.println("Expected number of products: " + expectedOutput);
-			System.out.println("Obtained number of products: " + output);
-			
-			assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
+			if (choco3Reasoner != null) {
+				try {
+					Solver solver = choco3Reasoner.getSolver();
+					
+					System.out.println(solver);
+					
+					double output = choco3NumberOfProductsQuestion.getNumberOfProducts();
+					
+					System.out.println("Expected number of products: " + expectedOutput);
+					System.out.println("Obtained number of products: " + output);
+					
+					assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
+					System.out.println("[INFO] Test case passed");
+				} catch (AssertionError e) {
+					System.out.println("[INFO] Test case failed");
+					throw e;
+				}
+			} else {
+				fail("Available reasoner is not supported with Choco 3");
+				System.out.println("[INFO] Available reasoner is not supported with Choco 3");
+			}
+		} else {
+			fail("Current reasoner does not accept this operation.");
+			System.out.println("[INFO] Current reasoner does not accept this operation.");
 		}
 	}
 

@@ -1,13 +1,13 @@
 <tests>
 	<test modelFile="test-resources/models/HIS.xml">
 		<question id="Commonality" input="" expectedOutput="" />
-		<question id="CoreFeatures" input="" expectedOutput="" />
+		<question id="CoreFeatures" input="" expectedOutput="HIS;SUPERVISION-SYSTEM;FIRE;INTRUSION;CONTROL;LIGHT-CONTROL;TEMPERATURE" />
 		<question id="DeadFeatures" input="" expectedOutput="" />
 		<question id="DetectErrors" input="" expectedOutput="" />
 		<question id="ExplainErrors" input="" expectedOutput="" />
 		<question id="ExplainInvalidProduct" input="" expectedOutput="" />
 		<question id="Homogeneity" input="" expectedOutput="" />
-		<question id="NumberOfProducts" input="" expectedOutput="24" />
+		<question id="#Products" input="" expectedOutput="24" />
 		<question id="OneProduct" input="" expectedOutput="" />
 		<question id="Products" input="" expectedOutput="" />
 		<question id="UniqueFeatures" input="" expectedOutput="" />
@@ -19,6 +19,13 @@
 		<question id="Variant" input="" expectedOutput="" />
 	</test>
 	<test modelFile="test-resources/models/test.fama">
-		<question id="NumberOfProducts" input="" expectedOutput="4" />
+		<question id="#Products" input="" expectedOutput="4" />
+		<question id="CoreFeatures" input="" expectedOutput="root" />
+		<question id="Products" input="" expectedOutput="root;root:child01;root:child02;root:child01:child02" />
+	</test>
+	<test modelFile="test-resources/models/Car.xml">
+		<question id="#Products" input="" expectedOutput="8" />
+		<question id="CoreFeatures" input="" expectedOutput="Car;Body;Transmission;Engine" />
+		<question id="Products" input="" expectedOutput="" />
 	</test>
 </tests>

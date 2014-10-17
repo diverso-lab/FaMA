@@ -20,7 +20,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3CoreFeaturesQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3NumberOfProductsQuestionTestCase;
+import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3ProductsQuestionTestCase;
 
 /**
  * Choco 3 Reasoner test suite. This class runs all the test cases related to
@@ -30,8 +32,10 @@ import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3NumberOfProducts
  * @version 1.0, September 2014
  */
 @RunWith(Suite.class)
-@SuiteClasses({ Choco3ReasonerReasonerTestCase.class,
-		Choco3NumberOfProductsQuestionTestCase.class })
+@SuiteClasses({ /*Choco3ReasonerReasonerTestCase.class,*/
+		Choco3NumberOfProductsQuestionTestCase.class,
+		Choco3CoreFeaturesQuestionTestCase.class,
+		Choco3ProductsQuestionTestCase.class })
 public class Choco3ReasonerSimpleTestSuite {
 
 }
