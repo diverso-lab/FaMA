@@ -265,13 +265,13 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		// We look for all the cardinalities in the cardinalities collection and save them to a sorted set of integer values.
 		SortedSet<Integer> cardinalityValues = new TreeSet<Integer>();
 		// We add the value 0.
-		cardinalityValues.add(0);
+//		cardinalityValues.add(0);
 		while (cardinalitiesIterator.hasNext()) {
 			Cardinality cardinality = cardinalitiesIterator.next();
 			// A cardinality has a minimum value and a maximum value.
 			int min = cardinality.getMin();
 			int max = cardinality.getMax();
-			for (int i = min; i < max; i++) {
+			for (int i = min; i <= max; i++) {
 				// We don't have to check if it is already inserted into the set,
 				// because no repeated elements are allowed in the set.
 				cardinalityValues.add(i);

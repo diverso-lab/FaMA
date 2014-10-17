@@ -144,7 +144,7 @@ Bundle-Name: Choco3Reasoner
 Created-By: Apache Maven Bundle Plugin
 Build-Jdk: 1.7.0_12-ea
 Bundle-Version: 1.0.0.SNAPSHOT
-Bnd-LastModified: 1413255973521
+Bnd-LastModified: 1413525585101
 Bundle-ManifestVersion: 2
 Bundle-Activator: co.icesi.i2t.Choco3.osgi.Activator
 Bundle-Description: A reasoner for FaMa, based on Choco Solver v3. Bui

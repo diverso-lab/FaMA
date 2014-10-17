@@ -21,6 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import solver.Solver;
+import solver.search.solution.AllSolutionsRecorder;
+import solver.search.solution.ISolutionRecorder;
 import solver.search.solution.Solution;
 import solver.variables.IntVar;
 import solver.variables.Variable;
@@ -31,12 +33,13 @@ import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.questions.ProductsQuestion;
 import es.us.isa.FAMA.models.featureModel.Product;
-import es.us.isa.FAMA.models.variabilityModel.GenericProduct;
 
 /**
  * Implementation to solve the all products question using the Choco 3 reasoner.
  * This operation calculates all valid products that can be 
  * derived from the feature model with the specified constraints.
+ * 
+ * Asking this question may cause a memory explosion, thus the reasoner may fail.
  * 
  * @author Andrés Paz, I2T Research Group, Icesi University, Cali - Colombia
  * @see es.us.isa.ChocoReasoner.questions.ChocoProductsQuestion Choco 2 implementation for the all products question.
@@ -73,7 +76,7 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 	 * 
 	 * @see es.us.isa.FAMA.Reasoner.questions.OneProductQuestion#getProduct()
 	 */
-	public Collection<? extends GenericProduct> getAllProducts() {
+	public Collection<Product> getAllProducts() {
 		return this.products;
 	}
 
@@ -98,9 +101,15 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 		// Set the heuristic or strategy to be used by the reasoner
 		// TODO Set heuristic MinDomain
 		
+		// Use a solution recorder that records all solutions that are found.
+		// Asking this question may cause a memory explosion, thus the reasoner may fail.
+		ISolutionRecorder defaultSolutionRecorder = solver.getSolutionRecorder();
+		solver.set(new AllSolutionsRecorder(solver));
+		
 		// The findAllSolutions method attempts to find all possible solutions to the CSP
 		// and it returns the number of solutions obtained
-		if (solver.findAllSolutions() > 0) {
+		long solutionsFound = solver.findAllSolutions();
+		if (solutionsFound > 0) {
 			// If at least one solution is found
 			// Solutions cannot be retrieved directly from the solver
 			// They are stored by a solution recorder
@@ -132,6 +141,8 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 		// Create and return performance result
 		Choco3PerformanceResult performanceResult = new Choco3PerformanceResult();
 		performanceResult.addFields(solver);
+		// Reset to the default solution recorder.
+//		solver.set(defaultSolutionRecorder);
 		return performanceResult;
 	}
 
