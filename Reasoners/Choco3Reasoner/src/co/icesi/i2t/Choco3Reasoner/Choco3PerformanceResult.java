@@ -58,6 +58,7 @@ public class Choco3PerformanceResult extends PerformanceResult {
 		this.depth = 0;
 		this.nodes = 0;
 		this.backtracks = 0;
+		this.time = 0;
 	}
 	
 	/**

@@ -482,12 +482,16 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		
 		// We create a constraint that states the origin feature must be present at least one time
 		// (this depends on its cardinality) in a product: origin > 0.
-		Constraint originConstraint = IntConstraintFactory.arithm(originVariable, ">", 0);
+//		Constraint originConstraint = IntConstraintFactory.arithm(originVariable, ">", 0);
 		// We create a constraint that states the destination feature can not not be present in the product: destination = 0.
-		Constraint destinationConstraint = IntConstraintFactory.arithm(destinationVariable, "=", 0);
+//		Constraint destinationConstraint = IntConstraintFactory.arithm(destinationVariable, "=", 0);
 		// We create the excludes constraint using the previous two constraints to build the
 		// expression (origin present => destination not present).
-		Constraint excludesConstraint = LogicalConstraintFactory.ifThen(originConstraint, destinationConstraint);
+//		Constraint excludesConstraint = LogicalConstraintFactory.ifThen(originConstraint, destinationConstraint);
+		
+		// We could create the previous constraints, but in CSP representation the excludes 
+		// constraint can be reduced to the expression: (origin > destination)
+		Constraint excludesConstraint = IntConstraintFactory.arithm(originVariable, ">", destinationVariable);
 		
 		// Save the excludes constraint for future reference.
 		this.dependencies.put(relation.getName(), excludesConstraint);
@@ -535,13 +539,17 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 		
 		// We create a constraint that states the origin feature must be present at least one time
 		// (this depends on its cardinality) in a product: origin > 0.
-		Constraint originConstraint = IntConstraintFactory.arithm(originVariable, ">", 0);
+//		Constraint originConstraint = IntConstraintFactory.arithm(originVariable, ">", 0);
 		// We create a constraint that states the destination feature must be present at least one time
 		// (this depends on its cardinality) in a product: destination > 0.
-		Constraint destinationConstraint = IntConstraintFactory.arithm(destinationVariable, ">", 0);
+//		Constraint destinationConstraint = IntConstraintFactory.arithm(destinationVariable, ">", 0);
 		// We create the requires constraint using the previous two constraints to build the
 		// expression (origin present => destination present).
-		Constraint requiresConstraint = LogicalConstraintFactory.ifThen(originConstraint, destinationConstraint);
+//		Constraint requiresConstraint = LogicalConstraintFactory.ifThen(originConstraint, destinationConstraint);
+		
+		// We could create the previous constraints, but in CSP representation the requires 
+		// constraint can be reduced to the expression: (origin = destination)
+		Constraint requiresConstraint = IntConstraintFactory.arithm(originVariable, "=", destinationVariable);
 		
 		// Save the excludes constraint for future reference.
 		this.dependencies.put(relation.getName(), requiresConstraint);

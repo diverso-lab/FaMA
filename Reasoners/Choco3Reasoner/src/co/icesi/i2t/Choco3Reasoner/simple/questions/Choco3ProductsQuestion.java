@@ -32,6 +32,7 @@ import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.questions.ProductsQuestion;
+import es.us.isa.FAMA.models.featureModel.GenericFeature;
 import es.us.isa.FAMA.models.featureModel.Product;
 
 /**
@@ -128,13 +129,21 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 						// This means the feature represented by this variable was selected to be
 						// present in the product found
 						if (solution.getIntVal((IntVar) variable) > 0) {
-							// Add the feature to the product
-							product.addFeature(choco3Reasoner.searchFeatureByName(variable.getName()));
+							// Search for the feature in the reasoner
+							GenericFeature feature = choco3Reasoner.searchFeatureByName(variable.getName());
+							if (feature != null) {
+								// If the feature was found
+								// Add the feature to the product
+								product.addFeature(feature);
+							}
 						}
 					}
 				}
-				// Add the product to the list of products
-				this.products.add(product);
+				// Add the product to the list of products if the product 
+				// is not already in the list
+				if (!this.products.contains(product)) {
+					this.products.add(product);
+				}
 			}
 		}
 		
@@ -142,7 +151,7 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 		Choco3PerformanceResult performanceResult = new Choco3PerformanceResult();
 		performanceResult.addFields(solver);
 		// Reset to the default solution recorder.
-//		solver.set(defaultSolutionRecorder);
+		solver.set(defaultSolutionRecorder);
 		return performanceResult;
 	}
 

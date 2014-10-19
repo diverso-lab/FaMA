@@ -16,13 +16,23 @@
  */
 package co.icesi.i2t.Choco3Reasoner.simple.questions;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import solver.Solver;
+import solver.search.solution.AllSolutionsRecorder;
+import solver.search.solution.ISolutionRecorder;
+import solver.search.solution.Solution;
+import solver.variables.IntVar;
+import solver.variables.Variable;
 import co.icesi.i2t.Choco3Reasoner.Choco3PerformanceResult;
 import co.icesi.i2t.Choco3Reasoner.simple.Choco3Question;
 import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion;
+import es.us.isa.FAMA.models.featureModel.GenericFeature;
+import es.us.isa.FAMA.models.featureModel.Product;
 
 /**
  * Implementation to solve the number of products question using the Choco 3 reasoner.
@@ -95,11 +105,62 @@ public class Choco3NumberOfProductsQuestion extends Choco3Question implements
 		// and returns the number of solutions obtained.
 		// In this case it will represent the number of products that can be derived from the feature model
 		// with the applied constraints.
-		this.numberOfProducts = solver.findAllSolutions();
+		// 
+		// NOTE: The Choco 3 solver is repeating solutions, hence, solutions must recorded and 
+		// filtered one by one.
+//		this.numberOfProducts = solver.findAllSolutions();
+		
+		// Use a solution recorder that records all solutions that are found.
+		// Asking this question may cause a memory explosion, thus the reasoner may fail.
+		ISolutionRecorder defaultSolutionRecorder = solver.getSolutionRecorder();
+		solver.set(new AllSolutionsRecorder(solver));
+		
+		List<Product> products = new LinkedList<Product>();
+		long solutionsFound = solver.findAllSolutions();
+		if (solutionsFound > 0) {
+			// If at least one solution is found
+			// Solutions cannot be retrieved directly from the solver
+			// They are stored by a solution recorder
+			// Since we're interested in all the solutions we retrieve all solutions
+			List<Solution> solutions = solver.getSolutionRecorder().getSolutions();
+			for (Solution solution : solutions) {
+				// Find the features that will be present in the product represented by the solution
+				Product product = new Product();
+				for (int i = 0; i < solver.getNbVars(); i++) {
+					Variable variable = solver.getVar(i);
+					// If the current variable is of type IntVar
+					// We're interested in this type of variables since they are the ones
+					// that represent features in the CSP
+					if (variable instanceof IntVar) {
+						// Check if the variable's value is greater than zero
+						// This means the feature represented by this variable was selected to be
+						// present in the product found
+						if (solution.getIntVal((IntVar) variable) > 0) {
+							// Search for the feature in the reasoner
+							GenericFeature feature = choco3Reasoner.searchFeatureByName(variable.getName());
+							if (feature != null) {
+								// If the feature was found
+								// Add the feature to the product
+								product.addFeature(feature);
+							}
+						}
+					}
+				}
+				// Add the product to the list of products if the product 
+				// is not already in the list.
+				if (!products.contains(product)) {
+					products.add(product);
+				}
+			}
+			// Set the number of products found.
+			this.numberOfProducts = products.size();
+		}
 		
 		// Create and return performance result
 		Choco3PerformanceResult performanceResult = new Choco3PerformanceResult();
 		performanceResult.addFields(solver);
+		// Reset to the default solution recorder.
+		solver.set(defaultSolutionRecorder);
 		return performanceResult;
 	}
 
