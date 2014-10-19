@@ -25,12 +25,9 @@ import java.util.Collection;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import solver.Solver;
-import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3NumberOfProductsQuestion;
 import co.icesi.i2t.FAMA.TestSuite2.reasoners.AbstractReasonerQuestionTestCase;
 import co.icesi.i2t.FAMA.TestSuite2.TestLoader;
-import es.us.isa.FAMA.Reasoner.Reasoner;
 
 /**
  * Test case for the Number of products question in the Choco 3 Reasoner.
@@ -103,35 +100,23 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 		
 		if (choco3NumberOfProductsQuestion != null) {
 			questionTrader.ask(choco3NumberOfProductsQuestion);
-			
-			Choco3Reasoner choco3Reasoner = null;
-			for (String reasonerID : questionTrader.getAvaliableReasoners(QUESTION)) {
-				Reasoner reasoner = questionTrader.getReasonerById(reasonerID);
-				if (reasoner instanceof Choco3Reasoner) {
-					choco3Reasoner = (Choco3Reasoner) reasoner;
-				}
-			}
-			
-			if (choco3Reasoner != null) {
-				try {
-					Solver solver = choco3Reasoner.getSolver();
-					
-					System.out.println(solver);
-					
-					double output = choco3NumberOfProductsQuestion.getNumberOfProducts();
-					
+			try {
+				double output = choco3NumberOfProductsQuestion.getNumberOfProducts();
+				
+				if (!expectedOutput.equals("")) {
 					System.out.println("Expected number of products: " + expectedOutput);
 					System.out.println("Obtained number of products: " + output);
 					
 					assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
 					System.out.println("[INFO] Test case passed");
-				} catch (AssertionError e) {
-					System.out.println("[INFO] Test case failed");
-					throw e;
+				} else {
+					System.out.println("[INFO] No expected output for test case.");
+					System.out.println("Obtained number of products: " + output);
+					System.out.println("[INFO] Test case ignored");
 				}
-			} else {
-				fail("Available reasoner is not supported with Choco 3");
-				System.out.println("[INFO] Available reasoner is not supported with Choco 3");
+			} catch (AssertionError e) {
+				System.out.println("[INFO] Test case failed");
+				throw e;
 			}
 		} else {
 			fail("Current reasoner does not accept this operation.");

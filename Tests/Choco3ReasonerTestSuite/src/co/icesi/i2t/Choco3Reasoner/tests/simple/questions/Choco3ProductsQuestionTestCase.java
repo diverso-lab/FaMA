@@ -19,25 +19,18 @@ package co.icesi.i2t.Choco3Reasoner.tests.simple.questions;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+import java.util.LinkedList;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import solver.Solver;
-import solver.search.solution.Solution;
-import solver.variables.IntVar;
-import solver.variables.Variable;
-import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ProductsQuestion;
 import co.icesi.i2t.FAMA.TestSuite2.TestLoader;
 import co.icesi.i2t.FAMA.TestSuite2.reasoners.AbstractReasonerQuestionTestCase;
-import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Feature;
 import es.us.isa.FAMA.models.featureModel.Product;
 
@@ -104,73 +97,48 @@ public class Choco3ProductsQuestionTestCase extends
 		
 		if (choco3ProductsQuestion != null) {
 			questionTrader.ask(choco3ProductsQuestion);
-			
-			Choco3Reasoner choco3Reasoner = null;
-			for (String reasonerID : questionTrader.getAvaliableReasoners(QUESTION)) {
-				Reasoner reasoner = questionTrader.getReasonerById(reasonerID);
-				if (reasoner instanceof Choco3Reasoner) {
-					choco3Reasoner = (Choco3Reasoner) reasoner;
-				}
-			}
-			
-			if (choco3Reasoner != null) {
-				try {
-					Comparator<Product> comparator = new Comparator<Product>() {
-					    public int compare(Product c1, Product c2) {
-					        return c2.getName().compareTo(c1.getName());
-					    }
-					};
-					
-					if (!expectedOutput.equals("")) {
-						ArrayList<Product> expectedProducts = new ArrayList<Product>();
-						String[] expectedOutputs = expectedOutput.split(";");
-						for (int i = 0; i < expectedOutputs.length; i++) {
-							String expectedProduct = expectedOutputs[i];
-							String[] expectedFeatures = expectedProduct.split(":");
-							Product product = new Product();
-							for (int j = 0; j < expectedFeatures.length; j++) {
-								String expectedFeature = expectedFeatures[j];
-								Feature feature = new Feature(expectedFeature);
-								product.addFeature(feature);
-							}
-							expectedProducts.add(product);
+			try {
+				Comparator<Product> comparator = new Comparator<Product>() {
+				    public int compare(Product c1, Product c2) {
+				        return c2.toString().compareTo(c1.toString());
+				    }
+				};
+				
+				LinkedList<Product> output = (LinkedList<Product>) choco3ProductsQuestion.getAllProducts();
+				Collections.sort(output, comparator);
+				
+				if (!expectedOutput.equals("")) {
+					LinkedList<Product> expectedProducts = new LinkedList<Product>();
+					String[] expectedOutputs = expectedOutput.split(";");
+					for (int i = 0; i < expectedOutputs.length; i++) {
+						String expectedProduct = expectedOutputs[i];
+						String[] expectedFeatures = expectedProduct.split(":");
+						Product product = new Product();
+						for (int j = 0; j < expectedFeatures.length; j++) {
+							String expectedFeature = expectedFeatures[j];
+							Feature feature = new Feature(expectedFeature);
+							product.addFeature(feature);
 						}
-						Collections.sort(expectedProducts, comparator);
-						
-						ArrayList<Product> output = new ArrayList<Product>();
-						Solver solver = choco3Reasoner.getSolver();
-						List<Solution> solutions = solver.getSolutionRecorder().getSolutions();
-						for (Solution solution : solutions) {
-							Product product = new Product();
-							for (int i = 0; i < solver.getNbVars(); i++) {
-								Variable variable = solver.getVar(i);
-								if (variable instanceof IntVar) {
-									if (solution.getIntVal((IntVar) variable) > 0) {
-										product.addFeature(choco3Reasoner.searchFeatureByName(variable.getName()));
-									}
-								}
-							}
-							output.add(product);
-						}
-						Collections.sort(output, comparator);
-						
-						System.out.println("Expected products: " + expectedProducts);
-						System.out.println("Obtained products: " + output);
-						
-						assertEquals(expectedProducts, output);
-						System.out.println("[INFO] Test case passed");
-					
-					} else {
-						System.out.println("No expected output for test case.");
-						System.out.println("[INFO] Test case ignored");
+						expectedProducts.add(product);
 					}
-				} catch (AssertionError e) {
-					System.out.println("[INFO] Test case failed");
-					throw e;
+					Collections.sort(expectedProducts, comparator);
+
+					System.out.println("Expected products: " + expectedProducts);
+					System.out.println("Obtained products: " + output);
+					
+					assertEquals(expectedProducts, output);
+					System.out.println("[INFO] Test case passed");
+				
+				} else {
+					System.out.println("[INFO] No expected output for test case.");
+					System.out.println("Obtained products: " + output);
+					System.out.println("[INFO] Test case ignored");
 				}
-			} else {
-				fail("Available reasoner is not supported with Choco 3");
-				System.out.println("[INFO] Available reasoner is not supported with Choco 3");
+			} catch (AssertionError e) {
+				System.out.println("[INFO] Test case failed");
+				throw e;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} else {
 			fail("Current reasoner does not accept this operation.");

@@ -28,11 +28,9 @@ import java.util.Comparator;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3VariantFeaturesQuestion;
 import co.icesi.i2t.FAMA.TestSuite2.TestLoader;
 import co.icesi.i2t.FAMA.TestSuite2.reasoners.AbstractReasonerQuestionTestCase;
-import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Feature;
 import es.us.isa.FAMA.models.featureModel.GenericFeature;
 
@@ -93,23 +91,17 @@ System.out.println("\n[TEST] Variant Features");
 		
 		if (choco3VariantFeaturesQuestion != null) {
 			questionTrader.ask(choco3VariantFeaturesQuestion);
-			
-			Choco3Reasoner choco3Reasoner = null;
-			for (String reasonerID : questionTrader.getAvaliableReasoners(QUESTION)) {
-				Reasoner reasoner = questionTrader.getReasonerById(reasonerID);
-				if (reasoner instanceof Choco3Reasoner) {
-					choco3Reasoner = (Choco3Reasoner) reasoner;
-				}
-			}
-			
-			if (choco3Reasoner != null) {
-				try {
-					Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
-					    public int compare(GenericFeature c1, GenericFeature c2) {
-					        return c2.getName().compareTo(c1.getName());
-					    }
-					};
-					
+			try {
+				Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
+				    public int compare(GenericFeature c1, GenericFeature c2) {
+				        return c2.getName().compareTo(c1.getName());
+				    }
+				};
+				
+				ArrayList<GenericFeature> output = (ArrayList<GenericFeature>) choco3VariantFeaturesQuestion.getVariantFeats();
+				Collections.sort(output, comparator);
+				
+				if (!expectedOutput.equals("")) {
 					String[] expectedOutputs = expectedOutput.split(";");
 					ArrayList<GenericFeature> expectedVariantFeatures = new ArrayList<GenericFeature>();
 					for (int i = 0; i < expectedOutputs.length; i++) {
@@ -118,21 +110,19 @@ System.out.println("\n[TEST] Variant Features");
 					}
 					Collections.sort(expectedVariantFeatures, comparator);
 					
-					ArrayList<GenericFeature> output = (ArrayList<GenericFeature>) choco3VariantFeaturesQuestion.getVariantFeats();
-					Collections.sort(output, comparator);
-					
 					System.out.println("Expected variant features: " + expectedVariantFeatures);
 					System.out.println("Obtained variant features: " + output);
 					
 					assertEquals(expectedVariantFeatures, output);
 					System.out.println("[INFO] Test case passed");
-				} catch (AssertionError e) {
-					System.out.println("[INFO] Test case failed");
-					throw e;
+				} else {
+					System.out.println("[INFO] No expected output for test case.");
+					System.out.println("Obtained variant features: " + output);
+					System.out.println("[INFO] Test case ignored");
 				}
-			} else {
-				fail("Available reasoner is not supported with Choco 3");
-				System.out.println("[INFO] Available reasoner is not supported with Choco 3");
+			} catch (AssertionError e) {
+				System.out.println("[INFO] Test case failed");
+				throw e;
 			}
 		} else {
 			fail("Current reasoner does not accept this operation.");
