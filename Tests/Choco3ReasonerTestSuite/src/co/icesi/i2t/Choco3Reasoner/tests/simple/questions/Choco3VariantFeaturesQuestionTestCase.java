@@ -80,7 +80,7 @@ public class Choco3VariantFeaturesQuestionTestCase extends
 	 */
 	@Test
 	public void testGetVariantFeats() {
-System.out.println("\n[TEST] Variant Features");
+		System.out.println("\n[TEST] Variant Features");
 		
 		// Load the variability model that will be evaluated during the test.
 		variabilityModel = questionTrader.openFile(variabilityModelPath);
