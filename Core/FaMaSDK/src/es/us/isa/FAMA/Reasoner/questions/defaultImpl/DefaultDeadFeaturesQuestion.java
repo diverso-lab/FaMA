@@ -38,6 +38,7 @@ public abstract class DefaultDeadFeaturesQuestion implements DeadFeaturesQuestio
 		PerformanceResult res = this.performanceResultFactory();
 		ProductsQuestion pq= this.productsQuestionFactory();
 		allFeats=this.getAllFeatures();
+		r.ask(pq);
 		products=(Collection<Product>) pq.getAllProducts();
 		deadFeatures = new ArrayList<GenericFeature>();
 		Iterator<GenericFeature> it = allFeats.iterator();
