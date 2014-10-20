@@ -168,6 +168,15 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 	public Map<String, Constraint> getDependencies() {
 		return this.dependencies;
 	}
+	
+	/**
+	 * Returns the collection of configuration constraints when a staged configuration is applied in the reasoner.
+	 * 
+	 * @return The configuration constraints in the reasoner.
+	 */
+	public Map<String, Constraint> getConfigurationConstraints() {
+		return this.configurationConstraints;
+	}
 
 	/**
 	 * Returns the solver instance in the reasoner.

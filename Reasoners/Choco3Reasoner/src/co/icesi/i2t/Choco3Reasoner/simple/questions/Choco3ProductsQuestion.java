@@ -107,6 +107,9 @@ public class Choco3ProductsQuestion extends Choco3Question implements
 		ISolutionRecorder defaultSolutionRecorder = solver.getSolutionRecorder();
 		solver.set(new AllSolutionsRecorder(solver));
 		
+		// Reset the search so the CSP can be solved again, if it was previously solved.
+		solver.getSearchLoop().reset();
+		
 		// The findAllSolutions method attempts to find all possible solutions to the CSP
 		// and it returns the number of solutions obtained
 		long solutionsFound = solver.findAllSolutions();

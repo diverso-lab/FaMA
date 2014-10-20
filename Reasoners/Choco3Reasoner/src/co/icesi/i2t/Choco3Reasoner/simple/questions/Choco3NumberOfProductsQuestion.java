@@ -116,6 +116,10 @@ public class Choco3NumberOfProductsQuestion extends Choco3Question implements
 		solver.set(new AllSolutionsRecorder(solver));
 		
 		List<Product> products = new LinkedList<Product>();
+		
+		// Reset the search so the CSP can be solved again, if it was previously solved.
+		solver.getSearchLoop().reset();
+		
 		long solutionsFound = solver.findAllSolutions();
 		if (solutionsFound > 0) {
 			// If at least one solution is found

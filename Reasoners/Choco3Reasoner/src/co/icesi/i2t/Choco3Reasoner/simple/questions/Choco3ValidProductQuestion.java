@@ -75,8 +75,8 @@ public class Choco3ValidProductQuestion extends Choco3Question implements
 	public void preAnswer(Reasoner reasoner) {
 		this.choco3Reasoner = (Choco3Reasoner) reasoner;
 		this.validProductQuestion = new DefaultValidProductQuestionImpl();
-		this.validProductQuestion.setProduct(this.product);
 //		this.validProductQuestion.preAnswer(reasoner);
+		this.validProductQuestion.setProduct(this.product);
 	}
 
 	/* (non-Javadoc)

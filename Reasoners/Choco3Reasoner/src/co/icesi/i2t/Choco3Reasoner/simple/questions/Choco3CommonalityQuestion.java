@@ -49,12 +49,16 @@ public class Choco3CommonalityQuestion extends Choco3Question implements
 	 * An instance to the Choco 3 reasoner used.
 	 */
 	private Choco3Reasoner choco3Reasoner;
+	/**
+	 * A configuration to be evaluated.
+	 */
+	private Configuration configuration;
 	
 	/* (non-Javadoc)
 	 * @see es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion#setConfiguration(es.us.isa.FAMA.stagedConfigManager.Configuration)
 	 */
 	public void setConfiguration(Configuration configuration) {
-		this.commonalityQuestion.setConfiguration(configuration);
+		this.configuration = configuration;
 	}
 
 	/* (non-Javadoc)
@@ -72,6 +76,7 @@ public class Choco3CommonalityQuestion extends Choco3Question implements
 		this.choco3Reasoner = (Choco3Reasoner) reasoner;
 		this.commonalityQuestion = new DefaultCommonalityQuestionImpl();
 		this.commonalityQuestion.preAnswer(reasoner);
+		this.commonalityQuestion.setConfiguration(this.configuration);
 	}
 
 	/* (non-Javadoc)

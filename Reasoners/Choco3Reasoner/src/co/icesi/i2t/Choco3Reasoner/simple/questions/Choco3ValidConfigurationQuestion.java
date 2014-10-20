@@ -49,12 +49,16 @@ public class Choco3ValidConfigurationQuestion extends Choco3Question implements
 	 * An instance to the Choco 3 reasoner used.
 	 */
 	private Choco3Reasoner choco3Reasoner;
+	/**
+	 * A configuration to be evaluated.
+	 */
+	private Configuration configuration;
 	
 	/* (non-Javadoc)
 	 * @see es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion#setConfiguration(es.us.isa.FAMA.stagedConfigManager.Configuration)
 	 */
 	public void setConfiguration(Configuration configuration) {
-		this.validConfigurationQuestion.setConfiguration(configuration);
+		this.configuration = configuration;
 	}
 
 	/* (non-Javadoc)
@@ -72,6 +76,7 @@ public class Choco3ValidConfigurationQuestion extends Choco3Question implements
 		this.choco3Reasoner = (Choco3Reasoner) reasoner;
 		this.validConfigurationQuestion = new DefaultValidConfigurationQuestionImpl();
 //		this.validConfigurationQuestion.preAnswer(reasoner);
+		this.validConfigurationQuestion.setConfiguration(this.configuration);
 	}
 
 	/* (non-Javadoc)

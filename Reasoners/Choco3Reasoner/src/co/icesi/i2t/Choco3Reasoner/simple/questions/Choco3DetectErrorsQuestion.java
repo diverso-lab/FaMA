@@ -48,12 +48,16 @@ public class Choco3DetectErrorsQuestion extends Choco3Question implements
 	 * An instance to the Choco 3 reasoner used.
 	 */
 	private Choco3Reasoner choco3Reasoner;
+	/**
+	 * A collection of observations
+	 */
+	private Collection<Observation> observations;
 
 	/* (non-Javadoc)
 	 * @see es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion#setObservations(java.util.Collection)
 	 */
 	public void setObservations(Collection<Observation> observations) {
-		this.detectErrorsQuestion.setObservations(observations);
+		this.observations = observations;
 	}
 
 	/* (non-Javadoc)
@@ -71,6 +75,7 @@ public class Choco3DetectErrorsQuestion extends Choco3Question implements
 		this.choco3Reasoner = (Choco3Reasoner) reasoner;
 		this.detectErrorsQuestion = new DefaultDetectErrorsQuestionImpl();
 //		this.detectErrorsQuestion.preAnswer(reasoner);
+		this.detectErrorsQuestion.setObservations(observations);
 	}
 
 	/* (non-Javadoc)
