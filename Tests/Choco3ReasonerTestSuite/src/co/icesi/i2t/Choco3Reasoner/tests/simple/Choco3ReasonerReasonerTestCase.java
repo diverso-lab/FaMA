@@ -16,6 +16,8 @@
  */
 package co.icesi.i2t.Choco3Reasoner.tests.simple;
 
+import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import solver.Solver;
 import solver.constraints.Constraint;
 import solver.variables.IntVar;
 import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
@@ -45,6 +48,8 @@ import es.us.isa.FAMA.models.FAMAfeatureModel.Relation;
 import es.us.isa.FAMA.models.FAMAfeatureModel.RequiresDependency;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.featureModel.GenericFeature;
+import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
+import es.us.isa.FAMA.stagedConfigManager.Configuration;
 import es.us.isa.util.Node;
 
 /**
@@ -119,11 +124,43 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testUnapplyStagedConfigurations() {
-//		System.out.println("\n[TEST] Unapply staged configuration");
-//		System.out.println("For model: \"" + variabilityModelPath + "\"");
-//		System.out.println("For configuration: ");
-		// TODO How to create a configuration object?
-//		fail("Not yet implemented");
+		try {
+			System.out.println("\n[TEST] Unapply staged configuration");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
+			
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
+			
+			Configuration configuration = generateStagedConfiguration();
+			if (!configuration.getElements().isEmpty()) {
+				addConfigurationFeaturesToReasoner(configuration);
+				System.out.println("For configuration:\n" + configuration);
+				
+				Solver solver = choco3Reasoner.getSolver();
+				String beforeConfiguration = solver.toString();
+				
+				choco3Reasoner.applyStagedConfiguration(configuration);
+				
+				choco3Reasoner.unapplyStagedConfigurations();
+				String afterUnapplyStagedConfiguration = solver.toString();
+				
+				assertEquals(beforeConfiguration, afterUnapplyStagedConfiguration);
+				
+				System.out.println("[INFO] Test case passed");
+			} else {
+				System.out.println("No configuration could be generated from the model.");
+				System.out.println("[INFO] Test case ignored");
+			}
+			
+		} catch (AssertionError e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			// TODO Remove
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	/**
@@ -133,11 +170,76 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testApplyStagedConfiguration() {
-//		System.out.println("\n[TEST] Apply staged configuration");
-//		System.out.println("For model: \"" + variabilityModelPath + "\"");
-//		System.out.println("For configuration: ");
-		// TODO
-//		fail("Not yet implemented");
+		try {
+			System.out.println("\n[TEST] Apply staged configuration");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
+			
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
+			
+			Configuration configuration = generateStagedConfiguration();
+			if (!configuration.getElements().isEmpty()) {
+				addConfigurationFeaturesToReasoner(configuration);
+				System.out.println("For configuration:\n" + configuration);
+				
+				choco3Reasoner.applyStagedConfiguration(configuration);
+				
+				Map<String, Constraint> configurationConstraints = choco3Reasoner.getConfigurationConstraints();
+				System.out.println("Obtained constraints: " + configurationConstraints);
+				System.out.println("[INFO] Test case passed");
+			} else {
+				System.out.println("No configuration could be generated from the model.");
+				System.out.println("[INFO] Test case ignored");
+			}
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			// TODO Remove
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	/**
+	 * Generates a random configuration from the features in the loaded feature model.
+	 * 
+	 * @return A random configuration from the features in the loaded feature model.
+	 */
+	private Configuration generateStagedConfiguration() {
+		Configuration configuration = new Configuration();
+		
+		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+		if (featureModel.getFeaturesNumber() > 0) {
+			Random random = new Random();
+			int randomFeatureIndex = random.nextInt(featureModel.getFeaturesNumber());
+			
+			Iterator<Feature> featuresIterator = featureModel.getFeatures().iterator();
+			
+			for (int i = 0; featuresIterator.hasNext() && i <= randomFeatureIndex; i++) {
+				Feature feature = (Feature) featuresIterator.next();
+				configuration.addElement(feature, 1);
+			}
+		} else {
+			System.out.println("The model has no features.");
+		}
+		
+		return configuration;
+	}
+	
+	/**
+	 * Adds the features of the given configuration to the reasoner.
+	 * 
+	 * @param configuration The configuration whose features will be added to the reasoner.
+	 */
+	private void addConfigurationFeaturesToReasoner(Configuration configuration) {
+		Iterator<Entry<VariabilityElement, Integer>> configurationIterator = configuration.getElements().entrySet().iterator();
+		while (configurationIterator.hasNext()) {
+			Map.Entry<VariabilityElement, Integer> entry = configurationIterator.next();
+			VariabilityElement variabilityElement = entry.getKey();
+			if (variabilityElement instanceof Feature) {
+				Feature feature = (Feature) variabilityElement;
+				choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+			}
+		}
 	}
 
 	/**
@@ -147,36 +249,42 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddFeature() {
-		System.out.println("\n[TEST] Add feature");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add feature");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
-		
-		if (featureModel.getFeaturesNumber() > 0) {
-			Iterator<Feature> featuresIterator = featureModel.getFeatures()
-					.iterator();
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 			
-			Random random = new Random();
-			int randomFeatureIndex = random.nextInt(featureModel
-					.getFeaturesNumber());
-			
-			Feature feature = null;
-			
-			for (int i = 0; featuresIterator.hasNext() && i <= randomFeatureIndex; i++) {
-				feature = (Feature) featuresIterator.next();
+			if (featureModel.getFeaturesNumber() > 0) {
+				Iterator<Feature> featuresIterator = featureModel.getFeatures()
+						.iterator();
+				
+				Random random = new Random();
+				int randomFeatureIndex = random.nextInt(featureModel
+						.getFeaturesNumber());
+				
+				Feature feature = null;
+				
+				for (int i = 0; featuresIterator.hasNext() && i <= randomFeatureIndex; i++) {
+					feature = (Feature) featuresIterator.next();
+				}
+				Collection<Cardinality> cardinalities = getFeatureCardinalities(feature);
+				
+				choco3Reasoner.addFeature(feature, cardinalities);
+				Map<String, IntVar> variables = choco3Reasoner.getVariables();
+
+				System.out.println("For feature: " + feature.getName());
+				System.out.println("Obtained variable: " + variables.get(feature.getName()));
+			} else {
+				System.out.println("The model has no features.");
 			}
-			Collection<Cardinality> cardinalities = getFeatureCardinalities(feature);
-			
-			choco3Reasoner.addFeature(feature, cardinalities);
-			Map<String, IntVar> variables = choco3Reasoner.getVariables();
-
-			System.out.println("For feature: " + feature.getName());
-			System.out.println("Obtained variable: " + variables.get(feature.getName()));
-		} else {
-			System.out.println("The model has no features.");
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 	
@@ -212,28 +320,34 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddRoot() {
-		System.out.println("\n[TEST] Add root feature");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add root feature");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Feature root = featureModel.getRoot();
-		ArrayList<Cardinality> cardinalities = null;
-		if (root.getParent() == null) {
-			cardinalities = new ArrayList<Cardinality>();
-			cardinalities.add(new Cardinality(0, 1));
+			Feature root = featureModel.getRoot();
+			ArrayList<Cardinality> cardinalities = null;
+			if (root.getParent() == null) {
+				cardinalities = new ArrayList<Cardinality>();
+				cardinalities.add(new Cardinality(0, 1));
+			}
+
+			choco3Reasoner.addFeature(root, cardinalities);
+			
+			choco3Reasoner.addRoot(root);
+			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+			
+			System.out.println("For root feature: " + root.getName());
+			System.out.println("Obtained constraint: " + dependencies.get("Root"));
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
-
-		choco3Reasoner.addFeature(root, cardinalities);
-		
-		choco3Reasoner.addRoot(root);
-		Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
-		
-		System.out.println("For root feature: " + root.getName());
-		System.out.println("Obtained constraint: " + dependencies.get("Root"));
 	}
 
 	/**
@@ -243,54 +357,60 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddMandatory() {
-		System.out.println("\n[TEST] Add mandatory relationship");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add mandatory relationship");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Collection<Feature> features = featureModel.getFeatures();
-		HashMap<Relation, Feature> mandatoryRelations = new HashMap<Relation, Feature>();
-		for (Feature feature : features) {
-			Iterator<Relation> relations = feature.getRelations();
-			while (relations.hasNext()) {
-				Relation relation = (Relation) relations.next();
-				if (relation.isMandatory()) {
-					mandatoryRelations.put(relation, feature);
+			Collection<Feature> features = featureModel.getFeatures();
+			HashMap<Relation, Feature> mandatoryRelations = new HashMap<Relation, Feature>();
+			for (Feature feature : features) {
+				Iterator<Relation> relations = feature.getRelations();
+				while (relations.hasNext()) {
+					Relation relation = (Relation) relations.next();
+					if (relation.isMandatory()) {
+						mandatoryRelations.put(relation, feature);
+					}
 				}
 			}
-		}
-		if (mandatoryRelations.size() > 0) {
-			Random random = new Random();
-			int randomRelationIndex = random.nextInt(mandatoryRelations.size());
-			int i = 0;
-			Relation relation = null;
-			Feature parentFeature = null;
-			for (Iterator<Entry<Relation, Feature>> iterator = mandatoryRelations
-					.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
-				Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
-				if (i == randomRelationIndex) {
-					relation = entry.getKey();
-					parentFeature = entry.getValue();
+			if (mandatoryRelations.size() > 0) {
+				Random random = new Random();
+				int randomRelationIndex = random.nextInt(mandatoryRelations.size());
+				int i = 0;
+				Relation relation = null;
+				Feature parentFeature = null;
+				for (Iterator<Entry<Relation, Feature>> iterator = mandatoryRelations
+						.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
+					Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
+					if (i == randomRelationIndex) {
+						relation = entry.getKey();
+						parentFeature = entry.getValue();
+					}
 				}
-			}
-		
-			Feature childFeature = relation.getDestinationAt(0);
 			
-			choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
-			choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
-			choco3Reasoner.addMandatory(relation, childFeature,	parentFeature);
+				Feature childFeature = relation.getDestinationAt(0);
+				
+				choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
+				choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
+				choco3Reasoner.addMandatory(relation, childFeature,	parentFeature);
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For parent feature: " + parentFeature.getName());
-			System.out.println("For child feature: " + childFeature.getName());
-			System.out.println("Relationship name: " + relation.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
-		} else {
-			System.out.println("The model has no mandatory relationships.");
+				System.out.println("For parent feature: " + parentFeature.getName());
+				System.out.println("For child feature: " + childFeature.getName());
+				System.out.println("Relationship name: " + relation.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
+			} else {
+				System.out.println("The model has no mandatory relationships.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -301,54 +421,60 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddOptional() {
-		System.out.println("\n[TEST] Add optional relationship");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add optional relationship");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Collection<Feature> features = featureModel.getFeatures();
-		HashMap<Relation, Feature> optionalRelations = new HashMap<Relation, Feature>();
-		for (Feature feature : features) {
-			Iterator<Relation> relations = feature.getRelations();
-			while (relations.hasNext()) {
-				Relation relation = (Relation) relations.next();
-				if (relation.isOptional()) {
-					optionalRelations.put(relation, feature);
+			Collection<Feature> features = featureModel.getFeatures();
+			HashMap<Relation, Feature> optionalRelations = new HashMap<Relation, Feature>();
+			for (Feature feature : features) {
+				Iterator<Relation> relations = feature.getRelations();
+				while (relations.hasNext()) {
+					Relation relation = (Relation) relations.next();
+					if (relation.isOptional()) {
+						optionalRelations.put(relation, feature);
+					}
 				}
 			}
-		}
-		if (optionalRelations.size() > 0) {
-			Random random = new Random();
-			int randomRelationIndex = random.nextInt(optionalRelations.size());
-			int i = 0;
-			Relation relation = null;
-			Feature parentFeature = null;
-			for (Iterator<Entry<Relation, Feature>> iterator = optionalRelations
-					.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
-				Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
-				if (i == randomRelationIndex) {
-					relation = entry.getKey();
-					parentFeature = entry.getValue();
+			if (optionalRelations.size() > 0) {
+				Random random = new Random();
+				int randomRelationIndex = random.nextInt(optionalRelations.size());
+				int i = 0;
+				Relation relation = null;
+				Feature parentFeature = null;
+				for (Iterator<Entry<Relation, Feature>> iterator = optionalRelations
+						.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
+					Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
+					if (i == randomRelationIndex) {
+						relation = entry.getKey();
+						parentFeature = entry.getValue();
+					}
 				}
-			}
-		
-			Feature childFeature = relation.getDestinationAt(0);
 			
-			choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
-			choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
-			choco3Reasoner.addOptional(relation, childFeature, parentFeature);
+				Feature childFeature = relation.getDestinationAt(0);
+				
+				choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
+				choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
+				choco3Reasoner.addOptional(relation, childFeature, parentFeature);
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For parent feature: " + parentFeature.getName());
-			System.out.println("For child feature: " + childFeature.getName());
-			System.out.println("Relationship name: " + relation.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
-		} else {
-			System.out.println("The model has no optional relationships.");
+				System.out.println("For parent feature: " + parentFeature.getName());
+				System.out.println("For child feature: " + childFeature.getName());
+				System.out.println("Relationship name: " + relation.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
+			} else {
+				System.out.println("The model has no optional relationships.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -359,54 +485,60 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddCardinality() {
-		System.out.println("\n[TEST] Add cardinality relationship");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add cardinality relationship");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Collection<Feature> features = featureModel.getFeatures();
-		HashMap<Relation, Feature> cardinalityRelations = new HashMap<Relation, Feature>();
-		for (Feature feature : features) {
-			Iterator<Relation> relations = feature.getRelations();
-			while (relations.hasNext()) {
-				Relation relation = (Relation) relations.next();
-				if (!relation.isMandatory() && !relation.isOptional() && relation.getNumberOfDestination() == 1) {
-					cardinalityRelations.put(relation, feature);
+			Collection<Feature> features = featureModel.getFeatures();
+			HashMap<Relation, Feature> cardinalityRelations = new HashMap<Relation, Feature>();
+			for (Feature feature : features) {
+				Iterator<Relation> relations = feature.getRelations();
+				while (relations.hasNext()) {
+					Relation relation = (Relation) relations.next();
+					if (!relation.isMandatory() && !relation.isOptional() && relation.getNumberOfDestination() == 1) {
+						cardinalityRelations.put(relation, feature);
+					}
 				}
 			}
-		}
-		if (cardinalityRelations.size() > 0) {
-			Random random = new Random();
-			int randomRelationIndex = random.nextInt(cardinalityRelations.size());
-			int i = 0;
-			Relation relation = null;
-			Feature parentFeature = null;
-			for (Iterator<Entry<Relation, Feature>> iterator = cardinalityRelations
-					.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
-				Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
-				if (i == randomRelationIndex) {
-					relation = entry.getKey();
-					parentFeature = entry.getValue();
+			if (cardinalityRelations.size() > 0) {
+				Random random = new Random();
+				int randomRelationIndex = random.nextInt(cardinalityRelations.size());
+				int i = 0;
+				Relation relation = null;
+				Feature parentFeature = null;
+				for (Iterator<Entry<Relation, Feature>> iterator = cardinalityRelations
+						.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
+					Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
+					if (i == randomRelationIndex) {
+						relation = entry.getKey();
+						parentFeature = entry.getValue();
+					}
 				}
-			}
-		
-			Feature childFeature = relation.getDestinationAt(0);
 			
-			choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
-			choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
-			choco3Reasoner.addCardinality(relation, childFeature, parentFeature, relation.getCardinalities());
+				Feature childFeature = relation.getDestinationAt(0);
+				
+				choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
+				choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
+				choco3Reasoner.addCardinality(relation, childFeature, parentFeature, relation.getCardinalities());
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For parent feature: " + parentFeature.getName());
-			System.out.println("For child feature: " + childFeature.getName());
-			System.out.println("Relationship name: " + relation.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
-		} else {
-			System.out.println("The model has no cardinality relationships.");
+				System.out.println("For parent feature: " + parentFeature.getName());
+				System.out.println("For child feature: " + childFeature.getName());
+				System.out.println("Relationship name: " + relation.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
+			} else {
+				System.out.println("The model has no cardinality relationships.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -417,65 +549,71 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddSet() {
-		System.out.println("\n[TEST] Add set relationship");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add set relationship");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Collection<Feature> features = featureModel.getFeatures();
-		HashMap<Relation, Feature> setRelations = new HashMap<Relation, Feature>();
-		for (Feature feature : features) {
-			Iterator<Relation> relations = feature.getRelations();
-			while (relations.hasNext()) {
-				Relation relation = (Relation) relations.next();
-				if (relation.getNumberOfDestination() > 1) {
-					setRelations.put(relation, feature);
+			Collection<Feature> features = featureModel.getFeatures();
+			HashMap<Relation, Feature> setRelations = new HashMap<Relation, Feature>();
+			for (Feature feature : features) {
+				Iterator<Relation> relations = feature.getRelations();
+				while (relations.hasNext()) {
+					Relation relation = (Relation) relations.next();
+					if (relation.getNumberOfDestination() > 1) {
+						setRelations.put(relation, feature);
+					}
 				}
 			}
-		}
-		if (setRelations.size() > 0) {
-			Random random = new Random();
-			int randomRelationIndex = random.nextInt(setRelations.size());
-			int i = 0;
-			Relation relation = null;
-			Feature parentFeature = null;
-			for (Iterator<Entry<Relation, Feature>> iterator = setRelations
-					.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
-				Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
-				if (i == randomRelationIndex) {
-					relation = entry.getKey();
-					parentFeature = entry.getValue();
+			if (setRelations.size() > 0) {
+				Random random = new Random();
+				int randomRelationIndex = random.nextInt(setRelations.size());
+				int i = 0;
+				Relation relation = null;
+				Feature parentFeature = null;
+				for (Iterator<Entry<Relation, Feature>> iterator = setRelations
+						.entrySet().iterator(); iterator.hasNext() && i <= randomRelationIndex; i++) {
+					Entry<Relation, Feature> entry = (Entry<Relation, Feature>) iterator.next();
+					if (i == randomRelationIndex) {
+						relation = entry.getKey();
+						parentFeature = entry.getValue();
+					}
 				}
-			}
+				
+				choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
+				
+				Collection<GenericFeature> children = new ArrayList<GenericFeature>();
+				Iterator<Feature> destinationIterator = relation.getDestination();
+				while (destinationIterator.hasNext()) {
+					Feature childFeature = destinationIterator.next();
+					children.add(childFeature);
+					choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
+				}
+				Collection<Cardinality> cardinalities = new ArrayList<Cardinality>();
+				Iterator<Cardinality> cardinalitiesIterator = relation.getCardinalities();
+				while (cardinalitiesIterator.hasNext()) {
+					cardinalities.add(cardinalitiesIterator.next());
+				}
 			
-			choco3Reasoner.addFeature(parentFeature, getFeatureCardinalities(parentFeature));
-			
-			Collection<GenericFeature> children = new ArrayList<GenericFeature>();
-			Iterator<Feature> destinationIterator = relation.getDestination();
-			while (destinationIterator.hasNext()) {
-				Feature childFeature = destinationIterator.next();
-				children.add(childFeature);
-				choco3Reasoner.addFeature(childFeature, getFeatureCardinalities(childFeature));
-			}
-			Collection<Cardinality> cardinalities = new ArrayList<Cardinality>();
-			Iterator<Cardinality> cardinalitiesIterator = relation.getCardinalities();
-			while (cardinalitiesIterator.hasNext()) {
-				cardinalities.add(cardinalitiesIterator.next());
-			}
-		
-			choco3Reasoner.addSet(relation, parentFeature, children, cardinalities);
+				choco3Reasoner.addSet(relation, parentFeature, children, cardinalities);
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For parent feature: " + parentFeature.getName());
-			System.out.println("For children features: " + children);
-			System.out.println("Relationship name: " + relation.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
-		} else {
-			System.out.println("The model has no set (alternative, or) relationships.");
+				System.out.println("For parent feature: " + parentFeature.getName());
+				System.out.println("For children features: " + children);
+				System.out.println("Relationship name: " + relation.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(relation.getName()));
+			} else {
+				System.out.println("The model has no set (alternative, or) relationships.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -486,51 +624,57 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddExcludes() {
-		System.out.println("\n[TEST] Add excludes constraint");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add excludes constraint");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
-		Collection<ExcludesDependency> excludesDependencies = new ArrayList<ExcludesDependency>();
-		while (constraintsIterator.hasNext()) {
-			es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
-			if (constraint instanceof ExcludesDependency) {
-				ExcludesDependency excludesDependency = (ExcludesDependency) constraint;
-				excludesDependencies.add(excludesDependency);
-			}
-		}
-		if (excludesDependencies.size() > 0) {
-			Random random = new Random();
-			int randomDependencyIndex = random.nextInt(excludesDependencies.size());
-			int i = 0;
-			ExcludesDependency excludesDependency = null;
-			for (Iterator<ExcludesDependency> iterator = excludesDependencies
-					.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
-				ExcludesDependency dependency = iterator.next();
-				if (i == randomDependencyIndex) {
-					excludesDependency = dependency;
+			Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
+			Collection<ExcludesDependency> excludesDependencies = new ArrayList<ExcludesDependency>();
+			while (constraintsIterator.hasNext()) {
+				es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
+				if (constraint instanceof ExcludesDependency) {
+					ExcludesDependency excludesDependency = (ExcludesDependency) constraint;
+					excludesDependencies.add(excludesDependency);
 				}
 			}
+			if (excludesDependencies.size() > 0) {
+				Random random = new Random();
+				int randomDependencyIndex = random.nextInt(excludesDependencies.size());
+				int i = 0;
+				ExcludesDependency excludesDependency = null;
+				for (Iterator<ExcludesDependency> iterator = excludesDependencies
+						.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
+					ExcludesDependency dependency = iterator.next();
+					if (i == randomDependencyIndex) {
+						excludesDependency = dependency;
+					}
+				}
+				
+				Feature originFeature = excludesDependency.getOrigin();
+				Feature destinationFeature = excludesDependency.getDestination();
 			
-			Feature originFeature = excludesDependency.getOrigin();
-			Feature destinationFeature = excludesDependency.getDestination();
-		
-			choco3Reasoner.addFeature(originFeature, getFeatureCardinalities(originFeature));
-			choco3Reasoner.addFeature(destinationFeature, getFeatureCardinalities(destinationFeature));
-			choco3Reasoner.addExcludes(excludesDependency, originFeature, destinationFeature);
+				choco3Reasoner.addFeature(originFeature, getFeatureCardinalities(originFeature));
+				choco3Reasoner.addFeature(destinationFeature, getFeatureCardinalities(destinationFeature));
+				choco3Reasoner.addExcludes(excludesDependency, originFeature, destinationFeature);
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For origin feature: " + originFeature.getName());
-			System.out.println("For destination feature: " + destinationFeature.getName());
-			System.out.println("Relationship name: " + excludesDependency.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(excludesDependency.getName()));
-		} else {
-			System.out.println("The model has no excludes constraints.");
+				System.out.println("For origin feature: " + originFeature.getName());
+				System.out.println("For destination feature: " + destinationFeature.getName());
+				System.out.println("Relationship name: " + excludesDependency.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(excludesDependency.getName()));
+			} else {
+				System.out.println("The model has no excludes constraints.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -541,51 +685,57 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddRequires() {
-		System.out.println("\n[TEST] Add requires constraint");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add requires constraint");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
-		Collection<RequiresDependency> requiresDependencies = new ArrayList<RequiresDependency>();
-		while (constraintsIterator.hasNext()) {
-			es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
-			if (constraint instanceof RequiresDependency) {
-				RequiresDependency requiresDependency = (RequiresDependency) constraint;
-				requiresDependencies.add(requiresDependency);
-			}
-		}
-		if (requiresDependencies.size() > 0) {
-			Random random = new Random();
-			int randomDependencyIndex = random.nextInt(requiresDependencies.size());
-			int i = 0;
-			RequiresDependency requiresDependency = null;
-			for (Iterator<RequiresDependency> iterator = requiresDependencies
-					.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
-				RequiresDependency dependency = iterator.next();
-				if (i == randomDependencyIndex) {
-					requiresDependency = dependency;
+			Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
+			Collection<RequiresDependency> requiresDependencies = new ArrayList<RequiresDependency>();
+			while (constraintsIterator.hasNext()) {
+				es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
+				if (constraint instanceof RequiresDependency) {
+					RequiresDependency requiresDependency = (RequiresDependency) constraint;
+					requiresDependencies.add(requiresDependency);
 				}
 			}
+			if (requiresDependencies.size() > 0) {
+				Random random = new Random();
+				int randomDependencyIndex = random.nextInt(requiresDependencies.size());
+				int i = 0;
+				RequiresDependency requiresDependency = null;
+				for (Iterator<RequiresDependency> iterator = requiresDependencies
+						.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
+					RequiresDependency dependency = iterator.next();
+					if (i == randomDependencyIndex) {
+						requiresDependency = dependency;
+					}
+				}
+				
+				Feature originFeature = requiresDependency.getOrigin();
+				Feature destinationFeature = requiresDependency.getDestination();
 			
-			Feature originFeature = requiresDependency.getOrigin();
-			Feature destinationFeature = requiresDependency.getDestination();
-		
-			choco3Reasoner.addFeature(originFeature, getFeatureCardinalities(originFeature));
-			choco3Reasoner.addFeature(destinationFeature, getFeatureCardinalities(destinationFeature));
-			choco3Reasoner.addRequires(requiresDependency, originFeature, destinationFeature);
+				choco3Reasoner.addFeature(originFeature, getFeatureCardinalities(originFeature));
+				choco3Reasoner.addFeature(destinationFeature, getFeatureCardinalities(destinationFeature));
+				choco3Reasoner.addRequires(requiresDependency, originFeature, destinationFeature);
 
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
 
-			System.out.println("For origin feature: " + originFeature.getName());
-			System.out.println("For destination feature: " + destinationFeature.getName());
-			System.out.println("Relationship name: " + requiresDependency.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(requiresDependency.getName()));
-		} else {
-			System.out.println("The model has no requires constraints.");
+				System.out.println("For origin feature: " + originFeature.getName());
+				System.out.println("For destination feature: " + destinationFeature.getName());
+				System.out.println("Relationship name: " + requiresDependency.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(requiresDependency.getName()));
+			} else {
+				System.out.println("The model has no requires constraints.");
+			}
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 
@@ -596,52 +746,58 @@ public class Choco3ReasonerReasonerTestCase extends AbstractReasonerTestCase {
 	 */
 	@Test
 	public void testAddConstraintConstraint() {
-		System.out.println("\n[TEST] Add custom constraint");
-		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		try {
+			System.out.println("\n[TEST] Add custom constraint");
+			System.out.println("For model: \"" + variabilityModelPath + "\"");
 
-		// Load the variability model that will be evaluated during the test.
-		variabilityModel = questionTrader.openFile(variabilityModelPath);
+			// Load the variability model that will be evaluated during the test.
+			variabilityModel = questionTrader.openFile(variabilityModelPath);
 
-		FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
+			FAMAFeatureModel featureModel = (FAMAFeatureModel) variabilityModel;
 
-		Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
-		Collection<es.us.isa.FAMA.models.featureModel.Constraint> constraintDependencies = new ArrayList<es.us.isa.FAMA.models.featureModel.Constraint>();
-		while (constraintsIterator.hasNext()) {
-			es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
-			if (!(constraint instanceof RequiresDependency) && !(constraint instanceof ExcludesDependency)) {
-				constraintDependencies.add(constraint);
-			}
-		}
-		if (constraintDependencies.size() > 0) {
-			Random random = new Random();
-			int randomDependencyIndex = random.nextInt(constraintDependencies.size());
-			int i = 0;
-			es.us.isa.FAMA.models.featureModel.Constraint constraintDependency = null;
-			for (Iterator<es.us.isa.FAMA.models.featureModel.Constraint> iterator = constraintDependencies
-					.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
-				es.us.isa.FAMA.models.featureModel.Constraint dependency = iterator.next();
-				if (i == randomDependencyIndex) {
-					constraintDependency = dependency;
+			Iterator<es.us.isa.FAMA.models.featureModel.Constraint> constraintsIterator = featureModel.getDependencies();
+			Collection<es.us.isa.FAMA.models.featureModel.Constraint> constraintDependencies = new ArrayList<es.us.isa.FAMA.models.featureModel.Constraint>();
+			while (constraintsIterator.hasNext()) {
+				es.us.isa.FAMA.models.featureModel.Constraint constraint = constraintsIterator.next();
+				if (!(constraint instanceof RequiresDependency) && !(constraint instanceof ExcludesDependency)) {
+					constraintDependencies.add(constraint);
 				}
 			}
-			
-			Node<String> rootNode = constraintDependency.getAST().getRootElement();
-			List<Node<String>> children = rootNode.getChildren();
-			for (Node<String> node : children) {
-				if (node.getChildren().size() == 0) {
-					Feature feature = new Feature(node.getData());
-					choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+			if (constraintDependencies.size() > 0) {
+				Random random = new Random();
+				int randomDependencyIndex = random.nextInt(constraintDependencies.size());
+				int i = 0;
+				es.us.isa.FAMA.models.featureModel.Constraint constraintDependency = null;
+				for (Iterator<es.us.isa.FAMA.models.featureModel.Constraint> iterator = constraintDependencies
+						.iterator(); iterator.hasNext() && i <= randomDependencyIndex; i++) {
+					es.us.isa.FAMA.models.featureModel.Constraint dependency = iterator.next();
+					if (i == randomDependencyIndex) {
+						constraintDependency = dependency;
+					}
 				}
+				
+				Node<String> rootNode = constraintDependency.getAST().getRootElement();
+				List<Node<String>> children = rootNode.getChildren();
+				for (Node<String> node : children) {
+					if (node.getChildren().size() == 0) {
+						Feature feature = new Feature(node.getData());
+						choco3Reasoner.addFeature(feature, getFeatureCardinalities(feature));
+					}
+				}
+				choco3Reasoner.addConstraint(constraintDependency);
+
+				Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
+
+				System.out.println("For features: " + choco3Reasoner.getAllFeatures());
+				System.out.println("Relationship name: " + constraintDependency.getName());
+				System.out.println("Obtained constraint: " + dependencies.get(constraintDependency.getName()));
+			} else {
+				System.out.println("The model has no custom constraints.");
 			}
-			choco3Reasoner.addConstraint(constraintDependency);
-
-			Map<String, Constraint> dependencies = choco3Reasoner.getDependencies();
-
-			System.out.println("For features: " + choco3Reasoner.getAllFeatures());
-			System.out.println("Relationship name: " + constraintDependency.getName());
-			System.out.println("Obtained constraint: " + dependencies.get(constraintDependency.getName()));
-		} else {
-			System.out.println("The model has no custom constraints.");
+			System.out.println("[INFO] Test case passed");
+		} catch (Exception e) {
+			System.out.println("[INFO] Test case failed");
+			throw e;
 		}
 	}
 

@@ -90,8 +90,9 @@ public class Choco3UniqueFeaturesQuestionTestCase extends
 		Choco3UniqueFeaturesQuestion choco3UniqueFeaturesQuestion = (Choco3UniqueFeaturesQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3UniqueFeaturesQuestion != null) {
-			questionTrader.ask(choco3UniqueFeaturesQuestion);
 			try {
+				questionTrader.ask(choco3UniqueFeaturesQuestion);
+				
 				Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
 				    public int compare(GenericFeature c1, GenericFeature c2) {
 				        return c2.getName().compareTo(c1.getName());
@@ -116,12 +117,15 @@ public class Choco3UniqueFeaturesQuestionTestCase extends
 					assertEquals(expectedUniqueFeatures, output);
 					System.out.println("[INFO] Test case passed");
 				} else {
-					System.out.println("[INFO] No input or expected output for test case.");
+					System.out.println("[INFO] No expected output for test case.");
 					System.out.println("Obtained unique features: " + output);
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

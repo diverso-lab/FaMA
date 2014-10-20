@@ -90,8 +90,9 @@ public class Choco3DeadFeaturesQuestionTestCase extends
 		Choco3DeadFeaturesQuestion choco3DeadFeaturesQuestion = (Choco3DeadFeaturesQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3DeadFeaturesQuestion != null) {
-			questionTrader.ask(choco3DeadFeaturesQuestion);
 			try {
+				questionTrader.ask(choco3DeadFeaturesQuestion);
+				
 				Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
 				    public int compare(GenericFeature c1, GenericFeature c2) {
 				        return c2.getName().compareTo(c1.getName());
@@ -116,12 +117,15 @@ public class Choco3DeadFeaturesQuestionTestCase extends
 					assertEquals(expectedDeadFeatures, output);
 					System.out.println("[INFO] Test case passed");
 				} else {
-					System.out.println("[INFO] No input or expected output for test case.");
+					System.out.println("[INFO] No expected output for test case.");
 					System.out.println("Obtained dead features: " + output);
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

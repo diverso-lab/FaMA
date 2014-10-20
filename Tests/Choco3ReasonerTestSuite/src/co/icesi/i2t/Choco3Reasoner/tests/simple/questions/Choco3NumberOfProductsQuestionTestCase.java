@@ -99,8 +99,9 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 		Choco3NumberOfProductsQuestion choco3NumberOfProductsQuestion = (Choco3NumberOfProductsQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3NumberOfProductsQuestion != null) {
-			questionTrader.ask(choco3NumberOfProductsQuestion);
 			try {
+				questionTrader.ask(choco3NumberOfProductsQuestion);
+				
 				double output = choco3NumberOfProductsQuestion.getNumberOfProducts();
 				
 				if (!expectedOutput.equals("")) {
@@ -115,7 +116,10 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

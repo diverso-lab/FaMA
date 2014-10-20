@@ -98,8 +98,9 @@ public class Choco3CoreFeaturesQuestionTestCase extends AbstractReasonerQuestion
 		Choco3CoreFeaturesQuestion choco3CoreFeaturesQuestion = (Choco3CoreFeaturesQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3CoreFeaturesQuestion != null) {
-			questionTrader.ask(choco3CoreFeaturesQuestion);
 			try {
+				questionTrader.ask(choco3CoreFeaturesQuestion);
+			
 				Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
 				    public int compare(GenericFeature c1, GenericFeature c2) {
 				        return c2.getName().compareTo(c1.getName());
@@ -129,7 +130,10 @@ public class Choco3CoreFeaturesQuestionTestCase extends AbstractReasonerQuestion
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

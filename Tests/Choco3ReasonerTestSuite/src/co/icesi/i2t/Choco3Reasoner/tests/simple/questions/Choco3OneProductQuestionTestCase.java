@@ -78,61 +78,60 @@ public class Choco3OneProductQuestionTestCase extends
 	 */
 	@Test
 	public void testGetProduct() {
-		try {
-			System.out.println("\n[TEST] One Product");
-			
-			// Load the variability model that will be evaluated during the test.
-			variabilityModel = questionTrader.openFile(variabilityModelPath);
-			questionTrader.setVariabilityModel(variabilityModel);
-			System.out.println("For model: \"" + variabilityModelPath + "\"");
-			
-			Choco3OneProductQuestion choco3OneProductQuestion = (Choco3OneProductQuestion) questionTrader.createQuestion(QUESTION);
-			
-			if (choco3OneProductQuestion != null) {
+		System.out.println("\n[TEST] One Product");
+		
+		// Load the variability model that will be evaluated during the test.
+		variabilityModel = questionTrader.openFile(variabilityModelPath);
+		questionTrader.setVariabilityModel(variabilityModel);
+		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		
+		Choco3OneProductQuestion choco3OneProductQuestion = (Choco3OneProductQuestion) questionTrader.createQuestion(QUESTION);
+		
+		if (choco3OneProductQuestion != null) {
+			try {
 				questionTrader.ask(choco3OneProductQuestion);
-				try {
-					Product output = (Product) choco3OneProductQuestion.getProduct();
-					
-					if (!expectedOutput.equals("")) {
-						LinkedList<Product> expectedProducts = new LinkedList<Product>();
-						String[] expectedOutputs = expectedOutput.split(";");
-						for (int i = 0; i < expectedOutputs.length; i++) {
-							String expectedProduct = expectedOutputs[i];
-							String[] expectedFeatures = expectedProduct.split(":");
-							Product product = new Product();
-							for (int j = 0; j < expectedFeatures.length; j++) {
-								String expectedFeature = expectedFeatures[j];
-								Feature feature = new Feature(expectedFeature);
-								product.addFeature(feature);
-							}
-							expectedProducts.add(product);
+				
+				Product output = (Product) choco3OneProductQuestion.getProduct();
+				
+				if (!expectedOutput.equals("")) {
+					LinkedList<Product> expectedProducts = new LinkedList<Product>();
+					String[] expectedOutputs = expectedOutput.split(";");
+					for (int i = 0; i < expectedOutputs.length; i++) {
+						String expectedProduct = expectedOutputs[i];
+						String[] expectedFeatures = expectedProduct.split(":");
+						Product product = new Product();
+						for (int j = 0; j < expectedFeatures.length; j++) {
+							String expectedFeature = expectedFeatures[j];
+							Feature feature = new Feature(expectedFeature);
+							product.addFeature(feature);
 						}
-						
-						System.out.println("Obtained product: " + output);
-						
-						if (expectedProducts.contains(output)) {
-							System.out.println("Obtained product is valid.");
-							System.out.println("[INFO] Test case passed");
-						} else {
-							System.out.println("Obtained product is not valid.");
-							System.out.println("[INFO] Test case failed");
-						}
-					} else {
-						System.out.println("[INFO] No input or expected output for test case.");
-						System.out.println("Obtained product: " + output);
-						System.out.println("[INFO] Test case ignored");
+						expectedProducts.add(product);
 					}
-				} catch (AssertionError e) {
-					System.out.println("[INFO] Test case failed");
-					throw e;
+					
+					System.out.println("Obtained product: " + output);
+					
+					if (expectedProducts.contains(output)) {
+						System.out.println("Obtained product is valid.");
+						System.out.println("[INFO] Test case passed");
+					} else {
+						System.out.println("Obtained product is not valid.");
+						System.out.println("[INFO] Test case failed");
+					}
+				} else {
+					System.out.println("[INFO] No expected output for test case.");
+					System.out.println("Obtained product: " + output);
+					System.out.println("[INFO] Test case ignored");
 				}
-			} else {
-				fail("Current reasoner does not accept this operation.");
-				System.out.println("[INFO] Current reasoner does not accept this operation.");
+			} catch (AssertionError e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
 			}
-		} catch (Exception e) {
-			// TODO Remove
-			e.printStackTrace();
+		} else {
+			fail("Current reasoner does not accept this operation.");
+			System.out.println("[INFO] Current reasoner does not accept this operation.");
 		}
 	}
 

@@ -96,8 +96,9 @@ public class Choco3ProductsQuestionTestCase extends
 		Choco3ProductsQuestion choco3ProductsQuestion = (Choco3ProductsQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3ProductsQuestion != null) {
-			questionTrader.ask(choco3ProductsQuestion);
 			try {
+				questionTrader.ask(choco3ProductsQuestion);
+				
 				Comparator<Product> comparator = new Comparator<Product>() {
 				    public int compare(Product c1, Product c2) {
 				        return c2.toString().compareTo(c1.toString());
@@ -135,10 +136,11 @@ public class Choco3ProductsQuestionTestCase extends
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
 			}
 		} else {
 			fail("Current reasoner does not accept this operation.");

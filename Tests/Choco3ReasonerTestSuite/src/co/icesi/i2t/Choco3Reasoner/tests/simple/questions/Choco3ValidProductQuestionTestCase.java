@@ -77,18 +77,18 @@ public class Choco3ValidProductQuestionTestCase extends
 	 */
 	@Test
 	public void testIsValid() {
-		try {
-			System.out.println("\n[TEST] Valid Product");
-			
-			// Load the variability model that will be evaluated during the test.
-			variabilityModel = questionTrader.openFile(variabilityModelPath);
-			questionTrader.setVariabilityModel(variabilityModel);
-			System.out.println("For model: \"" + variabilityModelPath + "\"");
-			
-			Choco3ValidProductQuestion choco3ValidProductQuestion = (Choco3ValidProductQuestion) questionTrader.createQuestion(QUESTION);
-			
-			if (choco3ValidProductQuestion != null) {
-				if (!input.equals("")) {
+		System.out.println("\n[TEST] Valid Product");
+		
+		// Load the variability model that will be evaluated during the test.
+		variabilityModel = questionTrader.openFile(variabilityModelPath);
+		questionTrader.setVariabilityModel(variabilityModel);
+		System.out.println("For model: \"" + variabilityModelPath + "\"");
+		
+		Choco3ValidProductQuestion choco3ValidProductQuestion = (Choco3ValidProductQuestion) questionTrader.createQuestion(QUESTION);
+		
+		if (choco3ValidProductQuestion != null) {
+			if (!input.equals("")) {
+				try {
 					String[] inputFeatures = input.split(":");
 					Product inputProduct = new Product();
 					for (int i = 0; i < inputFeatures.length; i++) {
@@ -98,36 +98,35 @@ public class Choco3ValidProductQuestionTestCase extends
 					}
 					choco3ValidProductQuestion.setProduct(inputProduct);
 					questionTrader.ask(choco3ValidProductQuestion);
-					try {
-						boolean output = choco3ValidProductQuestion.isValid();
+				
+					boolean output = choco3ValidProductQuestion.isValid();
 
-						if (!expectedOutput.equals("")) {
-							System.out.println("For input: " + inputProduct);
-							System.out.println("Expected is valid product: " + expectedOutput);
-							System.out.println("Obtained is valid product: " + output);
-							
-							assertEquals(Boolean.parseBoolean(expectedOutput), output);
-							System.out.println("[INFO] Test case passed");
-						} else {
-							System.out.println("[INFO] No expected output for test case.");
-							System.out.println("Obtained is valid product: " + output);
-							System.out.println("[INFO] Test case ignored");
-						}
-					} catch (AssertionError e) {
-						System.out.println("[INFO] Test case failed");
-						throw e;
+					if (!expectedOutput.equals("")) {
+						System.out.println("For input: " + inputProduct);
+						System.out.println("Expected is valid product: " + expectedOutput);
+						System.out.println("Obtained is valid product: " + output);
+						
+						assertEquals(Boolean.parseBoolean(expectedOutput), output);
+						System.out.println("[INFO] Test case passed");
+					} else {
+						System.out.println("[INFO] No expected output for test case.");
+						System.out.println("Obtained is valid product: " + output);
+						System.out.println("[INFO] Test case ignored");
 					}
-				} else {
-					System.out.println("[INFO] No input for test case.");
-					System.out.println("[INFO] Test case ignored");
+				} catch (AssertionError e) {
+					System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+					throw e;
+				} catch (Exception e) {
+					System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+					throw e;
 				}
 			} else {
-				fail("Current reasoner does not accept this operation.");
-				System.out.println("[INFO] Current reasoner does not accept this operation.");
+				System.out.println("[INFO] No input for test case.");
+				System.out.println("[INFO] Test case ignored");
 			}
-		} catch (Exception e) {
-			// TODO Remove
-			e.printStackTrace();
+		} else {
+			fail("Current reasoner does not accept this operation.");
+			System.out.println("[INFO] Current reasoner does not accept this operation.");
 		}
 	}
 

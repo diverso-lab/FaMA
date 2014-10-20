@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3CommonalityQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3CoreFeaturesQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3DeadFeaturesQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3HomogeneityQuestionTestCase;
@@ -27,6 +28,7 @@ import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3NumberOfProducts
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3OneProductQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3ProductsQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3UniqueFeaturesQuestionTestCase;
+import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3ValidConfigurationQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3ValidProductQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3ValidQuestionTestCase;
 import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3VariabilityQuestionTestCase;
@@ -51,7 +53,9 @@ import co.icesi.i2t.Choco3Reasoner.tests.simple.questions.Choco3VariantFeaturesQ
 		Choco3UniqueFeaturesQuestionTestCase.class,
 		Choco3OneProductQuestionTestCase.class,
 		Choco3DeadFeaturesQuestionTestCase.class,
-		Choco3HomogeneityQuestionTestCase.class })
+		Choco3HomogeneityQuestionTestCase.class,
+		Choco3CommonalityQuestionTestCase.class,
+		Choco3ValidConfigurationQuestionTestCase.class })
 public class Choco3ReasonerSimpleTestSuite {
 
 }

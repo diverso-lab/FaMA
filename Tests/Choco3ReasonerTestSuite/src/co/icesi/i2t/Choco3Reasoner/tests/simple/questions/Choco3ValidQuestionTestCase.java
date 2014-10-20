@@ -85,8 +85,9 @@ public class Choco3ValidQuestionTestCase extends
 		Choco3ValidQuestion choco3ValidQuestion = (Choco3ValidQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3ValidQuestion != null) {
-			questionTrader.ask(choco3ValidQuestion);
 			try {
+				questionTrader.ask(choco3ValidQuestion);
+				
 				boolean output = choco3ValidQuestion.isValid();
 				
 				if (!expectedOutput.equals("")) {
@@ -101,7 +102,10 @@ public class Choco3ValidQuestionTestCase extends
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

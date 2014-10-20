@@ -90,8 +90,9 @@ public class Choco3HomogeneityQuestionTestCase extends
 		Choco3HomogeneityQuestion choco3HomogeneityQuestion = (Choco3HomogeneityQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3HomogeneityQuestion != null) {
-			questionTrader.ask(choco3HomogeneityQuestion);
 			try {
+				questionTrader.ask(choco3HomogeneityQuestion);
+				
 				double output = choco3HomogeneityQuestion.getHomogeneity();
 				
 				if (!expectedOutput.equals("")) {
@@ -106,7 +107,10 @@ public class Choco3HomogeneityQuestionTestCase extends
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

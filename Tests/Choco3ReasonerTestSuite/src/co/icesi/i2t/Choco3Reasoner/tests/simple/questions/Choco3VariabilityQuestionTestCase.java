@@ -90,8 +90,9 @@ public class Choco3VariabilityQuestionTestCase extends
 		Choco3VariabilityQuestion choco3VariabilityQuestion = (Choco3VariabilityQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3VariabilityQuestion != null) {
-			questionTrader.ask(choco3VariabilityQuestion);
 			try {
+				questionTrader.ask(choco3VariabilityQuestion);
+				
 				double output = choco3VariabilityQuestion.getVariability();
 				
 				if (!expectedOutput.equals("")) {
@@ -106,7 +107,10 @@ public class Choco3VariabilityQuestionTestCase extends
 					System.out.println("[INFO] Test case ignored");
 				}
 			} catch (AssertionError e) {
-				System.out.println("[INFO] Test case failed");
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
+				throw e;
+			} catch (Exception e) {
+				System.out.println("[INFO] Test case failed. Cause: " + e.getMessage());
 				throw e;
 			}
 		} else {

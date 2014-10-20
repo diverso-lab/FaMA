@@ -1,6 +1,6 @@
 <tests>
 	<test modelFile="test-resources/models/HIS.xml">
-		<question id="Commonality" input="" expectedOutput="" />
+		<question id="Commonality" input="HIS=1:SUPERVISION-SYSTEM=1:FIRE=1:INTRUSION=1:CONTROL=1:LIGHT-CONTROL=1:TEMPERATURE=1:SERVICES=1:VIDEO=1" expectedOutput="" />
 		<question id="CoreFeatures" input=""
 			expectedOutput="HIS;SUPERVISION-SYSTEM;FIRE;INTRUSION;CONTROL;LIGHT-CONTROL;TEMPERATURE" />
 		<question id="DeadFeatures" input="" expectedOutput="POWER-LINE" />
@@ -35,6 +35,8 @@
 		<question id="OneProduct" input=""
 			expectedOutput="root;root:child01;root:child02;root:child01:child02" />
 		<question id="Homogeneity" input="" expectedOutput="1" />
+		<question id="Commonality" input="root=1:child01=1" expectedOutput="" />
+		<question id="ValidConfiguration" input="root=1:child01=1" expectedOutput="true" />
 	</test>
 	<test modelFile="test-resources/models/Car.xml">
 		<question id="#Products" input="" expectedOutput="12" />
@@ -51,5 +53,7 @@
 		<question id="OneProduct" input=""
 			expectedOutput="Car:Body:Transmission:Manual:Engine:Gasoline:Cruise;Car:Body:Transmission:Manual:Engine:Gasoline;Car:Body:Transmission:Manual:Engine:Electric:Gasoline:Cruise;Car:Body:Transmission:Manual:Engine:Electric:Gasoline;Car:Body:Transmission:Manual:Engine:Electric:Cruise;Car:Body:Transmission:Manual:Engine:Electric;Car:Body:Transmission:Automatic:Engine:Gasoline:Cruise;Car:Body:Transmission:Automatic:Engine:Gasoline;Car:Body:Transmission:Automatic:Engine:Electric:Gasoline:Cruise;Car:Body:Transmission:Automatic:Engine:Electric:Gasoline;Car:Body:Transmission:Automatic:Engine:Electric:Cruise;Car:Body:Transmission:Automatic:Engine:Electric" />
 		<question id="Homogeneity" input="" expectedOutput="1" />
+		<question id="Commonality" input="Car=1:Body=1:Transmission=1:Manual=1:Engine=1:Gasoline=1" expectedOutput="" />
+		<question id="ValidConfiguration" input="" expectedOutput="" />
 	</test>
 </tests>
