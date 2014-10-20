@@ -77,8 +77,9 @@ public class Choco3UniqueFeaturesQuestion extends Choco3Question implements
 	 */
 	@Override
 	public PerformanceResult answer(Reasoner reasoner) {
+		PerformanceResult performanceResult = this.uniqueFeaturesQuestion.answer(reasoner);
 		this.uniqueFeatures = this.uniqueFeaturesQuestion.getUniqueFeatures();
-		return this.uniqueFeaturesQuestion.answer(reasoner);
+		return performanceResult;
 	}
 
 	/* (non-Javadoc)

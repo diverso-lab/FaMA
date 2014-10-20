@@ -4,7 +4,7 @@ Bundle-Description: A reasoner for FaMa, based on Choco Solver v3. Bui
 Bundle-SymbolicName: es.us.isa.Choco3Reasoner
 Built-By: Raiden
 Bundle-ManifestVersion: 2
-Bnd-LastModified: 1413708512976
+Bnd-LastModified: 1413786625704
 Import-Package: co.icesi.i2t.Choco3.osgi;resolution:=optional,co.icesi
  .i2t.Choco3Reasoner;resolution:=optional,co.icesi.i2t.Choco3Reasoner.
  simple;resolution:=optional,co.icesi.i2t.Choco3Reasoner.simple.questi

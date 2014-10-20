@@ -79,8 +79,9 @@ public class Choco3DeadFeaturesQuestion extends Choco3Question implements
 	 */
 	@Override
 	public PerformanceResult answer(Reasoner reasoner) {
+		PerformanceResult performanceResult = this.deadFeaturesQuestion.answer(reasoner);
 		this.deadFeatures = this.deadFeaturesQuestion.getDeadFeatures();
-		return this.deadFeaturesQuestion.answer(reasoner);
+		return performanceResult;
 	}
 
 	/* (non-Javadoc)

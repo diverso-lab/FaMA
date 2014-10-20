@@ -49,12 +49,16 @@ public class Choco3ValidProductQuestion extends Choco3Question implements
 	 * An instance to the Choco 3 reasoner used.
 	 */
 	private Choco3Reasoner choco3Reasoner;
+	/** 
+	 * A product to be evaluated.
+	 */
+	private Product product;
 	
 	/* (non-Javadoc)
 	 * @see es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion#setProduct(es.us.isa.FAMA.models.featureModel.Product)
 	 */
 	public void setProduct(Product product) {
-		this.validProductQuestion.setProduct(product);
+		this.product = product;
 	}
 
 	/* (non-Javadoc)
@@ -71,6 +75,7 @@ public class Choco3ValidProductQuestion extends Choco3Question implements
 	public void preAnswer(Reasoner reasoner) {
 		this.choco3Reasoner = (Choco3Reasoner) reasoner;
 		this.validProductQuestion = new DefaultValidProductQuestionImpl();
+		this.validProductQuestion.setProduct(this.product);
 //		this.validProductQuestion.preAnswer(reasoner);
 	}
 

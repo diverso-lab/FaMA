@@ -18,7 +18,6 @@ package co.icesi.i2t.Choco3Reasoner.simple.questions;
 
 import solver.Solver;
 import solver.search.solution.Solution;
-import solver.search.strategy.IntStrategyFactory;
 import solver.variables.IntVar;
 import solver.variables.Variable;
 import co.icesi.i2t.Choco3Reasoner.Choco3PerformanceResult;
@@ -27,6 +26,7 @@ import co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner;
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.questions.OneProductQuestion;
+import es.us.isa.FAMA.models.featureModel.GenericFeature;
 import es.us.isa.FAMA.models.featureModel.Product;
 import es.us.isa.FAMA.models.variabilityModel.GenericProduct;
 
@@ -109,8 +109,13 @@ public class Choco3OneProductQuestion extends Choco3Question implements
 					// This means the feature represented by this variable was selected to be
 					// present in the product found
 					if (solution.getIntVal((IntVar) variable) > 0) {
-						// Add the feature to the product
-						this.product.addFeature(choco3Reasoner.searchFeatureByName(variable.getName()));
+						// Search for the feature in the reasoner
+						GenericFeature feature = choco3Reasoner.searchFeatureByName(variable.getName());
+						if (feature != null) {
+							// If the feature was found
+							// Add the feature to the product
+							product.addFeature(feature);
+						}
 					}
 				}
 			}

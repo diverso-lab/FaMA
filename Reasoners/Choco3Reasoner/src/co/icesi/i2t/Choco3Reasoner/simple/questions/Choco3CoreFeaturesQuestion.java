@@ -78,8 +78,9 @@ public class Choco3CoreFeaturesQuestion extends Choco3Question implements
 	 */
 	@Override
 	public PerformanceResult answer(Reasoner reasoner) {
+		PerformanceResult performanceResult = this.coreFeaturesQuestion.answer(reasoner);
 		this.features = this.coreFeaturesQuestion.getCoreFeats();
-		return this.coreFeaturesQuestion.answer(reasoner);
+		return performanceResult;
 	}
 
 	/* (non-Javadoc)
