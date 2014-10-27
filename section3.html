@@ -42,7 +42,7 @@
 		<div class="inner clearfix">
 			<section id="main-content">
 				<h3>
-					<a name="configure-ide" class="anchor" href="configure-ide"><span
+					<a id="configure-ide" class="anchor" href="configure-ide"><span
 						class="octicon octicon-link"></span></a>3 Setting up the Development
 					Environment Framework
 				</h3>
@@ -60,6 +60,7 @@
 					plug-ins to help with development. You can use the normal Eclipse
 					process to install these plug-ins through the menu option
 					<code>Help » Install New Software...</code>
+				</p>
 				<ul>
 					<li>A Git plugin (e.g. EGit) (Update site:
 						http://download.eclipse.org/releases/kepler/ under the
@@ -71,15 +72,14 @@
 						Collaboration category)</li>
 					<li>ANTLR UI (Update site:
 						http://antlreclipse.sourceforge.net/updates/)</li>
-					<li>ANTLR plugin for Eclipse 2.7.6. <u>Note:</u> ANTLR plugin
-						for Eclipse 2.7.6 is not available through an Eclipse update site.
-						You must download it from
+					<li>ANTLR plugin for Eclipse 2.7.6. <span class="note">Note:</span>
+						ANTLR plugin for Eclipse 2.7.6 is not available through an Eclipse
+						update site. You must download it from
 						http://sourceforge.net/projects/antlreclipse/ and manually install
 						the jar by placing it in the plugins folder found in your
 						Eclipse’s installation folder.
 					</li>
 				</ul>
-				</p>
 
 				<table class="tg">
 					<tr>
@@ -137,12 +137,11 @@
 				<br />
 
 				<h4>
-					<a name="fama-checkout" class="anchor" href="fama-checkout"><span
+					<a id="fama-checkout" class="anchor" href="fama-checkout"><span
 						class="octicon octicon-link"></span></a>3.1 Checking out the FAMA
 					Framework source code from GitHub using EGit
 				</h4>
 
-				<p>
 				<ol>
 					<li>Switch to the Git perspective in Eclipse.</li>
 					<li>Click the button <code>Clone a Git Repository</code> and
@@ -170,15 +169,12 @@
 					<li>Wait for the FAMA repository to be cloned.</li>
 				</ol>
 
-				</p>
-
 				<h4>
-					<a name="fama-import" class="anchor" href="fama-import"><span
+					<a id="fama-import" class="anchor" href="fama-import"><span
 						class="octicon octicon-link"></span></a>3.2 Importing the FAMA
 					Framework source code into Eclipse
 				</h4>
 
-				<p>
 				<ol>
 					<li>Right click the FAMA repository and select the option <code>Import
 							Maven Projects...</code></li>
@@ -196,11 +192,13 @@
 					<li>Wait for the projects to be imported and the indexing to
 						finish.</li>
 				</ol>
-				If you already checked out the FAMA Framework source code using an
-				external tool, such as SourceCode, you can import it into Eclipse
-				under the menu option
-				<code>File » Import</code>
-				.
+				<p>
+					If you already checked out the FAMA Framework source code using an
+					external tool, such as SourceCode, you can import it into Eclipse
+					under the menu option
+					<code>File » Import</code>
+					.
+				</p>
 				<ol>
 					<li>Browse to General and select the <code>Maven
 							Projects</code> element. Click <code>Next ></code>.
@@ -208,15 +206,14 @@
 					<li>Browse to the root folder of the source code and then
 						select all the projects of interest.</li>
 				</ol>
-				When everything works correctly, you should see each module checked
-				out as an individual Eclipse project in your workspace. Note that on
-				the initial checkout, it takes a while longer to initially build all
-				the projects in your workspace. In the background, Maven is
-				downloading all project dependencies.
-				</p>
+				<p>When everything works correctly, you should see each module
+					checked out as an individual Eclipse project in your workspace.
+					Note that on the initial checkout, it takes a while longer to
+					initially build all the projects in your workspace. In the
+					background, Maven is downloading all project dependencies.</p>
 
 				<h4>
-					<a name="build-problems" class="anchor" href="build-problems"><span
+					<a id="build-problems" class="anchor" href="build-problems"><span
 						class="octicon octicon-link"></span></a>3.3 Common problems building
 					the source code
 				</h4>
@@ -228,15 +225,15 @@
 				<p>
 					The typical problems involve missing referenced libraries. To solve
 					these errors, go to the lib folder of the project under the
-					project’s root folder (<u>note:</u> in some projects it is located
-					under a resources folder), select all the libraries in the folder,
-					right click and select the option
+					project’s root folder (<span class="note">note:</span> in some
+					projects it is located under a resources folder), select all the
+					libraries in the folder, right click and select the option
 					<code>Build Path » Configure Build Path...</code>
 				</p>
 
 				<p>For those projects involving unit tests you need to add a
 					JUnit library to the classpath. The Eclipse distribution comes with
-					a bundled JUnit library.
+					a bundled JUnit library.</p>
 				<ol>
 					<li>Hover the mouse pointer over an error in a Java class that
 						imports the JUnit library.</li>
@@ -245,7 +242,6 @@
 							build path</code>. Click <code>OK</code>.
 					</li>
 				</ol>
-				</p>
 
 				<p>
 					Depending on your JDK version you will get errors in the project
@@ -269,6 +265,7 @@
 					<code>Toggle ANTLR project nature</code>
 					. Eclipse should proceed to rebuild these projects. For both
 					projects it is required to recompile some ANTLR files.
+				</p>
 				<ol>
 					<li>Go to the <code>FaMaAttributedModel</code> project and
 						expand the package <code>es.us.isa.FAMA.parser</code> and go to
@@ -276,13 +273,12 @@
 					</li>
 					<li>Right click the files <code>Analex.g</code>, <code>Anasint.g</code>
 						and <code>TreeParser.g</code> found in both packages and select
-						the option <code>Compile ANTLR Grammar</code>. <u>Note:</u> You
-						must do this on a per file basis. Eclipse should proceed to
+						the option <code>Compile ANTLR Grammar</code>. <span class="note">Note:</span>
+						You must do this on a per file basis. Eclipse should proceed to
 						rebuild the project.
 					</li>
 				</ol>
 
-				</p>
 			</section>
 
 			<aside id="sidebar">

@@ -42,7 +42,7 @@
 		<div class="inner clearfix">
 			<section id="main-content">
 				<h3>
-					<a name="overview-fama-fw" class="anchor" href="overview-fama-fw"><span
+					<a id="overview-fama-fw" class="anchor" href="overview-fama-fw"><span
 						class="octicon octicon-link"></span></a>2 Overview of the FAMA
 					Framework
 				</h3>
@@ -66,7 +66,7 @@
 					alt="FAMA Framework Architecture" />
 
 				<h4>
-					<a name="overview-feature-models" class="anchor"
+					<a id="overview-feature-models" class="anchor"
 						href="overview-feature-models"><span
 						class="octicon octicon-link"></span></a>2.1 Feature models
 				</h4>
@@ -85,7 +85,7 @@
 					be categorized as mandatory, optional or set. On the other hand,
 					non-parental relationships, also known as cross-tree constraints.
 					The most common cross-tree constraints are requires and excludes.
-					All these features are defined as follows:
+					All these features are defined as follows:</p>
 				<dl>
 					<dt>Mandatory:</dt>
 					<dd>A mandatory relationship states that if a parent feature
@@ -156,10 +156,18 @@
 						can not be present at the same time in a product.
 					</dd>
 				</dl>
+				<p>
+					Feature models can be extended, if necessary, to include additional
+					information about its features. These extended feature models are
+					commonly referenced as extended, advanced or attributed feature
+					models. Extended feature models enable more complex constraints
+					among features and attributes, for example <i>“If attribute A
+						of feature F is lower than a value X, then feature T can not be
+						part of the product”</i>.
 				</p>
 
 				<h4>
-					<a name="overview-fama-extensions" class="anchor"
+					<a id="overview-fama-extensions" class="anchor"
 						href="overview-fama-extensions"><span
 						class="octicon octicon-link"></span></a>2.2 Overview of the FAMA
 					Extensions Layer
@@ -185,15 +193,15 @@
 					are used closely with reasoner extensions.
 				</p>
 				<p>A reasoner is meant to execute the operations over feature
-					models and obtain the required information or properties from it.
-					There are different techniques to perform these operations, and the
+					models to obtain required information or properties from it. There
+					are different techniques to perform these operations, and the
 					constraint satisfaction problem technique is one of them. Reasoner
 					extensions are usually implemented to use a specific technique, for
 					example through out this guide we will be developing a new reasoner
 					to support the analysis of feature models represented through
 					constraint satisfaction problems; following sections will explain
-					more about what constraint satisfactions problems are and how are
-					they used to build a representation of feature models. Anyone can
+					more about what constraint satisfactions problems are and how they
+					are used to build a representation of feature models. Anyone can
 					create a FAMA Extension that extends the framework in one of these
 					aspects or create one for an entirely new purpose. For more detail
 					on the FAMA Extensions available please refer to [Jesús García
@@ -202,7 +210,7 @@
 					Informáticos, Universidad de Sevilla. 2009.].</p>
 
 				<h4>
-					<a name="overview-csp" class="anchor" href="overview-csp"><span
+					<a id="overview-csp" class="anchor" href="overview-csp"><span
 						class="octicon octicon-link"></span></a>2.3 Overview of a Constraint
 					Satisfaction Problem representation of feature models
 				</h4>
@@ -220,6 +228,7 @@
 					representations for the relationships are as follows (more detail
 					about these representations can be found <a
 						href="http://dx.doi.org/10.1016/j.is.2010.01.001">here</a>):
+				</p>
 				<dl>
 					<dt>Mandatory:</dt>
 					<dd>
@@ -261,19 +270,19 @@
 						.
 					</dd>
 				</dl>
-				A product that can be derived from the feature model represented as
-				a CSP is, thus, one of the possible solutions to the CSP.
-				</p>
+				<p>A product that can be derived from the feature model
+					represented as a CSP is, thus, one of the possible solutions to the
+					CSP.</p>
 
 				<h4>
-					<a name="overview-choco" class="anchor" href="overview-choco"><span
+					<a id="overview-choco" class="anchor" href="overview-choco"><span
 						class="octicon octicon-link"></span></a>2.4 Overview of Choco and
 					Choco 3
 				</h4>
 
-				<p>In order to solve CSPs we need to use one of the many tools
-					that have been developed for this purpose. Since the FAMA Framework
-					is built on top of Java and all extensions are encouraged to build
+				<p>In order to solve CSPs we can use one of the many tools that
+					have been developed for this purpose. Since the FAMA Framework is
+					built on top of Java and all extensions are encouraged to be built
 					using Java we have chosen to work with Choco for the development of
 					our new reasoner. Choco is an open source Java library developed
 					for constraint satisfaction problems (CSP) and constraint
@@ -292,8 +301,9 @@
 					strategies (e.g. first fail, smallest, impact-based,
 					activity-based), and an explanation-based engine. However, the
 					Choco 3 library no longer provides native support for biconditional
-					expressions, so to represent the mandatory relationship with Choco
-					3 an equivalent expression needs to be used. This expression is
+					expressions, so, for example, to represent the mandatory
+					relationship with Choco 3 an equivalent expression needs to be
+					used, sucha as
 					<code>(parent present ⇒ child present) ∧ (child present ⇒
 						parent present)</code>
 					.

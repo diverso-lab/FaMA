@@ -42,7 +42,7 @@
 		<div class="inner clearfix">
 			<section id="main-content">
 				<h3>
-					<a name="create-fama-extension" class="anchor"
+					<a id="create-fama-extension" class="anchor"
 						href="create-fama-extension"><span
 						class="octicon octicon-link"></span></a>4 Creating a New FAMA
 					Extension
@@ -89,11 +89,11 @@ Description: «give a description for the artifact». For example, for the Choco
 						</pre>
 					</li>
 					<li>Maven should open the pom file. Switch to the <code>pom.xml</code>
-						tab. <u>Note:</u> Eclipse may mark the line <code>&ltpackaging&gtbundle&lt/packaging&gt</code>
+						tab. <span class="note">Note:</span> Eclipse may mark the line <code>&lt;packaging&gt;bundle&lt;/packaging&gt;</code>
 						in error. This will go away with the following steps.
 					</li>
-					<li>After the <code>&ltdescription&gt&lt/description&gt</code>
-						element and before the closing <code>&lt/project&gt</code> tag
+					<li>After the <code>&lt;description&gt;&lt;/description&gt;</code>
+						element and before the closing <code>&lt;/project&gt;</code> tag
 						paste the following <code>pom.xml</code> fragments:
 						<ul>
 							<li>Plug-in repositories <pre>
@@ -119,7 +119,7 @@ Description: «give a description for the artifact». For example, for the Choco
 	&lt;repository&gt;
 		&lt;id&gt;isa.devel&lt;/id&gt;
 		&lt;name&gt;ISA archiva&lt;/name&gt;
-		&lt;url&gt;http://devel.isa.us.es/glassfish/archiva/repository/internal&lt/url&gt;
+		&lt;url&gt;http://devel.isa.us.es/glassfish/archiva/repository/internal&lt;/url&gt;
 	&lt;/repository&gt;
 &lt;/distributionManagement&gt;
 
@@ -162,10 +162,10 @@ Description: «give a description for the artifact». For example, for the Choco
 								black; it is specific to the development of the Choco 3
 								reasoner. You should replace this dependency with the ones
 								concerning your particular FAMA extension, if needed; otherwise
-								you can safely remove those lines. <u>Note</u>: The version
-								numbers for dependencies may change, so be sure to update them
-								when modifying any of the <code>pom.xml</code> files referenced
-								in this guide.<pre>
+								you can safely remove those lines. <span class="note">Note</span>:
+								The version numbers for dependencies may change, so be sure to
+								update them when modifying any of the <code>pom.xml</code> files
+								referenced in this guide.<pre>
 								<code>
 &lt;dependencies&gt;</code>
 	&lt;dependency&gt;
@@ -315,10 +315,25 @@ Description: «give a description for the artifact». For example, for the Choco
 				</ol>
 
 				<h4>
-					<a name="develop-new-reasoner" class="anchor"
+					<a id="develop-new-reasoner" class="anchor"
 						href="develop-new-reasoner"><span class="octicon octicon-link"></span></a>4.1
 					Developing a New Reasoner
 				</h4>
+
+				<p>
+					As previously stated, a reasoner is meant to execute operations
+					over feature models to obtain certain information or properties
+					from it. There are different techniques to perform these
+					operations; the constraint satisfaction problem technique is one of
+					them. However, every technique has its own representation of
+					problem space elements and constraints between them (see Subsection
+					<a href="section2.html#overview-csp">2.3</a> for the Constraint
+					Satisfaction Problem representation of feature models). Thus, the
+					main task of the reasoner is to provide a translation of features
+					and their relationships from a feature model representation to one
+					in accordance to the selected operation solving technique, also
+					known as solver.
+				</p>
 
 				<p>Every new reasoner added to the FAMA Framework should, at
 					least, provide the implementation for handling simple feature
@@ -368,32 +383,63 @@ Description: «give a description for the artifact». For example, for the Choco
 						abstract class provided by the <code>FaMaSDK</code> project in the
 						package <code>es.us.isa.FAMA.Reasoner</code>. <br /> This
 						reasoner class should define the necessary methods to create a
-						representation of the feature model, as described in Subsections
-						2.3 and 2.4, that the reasoner can use to be able to provide
-						specific information about it. The required methods to implement
-						are:
+						representation of the feature model, as described in Subsections <a
+						href="section2.html#overview-csp">2.3</a> and <a
+						href="overview-choco">2.4</a>, that the reasoner can use to be
+						able to provide specific information about it. The required
+						methods to implement are:
 						<ul>
 							<li><code>addFeature</code>: Creates a representation of the
-								given feature in the reasoner.</li>
+								given feature in the reasoner. For the Choco 3 Reasoner we
+								create an integer variable with an enumerated domain (or
+								enumerated variable) representing the feature in the CSP and add
+								it to the solver. Enumerated variables may take their value in
+								the range <code>[a, b]</code> where <code>a &lt; b</code> or in
+								an array of ordered values <code>a, b, c, ..., z</code> where <code>a
+									&lt; ... &lt; z</code>. In this case the feature variable will take
+								its value from an array of values given by its cardinality,
+								therefore we use an enumerated variable.</li>
 							<li><code>addRoot</code>: Marks the given feature as the
-								root feature and ensures that it is present in every product.</li>
+								root feature and ensures that it is present in every product.
+								For the Choco 3 Reasoner the root feature is represented with an
+								equality constraint to the constant value 1. This means the root
+								feature has to be present in a product, hence the constraint: <code>root
+									= 1</code>.</li>
 							<li><code>addMandatory</code>: Creates a representation of a
 								mandatory relationship between the given parent and child
-								features.</li>
+								features. For the Choco 3 Reasoner we create the expression <code>(parent
+									present ⇒ child present) and (child present ⇒ parent present)</code>.
+								However, it can be reduced to the expression: <code>parent
+									= child</code>.</li>
 							<li><code>addOptional</code>: Creates a representation of an
 								optional relationship between the given parent and child
-								features.</li>
+								features. For the Choco 3 Reasoner we create the expression <code>(parent
+									not selected ⇒ child not selected)</code>. However, it can be reduced
+								to the expression: <code>parent >= child</code>.</li>
 							<li><code>addExcludes</code>: Creates a representation of an
 								excludes relationship between the given origin and destination
-								features.</li>
+								features. For the Choco 3 Reasoner we create the expression <code>(origin
+									present ⇒ destination not present)</code>. However, it can be reduced
+								to the expression: <code>origin > destination</code>.</li>
 							<li><code>addRequires</code>: Creates a representation of a
 								requires relationship between the given origin and destination
-								features.</li>
+								features. For the Choco 3 Reasoner we create the expression <code>(origin
+									present ⇒ destination present)</code>. However, it can be reduced to
+								the expression: <code>origin = destination</code>.</li>
 							<li><code>addSet</code>: Creates a representation of a set
-								relationship between the given parent and its children features.</li>
+								relationship between the given parent and its children features.
+								For the Choco 3 Reasoner we create a constraint equivalent to
+								the expression: <code>if parent present then children
+									present in the range of the cardinality, else children not
+									present</code>.</li>
 							<li><code>applyStagedConfiguration</code>: Applies a staged
 								configuration to the representation of the feature model in the
-								reasoner.</li>
+								reasoner. For the Choco 3 Reasoner we add each configuration of
+								the feature model as a constraint represented by the expression
+								<code>feature = configuration value</code>, where the
+								configuration value can be 0 if the feature is not selected, or
+								a value in the range <code>[a, b]</code> where <code>1
+									&lt; a &lt; b</code> if the feature is selected.</li>
 							<li><code>unapplyStagedConfiguration</code>: Removes the
 								staged configuration applied with the previous method from the
 								representation of the feature model in the reasoner.</li>
@@ -401,11 +447,25 @@ Description: «give a description for the artifact». For example, for the Choco
 								about specific information of the feature model, for example the
 								number of products that can be derived from a given feature
 								model. A question represents an analysis operation, like the one
-								in the example, over a given feature model.</li>
-						</ul> <u>Note:</u> For the reasoners in the packages of ExplainErrors
-						(4Exp) you must inherit from the respective implementation’s
-						reasoner created previously in this step and not from the abstract
-						reasoner class provided by the <code>FaMaSDK</code> project.
+								in the example, over a given feature model. First, set the
+								heuristic to be used when answering the question. Second,
+								prepare the reasoner and additional resources prior to answering
+								the question with the question’s <i>preAnswer</i> method. This
+								method should always be called before answering any question.
+								Third, attempt to answer the question and capture its
+								performance result with the question’s <i>answer</i> method.
+								Fourth, release any resources associated with answering the
+								question with the question’s <i>postAnswer</i> method. This
+								method should always be called after answering the question. The
+								<i>preAnswer</i>, <i>answer</i> and <i>postAnswer</i> methods
+								are detailed in the following step. Fifth and final, return the
+								performance result for the reasoner (this is detailed in Step
+								4).</li>
+						</ul> <span class="note">Note:</span> For the reasoners in the packages
+						of ExplainErrors (4Exp) you must inherit from the respective
+						implementation’s reasoner created previously in this step and not
+						from the abstract reasoner class provided by the <code>FaMaSDK</code>
+						project.
 					</li>
 					<li>Also, the package from <a
 						href="section4.html#develop-new-reasoner">step 2</a> will also
@@ -506,8 +566,7 @@ Description: «give a description for the artifact». For example, for the Choco
 								calculating the percentage of products represented by the
 								feature model including the input configuration.
 
-								<table class="fraction" align="center" cellpadding="0"
-									cellspacing="0">
+								<table class="fraction">
 									<tr>
 										<td rowspan="2" nowrap="nowrap"><i>Commonality</i> =</td>
 										<td nowrap="nowrap"><i>number of products after
@@ -524,8 +583,7 @@ Description: «give a description for the artifact». For example, for the Choco
 								potential number of products represented by a feature model
 								assuming that any combination of features is allowed. The root
 								and non-leaf features are often not considered.
-								<table class="fraction" align="center" cellpadding="0"
-									cellspacing="0">
+								<table class="fraction">
 									<tr>
 										<td rowspan="2" nowrap="nowrap"><i>Variability</i> =</td>
 										<td nowrap="nowrap"><i>number of products</i></td>
@@ -541,8 +599,7 @@ Description: «give a description for the artifact». For example, for the Choco
 								constraints. Homogeneity is related with the number of unique
 								features among products. The more unique features, the less
 								homogeneous the feature model is.
-								<table class="fraction" align="center" cellpadding="0"
-									cellspacing="0">
+								<table class="fraction">
 									<tr>
 										<td rowspan="2" nowrap="nowrap"><i>Homogeneity</i> =</td>
 										<td rowspan="2" nowrap="nowrap">1 –</td>
@@ -593,7 +650,7 @@ Description: «give a description for the artifact». For example, for the Choco
 				</ol>
 
 				<h4>
-					<a name="develop-new-question" class="anchor"
+					<a id="develop-new-question" class="anchor"
 						href="develop-new-question"><span class="octicon octicon-link"></span></a>4.2
 					Developing a new question to be answered by the reasoner
 				</h4>
@@ -602,7 +659,7 @@ Description: «give a description for the artifact». For example, for the Choco
 					should be able to answer, but it should not be limited to this set.
 					New questions may require a complete implementation to be answered
 					or they can use or compose the solutions of already existing
-					questions.
+					questions.</p>
 				<ol>
 					<li>The new question should extend the abstract class created
 						in step 3 <a href="section4.html#develop-new-reasoner">here</a>.
@@ -618,10 +675,8 @@ Description: «give a description for the artifact». For example, for the Choco
 					</li>
 				</ol>
 
-				</p>
-
 				<h4>
-					<a name="connect-fama-extension" class="anchor"
+					<a id="connect-fama-extension" class="anchor"
 						href="connect-fama-extension"><span
 						class="octicon octicon-link"></span></a>4.3 Connecting the new FAMA
 					Extension to the FAMA Framework
@@ -678,9 +733,9 @@ Description: «give a description for the artifact». For example, for the Choco
 					and is found in the project
 					<code>FaMa-Docs</code>
 					. For a new reasoner extension, a
-					<code>&ltreasoner /&gt</code>
+					<code>&lt;reasoner /&gt;</code>
 					tag should be added in-between the
-					<code>&ltquestionTrader&gt&lt/questionTrader&gt</code>
+					<code>&lt;questionTrader&gt;&lt;/questionTrader&gt;</code>
 					tags. For the Choco 3 reasoner implementation we inserted the tag
 					in the following listing.
 				</p>
@@ -708,7 +763,6 @@ class="co.icesi.i2t.Choco3Reasoner.simple.Choco3Reasoner" /&gt;
 &lt;/reasoner&gt;
 					</code>
 				</pre>
-				</p>
 
 				<p>The Choco 3 reasoner loader configuration file for simple
 					feature models looks like the fragment in the following listing.</p>

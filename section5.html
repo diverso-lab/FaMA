@@ -42,14 +42,14 @@
 		<div class="inner clearfix">
 			<section id="main-content">
 				<h3>
-					<a name="package-test-fama-extension" class="anchor"
+					<a id="package-test-fama-extension" class="anchor"
 						href="package-test-fama-extension"><span
 						class="octicon octicon-link"></span></a>5 Package and test a FAMA
 					Extension
 				</h3>
 
 				<h4>
-					<a name="package-fama-extension" class="anchor"
+					<a id="package-fama-extension" class="anchor"
 						href="package-fama-extension"><span
 						class="octicon octicon-link"></span></a>5.1 Packaging a FAMA Extension
 				</h4>
@@ -68,7 +68,8 @@
 					.
 				</p>
 				<p>
-					<u>Note:</u> Before packaging your extension, make sure the
+					<span class="note">Note:</span> Before packaging your extension,
+					make sure the
 					<code>FaMaSDK</code>
 					,
 					<code>FaMaFeatureModel</code>
@@ -81,7 +82,7 @@
 				</p>
 
 				<h4>
-					<a name="package-fama-extension" class="anchor"
+					<a id="package-fama-extension" class="anchor"
 						href="package-fama-extension"><span
 						class="octicon octicon-link"></span></a>5.2. Creating a test suite for
 					a FAMA Extension
@@ -400,15 +401,45 @@ Description: «give a description for the artifact». For example, for the Choco
 								question test case in the Choco 3 reasoner this method tests the
 								<code>getNumberOfProducts</code> method from the <code>Choco3NumberOfProductsQuestion</code>
 								class, which is the method that returns the output value after
-								the question is asked to the reasoner.</li>
+								the question is asked to the reasoner. Questions shouldn’t be
+								asked directly to the reasoner, as this would skip basic
+								processing from the FAMA Framework. The proper way is to do this
+								through a <code>QuestionTrader</code> object, a façade to access
+								the framework’s services. The <code>FaMaTestSuite2</code>
+								project provides an instance of this façade through the <code>questionTrader</code>
+								field. Use this field to load the variability model that will be
+								evaluated during the test, and to ask the question to be tested.
+								The following fragment shows the test case for the Choco 3
+								number of products question. <pre>
+								<code>
+@Test
+public void testGetNumberOfProducts() {	</code>
+	// Load the variability model that will be evaluated during the test.
+	<code>variabilityModel = questionTrader.openFile(variabilityModelPath);
+	questionTrader.setVariabilityModel(variabilityModel);</code>
+	// Create the question instance to be tested.
+	<code>Choco3NumberOfProductsQuestion choco3NumberOfProductsQuestion = (Choco3NumberOfProductsQuestion) questionTrader.createQuestion(QUESTION);
+	if (choco3NumberOfProductsQuestion != null) {
+		try {
+			questionTrader.ask(choco3NumberOfProductsQuestion);</code>
+			// Retrieve the result.
+			<code>double output = choco3NumberOfProductsQuestion.getNumberOfProducts();</code>
+			// Compare the result against an expected output value.
+			<code>assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
+	} else {
+		fail("Current reasoner does not accept this operation.");
+	}
+}
+								</code>
+								</pre></li>
 						</ul>
 					</li>
 					<li>The package should also contain a JUnit4 test suite class.
-						(<u>Note:</u> This step should only be made after all test cases
-						for the feature model type have been created.) The <code>New
-							JUnit Test Suite</code> wizard should give you a list of the test cases
-						available to be included in the test suite. Select all the test
-						cases that apply.
+						(<span class="note">Note:</span> This step should only be made
+						after all test cases for the feature model type have been
+						created.) The <code>New JUnit Test Suite</code> wizard should give
+						you a list of the test cases available to be included in the test
+						suite. Select all the test cases that apply.
 					</li>
 					<li>In the package <code>co.icesi.i2t.Choco3Reasoner.tests</code>
 						create an executable class (<i>i.e.</i> a class with a <i>main</i>

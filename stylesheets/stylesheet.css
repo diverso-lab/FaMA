@@ -194,6 +194,10 @@ ul, ol, dl {
 	margin-bottom: 20px;
 }
 
+span.note {
+	text-decoration: underline;
+}
+
 /* COMMON STYLES */
 hr {
 	height: 1px;
@@ -266,9 +270,13 @@ table.fraction {
 	vertical-align: middle;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
+	margin-left:auto; 
+    margin-right:auto;
 	line-height: 2em;
 	width: auto;
 	border: none;
+	border-collapse: collapse;
+	padding: 0;
 }
 
 /* GENERAL ELEMENT TYPE STYLES */
