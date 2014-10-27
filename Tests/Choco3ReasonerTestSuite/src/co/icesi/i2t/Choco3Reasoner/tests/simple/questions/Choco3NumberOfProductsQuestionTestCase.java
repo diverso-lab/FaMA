@@ -96,18 +96,22 @@ public class Choco3NumberOfProductsQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3NumberOfProductsQuestion choco3NumberOfProductsQuestion = (Choco3NumberOfProductsQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3NumberOfProductsQuestion != null) {
 			try {
+				// Ask the question.
 				questionTrader.ask(choco3NumberOfProductsQuestion);
 				
+				// Retrieve the result.
 				double output = choco3NumberOfProductsQuestion.getNumberOfProducts();
 				
 				if (!expectedOutput.equals("")) {
 					System.out.println("Expected number of products: " + expectedOutput);
 					System.out.println("Obtained number of products: " + output);
 					
+					// Compare the result against an expected output value.
 					assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
 					System.out.println("[INFO] Test case passed");
 				} else {

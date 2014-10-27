@@ -84,6 +84,7 @@ public class Choco3ValidProductQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3ValidProductQuestion choco3ValidProductQuestion = (Choco3ValidProductQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3ValidProductQuestion != null) {
@@ -97,8 +98,11 @@ public class Choco3ValidProductQuestionTestCase extends
 						inputProduct.addFeature(feature);
 					}
 					choco3ValidProductQuestion.setProduct(inputProduct);
+					
+					// Ask the question.
 					questionTrader.ask(choco3ValidProductQuestion);
-				
+					
+					// Retrieve the result.
 					boolean output = choco3ValidProductQuestion.isValid();
 
 					if (!expectedOutput.equals("")) {
@@ -106,6 +110,7 @@ public class Choco3ValidProductQuestionTestCase extends
 						System.out.println("Expected is valid product: " + expectedOutput);
 						System.out.println("Obtained is valid product: " + output);
 						
+						// Compare the result against an expected output value.
 						assertEquals(Boolean.parseBoolean(expectedOutput), output);
 						System.out.println("[INFO] Test case passed");
 					} else {

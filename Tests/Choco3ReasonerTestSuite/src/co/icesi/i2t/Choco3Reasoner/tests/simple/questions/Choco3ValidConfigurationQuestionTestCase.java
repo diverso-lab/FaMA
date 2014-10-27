@@ -88,6 +88,7 @@ public class Choco3ValidConfigurationQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3ValidConfigurationQuestion choco3ValidConfigurationQuestion = (Choco3ValidConfigurationQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3ValidConfigurationQuestion != null) {
@@ -126,14 +127,17 @@ public class Choco3ValidConfigurationQuestionTestCase extends
 				System.out.println("For configuration:\n" + inputConfiguration);
 				choco3ValidConfigurationQuestion.setConfiguration(inputConfiguration);
 				
+				// Ask the question.
 				questionTrader.ask(choco3ValidConfigurationQuestion);
 				
+				// Retrieve the result.
 				boolean output = choco3ValidConfigurationQuestion.isValid();
 				
 				if (!expectedOutput.equals("")) {
 					System.out.println("Expected is valid configuration: " + expectedOutput);
 					System.out.println("Obtained is valid configuration: " + output);
 					
+					// Compare the result against an expected output value.
 					assertEquals(Boolean.parseBoolean(expectedOutput), output);
 					System.out.println("[INFO] Test case passed");
 				} else {

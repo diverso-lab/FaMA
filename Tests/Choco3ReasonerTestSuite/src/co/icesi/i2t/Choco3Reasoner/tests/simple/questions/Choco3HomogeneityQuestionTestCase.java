@@ -87,18 +87,22 @@ public class Choco3HomogeneityQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3HomogeneityQuestion choco3HomogeneityQuestion = (Choco3HomogeneityQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3HomogeneityQuestion != null) {
 			try {
+				// Ask the question.
 				questionTrader.ask(choco3HomogeneityQuestion);
 				
+				// Retrieve the result.
 				double output = choco3HomogeneityQuestion.getHomogeneity();
 				
 				if (!expectedOutput.equals("")) {
 					System.out.println("Expected homogeneity: " + expectedOutput);
 					System.out.println("Obtained homogeneity: " + output);
 					
+					// Compare the result against an expected output value.
 					assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
 					System.out.println("[INFO] Test case passed");
 				} else {

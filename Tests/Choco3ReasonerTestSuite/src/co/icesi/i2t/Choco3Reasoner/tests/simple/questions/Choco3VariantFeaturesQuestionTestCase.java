@@ -87,10 +87,12 @@ public class Choco3VariantFeaturesQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3VariantFeaturesQuestion choco3VariantFeaturesQuestion = (Choco3VariantFeaturesQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3VariantFeaturesQuestion != null) {
 			try {
+				// Ask the question.
 				questionTrader.ask(choco3VariantFeaturesQuestion);
 				
 				Comparator<GenericFeature> comparator = new Comparator<GenericFeature>() {
@@ -99,6 +101,7 @@ public class Choco3VariantFeaturesQuestionTestCase extends
 				    }
 				};
 				
+				// Retrieve the result.
 				ArrayList<GenericFeature> output = (ArrayList<GenericFeature>) choco3VariantFeaturesQuestion.getVariantFeats();
 				Collections.sort(output, comparator);
 				
@@ -114,6 +117,7 @@ public class Choco3VariantFeaturesQuestionTestCase extends
 					System.out.println("Expected variant features: " + expectedVariantFeatures);
 					System.out.println("Obtained variant features: " + output);
 					
+					// Compare the result against an expected output value.
 					assertEquals(expectedVariantFeatures, output);
 					System.out.println("[INFO] Test case passed");
 				} else {

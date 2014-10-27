@@ -93,10 +93,12 @@ public class Choco3ProductsQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3ProductsQuestion choco3ProductsQuestion = (Choco3ProductsQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3ProductsQuestion != null) {
 			try {
+				// Ask the question.
 				questionTrader.ask(choco3ProductsQuestion);
 				
 				Comparator<Product> comparator = new Comparator<Product>() {
@@ -105,6 +107,7 @@ public class Choco3ProductsQuestionTestCase extends
 				    }
 				};
 				
+				// Retrieve the result.
 				LinkedList<Product> output = (LinkedList<Product>) choco3ProductsQuestion.getAllProducts();
 				Collections.sort(output, comparator);
 				
@@ -127,6 +130,7 @@ public class Choco3ProductsQuestionTestCase extends
 					System.out.println("Expected products: " + expectedProducts);
 					System.out.println("Obtained products: " + output);
 					
+					// Compare the result against an expected output value.
 					assertEquals(expectedProducts, output);
 					System.out.println("[INFO] Test case passed");
 				

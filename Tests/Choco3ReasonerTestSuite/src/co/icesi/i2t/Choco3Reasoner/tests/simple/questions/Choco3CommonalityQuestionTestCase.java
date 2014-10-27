@@ -91,6 +91,7 @@ public class Choco3CommonalityQuestionTestCase extends
 		questionTrader.setVariabilityModel(variabilityModel);
 		System.out.println("For model: \"" + variabilityModelPath + "\"");
 		
+		// Create the question instance to be tested.
 		Choco3CommonalityQuestion choco3CommonalityQuestion = (Choco3CommonalityQuestion) questionTrader.createQuestion(QUESTION);
 		
 		if (choco3CommonalityQuestion != null) {
@@ -111,14 +112,17 @@ public class Choco3CommonalityQuestionTestCase extends
 					System.out.println("For configuration:\n" + inputConfiguration);
 					choco3CommonalityQuestion.setConfiguration(inputConfiguration);
 					
+					// Ask the question.
 					questionTrader.ask(choco3CommonalityQuestion);
 					
+					// Retrieve the result.
 					double output = choco3CommonalityQuestion.getCommonality();
 					
 					if (!expectedOutput.equals("")) {
 						System.out.println("Expected commonality: " + expectedOutput);
 						System.out.println("Obtained commonality: " + output);
 						
+						// Compare the result against an expected output value.
 						assertEquals(Double.parseDouble(expectedOutput), output, DELTA);
 						System.out.println("[INFO] Test case passed");
 					} else {
