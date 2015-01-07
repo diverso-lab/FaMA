@@ -27,22 +27,18 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-//import net.sf.javabdd.BDD;
-//import net.sf.javabdd.JFactory;
-
-import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-
-import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 import es.us.isa.FAMA.Reasoner.FeatureModelReasoner;
 import es.us.isa.FAMA.Reasoner.Question;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
-import es.us.isa.FAMA.models.featureModel.Constraint;
 import es.us.isa.FAMA.models.featureModel.GenericFeature;
 import es.us.isa.FAMA.models.featureModel.GenericRelation;
-import es.us.isa.FAMA.models.featureModel.KeyWords;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
 import es.us.isa.FAMA.stagedConfigManager.Configuration;
-import es.us.isa.util.Node;
+//import net.sf.javabdd.BDD;
+//import net.sf.javabdd.JFactory;
+import es.us.isa.FAMA.Benchmarking.PerformanceResult;
+
+import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 
 public class Sat4jReasoner extends FeatureModelReasoner {
 
