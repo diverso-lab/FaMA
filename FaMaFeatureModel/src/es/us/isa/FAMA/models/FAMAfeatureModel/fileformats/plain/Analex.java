@@ -372,21 +372,21 @@ tryAgain:
 		
 		mALMOADILLA(false);
 		{
-		_loop949:
+		_loop16:
 		do {
 			if ((LA(1)=='\r') && (_tokenSet_0.member(LA(2)))) {
 				{
-				int _cnt946=0;
-				_loop946:
+				int _cnt13=0;
+				_loop13:
 				do {
 					if ((LA(1)=='\r') && (_tokenSet_0.member(LA(2)))) {
 						match('\r');
 					}
 					else {
-						if ( _cnt946>=1 ) { break _loop946; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+						if ( _cnt13>=1 ) { break _loop13; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 					}
 					
-					_cnt946++;
+					_cnt13++;
 				} while (true);
 				}
 				{
@@ -399,7 +399,7 @@ tryAgain:
 				}
 			}
 			else {
-				break _loop949;
+				break _loop16;
 			}
 			
 		} while (true);
@@ -449,7 +449,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop953:
+		_loop20:
 		do {
 			switch ( LA(1)) {
 			case 'A':  case 'B':  case 'C':  case 'D':
@@ -483,7 +483,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop953;
+				break _loop20;
 			}
 			}
 		} while (true);
@@ -503,13 +503,13 @@ tryAgain:
 		
 		match('"');
 		{
-		_loop956:
+		_loop23:
 		do {
 			if ((_tokenSet_2.member(LA(1)))) {
 				matchNot('"');
 			}
 			else {
-				break _loop956;
+				break _loop23;
 			}
 			
 		} while (true);
@@ -528,17 +528,17 @@ tryAgain:
 		int _saveIndex;
 		
 		{
-		int _cnt959=0;
-		_loop959:
+		int _cnt26=0;
+		_loop26:
 		do {
 			if (((LA(1) >= '0' && LA(1) <= '9'))) {
 				mDIGITO(false);
 			}
 			else {
-				if ( _cnt959>=1 ) { break _loop959; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt26>=1 ) { break _loop26; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
-			_cnt959++;
+			_cnt26++;
 		} while (true);
 		}
 		_ttype = LIT_ENTERO;

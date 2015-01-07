@@ -314,13 +314,13 @@ public Anasint(ParserSharedInputState state) {
 			declaracion_feature();
 			r_AST = (AST)returnAST;
 			{
-			_loop977:
+			_loop6:
 			do {
 				if ((LA(1)==IDENT)) {
 					declaracion_feature();
 				}
 				else {
-					break _loop977;
+					break _loop6;
 				}
 				
 			} while (true);
@@ -420,18 +420,18 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			int _cnt982=0;
-			_loop982:
+			int _cnt11=0;
+			_loop11:
 			do {
 				if ((LA(1)==IDENT||LA(1)==CORCHETE_ABRIR)) {
 					relacion();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt982>=1 ) { break _loop982; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt11>=1 ) { break _loop11; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt982++;
+				_cnt11++;
 			} while (true);
 			}
 			lista_relaciones_AST = (AST)currentAST.root;
@@ -457,10 +457,10 @@ public Anasint(ParserSharedInputState state) {
 		AST of_AST = null;
 		
 		try {      // for error handling
-			boolean synPredMatched985 = false;
+			boolean synPredMatched14 = false;
 			if (((LA(1)==CORCHETE_ABRIR) && (LA(2)==LIT_ENTERO))) {
-				int _m985 = mark();
-				synPredMatched985 = true;
+				int _m14 = mark();
+				synPredMatched14 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -468,12 +468,12 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched985 = false;
+					synPredMatched14 = false;
 				}
-				rewind(_m985);
+				rewind(_m14);
 inputState.guessing--;
 			}
-			if ( synPredMatched985 ) {
+			if ( synPredMatched14 ) {
 				relacion_cardinalidad();
 				r_AST = (AST)returnAST;
 				if ( inputState.guessing==0 ) {
@@ -682,18 +682,18 @@ inputState.guessing--;
 			feature();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			int _cnt993=0;
-			_loop993:
+			int _cnt22=0;
+			_loop22:
 			do {
 				if ((LA(1)==IDENT)) {
 					feature();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt993>=1 ) { break _loop993; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt22>=1 ) { break _loop22; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt993++;
+				_cnt22++;
 			} while (true);
 			}
 			match(LLAVE_CERRAR);
@@ -718,18 +718,18 @@ inputState.guessing--;
 		
 		try {      // for error handling
 			{
-			int _cnt997=0;
-			_loop997:
+			int _cnt26=0;
+			_loop26:
 			do {
 				if ((LA(1)==IDENT)) {
 					constraint();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt997>=1 ) { break _loop997; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt26>=1 ) { break _loop26; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt997++;
+				_cnt26++;
 			} while (true);
 			}
 			lista_constraints_AST = (AST)currentAST.root;

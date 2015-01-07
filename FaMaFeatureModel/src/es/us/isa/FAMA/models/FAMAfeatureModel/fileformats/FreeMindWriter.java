@@ -31,7 +31,6 @@ import javax.sql.RowSetInternal;
 import javax.sql.rowset.WebRowSet;
 import javax.sql.rowset.spi.XmlReader;
 
-import sun.misc.GC.LatencyRequest;
 
 import es.us.isa.FAMA.models.FAMAfeatureModel.Dependency;
 import es.us.isa.FAMA.models.FAMAfeatureModel.ExcludesDependency;
