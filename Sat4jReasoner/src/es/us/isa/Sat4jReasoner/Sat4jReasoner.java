@@ -17,9 +17,12 @@ o, 	This file is part of FaMaTS.
  */
 package es.us.isa.Sat4jReasoner;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,7 +40,6 @@ import es.us.isa.FAMA.stagedConfigManager.Configuration;
 //import net.sf.javabdd.BDD;
 //import net.sf.javabdd.JFactory;
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-
 import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 
 public class Sat4jReasoner extends FeatureModelReasoner {
@@ -58,12 +60,14 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 
 	private Map<String, GenericFeature> featuresMap;
 
-	private String pathFile;
+	//private String pathFile;
 	private ArrayList<String> clauses; // Clauses
 
 	private int numvar; // Number of variables
 
 	private ArrayList<String> addedClauses;
+
+	private InputStream stream;
 
 	public Sat4jReasoner() {
 		reset();
@@ -90,9 +94,9 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		return variables.get(featurename);
 	}
 
-	public String getPathFile() {
-		return this.pathFile;
-	}
+//	public String getPathFile() {
+//		return this.pathFile;
+//	}
 
 	// Return the name of the feature associate to cnf_var
 	public GenericFeature getFeature(String cnf_var) {
@@ -134,22 +138,22 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 
 		// End file
 		cnf_content += "0";
-
+		stream= new ByteArrayInputStream(cnf_content.getBytes(StandardCharsets.UTF_8));
 		// Create the .cnf file
-		File outputFile = null;
-		try {
-
-			outputFile = File.createTempFile("cnf", "txt");// new
-			// File(filepath);
-			pathFile = outputFile.getAbsolutePath();
-			FileWriter out;
-			out = new FileWriter(outputFile);
-			out.write(cnf_content);
-			out.close();
-
-		} catch (IOException e) {
-			System.out.println("SAT: Error creating temporary cnf file");
-		}
+//		File outputFile = null;
+//		try {
+//
+//			outputFile = File.createTempFile("cnf", "txt");// new
+//			// File(filepath);
+//			pathFile = outputFile.getAbsolutePath();
+//			FileWriter out;
+//			out = new FileWriter(outputFile);
+//			out.write(cnf_content);
+//			out.close();
+//
+//		} catch (IOException e) {
+//			System.out.println("SAT: Error creating temporary cnf file");
+//		}
 	}
 
 	@Override
@@ -398,6 +402,10 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	public void setHeuristic(Object obj) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public InputStream getStream() {
+		return this.stream;
 	}
 
 

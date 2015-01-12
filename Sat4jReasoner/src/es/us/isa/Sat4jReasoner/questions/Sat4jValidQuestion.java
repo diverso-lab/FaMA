@@ -19,6 +19,7 @@ package es.us.isa.Sat4jReasoner.questions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.sat4j.minisat.SolverFactory;
 import org.sat4j.reader.DimacsReader;
@@ -30,7 +31,6 @@ import org.sat4j.specs.ISolver;
 import org.sat4j.specs.TimeoutException;
 
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-
 import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.Sat4jReasoner.*;
@@ -61,7 +61,7 @@ public class Sat4jValidQuestion extends Sat4jQuestion implements ValidQuestion {
 			throw new FAMAParameterException("Reasoner :Not specified");
 		}
 		Sat4jResult res = new Sat4jResult();
-		String cnfFilePath = ((Sat4jReasoner) r).getPathFile();
+		InputStream cnfFilePath = ((Sat4jReasoner) r).getStream();
 		ISolver solver = SolverFactory.instance().defaultSolver();
 		solver.setTimeout(3600); // 1 hour timeout
 		Reader reader = new DimacsReader(solver);

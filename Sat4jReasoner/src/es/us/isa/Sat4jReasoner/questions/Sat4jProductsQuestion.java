@@ -19,6 +19,7 @@ package es.us.isa.Sat4jReasoner.questions;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -35,7 +36,6 @@ import org.sat4j.specs.TimeoutException;
 import org.sat4j.tools.ModelIterator;
 
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-
 import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.Reasoner.questions.ProductsQuestion;
@@ -72,7 +72,7 @@ public class Sat4jProductsQuestion extends Sat4jQuestion implements
 			throw new FAMAParameterException("Reasoner :Not specified");
 		}
 		Sat4jResult res = new Sat4jResult();
-		String cnfFilePath = ((Sat4jReasoner)r).getPathFile();
+		InputStream cnfFilePath = ((Sat4jReasoner)r).getStream();
 		ISolver solver = SolverFactory.instance().defaultSolver();
         ModelIterator mi = new ModelIterator(solver);
         solver.setTimeout(3600); // 1 hour timeout
