@@ -415,5 +415,12 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		return this.stream;
 	}
 
+	public String getPartialCNF() {
+		this.easeGeneration=true;
+		createSAT();
+		this.easeGeneration=false;
+		return easeGenString;
+	}
+
 
 }
