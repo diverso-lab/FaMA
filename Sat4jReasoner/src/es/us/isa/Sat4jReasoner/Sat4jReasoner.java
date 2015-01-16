@@ -49,7 +49,9 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	 * @uml.associationEnd qualifier="key:java.lang.Object java.lang.String"
 	 */
 	private Map<String, String> variables; // Variables<FeatureName,SATVarNumber>
-
+	
+	public boolean easeGeneration=false;
+	public String easeGenString;
 	public Map<String, String> getVariables() {
 		return variables;
 	}
@@ -68,7 +70,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	private ArrayList<String> addedClauses;
 
 	private InputStream stream;
-
+	
 	public Sat4jReasoner() {
 		reset();
 	}
@@ -136,8 +138,12 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 			cnf_content += (String) it.next() + "\n";
 		}
 
+		if(!easeGeneration){
 		// End file
 		cnf_content += "0";
+		}else{
+			this.easeGenString=cnf_content;
+		}
 		stream= new ByteArrayInputStream(cnf_content.getBytes(StandardCharsets.UTF_8));
 		// Create the .cnf file
 //		File outputFile = null;
@@ -346,6 +352,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		PerformanceResult res=new Sat4jResult();
 		
 		Sat4jQuestion sq = (Sat4jQuestion) q;
+		
 		sq.preAnswer(this);
 		res = sq.answer(this);
 		sq.postAnswer(this);
