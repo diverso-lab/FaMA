@@ -18,9 +18,6 @@ o, 	This file is part of FaMaTS.
 package es.us.isa.Sat4jReasoner;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -30,6 +27,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+//import net.sf.javabdd.BDD;
+//import net.sf.javabdd.JFactory;
+import es.us.isa.FAMA.Benchmarking.PerformanceResult;
+import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 import es.us.isa.FAMA.Reasoner.FeatureModelReasoner;
 import es.us.isa.FAMA.Reasoner.Question;
 import es.us.isa.FAMA.models.featureModel.Cardinality;
@@ -37,10 +38,6 @@ import es.us.isa.FAMA.models.featureModel.GenericFeature;
 import es.us.isa.FAMA.models.featureModel.GenericRelation;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityElement;
 import es.us.isa.FAMA.stagedConfigManager.Configuration;
-//import net.sf.javabdd.BDD;
-//import net.sf.javabdd.JFactory;
-import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-import es.us.isa.FAMA.Exceptions.FAMAParameterException;
 
 public class Sat4jReasoner extends FeatureModelReasoner {
 
@@ -52,6 +49,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	
 	public boolean easeGeneration=false;
 	public String easeGenString;
+	public int easeIncrement=0;
 	public Map<String, String> getVariables() {
 		return variables;
 	}
@@ -63,7 +61,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	private Map<String, GenericFeature> featuresMap;
 
 	//private String pathFile;
-	private ArrayList<String> clauses; // Clauses
+	public ArrayList<String> clauses; // Clauses
 
 	private int numvar; // Number of variables
 
@@ -129,9 +127,14 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		}
 
 		// Start the problem
+		if(!easeGeneration){
 		cnf_content += "p cnf " + variables.size() + " " + clauses.size()
 				+ "\n";
+		}else{
+			//cnf_content += "p cnf " + variables.size() + " " + (clauses.size() + easeIncrement)	+ "\n";
+			cnf_content += "p cnf " + variables.size() + " " + (clauses.size() )	+ "\n";
 
+		}
 		// Clauses
 		it = clauses.iterator();
 		while (it.hasNext()) {
@@ -142,7 +145,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		// End file
 		cnf_content += "0";
 		}else{
-			this.easeGenString=cnf_content;
+			this.easeGenString=cnf_content += "0" ;
 		}
 		stream= new ByteArrayInputStream(cnf_content.getBytes(StandardCharsets.UTF_8));
 		// Create the .cnf file
@@ -415,8 +418,9 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		return this.stream;
 	}
 
-	public String getPartialCNF() {
+	public String getPartialCNF(int increment) {
 		this.easeGeneration=true;
+		this.easeIncrement=increment;
 		createSAT();
 		this.easeGeneration=false;
 		return easeGenString;

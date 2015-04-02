@@ -54,7 +54,7 @@ import es.us.isa.FAMA.models.variabilityModel.parsers.IWriter;
  * Create a XML document which represents the feature model.
  */
 public class XMLWriter implements IWriter{
-	
+	int relnum=0;
 	/* (non-Javadoc)
 	 * @see es.us.isa.FAMA.Parser.IWriter#writeFile(java.lang.String, es.us.isa.FAMA.featureModel.FeatureModel)
 	 */
@@ -139,7 +139,9 @@ public class XMLWriter implements IWriter{
 		
 		//	create the name attribute
 		Attr name = document.createAttribute("name");
-		name.setValue(r.getName());
+//		name.setValue(r.getName());
+		name.setValue(relnum+"");
+		relnum++;
 		current.setAttributeNode(name);
 		
 		//process the cardinalities

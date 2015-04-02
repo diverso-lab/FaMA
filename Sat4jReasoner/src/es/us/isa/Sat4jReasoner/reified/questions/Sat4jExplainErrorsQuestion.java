@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import org.sat4j.maxsat.WeightedMaxSatDecorator;
 import org.sat4j.pb.OptToPBSATAdapter;
 import org.sat4j.specs.ContradictionException;
+import org.sat4j.specs.IOptimizationProblem;
 import org.sat4j.specs.IVecInt;
 import org.sat4j.specs.TimeoutException;
 
@@ -92,7 +93,7 @@ public class Sat4jExplainErrorsQuestion extends Sat4jReifiedQuestion implements
 				}
 				IVecInt reifiedVars = sat4jreified.getReifiedVars();
 				maxsat.addLiteralsToMinimize(reifiedVars);
-				OptToPBSATAdapter opt = new OptToPBSATAdapter(maxsat);
+				OptToPBSATAdapter opt = new OptToPBSATAdapter((IOptimizationProblem) maxsat);
 				hasSolution = opt.isSatisfiable();
 				if (hasSolution) {
 					Explanation exp = new Explanation();

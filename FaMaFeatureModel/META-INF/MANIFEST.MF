@@ -18,9 +18,9 @@ Export-Package: es.us.isa.FAMA.models.FAMAfeatureModel.errors;uses:="e
  rs",es.us.isa.FAMA.models.variabilityModel.parsers;uses:="es.us.isa.F
  AMA.models.variabilityModel,es.us.isa.FAMA.Exceptions",es.us.isa.FAMA
  .models.FAMAfeatureModel.fileformats.plain;uses:="es.us.isa.util,es.u
- s.isa.FAMA.Exceptions,es.us.isa.FAMA.models.featureModel.extended,es.
- us.isa.FAMA.models.FAMAfeatureModel,es.us.isa.FAMA.models.domain,es.u
- s.isa.FAMA.models.featureModel",es.us.isa.FAMA.stagedConfigManager;us
+ s.isa.FAMA.models.FAMAfeatureModel,es.us.isa.FAMA.Exceptions,es.us.is
+ a.FAMA.models.domain,es.us.isa.FAMA.models.featureModel,es.us.isa.FAM
+ A.models.featureModel.extended",es.us.isa.FAMA.stagedConfigManager;us
  es:="es.us.isa.FAMA.models.variabilityModel",es.us.isa.FAMA.Reasoner.
  questions.extended.defaultImpl;uses:="es.us.isa.FAMA.Benchmarking,es.
  us.isa.FAMA.Reasoner.questions,es.us.isa.FAMA.stagedConfigManager,es.
@@ -58,38 +58,40 @@ Export-Package: es.us.isa.FAMA.models.FAMAfeatureModel.errors;uses:="e
  us.isa.FAMA.errors,es.us.isa.FAMA.models.FAMAfeatureModel.errors,es.u
  s.isa.FAMA.models.FAMAfeatureModel.OrderingHeuristics,es.us.isa.FAMA.
  models.FAMAfeatureModel.transformations,es.us.isa.FAMA.models.variabi
- lityModel.transformations,es.us.isa.FAMA.models.featureModel",es.us.i
- sa.FAMA.models.variabilityModel.transformations;uses:="es.us.isa.FAMA
- .models.variabilityModel,es.us.isa.FAMA.Reasoner",es.us.isa.FAMA.Reas
- oner;uses:="es.us.isa.FAMA.Benchmarking,es.us.isa.FAMA.Exceptions,jav
- ax.xml.parsers,es.us.isa.FAMA.loader,es.us.isa.FAMA.models.variabilit
- yModel.parsers,org.w3c.dom,es.us.isa.FAMA.models.featureModel.extende
- d,org.xml.sax,es.us.isa.FAMA.stagedConfigManager,es.us.isa.FAMA.Reaso
- ner.Factory,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.mod
- els.variabilityModel.transformations,es.us.isa.FAMA.models.featureMod
- el",es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;uses:="javax.s
- wing.tree,com.csvreader,constraints,es.us.isa.FAMA.Exceptions,javax.x
- ml.parsers,javax.xml.transform.dom,es.us.isa.FAMA.models.variabilityM
- odel.parsers,org.w3c.dom,org.xml.sax,es.us.isa.FAMA.models.FAMAfeatur
- eModel.fileformats.plain,fm,javax.xml.transform,es.us.isa.FAMA.models
- .FAMAfeatureModel,es.us.isa.FAMA.models.variabilityModel,javax.xml.tr
- ansform.stream,es.us.isa.FAMA.models.featureModel"
+ lityModel,es.us.isa.FAMA.models.variabilityModel.transformations,es.u
+ s.isa.FAMA.models.featureModel",es.us.isa.FAMA.models.variabilityMode
+ l.transformations;uses:="es.us.isa.FAMA.models.variabilityModel,es.us
+ .isa.FAMA.Reasoner",es.us.isa.FAMA.Reasoner;uses:="es.us.isa.FAMA.Ben
+ chmarking,es.us.isa.FAMA.Exceptions,javax.xml.parsers,es.us.isa.FAMA.
+ loader,es.us.isa.FAMA.models.variabilityModel.parsers,org.w3c.dom,es.
+ us.isa.FAMA.models.featureModel.extended,org.xml.sax,es.us.isa.FAMA.s
+ tagedConfigManager,es.us.isa.FAMA.Reasoner.Factory,es.us.isa.FAMA.mod
+ els.variabilityModel,es.us.isa.FAMA.models.variabilityModel.transform
+ ations,es.us.isa.FAMA.models.featureModel",es.us.isa.FAMA.models.FAMA
+ featureModel.fileformats;uses:="javax.swing.tree,com.csvreader,constr
+ aints,es.us.isa.FAMA.Exceptions,javax.xml.parsers,javax.xml.transform
+ .dom,es.us.isa.FAMA.models.variabilityModel.parsers,org.w3c.dom,org.x
+ ml.sax,es.us.isa.FAMA.models.FAMAfeatureModel.fileformats.plain,fm,ja
+ vax.xml.transform,es.us.isa.FAMA.models.FAMAfeatureModel,es.us.isa.FA
+ MA.models.variabilityModel,javax.xml.transform.stream,es.us.isa.FAMA.
+ models.featureModel"
 Private-Package: antlr,antlr.ASdebug,antlr.actions.cpp,antlr.actions.c
  sharp,antlr.actions.java,antlr.actions.python,antlr.build,antlr.colle
  ctions,antlr.collections.impl,antlr.debug,antlr.debug.misc,antlr.prep
  rocessor,lib
 Bundle-ClassPath: lib/antlr.jar,.
-Built-By: Jesus
+Built-By: malawito
 Tool: Bnd-0.0.238
 Bundle-Name: FaMa Feature Model
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.6.0
+Build-Jdk: 1.7.0_75
 Bundle-Version: 0.9.1
-Bnd-LastModified: 1300707690681
+Bnd-LastModified: 1423045875672
 Bundle-ManifestVersion: 2
 Bundle-Activator: es.us.isa.FAMA.models.FAMAfeatureModel.osgi.Activato
  r
 Bundle-Description: Metamodel for fama
+Bundle-SymbolicName: es.us.isa.FaMaFeatureModel
 Import-Package: com.csvreader;resolution:=optional,constraints;resolut
  ion:=optional,es.us.isa.FAMA.Benchmarking;resolution:=optional,es.us.
  isa.FAMA.Exceptions;resolution:=optional,es.us.isa.FAMA.Reasoner;reso
@@ -122,5 +124,4 @@ Import-Package: com.csvreader;resolution:=optional,constraints;resolut
  nsform.stream;resolution:=optional,org.osgi.framework,org.w3c.dom;res
  olution:=optional,org.xml.sax;resolution:=optional,spitz.ayal.jarjar;
  resolution:=optional
-Bundle-SymbolicName: es.us.isa.FaMaFeatureModel
 
