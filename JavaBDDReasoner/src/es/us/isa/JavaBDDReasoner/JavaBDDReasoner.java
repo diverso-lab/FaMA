@@ -305,17 +305,16 @@ public class JavaBDDReasoner extends FeatureModelReasoner {
 
 	@Override
 	public void applyStagedConfiguration(Configuration conf) {
-
 		bdd = this.getBDD();
 		Iterator<Entry<VariabilityElement, Integer>> valuesIt = conf
 				.getElements().entrySet().iterator();
 		while (valuesIt.hasNext()) {
 			Entry<VariabilityElement, Integer> value = valuesIt.next();
-			if (value.getValue() > 0) {
+			BDD var = this.getBDDVar(value.getKey().getName());
+
+			if (value.getValue() > 0 && var!=null) {
 				BDD one = ((BDDFactory) this.getBDDFactory()).one();
-				BDD var = this.getBDDVar(value.getKey().getName());
-				BDD filter = one.apply(var,
-						BDDFactory.biimp);
+				BDD filter = one.apply(var,	BDDFactory.biimp);
 				BDD bdd_aux = this.getBDD();
 				bdd_aux = bdd_aux.apply(filter, BDDFactory.and);
 				this.setBDD(bdd_aux);
@@ -323,9 +322,7 @@ public class JavaBDDReasoner extends FeatureModelReasoner {
 			}
 			if (value.getValue() == 0) {
 				BDD one = ((BDDFactory) this.getBDDFactory()).zero();
-				BDD var = this.getBDDVar(value.getKey().getName());
-				BDD filter = one.apply(var,
-						BDDFactory.biimp);
+				BDD filter = one.apply(var,	BDDFactory.biimp);
 				BDD bdd_aux = this.getBDD();
 				bdd_aux = bdd_aux.apply(filter, BDDFactory.and);
 				this.setBDD(bdd_aux);
