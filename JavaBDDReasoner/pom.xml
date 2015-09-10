@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.us.isa</groupId>
 	<artifactId>JavaBDDReasoner</artifactId>
-	<packaging>bundle</packaging>
+<!-- <packaging>bundle</packaging> -->	
 	<name>JavaBDDReasoner</name>
 	<version>1.0.0</version>
 	<description>Solver based on JavaBDD (Binary Decision Tree)</description>

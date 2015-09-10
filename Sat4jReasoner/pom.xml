@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.us.isa</groupId>
 	<artifactId>Sat4jReasoner</artifactId>
-	<packaging>bundle</packaging>
+<!-- <packaging>bundle</packaging> -->	
 	<name>Sat4jReasoner</name>
 	<version>1.0.1</version>
 	<description>Reasoner based on Sat4j (SAT)</description>

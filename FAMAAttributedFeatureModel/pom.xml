@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.us.isa</groupId>
 	<artifactId>FaMaAttributedModel</artifactId>
-	<packaging>bundle</packaging>
+<!-- <packaging>bundle</packaging> -->	
 	<name>FaMaAttributedModel</name>
 	<version>1.0.2</version>
 	<description>Attributed Metamodel for fama</description>

@@ -174,12 +174,12 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 		return s.isFeasible();
 	}
 
-	@Override
+
 	public void setErrors(Collection<Error> colErrors) {
 		this.errors= colErrors;
 	}
 
-	@Override
+
 	public Collection<Error> getErrors() {
 		return errors;
 	}

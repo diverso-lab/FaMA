@@ -42,7 +42,6 @@ public class ChocoCoreFeaturesQuestion extends ChocoQuestion implements
 
 	private List<GenericFeature> coreFeats;
 	
-	@Override
 	public Collection<GenericFeature> getCoreFeats() {
 		return coreFeats;
 	}

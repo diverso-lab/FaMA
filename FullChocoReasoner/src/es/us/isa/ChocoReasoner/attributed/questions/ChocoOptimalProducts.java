@@ -130,12 +130,10 @@ public class ChocoOptimalProducts extends ChocoQuestion implements OptimalProduc
 		return f;
 	}
 
-	@Override
 	public Collection<Product> getProducts() {
 		return products;
 	}
 
-	@Override
 	public void setAttributeName(String name) {
 		this.attname=name;
 		

@@ -111,9 +111,7 @@ public class ChocoDetectRedundanciesFMCORE extends ChocoQuestion implements
 		return s.isFeasible();
 	}
 
-	@Override
 	public Collection<VariabilityElement> getRedundancies() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
