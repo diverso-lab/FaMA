@@ -69,14 +69,12 @@ public class ChocoUniqueFeaturesQuestion extends ChocoQuestion implements
 			return new ChocoProductsQuestion();
 		}
 
-		@Override
 		public Class<? extends Reasoner> getReasonerClass() {
 			return new ChocoReasoner().getClass();
 		}
 
 	}
 
-	@Override
 	public Collection<GenericFeature> getUniqueFeatures() {
 		
 		return uniqueFeats;

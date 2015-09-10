@@ -100,7 +100,6 @@ public class ChocoCommonalityQuestion extends ChocoQuestion implements
 		
 	}
 
-	@Override
 	public void setConfiguration(Configuration conf) {
 		this.cq.setConfiguration(conf);
 		

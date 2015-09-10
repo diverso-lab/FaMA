@@ -42,7 +42,6 @@ public class ChocoCoreFeaturesQuestion extends ChocoQuestion implements
 		defq = new DefCoreFeatures();
 	}
 
-	@Override
 	public Collection<GenericFeature> getCoreFeats() {
 		return feats;
 	}
@@ -73,7 +72,6 @@ public class ChocoCoreFeaturesQuestion extends ChocoQuestion implements
 			return new ChocoProductsQuestion();
 		}
 
-		@Override
 		public Class<? extends Reasoner> getReasonerClass() {
 			return null;
 		}
