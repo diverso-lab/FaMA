@@ -146,6 +146,7 @@ public class Feature extends GenericFeature {
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		boolean res = false;
 		if (obj instanceof VariabilityElement||obj instanceof Feature) {
