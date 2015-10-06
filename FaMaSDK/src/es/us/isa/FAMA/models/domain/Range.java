@@ -23,39 +23,56 @@ package es.us.isa.FAMA.models.domain;
  */
 public class Range {
 
-	private int max;
+	private float max;
 	
-	private int min;
+	private float min;
 
+	private float delta;
 	
-	public Range(int min, int max) {
+	public Range(float min, float max) {
 		this.max = max;
 		this.min = min;
 	}
 
 	public int getMax() {
-		return max;
+		return Float.floatToIntBits(max);
 	}
 
 	public int getMin() {
-		return min;
+		return Float.floatToIntBits(min);
 	}
 
-	public void setMax(int max) {
+	public float getMaxFloat() {
+		return max;
+	}
+
+	public float getMinFloat() {
+		return min;
+	}
+	
+	public void setMax(float max) {
 		this.max = max;
 	}
 
-	public void setMin(int min) {
+	public void setMin(float min) {
 		this.min = min;
 	}
 	
-	public boolean isInRange(int i){
+	public boolean isInRange(float i){
 		if (i <= max && i >= min){
 			return true;
 		}
 		else{
 			return false;
 		}
+	}
+
+	public float getDelta() {
+		return delta;
+	}
+
+	public void setDelta(float delta) {
+		this.delta = delta;
 	}
 	
 	
