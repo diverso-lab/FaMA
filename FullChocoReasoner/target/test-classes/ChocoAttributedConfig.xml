@@ -1,0 +1,8 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoValidQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.SetQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoSetQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.FilterQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoFilterQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoDetectErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoValidProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" class="es.us.isa.ChocoReasoner.attributed.questions.ChocoValidConfigurationQuestion"/>
+</reasoner>
