@@ -1,0 +1,13 @@
+%Relationships
+A: [B] C;
+
+%Attributes
+A.cost: Integer[0 to 50000], 0, 0; 
+B.cost: Integer[200 to 400], 200, 0;
+C.cost: Integer[0 to 500], 0, 0;
+
+%Constraints
+A{
+	cost < 800;
+}
+A.cost == B.cost + C.cost;

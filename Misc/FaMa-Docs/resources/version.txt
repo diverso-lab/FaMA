@@ -1,0 +1,408 @@
+﻿﻿﻿﻿﻿---------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.1.2  ----------------------------------------------
+---------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					   	v1.1.1
+
+FaMa Feature Model     						v0.9.1
+
+FaMa Attributed Feature Model     				v1.0.4
+
+Sat4jReasoner         						v1.0.0
+
+JavaBDDReasoner     						v1.0.0
+
+ChocoReasoner        						v1.1.1
+
+JaCoPReasoner 						   	 v1.0.1
+
+FaMaShell							v0.1.1
+
+Fixes from 1.1.1:
+
+-Bug in the plain tex format writer.
+-Minor changes in ChocoReasoner and others solvers.
+-More questions offered for the unexperienced user.
+
+---------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.1.1  ----------------------------------------------
+---------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					   	v1.1.1
+
+FaMa Feature Model     						v0.9.1
+
+FaMa Attributed Feature Model     				v1.0.2
+
+Sat4jReasoner         						v1.0.0
+
+JavaBDDReasoner     						v1.0.0
+
+ChocoReasoner        						v1.1.1
+
+JaCoPReasoner 						   	 v1.0.1
+
+FaMaShell							v0.1.1
+
+Fixes from 1.1.0:
+
+- Solved bugs in shell interaction
+- Solved bugs with linefeed character in text plain format
+- Solved bugs with configurations in JaCoP and Choco reasoners
+
+
+
+---------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.1.0  ----------------------------------------------
+---------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					   	v1.1.0
+
+FaMa Feature Model     						v0.9.0
+
+FaMa Attributed Feature Model     				v1.0.1
+
+Sat4jReasoner         						v1.0.0
+
+JavaBDDReasoner     						v1.0.0
+
+ChocoReasoner        						v1.0.2
+
+JaCoPReasoner 						   	 v1.0.0
+
+FaMaShell							v0.1.0
+
+Upgrades and updates from 1.0.0 Final:
+
+- Bugs solved.
+- Added new piece of software FamaShell that allows Fama to be used in a console frontend
+- New Documentation much more friendly.
+- New reader for standard Feature Models (FaMa Format)
+- Other minor changes
+
+
+
+---------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.0.0 Final -----------------------------------------
+---------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					   	 v1.0.0
+
+FaMa Feature Model     						v0.8.3
+
+FaMa Attributed Feature Model     				v1.0.1
+
+Sat4jReasoner         						v1.0.0
+
+JavaBDDReasoner     						v1.0.0
+
+ChocoReasoner        						v1.0.2
+
+JaCoPReasoner 						   	 v1.0.0
+
+Upgrades and updates from 1.0.0 RC-1:
+
+-JRE 5.0 compatible (except ChocoReasoner because it uses JRE 6.0 internally)
+-Bug cleaned
+-Source Code cleaned.
+
+
+---------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.0.0 RC-1 ------------------------------------------
+---------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					    v1.0.1
+
+FaMa Feature Model     					v0.8.2
+
+FaMa Attributed Feature Model     		v1.0.1
+
+Sat4jReasoner         					v1.0.0
+
+JavaBDDReasoner     					v1.0.0
+
+ChocoReasoner        					v1.0.2
+
+JaCoPReasoner 						    v1.0.0
+
+
+
+Upgrades and updates from 1.0.0a:
+
+-Some bugs fixed
+
+
+--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 1.0.0 alpha ----------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					v1.0.0a
+
+FaMa Feature Model     					v0.8.2
+
+FaMa Attributed Feature Model     			v1.0.0a
+
+Sat4jReasoner         					v1.0.0a
+
+JavaBDDReasoner     					v1.0.0a
+
+ChocoReasoner        					v1.0.0a
+
+JaCoPReasoner 						v1.0.0a
+
+
+
+Upgrades and updates from 0.9.2
+--------------------------------------------------------------------------------------------
+
+-New Features:
+
+	-StagedConfiguration support.
+	-New Format, in plain text ,now support complex rules and any type of constraints, attributes, easy to use, easy to learn,
+	 easy to write. Error detection writing a file,
+	-Atomic sets transform.
+	-New question, one product, to use in benchmarks.
+	
+
+-Improvements
+
+	-FilterQuestion & SetQuestions are deprecated, use StagedConfigurations instead
+	-ChocoReasoner is too more efficient
+
+-Other changes:
+
+	-Choco src code is cleaner.
+
+--------------------------------------------------------------------------------------------
+
+
+
+﻿--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 0.9.2 ----------------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					v0.9.2
+
+FaMa Feature Model     					v0.8.2
+
+FaMa Attributed Feature Model     			v0.9.0
+
+Sat4jReasoner         					v0.8.3
+
+JavaBDDReasoner     					v0.8.1
+
+ChocoReasoner        					v0.9.1
+
+JaCoPReasoner 						v0.8.1
+
+
+
+Upgrades and updates from 0.9.0
+--------------------------------------------------------------------------------------------
+
+-New Features:
+	-OSGi compliant
+
+-Improvements
+	-Internal refactoring of the core.
+	-ChocoReaoner now contains four diferent reasoners, one for each metamodel and explanations 
+
+-Other changes:
+	-Questions are now integrated in the core.
+
+--------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 0.9.0 (beta) ---------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         					v0.9.0
+
+FaMa Feature Model     				v0.8.1
+
+FaMa Attributed Feature Model     	v0.9.0
+
+Sat4jReasoner         				v0.8.1
+
+JavaBDDReasoner     				v0.8.0
+
+ChocoReasoner        				v0.8.2
+
+JaCoPReasoner 						v0.8.0
+
+FAMA Questions						v0.8.3
+
+
+Upgrades and updates from 0.8.2
+--------------------------------------------------------------------------------------------
+
+-New Features:
+	-New Metamodel (attributed feature model, beta phase. You can build it from scratch,
+	but it still hasn't reader and writer)
+	-Changes in the core (to support atttributed feature models)
+	-New reasoner (to support questions on attributed feature models, with choco solver)
+	At this moment, this reasoner support 3 questions (valid, filter & set)
+	-Writers to x3d and dot formats
+
+-Improvements
+	-The fama exceptions' management has changed. Now it is not necessary to handle
+	the exceptions with try/catch blocks or throws statements.
+
+-Other changes:
+	-Return type of Number of Products Questions is now double (before it was long)
+
+--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 0.8.3 ----------------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         		v0.8.3
+
+FaMa Feature Model     	v0.8.1
+
+Sat4jReasoner         	v0.8.1
+
+JavaBDDReasoner     	v0.8.0
+
+ChocoReasoner        	v0.8.2
+
+JaCoPReasoner (new)		v0.8.0
+
+FAMA Questions			v0.8.2
+
+Upgrades and updates from 0.8.2
+--------------------------------------------------------------------------------------------
+
+-New features:
+	-New CSP Reasoner (JaCoP)
+
+-Fixed bugs:
+	-Duplicated attributes on GenericFeature and its implementation Feature
+	
+-Improvements
+	-New QuestionTrader constructor (with configFile parameter)
+	
+
+
+
+--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 0.8.2 ----------------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         v0.8.2
+
+FaMa Feature Model     v0.8.1
+
+Sat4jReasoner         v0.8.1
+
+JavaBDDReasoner     v0.8.0
+
+ChocoReasoner        v0.8.2
+
+FAMA Questions		v0.8.2
+
+Upgrades and updates from 0.8.1
+--------------------------------------------------------------------------------------------
+
+-Added those questions:
+
+    	-Valid configuration Errors
+
+-Added Exceptions 
+
+	-FAMAException
+	-FAMAParameterException
+
+-Internal Maven support
+
+
+﻿--------------------------------------------------------------------------------------------
+---------------------------------- FaMaTS version 0.8.1 ------------------------------------
+--------------------------------------------------------------------------------------------
+
+Versions
+--------------------------------------------------------------------------------------------
+FAMA Core         v0.8.1
+
+FaMa Feature Model     v0.8.1
+
+Sat4jReasoner         v0.8.1
+
+JavaBDDReasoner     v0.8.0
+
+ChocoReasoner        v0.8.1
+
+
+Upgrades and updates from 0.7.0
+--------------------------------------------------------------------------------------------
+
+-ChocoReasoner (based on Choco 2.0 solver, CSP) added.
+-Sat4jReasoner updated (to Sat4j 2.00 version)
+-Added those questions:
+    -Detect errors
+    -Explain errors
+    -Valid configuration
+    -Valid product
+    -Variability
+-Modified questions
+
+    -Products
+    -Filter
+-Added some basic question implementation to the core
+	-Commonality
+	-DetectErrors
+	-Valid configuration
+	-Valid product
+	-Variability
+-Added new example classes
+-Added new explamples of feature models
+-Added xsd metamodel
+
+Solved bugs
+-------------------------------------------------------------------------------------------
+
+-Fixed addValue and removeValue methods in filterQuestion
+-Fixed bug in commonality question, that cause that a feature not included in the model not 
+to have maximun commonality
+
+
+
+--------------------------------------------------------------------------------------------
+------------------------ FaMaTS version 0.7.0 ---Initial public release------------------------
+--------------------------------------------------------------------------------------------
+
+Features
+--------------------------------------------------------------------------------------------
+
+FAMA Core         v0.7.0
+
+Feature models
+--------------------------------------------------------------------------------------------
+
+FaMa Feature Model     v0.7.0
+
+
+Reasoners:
+---------------------------------------------------------------------------------------------
+-Sat4jReasoner         v0.7.0
+-JavaBDDReasoner     v0.7.0
+---------------------------------------------------------------------------------------------

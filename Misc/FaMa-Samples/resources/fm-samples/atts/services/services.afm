@@ -1,0 +1,25 @@
+%Relationships
+Services: [1,2]{VideoOnDemand InternetConection};
+InternetConection: [1,1]{PowerLine ADSL Wireless};
+
+
+%Attributes
+Services.dtime: Integer[10000 to 40000], 0, 0;
+Services.price: Integer[0 to 750], 0, 0;
+VideoOnDemand.dtime: Integer[18000 to 25000], 0, 0;
+VideoOnDemand.price: Integer[80 to 100], 0, 0;
+InternetConection.dtime: Integer[1000 to 8500], 0, 0;
+InternetConection.price: Integer[100 to 750], 0, 0;
+PowerLine.dtime: Integer[1000 to 2000], 0, 0;
+PowerLine.price: Integer[100 to 200], 0, 0;
+ADSL.dtime: Integer[1500 to 2500], 0, 0;
+ADSL.price: Integer[100 to 200], 0, 0;
+Wireless.dtime: Integer[3000 to 4000], 0, 0;
+Wireless.price: Integer[100 to 200], 0, 0;
+
+
+%Constraints
+InternetConection.price == 20 + PowerLine.price + ADSL.Price + Wireless.Price;
+InternetConection.dtime == PowerLine.dtime + ADSL.dtime + Wireless.dtime;
+Services.dtime = VideoOnDemand.dtime + InternetConection.dtime;
+Services.price = VideoOnDemand.price + InternetConection.price;

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="feature-model-schema.xsd">
+  <feature name="root">
+  	<setRelation name="r1">
+  		<cardinality max="1" min="1" />
+  		<groupedFeature name="a"></groupedFeature>
+  		<groupedFeature name="b"></groupedFeature>
+  	</setRelation></feature>
+</feature-model>

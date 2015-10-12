@@ -1,0 +1,32 @@
+%Relationships
+James: UserManagement [WSInterface] GUI Core Modules;
+UserManagement: [1,1] {DB LDAP};
+GUI: [1,2] {PDA PC};
+Modules: [1,4] {Calendar Forum CongressManagement Repository};
+
+%Attributes
+James.cost: Integer[0 to 500], 0, 0;
+UserManagement.cost: Integer[0 to 500], 0, 0;
+DB.cost: [5,10], 10, 0;
+LDAP.cost: [7,10], 10, 0;
+WSInterface.cost: [20,21], 20, 0;
+GUI.cost: Integer[0 to 500], 0, 0;
+PDA.cost: [18], 18, 0;
+PC.cost: [30], 30, 0;
+Core.cost: Integer[0 to 500], 0, 0;
+Modules.cost: Integer[0 to 500], 0, 0;
+Calendar.cost: [50], 50, 0;
+Forum.cost: [30], 30, 0;
+CongressManagement.cost: [20], 20, 0;
+Repository.cost: [10], 10, 0;
+
+%Constraints
+James{
+	cost > 0;
+}
+James.cost == UserManagement.cost + WSInterface.cost + GUI.cost + Core.cost + Modules.cost;
+UserManagement.cost == DB.cost + LDAP.cost;
+Modules.cost == Calendar.cost + Forum.cost + CongressManagement.cost + Repository.cost;
+GUI.cost == PDA.cost + PC.cost;
+Repository EXCLUDES PDA;
+CongressManagement REQUIRES Repository;

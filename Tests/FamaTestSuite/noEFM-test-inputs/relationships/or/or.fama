@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="A">
+	<setRelation name="SR-1">
+		<cardinality min="1" max="2"/>
+		<groupedFeature name="B">
+		</groupedFeature>
+		<groupedFeature name="C">
+		</groupedFeature>
+	</setRelation>
+	</feature>
+</feature-model>

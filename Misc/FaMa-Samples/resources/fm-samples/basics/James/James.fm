@@ -1,0 +1,10 @@
+%Relationships
+James: UserManagement [WSInterface] GUI Core Modules;
+UserManagement: [1,1] {DB LDAP};
+GUI: [1,2] {PDA PC};
+Modules: [1,4] {Calendar Forum CongressManagement Repository};
+
+
+%Constraints
+Repository EXCLUDES PDA;
+CongressManagement REQUIRES Repository;

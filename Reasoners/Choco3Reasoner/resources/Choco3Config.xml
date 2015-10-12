@@ -1,0 +1,19 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.CommonalityQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3CommonalityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.CoreFeaturesQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3CoreFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.DeadFeaturesQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3DeadFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.DetectErrorsQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3DetectErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ExplainErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ExplainInvalidProductQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ExplainInvalidProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.HomogeneityQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3HomogeneityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.NumberOfProductsQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3NumberOfProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.OneProductQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3OneProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ProductsQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ProductsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.UniqueFeaturesQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3UniqueFeaturesQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationErrorsQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ValidConfigurationErrorsQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidConfigurationQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ValidConfigurationQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidProductQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ValidProductQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.ValidQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3ValidQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.VariabilityQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3VariabilityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.VariantFeaturesQuestion" class="co.icesi.i2t.Choco3Reasoner.simple.questions.Choco3VariantFeaturesQuestion"/>
+</reasoner>

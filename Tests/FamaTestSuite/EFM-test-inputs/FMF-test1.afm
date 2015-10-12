@@ -1,0 +1,19 @@
+%Relationships
+MobilePhone  :  UtilityFunc    Settings    Connectivity;
+UtilityFunc  :  Calls    Messaging   [Games]    Alarm;
+Calls  :  [1,2] {Voice   Data};
+Messaging  :  [1,2] {SMS   MMS};
+Settings  :  [JavaSupport]     OS;
+OS  :   [1,1] {Symbian   WinCE};
+Connectivity  :  [1,2]{Bluetooth   Wifi};
+
+
+%Attributes
+Wifi.pepito: Integer [3 to 10000],3,0;
+Wifi.juanito: Integer [9 to 10000],9,0;
+OS.algo: Integer [0 to 5][10 to 20000], 10, 0;
+
+
+%Constraints
+Wifi.pepito >= 0 IMPLIES OS.algo < 0;
+

@@ -1,0 +1,12 @@
+%Relationships
+FaMaFW: Core Metamodels [Transformations] Reasoners ReasonerSelectors Questions;
+Core: [1,1]{Standalone OSGi};
+Metamodels: [1,3]{FaMaFeatureMetamodel FaMaAttributedFM MoskittFM};
+Transformations: [1,2]{AtomicSet Attributed2Basic};
+Reasoners: [1,5]{JavaBDD Sat4j Choco Reified Attributed};
+ReasonerSelectors: [1,2]{Default OptimalSelector};
+Questions: [1,6]{Valid Products Errors ValidProduct Explanation AnotherQuestion};
+
+%Constraints
+FaMaAttributedFM REQUIRES Attributed;
+Explanation REQUIRES Reified;

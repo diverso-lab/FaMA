@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.tdg-seville.info/benavides/featuremodelling/feature-model.xsd">
+	<feature name="Car">
+		<binaryRelation name="R-1">
+			<cardinality max="1" min="1" />
+			<solitaryFeature name="Body" />
+		</binaryRelation>
+		<binaryRelation name="R-2">
+			<cardinality max="1" min="1" />
+			<solitaryFeature name="Transmission">
+				<setRelation name="R-3">
+					<cardinality max="1" min="1" />
+					<groupedFeature name="Automatic" />
+					<groupedFeature name="Manual" />
+				</setRelation>
+			</solitaryFeature>
+		</binaryRelation>
+		<binaryRelation name="R-4">
+			<cardinality max="1" min="1" />
+			<solitaryFeature name="Engine">
+				<setRelation name="R-5">
+					<cardinality max="2" min="1" />
+					<groupedFeature name="Electric" />
+					<groupedFeature name="Gasoline" />
+				</setRelation>
+			</solitaryFeature>
+		</binaryRelation>
+		<binaryRelation name="R-6">
+			<cardinality max="1" min="0" />
+			<solitaryFeature name="Cruise" />
+		</binaryRelation>
+	</feature>
+</feature-model>

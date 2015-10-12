@@ -1,0 +1,12 @@
+Instances;CSP solver (JaCoP);Choco solver
+df-case.xml;time: 10616;time: 14807;Errors: 
+Instance1.xml;time: 5588;time: 6425;Errors: 
+Instance10.xml;time: 5867;time: 6985;Errors: 
+Instance2.xml;time: 6146;time: 6425;Errors: 
+Instance3.xml;time: 6146;time: 5866;Errors: 
+Instance4.xml;time: 7543;time: 5867;Errors: 
+Instance5.xml;time: 7822;time: 7263;Errors: 
+Instance6.xml;time: 14247;time: 7264;Errors: 
+Instance7.xml;time: 8101;time: 7822;Errors: 
+Instance8.xml;time: 9778;time: 8381;Errors: 
+Instance9.xml;time: 11454;time: 7543;Errors: 

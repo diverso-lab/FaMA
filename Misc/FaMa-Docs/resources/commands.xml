@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content>
+	<commands>
+		<command id="help" path="es.us.isa.FAMA.shell.commands.HelpCommand"
+			active="true">
+			<help>Usage: help nameOfACommand
+			
+Shows help for the application.
+			</help>
+		</command>
+		<command id="commonality" path="es.us.isa.FAMA.shell.commands.CommonalityCommand"
+			active="true">
+			<help>Usage: commonality [nameOfAFeature]
+			
+commonality calculates the commonality of a feature. In other words, the number of products of the model in that this feature appears.
+			</help>
+		</command>
+		<command id="core-features" path="es.us.isa.FAMA.shell.commands.CoreFeaturesCommand"
+			active="true">
+			<help>Usage: core-features 
+			
+core-features returns features that are present in every product.
+			</help>
+		</command>
+		<command id="errors" path="es.us.isa.FAMA.shell.commands.ErrorsCommand"
+			active="true">
+			<help>Usage: errors 
+			
+errors looks for decisions that cause errors on the model.
+When errors are found, this command provides an option
+to explain them.
+			</help>
+		</command>
+		<command id="exit" path="es.us.isa.FAMA.shell.commands.ExitAppCommand"
+			active="true">
+			<help>Usage: exit 
+			
+Command used to exit application.
+			</help>
+		</command>
+		<command id="load" path="es.us.isa.FAMA.shell.commands.LoadModelCommand"
+			active="true">
+			<help>Usage: load pathToAModel
+			
+This command loads a model from a file. You should invoke it before do any operation.
+			</help>
+		</command>
+		<command id="#products" path="es.us.isa.FAMA.shell.commands.ProductsCardinalCommand"
+			active="true">
+			<help>Usage: #products 
+			
+#products returns the number of products of a feature model.
+			</help>
+		</command>
+		<command id="products" path="es.us.isa.FAMA.shell.commands.ProductsCommand"
+			active="true">
+			<help>Usage: products
+			
+It returns a list with every product of the feature model.
+			</help>
+		</command>
+		<command id="valid-product" path="es.us.isa.FAMA.shell.commands.ProductValidationCommand"
+			active="true">
+			<help>Usage: valid-product [list of features]
+			
+It calculates if a given product (a set of features) is valid for the current model. 
+If the product is not valid, this operation provides an option to show changes to turn the product into a valid one.
+			</help>
+		</command>
+		<command id="valid" path="es.us.isa.FAMA.shell.commands.ValidationCommand"
+			active="true">
+			<help>Usage: valid
+			
+This operation calculates if the current model is valid. A model is valid when it has, at leats, one product.
+If the model is not valid, the operation provides options to analyse and explain errors caused it.
+			</help>
+		</command>
+		<command id="variability" path="es.us.isa.FAMA.shell.commands.VariabilityCommand"
+			active="true">
+			<help>Usage: variability
+			
+Operation that calculates variability degree of the model.
+			</help>
+		</command>
+		<command id="variant-features" path="es.us.isa.FAMA.shell.commands.VariantFeaturesCommand"
+			active="true">
+			<help>Usage: variant-features
+			
+It returns set of features that are not present on every product.
+			</help>
+		</command>
+	</commands>
+	<errors>
+		<error id="wrong-parameters">
+			<message>Bad syntax. Wrong number of parameters. Ask for command help for more information.</message>
+		</error>
+	</errors>
+</content>
+

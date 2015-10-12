@@ -1,0 +1,26 @@
+<feature_model name="optional-alternativeVM">
+<meta>
+<data name="description"></data>
+<data name="creator"></data>
+<data name="email"></data>
+<data name="date"></data>
+<data name="department"></data>
+<data name="organization"></data>
+<data name="address">null</data>
+<data name="phone">null</data>
+<data name="website">null</data>
+<data name="reference">null</data>
+</meta><feature_tree>
+r: A (A)
+	:o B (B)
+		:g [1,1]
+			: E (E)
+			: D (D)
+	:m C (C)
+</feature_tree>
+<constraints>
+RE-1: ~D or E
+Re-2: ~E or D
+Re-3: ~C or E
+</constraints>
+</feature_model>
