@@ -1,1 +1,0 @@
-<experiment><question id="DetectErrors"><reasoner colTitle="Choco solver" id="Choco"></reasoner><reasoner colTitle="CSP solver (JaCoP)" id="JaCoP"/></question><executeDirectory directory="test/choco" resultFile="test/choco/results.csv"/></experiment>

@@ -1,6 +1,0 @@
-<experiment>
-<executeRandom>
-<output format="xml" directory="test/choco"/>
-<random width="4" height="6" choose="7" dependencies="500" instances="10" features="2000"/>
-</executeRandom>
-</experiment>
