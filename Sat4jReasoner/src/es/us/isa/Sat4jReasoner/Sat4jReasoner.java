@@ -45,7 +45,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	 * @uml.property name="variables"
 	 * @uml.associationEnd qualifier="key:java.lang.Object java.lang.String"
 	 */
-	private Map<String, String> variables; // Variables<FeatureName,SATVarNumber>
+	public Map<String, String> variables; // Variables<FeatureName,SATVarNumber>
 	
 	public boolean easeGeneration=false;
 	public String easeGenString;

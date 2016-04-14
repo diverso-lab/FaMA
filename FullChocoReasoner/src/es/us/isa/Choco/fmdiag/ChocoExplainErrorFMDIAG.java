@@ -60,7 +60,7 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 			// observaciones
 			Error e = itE.next();
 
-			System.out.println("Explanations for "+e.toString());
+			//System.out.println("Explanations for "+e.toString());
 			Map<String,Constraint> cons4obs = new HashMap<String,Constraint>();
 			Observation obs = e.getObservation();
 			Map<? extends VariabilityElement, Object> values = obs.getObservation();
@@ -97,7 +97,7 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 			ArrayList<String> AC = new ArrayList<String>(relations.keySet());
 			if(returnAllPossibeExplanations==false){
 				List<String> fmdiag = fmdiag(S,AC);
-				System.out.println("Relation "+fmdiag.get(0)+" is causing the conflict");
+				//System.out.println("Relation "+fmdiag.get(0)+" is causing the conflict");
 				explanations=fmdiag;
 			}else{
 				List<String> allExpl= new LinkedList<String>();
@@ -109,9 +109,9 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 					fmdiag = fmdiag(S,AC);
 				}
 				explanations=fmdiag;
-				for(String str:allExpl){
-					System.out.println("Relation "+str+" is causing the conflict");
-				}
+//				for(String str:allExpl){
+//					System.out.println("Relation "+str+" is causing the conflict");
+//				}
 			}
 	
 		}

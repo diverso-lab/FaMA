@@ -15,7 +15,7 @@
  *     along with FaMaTS.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package fr.inria.diverse.refm.competition.common.utils;
+package es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;
 
 import java.util.HashMap;
 import java.util.Map;

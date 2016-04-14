@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 
 import org.sat4j.maxsat.WeightedMaxSatDecorator;
 import org.sat4j.pb.OptToPBSATAdapter;
+import org.sat4j.pb.core.PBSolver;
 import org.sat4j.specs.ContradictionException;
 import org.sat4j.specs.IOptimizationProblem;
 import org.sat4j.specs.IVecInt;
@@ -80,20 +81,25 @@ public class Sat4jExplainErrorsQuestion extends Sat4jReifiedQuestion implements
 				conf.addElement(entry.getKey(), val);
 			}
 			sat4jreified.applyStagedConfiguration(conf);
-			
+			PBSolver defaultSolver = org.sat4j.pb.SolverFactory.instance().defaultSolver();
 			boolean hasSolution;
 			try {
-				WeightedMaxSatDecorator maxsat = new WeightedMaxSatDecorator(
-						org.sat4j.pb.SolverFactory.instance().defaultSolver());
+//				WeightedMaxSatDecorator maxsat = new WeightedMaxSatDecorator(defaultSolver);
+				WeightedMaxSatDecorator maxsat = new WeightedMaxSatDecorator(defaultSolver);
+
 				Iterator<IVecInt> itClauses = sat4jreified.getClauses()
 						.iterator();
+				maxsat.newVar(sat4jreified.getClauses().size());
 				while (itClauses.hasNext()) {
 					IVecInt clause = itClauses.next();
+					
 					maxsat.addClause(clause);
 				}
 				IVecInt reifiedVars = sat4jreified.getReifiedVars();
 				maxsat.addLiteralsToMinimize(reifiedVars);
+				
 				OptToPBSATAdapter opt = new OptToPBSATAdapter((IOptimizationProblem) maxsat);
+
 				hasSolution = opt.isSatisfiable();
 				if (hasSolution) {
 					Explanation exp = new Explanation();

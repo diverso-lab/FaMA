@@ -50,6 +50,12 @@ public class ChocoReasoner extends es.us.isa.ChocoReasoner.ChocoReasoner{
 		this.reifiVars= new HashMap<GenericRelation, IntegerVariable>();
 	}
 
+	public int getPVariablesNumber(){
+		return this.problem.getNbTotVars();
+	}
+	public int getPConstraintsNumber(){
+		return this.problem.getNbConstraints();
+	}
 	@Override
 	public PerformanceResult ask(Question q) {
 		if (q == null) {

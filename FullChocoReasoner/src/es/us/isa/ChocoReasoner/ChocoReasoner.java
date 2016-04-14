@@ -59,6 +59,8 @@ public class ChocoReasoner extends FeatureModelReasoner {
 	protected Map<String, GenericFeature> features;
 	protected Map<String, IntegerVariable> variables;
 	protected Map<String, Constraint> dependencies;
+	public Map<String, Constraint> ctc;
+
 	protected Map<String, IntegerExpressionVariable> setRelations;
 	protected Model problem;
 	private List<Constraint> configConstraints;
@@ -69,7 +71,12 @@ public class ChocoReasoner extends FeatureModelReasoner {
 		super();
 		reset();
 	}
-
+	public int getPVariablesNumber(){
+		return this.problem.getNbTotVars();
+	}
+	public int getPConstraintsNumber(){
+		return this.problem.getNbConstraints();
+	}
 	@Override
 	public void reset() {
 
@@ -77,6 +84,8 @@ public class ChocoReasoner extends FeatureModelReasoner {
 		this.variables = new HashMap<String, IntegerVariable>();
 		this.problem = new CPModel();
 		this.dependencies = new HashMap<String, Constraint>();
+		this.ctc = new HashMap<String, Constraint>();
+
 		this.setRelations = new HashMap<String, IntegerExpressionVariable>();
 		this.configConstraints = new ArrayList<Constraint>();
 		heuristicsMap = new HashMap<String, Object>();
@@ -378,6 +387,7 @@ public class ChocoReasoner extends FeatureModelReasoner {
 		Constraint requiresConstraint = implies(gt(originVar, 0), gt(
 				destinationVar, 0));
 		dependencies.put(rel.getName(), requiresConstraint);
+		ctc.put(rel.getName(), requiresConstraint);
 		return requiresConstraint;
 
 	}
@@ -390,6 +400,8 @@ public class ChocoReasoner extends FeatureModelReasoner {
 		Constraint excludesConstraint = implies(gt(originVar, 0),
 				eq(destVar, 0));
 		dependencies.put(rel.getName(), excludesConstraint);
+		ctc.put(rel.getName(), excludesConstraint);
+
 		return excludesConstraint;
 
 	}

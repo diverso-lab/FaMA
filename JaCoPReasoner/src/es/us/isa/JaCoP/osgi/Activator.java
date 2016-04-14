@@ -15,7 +15,7 @@
     along with FaMaTS.  If not, see <http://www.gnu.org/licenses/>.
 
  */
-package es.us.isa.JaCoP.osgi;
+package src.es.us.isa.JaCoP.osgi;
 
 import java.util.Hashtable;
 import java.util.Iterator;
