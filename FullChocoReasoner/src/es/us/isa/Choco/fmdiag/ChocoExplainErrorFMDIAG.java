@@ -40,6 +40,8 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 	Collection<Error> errors;
 	Map<String, Constraint> relations =null;
 
+	public boolean flexactive=false;
+	public int m=1;
 	
 	public PerformanceResult answer(Reasoner r) throws FAMAException {
 		
@@ -131,8 +133,14 @@ public class ChocoExplainErrorFMDIAG extends ChocoQuestion implements
 		if(D.size()!=0&&isConsistent(AC)){
 			return new ArrayList<String>();
 		}
-		if(S.size()==1){
-			return S;
+		if(flexactive){
+			if(S.size()<=m){
+				return S;
+			}
+		}else{
+			if(S.size()==1){
+				return S;
+			}
 		}
 		int k= S.size()/2;
 		List<String> S1=S.subList(0, k);
