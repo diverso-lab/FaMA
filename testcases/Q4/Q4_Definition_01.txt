@@ -1,0 +1,34 @@
+%created by ML, v01, 2012-03-28:
+
+Q4 - Platform Migration Question:
+	Investigating potential conflicts of a platform migration is a prevailing problem in today's mobile world and at the core of Q4. Given a particular application and the source and target platforms, the question will highlight potential conflicts caused by such migrations.
+	The question sort of combines all the previously defined questions, and uses those for the "master question" Q4.
+
+	- Input: ConfTop1, the configuration of selected application functionalities. A variation would be to pass the complete top feature model (as opposed to a specific application configuration), and see the impact on this layer caused by the migration.
+			 ConfBottom1, the provided modules of the current platform in use (= where to port from).
+			 ConfBottom2, the provided modules of the future platform (= where to port to).
+			 Mapping
+	- Output: ConfTopCompatibility, a list of compatible and incompatible features after a platform change (categorized by their level of compatibility).
+	
+	Example:
+		- Input:  MP_AppFeatures_Config_01.afm
+				  MP_PlatformComponents_Config_01.afm
+				  MP_PlatformComponents_Config_02.afm
+				  MP_Mapping_01.map
+		- Output: Q4_MP_AppFeatures_CompatibilityList_01.out
+						unaffected/compatible:				PositionInformation, VoiceAudioInput
+						positively affected/compatible:		PicVideoInput, GraphicsOutput
+						negatively affected/incompatible:	SMS, CSCall
+						
+	Algo Q4 in prosa: TBD.
+
+				
+	Use Cases:
+		Scenario 1: The described video chat application shall be ported from a Smartphone to a Tablet; what are the consequences?
+					The developer can also make circular conclusions on his own (such as: we have bigger screen with bigger resolution --> need more powerful hardware, too)
+			- given: the specifications of two platforms (source, target), and the application to be checked for compatibility
+			- find: application features and how they are affected by the platform change (e.g., are no longer supported, or could be positively affected (e.g. due to a better display))
+			
+		Scenario 2: OEM is required to make a platform change (for technological or economical reasons); can the functionality currently in use be maintained?
+			- given: same as above
+			- find: same as above; basically information for each of the currently used application features on how they are affected

@@ -1,0 +1,53 @@
+%created by ML, v01, 2012-03-16:
+
+Q2 - Platform Compatibility Question:
+	The purpose of this question is to compare the required components for a specific application (Q1) with concrete platforms/devices, and determine their (in-)compatibility level.
+	- Input: ConfTop1, the configuration of selected application functionalities.	% alternatively, provide the output of Q1 (ConfBottomMin)
+			 ConfBottom1, the provided elements of a specific platform.
+			 Mapping
+	- Output: ConfBottomCompatibility, a list of compatible and incompatible platform components.
+	
+	Example:
+		- Input:  MP_AppFeatures_Config_01.afm (to derive Q1_MP_PlatformComponents_ConfigMin_01.out; alternatively, we could provide it directly?)
+				  MP_PlatformComponents_Config_01.afm
+				  MP_Mapping_01.map
+		- Output: Q2_MP_PlatformComponents_CompatibilityList_01.out
+						compatible (= required and provided): 													Mike, GraphicsOutput,...
+						incompatible (= required but missing, or constraint not met): 							SIP,...
+						(provided (all other provided components that are not required for the application): 	Compass, Accelerometer)
+					%open issue: shall we further categorize/mark the 1:n relations (e.g. alternatively required and provided/missing/don'tCare)
+
+	Splitting Q2 into four elementary operations:
+		O2   - PlatformCompatibilityQuestion: run O2.1 - O2.4, then resolve conflicts, provide one output
+		O2.1 - RequiredComponents (1:1)
+		O2.2 - RequiredComponentsWithConstraint (1:1)
+		O2.3 - AlternativelyRequiredComponents (1:N)
+		O2.4 - AlternativelyRequiredComponentsWithConstraints (1:N)
+		O2.5 - CombineAndResolveConflicts?
+	
+					
+	Algo Q2 in prosa: Compute the difference between ConfBottomMin (Q1 output), and ConfBottom1
+		- step by step:
+			- for each platform component in ConfBottomMin, check if component is included in ConfBottom1
+			- (or: for each relevant mapping, check if component(s) is/are included in ConfBottom1)
+				- if not: add to list "incompatible" (reason: missing)
+				- if yes: is there a constraint attached?
+					if not: add to list "compatible"
+					if yes: is constraint met?
+						if not: add to list "incompatible" (reason: constraint not met)
+						if yes: add to list "compatible"
+				- whenever adding sthg to a list, check this to ensure priorities:
+					only add to compatible list, if it doesn't already exist in incompatible list
+					if adding to incompatible list, delete any occurences in compatible list
+				% if the component was part of a 1:n relation group, we have to modify these steps slightly (mainly to check whether overall condition for the whole group is satisfied)
+
+				
+	Use Cases:
+		Scenario 1: an Android developer, who wants to upload his application to Google Play (aka Android Market), and likes to check whether the application is compatible with a specific phone/platform
+					or, from an end user's point of view: the Android Market Client can check itself whether a downloadable application will be compatible with the actual phone model
+			- given: the application requirements (= top level features), and a concrete phone/platform (e.g. Samsung Galaxy S2, Android 2.3)
+			- find: a list of compatible and incompatible platform components for the given application --> immediately highlights differences/problems
+			
+		Scenario 2: an OEM (original equipment manufacturer, such as our cooperation partner) of a feature phone who wants to check whether a prospective new platform is compatible with their existing applications
+			- given: the very basic application functionalities; a specification of a specific platform
+			- find: a list of compatible and incompatible platform components for the given basic application

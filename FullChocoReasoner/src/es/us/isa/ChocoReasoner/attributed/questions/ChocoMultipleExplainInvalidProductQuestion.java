@@ -50,6 +50,7 @@ public class ChocoMultipleExplainInvalidProductQuestion extends ChocoQuestion
 	private Collection<ConfigurationExplaining> res;
 	private Product invalidProduct; 
 	
+	@Override
 	public Collection<ConfigurationExplaining> getProductExplaining() {
 		return res;
 	}
@@ -168,7 +169,7 @@ public class ChocoMultipleExplainInvalidProductQuestion extends ChocoQuestion
 				if (var.getVal() == 1){
 					//la feature ha sido seleccionada
 					toSelect.add(e.getValue());
-					//ademas, tenemos que aï¿½adirla a la config original
+					//ademas, tenemos que añadirla a la config original
 					fixedProduct.addFeature(e.getValue());
 				}
 			}

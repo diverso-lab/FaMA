@@ -1,0 +1,12 @@
+%created by ML, v01, 2012-04-05:
+%for CaseStudy 2, Basic Feature Phone
+
+%Q2 - Platform Compatibility Question:
+	%Output:
+		compatible (= required and provided):				Mike; RAM; SIM; Vibrator; Speakers; SOSButton; ClockTimer;
+										Display; LED;		% required with constraint
+										GSM; Keyboard		% alternatively required
+		incompatible (= required but missing):				DTMFToneDecoder
+		incompatible (= required but constraint not met):		Flash		% we could other constraints, e.g. Languages requiring huge space, then make it fail
+		(provided (all other provided components that are not required for the application): 	just subtract InputConfig - Output
+	%open issue: shall we further categorize/mark the 1:n relations (e.g. alternatively required and provided/missing/don'tCare)

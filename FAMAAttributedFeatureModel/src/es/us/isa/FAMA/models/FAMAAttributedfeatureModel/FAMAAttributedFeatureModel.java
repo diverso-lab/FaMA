@@ -39,7 +39,9 @@ import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.featureModel.Constraint;
 import es.us.isa.FAMA.models.featureModel.GenericRelation;
 import es.us.isa.FAMA.models.featureModel.extended.GenericAttributedFeatureModel;
+import es.us.isa.FAMA.parser.FMFParser;
 import es.us.isa.util.Node;
+import es.us.isa.util.Tree;
 
 /**
  * @author   trinidad.
@@ -420,5 +422,11 @@ public class FAMAAttributedFeatureModel extends GenericAttributedFeatureModel{
         }
         return true;
     }
+
+	@Override
+	public Tree<String> getConstraint(String str) {
+		FMFParser parser = new FMFParser();
+		return parser.parseConstraint(str);
+	}
 
 }

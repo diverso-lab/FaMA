@@ -22,12 +22,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Map.Entry;
+import java.util.Queue;
 
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
 import es.us.isa.FAMA.Exceptions.FAMAParameterException;
-
 import es.us.isa.FAMA.loader.ExtensionsLoader;
 import es.us.isa.FAMA.loader.ExtensionsLoaderFactory;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
@@ -52,7 +51,7 @@ public class QuestionTrader {
 	protected ExtensionsLoaderFactory extFactory;
 	protected Queue<Configuration> configurations;
 	private Reasoner selectedReasoner;
-
+	private boolean twolayerFM;
 	/**
 	 * Default constructor, it uses the file FAMAconfig.xml to know the
 	 * questions, reasoners, readers/writers and transformations.
@@ -60,6 +59,7 @@ public class QuestionTrader {
 	public QuestionTrader() {
 		this("FaMaConfig.xml");
 		selectedReasoner = null;
+		twolayerFM=false;
 	}
 
 	/**
@@ -81,6 +81,8 @@ public class QuestionTrader {
 		configurations = new LinkedList<Configuration>();
 		selector = new DefaultCriteriaSelector(this);
 		mp = extLoad.getModelParser();
+		twolayerFM=false;
+
 	}
 
 	/**
@@ -95,37 +97,38 @@ public class QuestionTrader {
 	public PerformanceResult ask(Question q) {
 
 		PerformanceResult res = null;
-		if (q != null) {
+		if (q != null ) {
 			Class<? extends Reasoner> reasonerClass = q.getReasonerClass();
+			Reasoner reasonerToUse=null;
+			
 			if (selectedReasoner == null) {
 				Iterator<Reasoner> itr = reasoners.iterator();
-				while (itr.hasNext() && res == null) {
+				while (itr.hasNext() && reasonerToUse==null) {
 					Reasoner r = itr.next();
 					if (reasonerClass.isInstance(r)) {
-						fm.transformTo(r);
-						Iterator<Configuration> configIterator = configurations
-								.iterator();
-						while (configIterator.hasNext()) {
-							r.applyStagedConfiguration(configIterator.next());
-						}
-						res = r.ask(q);
-						r.unapplyStagedConfigurations();
-						selector.registerResults(q, fm, res);
+						reasonerToUse=r;
 					}
 				}
 			} else {
 				if (reasonerClass.isInstance(selectedReasoner)) {
-					fm.transformTo(selectedReasoner);
-					Iterator<Configuration> configIterator = configurations
-							.iterator();
-					while (configIterator.hasNext()) {
-						selectedReasoner
-								.applyStagedConfiguration(configIterator.next());
-					}
-					res = selectedReasoner.ask(q);
-					selectedReasoner.unapplyStagedConfigurations();
-					selector.registerResults(q, fm, res);
+					reasonerToUse=selectedReasoner;
 				}
+			}
+			if(reasonerToUse instanceof TwoLayerReasoner){
+				((TwoLayerReasoner)reasonerToUse).createProblem(q);
+				((TwoLayerReasoner)reasonerToUse).addConfigurations(configurations);
+				res=((TwoLayerReasoner)reasonerToUse).ask(q);
+				((TwoLayerReasoner)reasonerToUse).unapplyStagedConfigurations();
+				selector.registerResults(q, res);
+			}else{
+				fm.transformTo(reasonerToUse);
+				Iterator<Configuration> configIterator = configurations.iterator();
+				while (configIterator.hasNext()) {
+					reasonerToUse.applyStagedConfiguration(configIterator.next());
+				}
+				res = reasonerToUse.ask(q);
+				reasonerToUse.unapplyStagedConfigurations();
+				selector.registerResults(q, fm, res);
 			}
 		}
 		return res;
@@ -401,4 +404,12 @@ public class QuestionTrader {
 	}
 	public void removeStagedConfigurations(){
 		configurations = new LinkedList<Configuration>();
+	}
+
+	public boolean isTwolayerFM() {
+		return twolayerFM;
+	}
+
+	public void setTwolayerFM(boolean twolayerFM) {
+		this.twolayerFM = twolayerFM;
 	}}

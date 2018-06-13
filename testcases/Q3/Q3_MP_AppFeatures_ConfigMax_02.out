@@ -1,0 +1,8 @@
+%created by ML, v01, 2012-04-06:
+%for CaseStudy 2, Basic Feature Phone
+
+%Q3 - Application Functionality Question:
+	%Output:
+		enabled:	SMS; MMS; Call; InternetAccess; Phonebook; CallInfo; PositionInformation; Acceleration; TextInput; AudioInput; PicVideoInput;
+				TextOutput; GraphicsOutput; TactileFeedback; VisualIndicator; Torch; AudioOutput; EmergencyProcedure; AlarmClock; SMSToPhonebook; Calculator; HandsfreeMode;
+	%open issue: can/shall we interpret the relations differently depending on their type (and therefore classify the output?); think about it...

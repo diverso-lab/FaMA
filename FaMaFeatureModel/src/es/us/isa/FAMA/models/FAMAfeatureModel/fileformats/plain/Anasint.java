@@ -314,13 +314,13 @@ public Anasint(ParserSharedInputState state) {
 			declaracion_feature();
 			r_AST = (AST)returnAST;
 			{
-			_loop6:
+			_loop66:
 			do {
-				if ((LA(1)==CORCHETE_ABRIR||LA(1)==IDENT)) {
+				if ((LA(1)==IDENT)) {
 					declaracion_feature();
 				}
 				else {
-					break _loop6;
+					break _loop66;
 				}
 				
 			} while (true);
@@ -354,42 +354,8 @@ public Anasint(ParserSharedInputState state) {
 		AST r_AST = null;
 		
 		try {      // for error handling
-			{
-			switch ( LA(1)) {
-			case CORCHETE_ABRIR:
-			{
-				match(CORCHETE_ABRIR);
-				break;
-			}
-			case IDENT:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(LT(1), getFilename());
-			}
-			}
-			}
 			feature();
 			f_AST = (AST)returnAST;
-			{
-			switch ( LA(1)) {
-			case CORCHETE_CERRAR:
-			{
-				match(CORCHETE_CERRAR);
-				break;
-			}
-			case DOSPUNTOS:
-			{
-				break;
-			}
-			default:
-			{
-				throw new NoViableAltException(LT(1), getFilename());
-			}
-			}
-			}
 			match(DOSPUNTOS);
 			lista_relaciones();
 			r_AST = (AST)returnAST;
@@ -454,18 +420,18 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			int _cnt13=0;
-			_loop13:
+			int _cnt71=0;
+			_loop71:
 			do {
-				if ((LA(1)==CORCHETE_ABRIR||LA(1)==IDENT)) {
+				if ((LA(1)==IDENT||LA(1)==CORCHETE_ABRIR)) {
 					relacion();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt13>=1 ) { break _loop13; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt71>=1 ) { break _loop71; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt13++;
+				_cnt71++;
 			} while (true);
 			}
 			lista_relaciones_AST = (AST)currentAST.root;
@@ -491,10 +457,10 @@ public Anasint(ParserSharedInputState state) {
 		AST of_AST = null;
 		
 		try {      // for error handling
-			boolean synPredMatched16 = false;
+			boolean synPredMatched74 = false;
 			if (((LA(1)==CORCHETE_ABRIR) && (LA(2)==LIT_ENTERO))) {
-				int _m16 = mark();
-				synPredMatched16 = true;
+				int _m74 = mark();
+				synPredMatched74 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -502,12 +468,12 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched16 = false;
+					synPredMatched74 = false;
 				}
-				rewind(_m16);
+				rewind(_m74);
 inputState.guessing--;
 			}
-			if ( synPredMatched16 ) {
+			if ( synPredMatched74 ) {
 				relacion_cardinalidad();
 				r_AST = (AST)returnAST;
 				if ( inputState.guessing==0 ) {
@@ -716,18 +682,18 @@ inputState.guessing--;
 			feature();
 			astFactory.addASTChild(currentAST, returnAST);
 			{
-			int _cnt24=0;
-			_loop24:
+			int _cnt82=0;
+			_loop82:
 			do {
 				if ((LA(1)==IDENT)) {
 					feature();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt24>=1 ) { break _loop24; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt82>=1 ) { break _loop82; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt24++;
+				_cnt82++;
 			} while (true);
 			}
 			match(LLAVE_CERRAR);
@@ -752,18 +718,18 @@ inputState.guessing--;
 		
 		try {      // for error handling
 			{
-			int _cnt28=0;
-			_loop28:
+			int _cnt86=0;
+			_loop86:
 			do {
 				if ((LA(1)==IDENT)) {
 					constraint();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					if ( _cnt28>=1 ) { break _loop28; } else {throw new NoViableAltException(LT(1), getFilename());}
+					if ( _cnt86>=1 ) { break _loop86; } else {throw new NoViableAltException(LT(1), getFilename());}
 				}
 				
-				_cnt28++;
+				_cnt86++;
 			} while (true);
 			}
 			lista_constraints_AST = (AST)currentAST.root;
@@ -923,12 +889,12 @@ inputState.guessing--;
 		"VALORES",
 		"ENUM",
 		"MENOS_UNARIO",
-		"CORCHETE_ABRIR",
-		"CORCHETE_CERRAR",
 		"SECCION_RELACIONES",
 		"DOSPUNTOS",
 		"PyC",
 		"IDENT",
+		"CORCHETE_ABRIR",
+		"CORCHETE_CERRAR",
 		"LIT_ENTERO",
 		"COMA",
 		"LLAVE_ABRIR",
@@ -953,32 +919,32 @@ inputState.guessing--;
 	}
 	public static final BitSet _tokenSet_1 = new BitSet(mk_tokenSet_1());
 	private static final long[] mk_tokenSet_2() {
-		long[] data = { 2216689666L, 0L};
+		long[] data = { 2164260866L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_2 = new BitSet(mk_tokenSet_2());
 	private static final long[] mk_tokenSet_3() {
-		long[] data = { 1197473792L, 0L};
+		long[] data = { 1203765248L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_3 = new BitSet(mk_tokenSet_3());
 	private static final long[] mk_tokenSet_4() {
-		long[] data = { 33554432L, 0L};
+		long[] data = { 8388608L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_4 = new BitSet(mk_tokenSet_4());
 	private static final long[] mk_tokenSet_5() {
-		long[] data = { 102760448L, 0L};
+		long[] data = { 58720256L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_5 = new BitSet(mk_tokenSet_5());
 	private static final long[] mk_tokenSet_6() {
-		long[] data = { 603979776L, 0L};
+		long[] data = { 553648128L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_6 = new BitSet(mk_tokenSet_6());
 	private static final long[] mk_tokenSet_7() {
-		long[] data = { 67108866L, 0L};
+		long[] data = { 16777218L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_7 = new BitSet(mk_tokenSet_7());

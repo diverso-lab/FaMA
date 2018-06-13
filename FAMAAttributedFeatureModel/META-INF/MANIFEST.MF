@@ -25,52 +25,54 @@ Export-Package: es.us.isa.FAMA.Reasoner.questions;uses:="es.us.isa.FAM
  nded,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.Reasoner,e
  s.us.isa.FAMA.models.featureModel,es.us.isa.FAMA.models.featureModel.
  extended",es.us.isa.FAMA.models.variabilityModel;uses:="es.us.isa.FAM
- A.errors,es.us.isa.FAMA.models.variabilityModel.transformations,es.us
- .isa.FAMA.Reasoner,es.us.isa.FAMA.models.featureModel",es.us.isa.FAMA
- .models.domain;uses:="es.us.isa.util,es.us.isa.FAMA.models.featureMod
- el.extended",es.us.isa.FAMA.models.featureModel;uses:="es.us.isa.util
- ,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.models.domain,
- es.us.isa.FAMA.models.featureModel.extended",es.us.isa.FAMA.main;uses
- :="javax.xml.parsers,spitz.ayal.jarjar,org.w3c.dom",es.us.isa.FAMA.Be
- nchmarking,es.us.isa.util,es.us.isa.FAMA.Reasoner.questions.extended;
- uses:="es.us.isa.FAMA.Reasoner,es.us.isa.FAMA.models.featureModel",es
- .us.isa.FAMA.loader.impl;uses:="javax.xml.parsers,es.us.isa.FAMA.load
- er,es.us.isa.FAMA.models.variabilityModel.parsers,org.w3c.dom,org.xml
- .sax,es.us.isa.FAMA.Reasoner.Factory,es.us.isa.FAMA.Reasoner,spitz.ay
- al.jarjar",es.us.isa.FAMA.Exceptions,es.us.isa.FAMA.models.FAMAAttrib
- utedfeatureModel;uses:="es.us.isa.FAMA.errors,es.us.isa.util,es.us.is
- a.FAMA.models.FAMAAttributedfeatureModel.transformations,es.us.isa.FA
- MA.parser,es.us.isa.FAMA.models.variabilityModel.transformations,es.u
- s.isa.FAMA.models.domain,es.us.isa.FAMA.models.FAMAAttributedfeatureM
- odel.errors,es.us.isa.FAMA.models.featureModel,es.us.isa.FAMA.models.
- featureModel.extended",es.us.isa.FAMA.models.FAMAAttributedfeatureMod
- el.errors;uses:="es.us.isa.FAMA.errors,es.us.isa.FAMA.models.variabil
- ityModel,es.us.isa.FAMA.models.FAMAAttributedfeatureModel",es.us.isa.
- FAMA.osgi.activator;uses:="es.us.isa.FAMA.Reasoner.questions,es.us.is
- a.FAMA.Reasoner.Factory,es.us.isa.FAMA.loader.impl,es.us.isa.FAMA.Rea
- soner,es.us.isa.FAMA.models.variabilityModel.transformations,org.osgi
- .framework,es.us.isa.FAMA.models.variabilityModel.parsers",es.us.isa.
- FAMA.models.featureModel.extended;uses:="es.us.isa.FAMA.models.domain
- ,es.us.isa.FAMA.models.featureModel",es.us.isa.FAMA.errors;uses:="es.
- us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.models.featureMode
- l",es.us.isa.FAMA.Reasoner.Factory;uses:="es.us.isa.FAMA.models.varia
- bilityModel,es.us.isa.FAMA.Reasoner",es.us.isa.FAMA.models.variabilit
- yModel.transformations;uses:="es.us.isa.FAMA.models.variabilityModel,
- es.us.isa.FAMA.Reasoner",es.us.isa.FAMA.models.FAMAAttributedfeatureM
- odel.fileformats;uses:="es.us.isa.FAMA.parser,es.us.isa.FAMA.models.v
- ariabilityModel,es.us.isa.FAMA.models.domain,es.us.isa.FAMA.models.FA
- MAAttributedfeatureModel,es.us.isa.FAMA.models.variabilityModel.parse
- rs,es.us.isa.FAMA.models.featureModel,es.us.isa.FAMA.models.featureMo
- del.extended",es.us.isa.FAMA.Reasoner;uses:="es.us.isa.FAMA.Benchmark
- ing,es.us.isa.FAMA.Exceptions,javax.xml.parsers,es.us.isa.FAMA.loader
- ,es.us.isa.FAMA.models.variabilityModel.parsers,org.w3c.dom,es.us.isa
- .FAMA.models.featureModel.extended,org.xml.sax,es.us.isa.FAMA.stagedC
- onfigManager,es.us.isa.FAMA.Reasoner.Factory,es.us.isa.FAMA.models.va
- riabilityModel,es.us.isa.FAMA.models.variabilityModel.transformations
- ,es.us.isa.FAMA.models.featureModel",es.us.isa.FAMA.models.FAMAAttrib
- uted.osgi;uses:="es.us.isa.FAMA.models.FAMAAttributedfeatureModel.fil
- eformats,org.osgi.framework,es.us.isa.FAMA.models.variabilityModel.pa
- rsers"
+ A.errors,es.us.isa.util,es.us.isa.FAMA.models.variabilityModel.transf
+ ormations,es.us.isa.FAMA.Reasoner,es.us.isa.FAMA.models.featureModel"
+ ,es.us.isa.FAMA.models.domain;uses:="es.us.isa.util,es.us.isa.FAMA.mo
+ dels.featureModel.extended",es.us.isa.FAMA.models.featureModel;uses:=
+ "es.us.isa.util,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA
+ .models.domain,es.us.isa.FAMA.models.featureModel.extended",es.us.isa
+ .FAMA.main;uses:="javax.xml.parsers,spitz.ayal.jarjar,org.w3c.dom",es
+ .us.isa.FAMA.Benchmarking,es.us.isa.util,es.us.isa.FAMA.Reasoner.ques
+ tions.extended;uses:="es.us.isa.FAMA.Reasoner,es.us.isa.FAMA.models.f
+ eatureModel",es.us.isa.FAMA.loader.impl;uses:="javax.xml.parsers,es.u
+ s.isa.FAMA.loader,es.us.isa.FAMA.models.variabilityModel.parsers,org.
+ w3c.dom,org.xml.sax,es.us.isa.FAMA.Reasoner.Factory,es.us.isa.FAMA.Re
+ asoner,spitz.ayal.jarjar",es.us.isa.FAMA.Exceptions,es.us.isa.FAMA.mo
+ dels.FAMAAttributedfeatureModel;uses:="es.us.isa.FAMA.errors,es.us.is
+ a.util,es.us.isa.FAMA.models.FAMAAttributedfeatureModel.transformatio
+ ns,es.us.isa.FAMA.parser,es.us.isa.FAMA.models.variabilityModel.trans
+ formations,es.us.isa.FAMA.models.domain,es.us.isa.FAMA.models.FAMAAtt
+ ributedfeatureModel.errors,es.us.isa.FAMA.models.featureModel,es.us.i
+ sa.FAMA.models.featureModel.extended",es.us.isa.FAMA.Reasoner.questio
+ ns.twolayer;uses:="es.us.isa.FAMA.stagedConfigManager,es.us.isa.FAMA.
+ models.variabilityModel,es.us.isa.FAMA.Reasoner",es.us.isa.FAMA.model
+ s.FAMAAttributedfeatureModel.errors;uses:="es.us.isa.FAMA.errors,es.u
+ s.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.models.FAMAAttribut
+ edfeatureModel",es.us.isa.FAMA.osgi.activator;uses:="es.us.isa.FAMA.R
+ easoner.questions,es.us.isa.FAMA.Reasoner.Factory,es.us.isa.FAMA.load
+ er.impl,es.us.isa.FAMA.Reasoner,es.us.isa.FAMA.models.variabilityMode
+ l.transformations,org.osgi.framework,es.us.isa.FAMA.models.variabilit
+ yModel.parsers",es.us.isa.FAMA.models.featureModel.extended;uses:="es
+ .us.isa.FAMA.models.domain,es.us.isa.FAMA.models.featureModel",es.us.
+ isa.FAMA.errors;uses:="es.us.isa.FAMA.models.variabilityModel,es.us.i
+ sa.FAMA.models.featureModel",es.us.isa.FAMA.Reasoner.Factory;uses:="e
+ s.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.Reasoner",es.us.
+ isa.FAMA.models.variabilityModel.transformations;uses:="es.us.isa.FAM
+ A.models.variabilityModel,es.us.isa.FAMA.Reasoner",es.us.isa.FAMA.mod
+ els.FAMAAttributedfeatureModel.fileformats;uses:="es.us.isa.FAMA.pars
+ er,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.models.domai
+ n,es.us.isa.FAMA.models.FAMAAttributedfeatureModel,es.us.isa.FAMA.mod
+ els.variabilityModel.parsers,es.us.isa.FAMA.models.featureModel,es.us
+ .isa.FAMA.models.featureModel.extended",es.us.isa.FAMA.Reasoner;uses:
+ ="es.us.isa.FAMA.Benchmarking,es.us.isa.FAMA.Exceptions,javax.xml.par
+ sers,es.us.isa.FAMA.loader,es.us.isa.FAMA.models.variabilityModel.par
+ sers,org.w3c.dom,es.us.isa.FAMA.models.featureModel.extended,org.xml.
+ sax,es.us.isa.FAMA.stagedConfigManager,es.us.isa.FAMA.Reasoner.Factor
+ y,es.us.isa.FAMA.models.variabilityModel,es.us.isa.FAMA.models.variab
+ ilityModel.transformations,es.us.isa.FAMA.models.featureModel",es.us.
+ isa.FAMA.models.FAMAAttributed.osgi;uses:="es.us.isa.FAMA.models.FAMA
+ AttributedfeatureModel.fileformats,org.osgi.framework,es.us.isa.FAMA.
+ models.variabilityModel.parsers"
 Private-Package: antlr,antlr.ASdebug,antlr.actions.cpp,antlr.actions.c
  sharp,antlr.actions.java,antlr.actions.python,antlr.build,antlr.colle
  ctions,antlr.collections.impl,antlr.debug,antlr.debug.misc,antlr.prep
@@ -80,13 +82,12 @@ Built-By: malawito
 Tool: Bnd-0.0.238
 Bundle-Name: FaMaAttributedModel
 Created-By: Apache Maven Bundle Plugin
-Build-Jdk: 1.7.0_79
+Build-Jdk: 1.6.0_24
 Bundle-Version: 1.0.2
-Bnd-LastModified: 1441889999884
+Bnd-LastModified: 1335901301349
 Bundle-ManifestVersion: 2
 Bundle-Activator: es.us.isa.FAMA.models.FAMAAttributed.osgi.Activator
 Bundle-Description: Attributed Metamodel for fama
-Bundle-SymbolicName: es.us.isa.FaMaAttributedModel
 Import-Package: es.us.isa.FAMA.Benchmarking;resolution:=optional,es.us
  .isa.FAMA.Exceptions;resolution:=optional,es.us.isa.FAMA.Reasoner;res
  olution:=optional,es.us.isa.FAMA.Reasoner.Factory;resolution:=optiona
@@ -94,24 +95,26 @@ Import-Package: es.us.isa.FAMA.Benchmarking;resolution:=optional,es.us
  MA.Reasoner.questions.defaultImpl;resolution:=optional,es.us.isa.FAMA
  .Reasoner.questions.extended;resolution:=optional,es.us.isa.FAMA.Reas
  oner.questions.extended.defaultImpl;resolution:=optional,es.us.isa.FA
- MA.errors;resolution:=optional,es.us.isa.FAMA.loader;resolution:=opti
- onal,es.us.isa.FAMA.loader.impl;resolution:=optional,es.us.isa.FAMA.m
- ain;resolution:=optional,es.us.isa.FAMA.models.FAMAAttributed.osgi;re
- solution:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatureModel;r
- esolution:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatureModel.
- errors;resolution:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatu
- reModel.fileformats;resolution:=optional,es.us.isa.FAMA.models.FAMAAt
- tributedfeatureModel.transformations;resolution:=optional,es.us.isa.F
- AMA.models.domain;resolution:=optional,es.us.isa.FAMA.models.featureM
- odel;resolution:=optional,es.us.isa.FAMA.models.featureModel.extended
- ;resolution:=optional,es.us.isa.FAMA.models.variabilityModel;resoluti
- on:=optional,es.us.isa.FAMA.models.variabilityModel.parsers;resolutio
- n:=optional,es.us.isa.FAMA.models.variabilityModel.transformations;re
- solution:=optional,es.us.isa.FAMA.osgi.activator;resolution:=optional
- ,es.us.isa.FAMA.parser;resolution:=optional,es.us.isa.FAMA.stagedConf
- igManager;resolution:=optional,es.us.isa.util;resolution:=optional,ja
- vax.swing;resolution:=optional,javax.swing.event;resolution:=optional
- ,javax.swing.tree;resolution:=optional,javax.xml.parsers;resolution:=
- optional,org.osgi.framework,org.w3c.dom;resolution:=optional,org.xml.
- sax;resolution:=optional,spitz.ayal.jarjar;resolution:=optional
+ MA.Reasoner.questions.twolayer;resolution:=optional,es.us.isa.FAMA.er
+ rors;resolution:=optional,es.us.isa.FAMA.loader;resolution:=optional,
+ es.us.isa.FAMA.loader.impl;resolution:=optional,es.us.isa.FAMA.main;r
+ esolution:=optional,es.us.isa.FAMA.models.FAMAAttributed.osgi;resolut
+ ion:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatureModel;resolu
+ tion:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatureModel.error
+ s;resolution:=optional,es.us.isa.FAMA.models.FAMAAttributedfeatureMod
+ el.fileformats;resolution:=optional,es.us.isa.FAMA.models.FAMAAttribu
+ tedfeatureModel.transformations;resolution:=optional,es.us.isa.FAMA.m
+ odels.domain;resolution:=optional,es.us.isa.FAMA.models.featureModel;
+ resolution:=optional,es.us.isa.FAMA.models.featureModel.extended;reso
+ lution:=optional,es.us.isa.FAMA.models.variabilityModel;resolution:=o
+ ptional,es.us.isa.FAMA.models.variabilityModel.parsers;resolution:=op
+ tional,es.us.isa.FAMA.models.variabilityModel.transformations;resolut
+ ion:=optional,es.us.isa.FAMA.osgi.activator;resolution:=optional,es.u
+ s.isa.FAMA.parser;resolution:=optional,es.us.isa.FAMA.stagedConfigMan
+ ager;resolution:=optional,es.us.isa.util;resolution:=optional,javax.s
+ wing;resolution:=optional,javax.swing.event;resolution:=optional,java
+ x.swing.tree;resolution:=optional,javax.xml.parsers;resolution:=optio
+ nal,org.osgi.framework,org.w3c.dom;resolution:=optional,org.xml.sax;r
+ esolution:=optional,spitz.ayal.jarjar;resolution:=optional
+Bundle-SymbolicName: es.us.isa.FaMaAttributedModel
 

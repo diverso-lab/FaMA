@@ -73,4 +73,9 @@ public class DefaultCriteriaSelector extends CriteriaSelector {
 
 		return res;
 	}
+
+	@Override
+	public void registerResults(Question q, PerformanceResult pr) {
+		
+	}
 }

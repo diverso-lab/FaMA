@@ -93,6 +93,7 @@ public class ChocoHomogeneityQuestion extends ChocoQuestion implements
 		
 	}
 
+	@Override
 	public double getHomogeneity() {
 		return vq.getHomogeneity();
 

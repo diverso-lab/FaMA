@@ -1,0 +1,6 @@
+<reasoner>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.twolayer.PlatFormCapabilityQuestion" class="es.us.isa.ChocoReasoner.twolayer.questions.ChocoPlatformCapabilityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.twolayer.PlatFormCompatibilityQuestion" class="es.us.isa.ChocoReasoner.twolayer.questions.ChocoPlatformCompatibilityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.twolayer.PlatFormFunctionalityQuestion" class="es.us.isa.ChocoReasoner.twolayer.questions.ChocoFunctionalityQuestion"/>
+	<question interface="es.us.isa.FAMA.Reasoner.questions.twolayer.PlatFormMigrationQuestion" class="es.us.isa.ChocoReasoner.twolayer.questions.ChocoMigrationQuestion"/>
+</reasoner>

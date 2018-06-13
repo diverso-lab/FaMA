@@ -1,0 +1,14 @@
+%Relationships
+PlatformFeatures: Input [Radios];
+Radios:[1,2]{Cellular NonCellular};
+Cellular: [1, 2] {GSM GPRS};
+NonCellular: [1, 2] {WIFI BT};
+
+#%Attributes
+#Radios.datarate:	Integer[20 to 400], 0, 0;
+#Cellular.datarate:	Integer[20 to 400], 0, 0;
+#NonCellular.datarate:	Integer[20 to 400], 0, 0;
+#GSM.datarate:	Integer[20 to 400], 0, 0;
+#GPRS.datarate:	Integer[20 to 400], 0, 0;
+#WIFI.datarate:	Integer[20 to 400], 0, 0;
+#BT.datarate:	Integer[20 to 400], 0, 0;

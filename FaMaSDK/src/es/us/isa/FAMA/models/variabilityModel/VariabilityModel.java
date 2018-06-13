@@ -25,7 +25,9 @@ import java.util.Set;
 import es.us.isa.FAMA.Reasoner.Reasoner;
 import es.us.isa.FAMA.errors.Observation;
 import es.us.isa.FAMA.errors.Observation.ErrorLevel;
+import es.us.isa.FAMA.models.featureModel.Constraint;
 import es.us.isa.FAMA.models.variabilityModel.transformations.ITransform;
+import es.us.isa.util.Tree;
 
 /**
  * @author Pablo Trinidad
@@ -64,4 +66,6 @@ public abstract class VariabilityModel {
 		Collection<Observation> res = new HashSet<Observation>();
 		return res;
 	}
+	
+	public abstract Tree<String> getConstraint(String str);
 }

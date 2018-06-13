@@ -1,0 +1,38 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+%Mapping is not supported yet in FaMA --> will be added
+
+SMS requires GSM or GPRS or UMTS;	% type (3)	(could also be modeled as requires CellularRadio - which looks like type (1), but due to that relation to a parent feature it can effectively be a hidden 1:N relation to leaf features)
+Call requires GSM or UMTS;		% type (3)
+InternetAccess requires (GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= top.datarate];	% type (4)
+AudioInput requires Mike		% type (1)
+TextInput requires (Keyboard or Touch)	% type (3)
+TextOutput requires Display and [bottom.colorDepth >= top.colorDepth]	% type (2)
+AudioOutput requires Speakers		% type (1)
+
+%open issue: do we also need distinction of model/configuration for Mapping? (for now, could be sufficient to model them once for whole FM; only mappings containing selected features will be applied anyway)
+
+
+%different types of inter-tree relations:
+%(essentially, there are 4 types overall; 1:1, 1:n, and those two combined with a constraint)
+	% 1-to-1:
+(1)	A requires B		
+	% if B is included in bottomLayer, success. else, "single-feature-missing error".
+(2)	A requires B with [top.x > bottom.y]
+	% if B is included in bottomLayer, and matches the criterion, success. else, "feature-missing error" (with hint which constraint is not met) (maybe distinguish between 'component missing' and 'constraint not met'?)
+	% initial formulation: "A conditionally requires B if [top.x > bottom.y]" - however, this sounds like: if constraint is not met, bottomA is not required; is NOT true though...bottomA is always required, but must meet the requirement!
+	% variation: how about formulation "A requires B and [top.x > bottom.y]"? advantage: doesn't need any new vocabulary, AND is widely understood. (does it transport correct meaning though?)
+
+	% 1-to-N:
+	% (A requires B and C)	
+	% not supported for now; is just syntactic sugar; translate it into separate mapping: A requires B, A requires C
+(3)	A requires (B or C)		
+	% if B or C (or both) included in bottomLayer, success. else (= non included), "group-feature-missing error".
+(4)	A requires (B or C) with [top.x > bottom.y]	
+	% at least one feature must match the criterion;	if B or C (or both) included in bottomLayer, and (at least one) matches the criterion, success. else, "group-feature-missing error" (with hint which constraint is not met)
+
+order of priority: (2), (1), (4), (3)		% will be relevant for relations with conflicting categories
+%david: @jose this won't be included in the first version of the implementation

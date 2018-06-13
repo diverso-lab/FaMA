@@ -1,0 +1,105 @@
+%created by ML, v01, 2012-05-14:	a Dummy example, using new output-definition for O1 (after meeting from 10.5.2012)
+
+
+=============================== TOP ======================================
+%Relationships (1. Feature Model)
+R: [A] [B];
+
+%Cross-Tree Constraints:
+
+
+%Attributes	(2. Attribute Model)
+
+
+
+=============================== BOTTOM ======================================
+%Relationships (1. Feature Model)
+C: [D] [E] X;
+E: [1, 1] {F, Y};
+
+
+%Attributes	(2. Attribute Model)
+
+
+
+=============================== MAPPING =====================================
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+%Mapping is not supported yet in FaMA --> will be added
+
+A requires D
+B requires Y
+
+
+=============================== CONFIG ======================================
+%Relationships (3. Product Configuration)
+
+S={A, B};	% note that parent features are not explicitly mentioned (but implicitly selected); all other features are automatically treated as removed
+
+%Attributes	(4. Attribute Configuration)
+%such Attribute Configuration is not supported yet in FaMa (but should be no big deal)
+
+
+======================== MANUAL ANALYSIS ====================================
+
+%Q1 - (required) Platform Capability Question:
+	%Input:
+		TopFM_Config1:	S={A, B};
+	%Output:
+		Must-Have:		
+			D, C, E, Y, X
+		Removed:		
+			F
+		GroupOptional:
+			-
+		OpenOptional:
+			what for again? does it contain any additional info, which we can't see from FM + output already?		
+		Attributes Limitations:
+			-
+
+			
+%Q2 - Platform Compatibility Question:
+	%Input:
+		TopFM_Config1:		S={A, B};			% full config (parent features may not be explicitly mentioned (but are implicitly selected))
+		BottomFM_Config1:	S={C, E, X, Y};		% full config
+	%Output:
+		Compatible (= required and provided):
+			C, E, X, Y
+		Missing:
+			D
+		Incompatible (= provided, but constraint not met):
+			-
+
+			
+%Q3 - Application Functionality Question:
+	%Input:
+		BottomFM_Config1:	S={C, E, X, Y};		% full config		
+	%Output:
+		enabled:	
+			R, B
+		removed(?):
+			A
+		%open issue: can/shall we interpret the relations differently depending on their type (and therefore classify the output?); think about it...
+
+		
+%Q4 - Platform Migration Question:
+	%Input:
+		TopFM_Config1:		S={A, B};			% full config (parent features may not be explicitly mentioned (but are implicitly selected))
+		(BottomFM_Config1:	S={C, D, E, X, Y};)	% full config; (not sure yet whether we support second bottom config as input, to compute/highlight the platform differences)
+		BottomFM_Config2:	S={C, E, X, Y};		% full config
+	%Output:
+		unaffected:
+			R, B
+		enabled, new:
+			-
+		incompatible:
+			A
+	(%Output Bottom Layer):		% not sure yet whether we provide this additional output (probably separate Q, simply within one layer?)
+		added:
+			-
+		removed:
+			D
+		unchanged:
+			C, E, X, Y
+		%open issue: can/shall we provide explanation why sthg was positively/negativel affected? (e.g. Phonebook positively affected, due to increased FlashSize --> more entries possible)
+		%open issue: can/shall we really distinguish between limited and conflicted? or shall we merge them into single category "conflicted/limited"?

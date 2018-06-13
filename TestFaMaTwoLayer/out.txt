@@ -1,0 +1,2 @@
+Y domain :[0,1]
+Not defined_The feature :Y

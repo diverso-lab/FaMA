@@ -1,0 +1,25 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Relationships (1. Feature Model)
+MP_AppFeatures: [Communication] [Storage] [ContextInformation] Input Output [Services];
+Communication: [TextualCommunication] [VoiceCommunication] [DataCommunication];
+TextualCommunication: [SMS];
+VoiceCommunication: [Call];
+DataCommunication: [InternetAccess];
+Input: [TextInput] [AudioInput];
+Output: [TextOutput] [GraphicsOutput] [AudioOutput];
+%don't I need other relation types?
+%check syntax
+%cross tree constraints? put them inside here if required
+
+
+%Attributes	(2. Attribute Model)
+InternetAccess.datarate:		Integer[0 to MaxInt], 0, 0;	% [bps]
+TextOutput.colorDepth:			Integer[0 to 24], 0, 0;		% [bit] 1..blackWhite
+
+%Q: is there a way to add/model the unit in FaMa? would be valueable for any meaningful output interpretation
+
+
+%Cross-Tree Constraints:
+% none defined for toy example (maybe SMS --> TextInput, TextOutput; Call --> AudioInput, AudioOutput)

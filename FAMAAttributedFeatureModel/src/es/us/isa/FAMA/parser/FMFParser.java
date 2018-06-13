@@ -59,6 +59,8 @@ public class FMFParser {
 		}
 		return res;
 	}
+	
+	
 
 	public FAMAAttributedFeatureModel parseModel(String path) {
 
@@ -70,7 +72,6 @@ public class FMFParser {
 			Anasint as = new Anasint(an);
 			res = parseModel(as);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

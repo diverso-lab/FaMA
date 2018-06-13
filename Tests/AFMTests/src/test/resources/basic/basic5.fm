@@ -1,5 +1,0 @@
-%Relationships
-A : [B] [C];
-
-%Constraints
-B REQUIRES C;

@@ -1,0 +1,3 @@
+SMS REQUIRES Cellular
+InternetAccess IMPLIES GPRS OR InternetAccess IMPLIES WIFI 
+#InternetAccess IMPLIES GPRS.datarate + WIFI.datarate >= InternetAccess.datarate

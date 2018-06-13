@@ -1,0 +1,11 @@
+%created by ML, v01, 2012-04-05:
+%for CaseStudy 2, Basic Feature Phone
+
+%Q1 - (required) Platform Capability Question:
+	%Output:
+		required (1:1): 						Mike; RAM; SIM; Vibrator; Speakers; SOSButton; DTMFToneDecoder; ClockTimer;
+		required with constraint (1:1): 				Display and [bottom.resolutionWidth >= 128 px] and [bottom.resolutionHeight >= 160 px] and [bottom.colorDepth >= 1]
+										Flash and [bottom.memSize >= 8000 byte]
+										LED and [bottom.intensity >= 3 cd]
+		alternatively required (1:N): 					{GSM or UMTS}; (Keyboard or Touch);
+		alternatively required with constraint (1:N): 			-

@@ -1,7 +1,0 @@
-%Relationships
-A : [B] C;
-B : [1,1] {D E F};
-C : [H];
-
-%Constraints
-E EXCLUDES H;

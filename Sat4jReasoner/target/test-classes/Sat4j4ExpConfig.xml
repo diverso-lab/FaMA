@@ -1,3 +1,0 @@
-<reasoner>
-	<question interface="es.us.isa.FAMA.Reasoner.questions.ExplainErrorsQuestion" class="es.us.isa.Sat4jReasoner.reified.questions.Sat4jExplainErrorsQuestion"/>
-</reasoner>

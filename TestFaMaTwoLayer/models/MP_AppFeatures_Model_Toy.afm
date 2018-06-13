@@ -1,0 +1,12 @@
+%Relationships
+MP_AppFeatures: [Communication] [Storage] [ContextInformation] Input Output [Services];
+Communication: [TextualCommunication] [VoiceCommunication] [DataCommunication];
+TextualCommunication: [SMS];
+VoiceCommunication: [Call];
+DataCommunication: [InternetAccess];
+Input: [TextInput] [AudioInput];
+Output: [TextOutput] [GraphicsOutput] [AudioOutput];
+
+%Attributes
+InternetAccess.datarate: Integer[0 to 9], 0, 0;
+TextOutput.colorDepth: Integer[0 to 24], 0, 0;

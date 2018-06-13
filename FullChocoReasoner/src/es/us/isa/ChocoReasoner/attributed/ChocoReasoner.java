@@ -17,6 +17,29 @@
  */
 package es.us.isa.ChocoReasoner.attributed;
 
+import static choco.Choco.and;
+import static choco.Choco.constant;
+import static choco.Choco.div;
+import static choco.Choco.eq;
+import static choco.Choco.geq;
+import static choco.Choco.gt;
+import static choco.Choco.ifOnlyIf;
+import static choco.Choco.ifThenElse;
+import static choco.Choco.implies;
+import static choco.Choco.leq;
+import static choco.Choco.lt;
+import static choco.Choco.makeIntVar;
+import static choco.Choco.minus;
+import static choco.Choco.mod;
+import static choco.Choco.mult;
+import static choco.Choco.neg;
+import static choco.Choco.neq;
+import static choco.Choco.not;
+import static choco.Choco.or;
+import static choco.Choco.plus;
+import static choco.Choco.power;
+import static choco.Choco.sum;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -24,21 +47,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.SortedSet;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
-import static choco.Choco.*;
 import choco.cp.model.CPModel;
 import choco.kernel.model.Model;
 import choco.kernel.model.constraints.Constraint;
 import choco.kernel.model.variables.integer.IntegerExpressionVariable;
 import choco.kernel.model.variables.integer.IntegerVariable;
-
-import es.us.isa.ChocoReasoner.attributed.ChocoQuestion;
 import es.us.isa.FAMA.Benchmarking.PerformanceResult;
-
 import es.us.isa.FAMA.Exceptions.FAMAException;
 import es.us.isa.FAMA.Reasoner.AttributedFeatureModelReasoner;
 import es.us.isa.FAMA.Reasoner.Question;
@@ -60,11 +79,11 @@ import es.us.isa.util.Tree;
 
 public class ChocoReasoner extends AttributedFeatureModelReasoner {
 
-	protected Map<String, GenericAttributedFeature> features;
+	private Map<String, GenericAttributedFeature> features;
 	protected Map<String, IntegerVariable> variables;
-	protected Map<String, GenericAttribute> atts;
-	protected Map<String, IntegerVariable> attVars;
-	protected Map<String, Constraint> dependencies;
+	private Map<String, GenericAttribute> atts;
+	private Map<String, IntegerVariable> attVars;
+	private Map<String, Constraint> dependencies;
 	protected Map<String, IntegerExpressionVariable> setRelations;
 	protected Model problem;
 	protected boolean reify;
@@ -78,12 +97,12 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 
 	@Override
 	public void reset() {
-		features = new HashMap<String, GenericAttributedFeature>();
+		setFeatures(new HashMap<String, GenericAttributedFeature>());
 		variables = new HashMap<String, IntegerVariable>();
-		atts = new HashMap<String, GenericAttribute>();
-		attVars = new HashMap<String, IntegerVariable>();
+		setAtts(new HashMap<String, GenericAttribute>());
+		setAttVars(new HashMap<String, IntegerVariable>());
 		problem = new CPModel();
-		dependencies = new HashMap<String, Constraint>();
+		setDependencies(new HashMap<String, Constraint>());
 		setRelations = new HashMap<String, IntegerExpressionVariable>();
 		reify = false;
 		configConstraints = new ArrayList<Constraint>();
@@ -103,7 +122,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		IntegerVariable root = variables.get(feature.getName());
 		problem.addConstraint(eq(root, 1));
 	}
-
+	
 	@Override
 	protected void addMandatory_(GenericRelation rel,
 			GenericAttributedFeature child, GenericAttributedFeature parent) {
@@ -163,7 +182,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 
 	protected void createFeature(GenericAttributedFeature f,
 			Collection<Cardinality> cards) {
-		features.put(f.getName(), f); // Save the feature
+		getFeatures().put(f.getName(), f); // Save the feature
 		Iterator<Cardinality> cardIt = cards.iterator();// Looks for all the
 		// cardinality and save
 		// it
@@ -223,7 +242,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		// si y solo si la feature esta presente, tendremos en cuenta la
 		// invariante
 		Constraint reifiedInvariant = implies(geq(varFeat, 1), c);
-		dependencies.put(inv.getName(), reifiedInvariant);
+		getDependencies().put(inv.getName(), reifiedInvariant);
 		return reifiedInvariant;
 
 	}
@@ -300,8 +319,8 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 				throw new FAMAException("Unknown domain type");
 			}
 			// a�adimos la IntegerVariable
-			attVars.put(attName, attVar);
-			atts.put(attName, att);
+			getAttVars().put(attName, attVar);
+			getAtts().put(attName, att);
 			problem.addVariable(attVar);
 
 			// si la feature esta presente, tenemos en cuenta el dominio. si no,
@@ -396,23 +415,28 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 	}
 
 	public Map<String, Constraint> getRelations() {
-		return dependencies;
+		return getDependencies();
 	}
 
 	public GenericAttributedFeature searchFeatureByName(String id) {
-		return features.get(id);
+		GenericAttributedFeature res=null;
+		Map<String, GenericAttributedFeature> features2 = getFeatures();
+		for(GenericAttributedFeature f : features2.values()){
+			if(f.getName().equals(id)){res=f;}
+		}
+		return res;
 	}
 
 	public Collection<GenericAttributedFeature> getAllFeatures() {
-		return this.features.values();
+		return this.getFeatures().values();
 	}
 
 	public Map<String, IntegerVariable> getAttributesVariables() {
-		return attVars;
+		return getAttVars();
 	}
 
 	public Collection<GenericAttribute> getAllAttributes() {
-		return atts.values();
+		return getAtts().values();
 	}
 
 	@Override
@@ -521,7 +545,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		IntegerVariable parentVar = variables.get(parent.getName());
 		Constraint mandatoryConstraint = ifOnlyIf(eq(parentVar, 1), eq(
 				childVar, 1));
-		dependencies.put(rel.getName(), mandatoryConstraint);
+		getDependencies().put(rel.getName(), mandatoryConstraint);
 		return mandatoryConstraint;
 
 	}
@@ -533,7 +557,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		IntegerVariable parentVar = variables.get(parent.getName());
 		Constraint optionalConstraint = implies(eq(parentVar, 0), eq(childVar,
 				0));
-		dependencies.put(rel.getName(), optionalConstraint);
+		getDependencies().put(rel.getName(), optionalConstraint);
 		return optionalConstraint;
 
 	}
@@ -563,7 +587,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 				cardValuesArray, "cp:no_decision");
 		Constraint cardConstraint = ifThenElse(gt(parentVar, 0), eq(childVar,
 				cardinalityVar), eq(childVar, 0));
-		dependencies.put(rel.getName(), cardConstraint);
+		getDependencies().put(rel.getName(), cardConstraint);
 		return cardConstraint;
 
 	}
@@ -574,7 +598,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		IntegerVariable destinationVar = variables.get(destination.getName());
 		Constraint requiresConstraint = implies(gt(originVar, 0), gt(
 				destinationVar, 0));
-		dependencies.put(rel.getName(), requiresConstraint);
+		getDependencies().put(rel.getName(), requiresConstraint);
 		return requiresConstraint;
 	}
 
@@ -585,7 +609,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		IntegerVariable destVar = variables.get(dest.getName());
 		Constraint excludesConstraint = implies(gt(originVar, 0),
 				eq(destVar, 0));
-		dependencies.put(rel.getName(), excludesConstraint);
+		getDependencies().put(rel.getName(), excludesConstraint);
 		return excludesConstraint;
 	}
 
@@ -635,7 +659,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 		// ifThenElse(A>0;sum(B,C) in {n,m};B=0,C=0)
 		Constraint setConstraint = ifThenElse(gt(parentVar, 0), eq(sum(aux),
 				cardinalityVar), eq(sum(aux), 0));
-		dependencies.put(rel.getName(), setConstraint);
+		getDependencies().put(rel.getName(), setConstraint);
 		setRelations.put(rel.getName(), sum(aux));
 		return setConstraint;
 	}
@@ -644,7 +668,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 			es.us.isa.FAMA.models.featureModel.Constraint c) {
 		
 		Constraint relation = chocoParser.translateToConstraint(c.getAST());
-		dependencies.put(c.getName(), relation);
+		getDependencies().put(c.getName(), relation);
 		return relation;
 
 	}
@@ -799,7 +823,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 			}
 			else if (isAttribute(tree)) {
 				String attName = getAttributeName(tree);
-				res = attVars.get(attName);
+				res = getAttVars().get(attName);
 			}
 			else {
 				//es una constante, usamos el intConverter
@@ -833,7 +857,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 				return n.getData().equals(KeyWords.ATTRIBUTE);
 			} else {
 				String aux = featName + "." + n.getData();
-				Object res = atts.get(aux);
+				Object res = getAtts().get(aux);
 				return (res != null);
 			}
 
@@ -841,7 +865,7 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 
 		private boolean isFeature(Node<String> n) {
 			String s = n.getData();
-			return (features.get(s) != null);
+			return (getFeatures().get(s) != null);
 		}
 
 		private boolean isIntegerConstant(Node<String> n) {
@@ -897,6 +921,38 @@ public class ChocoReasoner extends AttributedFeatureModelReasoner {
 	public void setHeuristic(Object obj) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Map<String, GenericAttribute> getAtts() {
+		return atts;
+	}
+
+	public void setAtts(Map<String, GenericAttribute> atts) {
+		this.atts = atts;
+	}
+
+	public Map<String, GenericAttributedFeature> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Map<String, GenericAttributedFeature> features) {
+		this.features = features;
+	}
+
+	public Map<String, IntegerVariable> getAttVars() {
+		return attVars;
+	}
+
+	public void setAttVars(Map<String, IntegerVariable> attVars) {
+		this.attVars = attVars;
+	}
+
+	public Map<String, Constraint> getDependencies() {
+		return dependencies;
+	}
+
+	public void setDependencies(Map<String, Constraint> dependencies) {
+		this.dependencies = dependencies;
 	}
 
 }

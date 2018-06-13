@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.us.isa</groupId>
 	<artifactId>ChocoReasoner</artifactId>
-<!-- <packaging>bundle</packaging> -->	
+	<packaging>bundle</packaging>
 	<name>FaMa Choco Reasoner</name>
 	<version>1.1.1</version>
 	<description>A reasoner for FaMa, based on Choco Solver (v2). It compacts three reasoners</description>
@@ -65,6 +65,7 @@
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<defaultGoal>test</defaultGoal>

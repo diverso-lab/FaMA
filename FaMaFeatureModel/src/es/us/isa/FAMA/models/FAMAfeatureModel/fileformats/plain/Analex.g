@@ -38,17 +38,26 @@ protected SALTO: "\r\n" | '\n'{newline();};
 BLANCO: (SALTO | ' ' | '\t') {$setType(Token.SKIP);};
 protected LETRA: 'a'..'z' | 'A'..'Z';
 protected BARRA_BAJA: '_';
-protected GUION: '-';
 protected DIGITO: '0'..'9';
 protected COMILLA: '\'';
 //protected AT: '@';
-protected PUNTO: '.';
+PUNTO: '.';
 protected ALMOADILLA: '#';
+
+//Comentarios de linea
+COMENT_LIN: ALMOADILLA (('\r')+ ~('\n') | ~('\r') )* "\r\n" {newline();$setType(Token.SKIP);} ;
+
+IDENT options {testLiterals=true;}: (LETRA | BARRA_BAJA) (LETRA | BARRA_BAJA | DIGITO)*;
+//ATT : IDENT (PUNTO IDENT)?; 
+//ATT : IDENT PUNTO IDENT;
+//CUIDADO CON LOS VALORES NEGATIVOS, AHORA MISMO NO ESTAN CONTEMPLADOS
+//LIT_ENTERO: (DIGITO)+;
+//LIT_REAL: (DIGITO)+ PUNTO (DIGITO)+;
 LIT_STRING: '"' (~'"')* '"';
 
 NUMERO : (DIGITO)+ {$setType(LIT_ENTERO);};
 
-MAS :'+';
+
 COMA : ',';
 PyC : ';';
 DOSPUNTOS: ':';
@@ -58,18 +67,6 @@ LLAVE_ABRIR: '{';
 LLAVE_CERRAR: '}';
 CORCHETE_ABRIR: '[';
 CORCHETE_CERRAR: ']';
-VIRGULA:'~';
-VERSION: PARENTESIS_ABRIR (LETRA |DIGITO|DOSPUNTOS|PUNTO|GUION|VIRGULA|MAS)*  PARENTESIS_CERRAR;
-//Comentarios de linea
-COMENT_LIN: ALMOADILLA (('\r')+ ~('\n') | ~('\r') )* "\r\n" {newline();$setType(Token.SKIP);} ;
-//aaa(1:2.14.1-0ubuntu1)_vp
-IDENT options {testLiterals=true;}: (LETRA | BARRA_BAJA)  (LETRA | BARRA_BAJA | DIGITO | GUION|PUNTO|MAS| VERSION)* ;
-//ATT : IDENT (PUNTO IDENT)?; 
-//ATT : IDENT PUNTO IDENT;
-//CUIDADO CON LOS VALORES NEGATIVOS, AHORA MISMO NO ESTAN CONTEMPLADOS
-//LIT_ENTERO: (DIGITO)+;
-//LIT_REAL: (DIGITO)+ PUNTO (DIGITO)+;
-
 
 //SECCIONES
 SECCION_RELACIONES: "%Relationships";

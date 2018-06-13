@@ -1,0 +1,36 @@
+%created by ML, v01, 2012-03-29:
+%status: incomplete, 2do for CS1!!
+
+%Q2 - Platform Compatibility Question:
+	%Output:
+		compatible (= required and provided):				SIP (must adapt bottom layer), Mike, Display
+		incompatible (= required but missing):		
+		incompatible (= required but constraint not met):	
+	
+	template, delMe:
+		compatible (= required and provided): 													Mike, GraphicsOutput,...
+		incompatible (= required but missing, or constraint not met): 							SIP,...
+		(provided (all other provided components that are not required for the application): 	Compass, Accelerometer)
+	%open issue: shall we further categorize/mark the 1:n relations (e.g. alternatively required and provided/missing/don'tCare)
+
+
+
+	output Q1:
+		required (1:1): 								SIP, Mike, Display
+		required with constraint (1:1): 				Camera and [bottom.resolutionWidth >= 640 px] and [bottom.fps >= 25 fps] and [bottom.position == front]
+		alternatively required (1:N): 					{GSM or UMTS}
+		alternatively required with constraint (1:N): 	(GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= 1024 kbps];	(GPS or CellularRadio or WiFi) and [bottom.accuracy <= 1000 m]
+
+	bottom layer:
+		%Relationships
+		MP_PlatformComponents: Radios Memory Input Output Protocols;
+		Radios: Cellular NonCellularRadio;
+		CellularRadio: GSM GPRS UMTS HSPA;
+		NonCellularRadio: WiFi BT;
+		Memory: ROM RAM Flash;
+		Input: General Sensors;
+		General: Keyboard Touch Mike LineIn;
+		Sensors: GPS Compass Accelerometer;
+	//added:
+		Output:		Display
+		Protocols:	SIP

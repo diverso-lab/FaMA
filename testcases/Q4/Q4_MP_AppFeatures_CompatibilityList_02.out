@@ -1,0 +1,20 @@
+%created by ML, v01, 2012-04-06:
+%added comments by ML (after chat #7), 2012-04-13:
+%for CaseStudy 2, Basic Feature Phone
+
+%Q4 - Platform Migration Question:
+	%Output:
+		enabled, unaffected:		SMS; Call; CallInfo; TextInput; AudioInput; TextOutput; TactileFeedback; VisualIndicator; Torch; AudioOutput; AlarmClock; SMSToPhonebook; Calculator
+
+		enabled, positively affected:	MMS; InternetAccess; Phonebook [memSize]; PositionInformation; Acceleration; PicVideoInput; GraphicsOutput [resolution]; HandsfreeMode
+
+		limited, negatively affected:	-
+
+		conflicted, disabled:		EmergencyProcedure	% should rather be "limited" category, since DTMFToneDecoder can be implemented in SW on this powerful CPU - how to distinguish?
+		
+	%open issue: can/shall we provide explanation why sthg was positively/negativel affected? (e.g. Phonebook positively affected, due to increased FlashSize --> more entries possible)
+	%open issue: can/shall we really distinguish between limited and conflicted? or shall we merge them into single category "conflicted/limited"?
+
+
+	%intermediate Output (preliminary step, top-to-bottom analysis):	tbd if helpful
+	%2do: probably have to split up Q4 into Q4.1 - Q4.4

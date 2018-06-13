@@ -1,0 +1,23 @@
+%created by ML, v01, 2012-03-13:
+
+%Relationships
+MP_AppFeatures: Communication Storage ContextInformation Input Output;
+Communication: VoiceCommunication;
+VoiceCommunication: VoIP;
+Storage: [Phonebook];		% optional features in configuration are not supported yet (for now, we treat them as if they were required)
+ContextInformation: [PositionInformation];
+Input: AudioInput PicVideoInput;
+Output: GraphicsOutput;
+System: [Encryption];
+
+%Attributes (= what I call "attribute instantiation" at configuration time):
+VoIP.datarate: 1024; 	% [kbps]; ensure a minimum datarate for fluent transmission
+PositionInformation.accuracy: 1000	% [m]
+PicVideoInput.resolutionWidth: 640	% [px]
+PicVideoInput.resolutionHeight: 480	% [px]
+PicVideoInput.fps: 25;	% [fps]
+PicVideoInput.numOfCams: 2;
+PicVideoInput.position: front;
+GraphicsOutput.resolutionWidth: 640;	% [px]
+GraphicsOutput.resolutionHeight: 480;	% [px]
+%note: alternatively, we can split this into attribute definitions (e.g.: VoIP.datarate: Integer[0 to intMax], 0, 0;) and modeling the value at configuration time as a constraint (e.g.: VoIP.datarate >= 1024 [kbps]) if required/desired?

@@ -48,6 +48,7 @@ public class ChocoValidConfigurationQuestion extends ChocoQuestion implements
 		return vcq.isValid();
 	}
 
+	@Override
 	public void setConfiguration(Configuration c) {
 		if(c==null){
 			throw new FAMAException("Product: Product not specified");

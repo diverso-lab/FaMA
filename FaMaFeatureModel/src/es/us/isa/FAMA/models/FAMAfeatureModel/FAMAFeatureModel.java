@@ -38,6 +38,7 @@ import es.us.isa.FAMA.models.FAMAfeatureModel.transformations.FeatureModelTransf
 import es.us.isa.FAMA.models.featureModel.Cardinality;
 import es.us.isa.FAMA.models.featureModel.GenericFeatureModel;
 import es.us.isa.FAMA.models.featureModel.GenericRelation;
+import es.us.isa.util.Tree;
 
 /**
  * @author   trinidad,jagalindo.
@@ -336,5 +337,11 @@ public class FAMAFeatureModel extends GenericFeatureModel{
 
 	public OrderingHeuristic getOrderingHeuristic() {
 		return orderingHeuristic;
+	}
+
+	@Override
+	public Tree<String> getConstraint(String str) {
+		System.err.println("This model no accept complex constraintss");
+		return null;
 	}
 }

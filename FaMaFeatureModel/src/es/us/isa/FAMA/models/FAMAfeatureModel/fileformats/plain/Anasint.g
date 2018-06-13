@@ -47,9 +47,6 @@ tokens{
 	VALORES;
 	ENUM;
 	MENOS_UNARIO;
-	CORCHETE_ABRIR;
-	CORCHETE_CERRAR;
-	
 }
 
 
@@ -205,10 +202,10 @@ conjunto_relaciones: SECCION_RELACIONES^ declaraciones_feature;
 declaraciones_feature!: r:declaracion_feature (declaracion_feature)*
 					{## = #r;};
 
-declaracion_feature!: (CORCHETE_ABRIR!)? f:feature (CORCHETE_CERRAR!)? DOSPUNTOS! r:lista_relaciones PyC!
+declaracion_feature!: f:feature DOSPUNTOS! r:lista_relaciones PyC!
 		{## = AST_feature_relacion(#f,#r); };
 
-feature!:  f:IDENT {## = AST_feature(#f);};
+feature!: f:IDENT {## = AST_feature(#f);};
 
 lista_relaciones: (relacion)+;
 

@@ -2,7 +2,7 @@
   	<modelVersion>4.0.0</modelVersion>
   	<groupId>es.us.isa</groupId>
   	<artifactId>FaMaFeatureModel</artifactId>
-<!-- <packaging>bundle</packaging> -->	
+  	<packaging>bundle</packaging>
   	<name>FaMa Feature Model</name>
   	<version>0.9.1</version>
    	<description>Metamodel for fama</description>

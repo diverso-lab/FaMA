@@ -1,0 +1,16 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Relationships (3. Product Configuration)
+S={MP_PlatformComponents, Radios, Memory, Input, Output, System, CellularRadio, GSM, GPRS, General, Keyboard, Mike, Display, Vibrator, Speakers};
+R={};
+%not necessary to have full configuration; for ease of reading, Unselected features are listed as well (FM = S+R+U):
+%U={Memory, LED, Processors}
+
+%Attributes	(4. Attribute Configuration)
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+GPRS.datarate:		128 [kbps]
+UMTS.datarate:		2048 [kbps]
+HSPA.datarate:		14400 [kbps]
+WiFi.datarate:		11000 [kbps]
+Display.colorDepth:	1 [bit]

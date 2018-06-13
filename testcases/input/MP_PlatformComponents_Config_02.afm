@@ -1,0 +1,30 @@
+%created by ML, v01, 2012-04-05:
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships
+MP_PlatformComponents: Radios Memory Input Output Processors System;
+Radios: Cellular NonCellularRadio;
+CellularRadio: GSM;
+%forConf2: NonCellularRadio: BT;
+Memory: ROM RAM Flash SIM;
+Input: General Sensors;
+General: Keyboard Mike;
+%forConf2: Sensors: GPS Accelerometer BioMedicalSensor;
+Output: Display Vibrator LED Speakers;
+Processor: CPU [DTMFToneDecoder];	% could list this component initially as missing --> OEM has to upgrade HW to support that feature
+SystemOthers: SOSButton Battery;
+
+%Attributes (= what I call "attribute instantiation" at configuration time):
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+GPS.accuracy: 10;	% [m]
+CellularRadio.accuracy: 1000	% [m]; this is a rough minimum accuracy estimation; to be more precise, we could make it more fine-grained (depending on frequency)...i.e. one value for each child
+WiFi.accuracy: 100;		% [m]
+Camera.resolutionWidth: 2048	% [px]
+Camera.resolutionHeight: 1536	% [px]
+Camera.fps: 30fps;	% [fps]
+Camera.autofocus: yes;	% [yes|no]
+Camera.flashlight: yes; % [yes|no]
+Camera.noOfCams: 1;
+Display.resolutionWidth: 800;	% [px]
+Display.resolutionHeight: 480;	% [px]
+%note: alternatively, we can split this into attribute definitions (e.g.: Camera.autofocus: [yes, no], no, no;) and modeling the value at configuration time as a constraint (e.g.: Camera.autofocus == yes) if required/desired?

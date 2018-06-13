@@ -68,12 +68,14 @@ public class ChocoDeadFeaturesQuestion extends ChocoQuestion implements
 			return new ChocoProductsQuestion();
 		}
 
+		@Override
 		public Class<? extends Reasoner> getReasonerClass() {
 			return null;
 		}
 
 	}
 
+	@Override
 	public Collection<GenericFeature> getDeadFeatures() {
 		return this.deadFeats;
 	}

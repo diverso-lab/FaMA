@@ -1,0 +1,26 @@
+%created by ML, v01, 2012-04-05:
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships
+MP_AppFeatures: Communication Storage ContextInformation Input Output Services;
+Communication: TextualCommunication VoiceCommunication;
+TextualCommunication: SMS;
+VoiceCommunication: Call;
+Storage: Phonebook CallInfo;
+Input: TextInput AudioInput;
+Output: TextOutput GraphicsOutput TactileFeedback VisualIndicator Torch AudioOutput;
+Services: EmergencyProcedure AlarmClock SMSToPhonebook Calculator;
+
+%Attributes (= what I call "attribute instantiation" at configuration time):
+Phonebook.recSize: 80 [byte]	(30chars*2 (name, unicode) + 20chars (number))
+Phonebook.noOfEntries:	100
+%PositionInformation.accuracy: 1000	% [m]
+%PicVideoInput.resolutionWidth: 640	% [px]
+%PicVideoInput.resolutionHeight: 480	% [px]
+%PicVideoInput.fps: 25;	% [fps]
+%PicVideoInput.numOfCams: 2;
+%PicVideoInput.position: front;
+GraphicsOutput.resolutionWidth: 128;	% [px]
+GraphicsOutput.resolutionHeight: 160;	% [px]
+GraphicsOutput.colorDepth: 1		% [bit] 1..blackWhite
+Torch.intensity: 3;	% [cd]

@@ -1,0 +1,155 @@
+%created by ML, v01, 2012-05-11:	creating a new smaller toy example (less features); using new output-definition for O1 (after meeting from 10.5.2012)
+%for Toy Example
+
+
+=============================== TOP ======================================
+%Relationships (1. Feature Model)
+AppFeatures: [Communication];
+Communication: [1, 3] {Text Voice Data};
+Text: SMS;
+Voice: [1, 1] {Call VoIP};
+Data: InternetAccess;
+
+%Cross-Tree Constraints:
+VoIP REQUIRES InternetAccess;
+
+
+%Attributes	(2. Attribute Model)
+InternetAccess.datarate:		Integer[0 to MaxInt], 0, 0;	% [bps]
+
+
+
+=============================== BOTTOM ======================================
+%Relationships (1. Feature Model)
+PlatformFeatures: [Radios] Input;
+Radios: [1, 2] {Cellular NonCellular};
+Cellular: [1, 2] {GSM GPRS};
+NonCellular: [1, 2] {WiFi BT};
+
+%Constraints:
+%PlatformFeatures.apiLevel >= *.minApiLevel	% is there a way to have a constraint that requires ALL bottom level features to have a minApiLevel > X?
+
+%Attributes	(2. Attribute Model)
+Radios.datarate:	Integer[0 to MaxInt], 0, 0, Inheritable;	% the flag "Inheritable" indicates that this attribute definition is also valid for all its children --> e.g. GPRS, WiFi also have an attribute named "datarate", with the same definition/range
+PlatformFeatures.minApiLevel:	Integer[1 to 15], 1, 1, Inheritable(MAX);	% the flag "Inheritable" indicates that this attribute definition is also valid for all its children; the function in brackets (MAX) defines that this attribute value is composed of a group-function of the parent feature attribute values (example: BT.minApiLevel=5, WiFi.minApiLevel=1 --> Platform.minApiLevel will have the value 5 (the maximum of all his children values))
+
+%old:
+%GPRS.datarate:		Integer[0 to MaxInt], 0, 0;	% 128 [kbps]
+%WiFi.datarate:		Integer[0 to MaxInt], 0, 0;	% 11000 [kbps]
+%PlatformFeatures.apiLevel	Integer[1 to 15], 0, 0;		% reflects the current Android API level
+%BT.minApiLevel:		Integer[5 to 15], 0, 0;		% BT is supported starting in Android API level 5
+
+
+
+=============================== MAPPING =====================================
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+%Mapping is not supported yet in FaMA --> will be added
+
+SMS requires Cellular			% former type (1)
+InternetAccess requires (GPRS or WiFi) and [bottom.datarate >= top.datarate];	% former type (4)
+Call requires GSM (or UMTS);		% former type (3);	we probably can't have a Mapping with features that are not in current FM? (as here UMTS)?
+
+%open issue: do we also need distinction of model/configuration for Mapping? (for now, could be sufficient to model them once for whole FM; only mappings containing selected features will be applied anyway)
+
+
+%different types of inter-tree relations:
+%(essentially, there are 4 types overall; 1:1, 1:n, and those two combined with a constraint)
+	% 1-to-1:
+(1)	A requires B		
+	% if B is included in bottomLayer, success. else, "single-feature-missing error".
+(2)	A requires B with [top.x > bottom.y]
+	% if B is included in bottomLayer, and matches the criterion, success. else, "feature-missing error" (with hint which constraint is not met) (maybe distinguish between 'component missing' and 'constraint not met'?)
+	% initial formulation: "A conditionally requires B if [top.x > bottom.y]" - however, this sounds like: if constraint is not met, bottomA is not required; is NOT true though...bottomA is always required, but must meet the requirement!
+	% variation: how about formulation "A requires B and [top.x > bottom.y]"? advantage: doesn't need any new vocabulary, AND is widely understood. (does it transport correct meaning though?)
+
+	% 1-to-N:
+	% (A requires B and C)	
+	% not supported for now; is just syntactic sugar; translate it into separate mapping: A requires B, A requires C
+(3)	A requires (B or C)		
+	% if B or C (or both) included in bottomLayer, success. else (= non included), "group-feature-missing error".
+(4)	A requires (B or C) with [top.x > bottom.y]	
+	% at least one feature must match the criterion;	if B or C (or both) included in bottomLayer, and (at least one) matches the criterion, success. else, "group-feature-missing error" (with hint which constraint is not met)
+
+order of priority: (2), (1), (4), (3)		% will be relevant for relations with conflicting categories
+%david: @jose this won't be included in the first version of the implementation
+
+
+=============================== CONFIG ======================================
+
+%Attributes	(4. Attribute Configuration)
+%such Attribute Configuration is not supported yet in FaMa (but should be no big deal)
+%Top:
+InternetAccess.datarate:		300	% [bps]
+%Bottom:
+GPRS.datarate:	128
+WiFi.datarate:	1000
+%undecided attributes should be possible too probably
+
+
+======================== MANUAL ANALYSIS ====================================
+
+%Q1 - (required) Platform Capability Question:
+	%Input:
+		TopFM_Config1:	S={SMS, VoIP};		% full config (parent features may not be explicitly mentioned (but are implicitly selected))	also see Attribute Configuration from above
+	%Output:
+		Must-Have:
+			PlatformFeatures, Radios, Cellular, Input
+		Removed:		
+			-
+		GroupOptional:	
+			(GPRS, WiFi)
+		OpenOptional:	
+			%does it contain any additional info, which we can't see from FM + output already?
+			%all the others? (GSM, BT, NonCellular)
+		Attributes Limitations:
+			GPRS.datarate:	Integer[300 to MaxInt]
+			WiFi.datarate:	Integer[300 to MaxInt]
+			PlatformFeatures.minApiLevel:	Integer[5 to 15]
+			
+
+%Q2 - Platform Compatibility Question:
+	%Input:
+		TopFM_Config1:		S={SMS, VoIP};			% full config (parent features may not be explicitly mentioned (but are implicitly selected))
+		BottomFM_Config1:	S={PlatformFeatures, Radios, Input, Cellular, GPRS};		% full config
+	%Output:
+		Compatible (= required and provided):
+			Radios, PlatformFeatures, Input, Cellular
+		Missing:
+			WiFi	% to be precise, WiFi is only missing since GPRS doesn't meet the datarate-criterion; otherwise, either GPRS or WiFi would be fine
+		Incompatible (= provided, but constraint not met):
+			GPRS	% as explanation, we could mention the problem (if possible):	GPRS.datarate < 300
+
+			
+%Q3 - Application Functionality Question:
+	%Input:
+		BottomFM_Config3:	S={PlatformFeatures, Radios, Input, Cellular, GSM};		% full config
+	%Output:
+		enabled:	
+			SMS, Text, Communication, AppFeatures, Call, Voice
+		removed:
+			Internet, VoIP, Data
+		%open issue: can/shall we interpret the relations differently depending on their type (and therefore classify the output?); think about it...
+		%(possibly, we could add Attribute Limitations for top layer attributes here, in analogy to O1)
+		
+%Q4 - Platform Migration Question:
+	%Input:
+		TopFM_Config2:		S={SMS, VoIP, InternetAccess};			% full config (parent features may not be explicitly mentioned (but are implicitly selected))
+		(BottomFM_Config1:	S={PlatformFeatures, Radios, Input, Cellular, GPRS, WiFi};		% full config; (not sure yet whether we support second bottom config as input, to compute/highlight the platform differences)
+		BottomFM_Config2:	S={PlatformFeatures, Radios, Input, Cellular, GPRS, GSM};		% full config
+	%Output:
+		unaffected:
+			SMS
+		enabled, new:
+			Call
+		incompatible:
+			InternetAccess, VoIP
+	(%Output Bottom Layer):		% not sure yet whether we provide this additional output - shows the diff between bottom config 1 and 2 (probably separate Q, simply within one layer?)
+		added:
+			GSM
+		removed:
+			WiFi
+		unchanged:
+			PlatformFeatures, Radios, Input, Cellular, GPRS
+		%open issue: can/shall we provide explanation why sthg was positively/negatively affected? (e.g. Phonebook positively affected, due to increased FlashSize --> more entries possible)
+		%open issue: can/shall we really distinguish between limited and conflicted? or shall we merge them into single category "conflicted/limited"?

@@ -37,6 +37,9 @@ public abstract class CriteriaSelector {
 	public abstract void registerResults(Question q, VariabilityModel vm,
 			PerformanceResult pr);
 
+	public abstract void registerResults(Question q,
+			PerformanceResult pr);
+	
 	public abstract Question createQuestion(Class<Question> q, Reasoner selectedReasoner,
 			VariabilityModel fm);
 }

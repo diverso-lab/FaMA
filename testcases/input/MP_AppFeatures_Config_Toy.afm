@@ -1,0 +1,14 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Relationships (3. Product Configuration)
+S={MP_AppFeatures, Communication, Input, Output, TextualCommunication, VoiceCommunication, DataCommunication, SMS, Call, InternetAccess, TextInput, AudioInput, TextOutput, GraphicsOutput, AudioOutput};
+R={};
+%not necessary to have full configuration; for ease of reading, Unselected features are listed as well (FM = S+R+U):
+%U={Storage, ContextInformation, Services}
+
+%Attributes	(4. Attribute Configuration)
+%such Attribute Configuration is not supported yet in FaMa (but should be no big deal)
+InternetAccess.datarate:		300	% [bps]
+TextOutput.colorDepth:			1;	% [bit] 1..blackWhite
+%undecided attributes should be possible too probably

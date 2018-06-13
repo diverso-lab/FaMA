@@ -1,0 +1,38 @@
+%created by ML, v01, 2012-03-23:
+
+Q3 - Application Functionality Question:
+	Similar to Q1 (though bottom-up), this question will find the corresponding application features that are enabled by a certain platform. One use case would be to early detect application features that are not supported on a particular device/platform, or recognize functionality that could be tapped into by an application (such as a new text-to-speech feature).
+
+	- Input: ConfBottom1, the configuration of supported elements for a given platform.
+			 Mapping
+	- Output: ConfTopMax, the set of features that are potentially enabled by the given platform. %possible?: (categorized by their priority of support, i.e. mandatory vs. optional vs. conditional).
+			  %why is it ConfTopMax here (vs. ConfBottomMin in Q1)? due to 1:N relations top-to-bottom...
+	
+	Example:
+		- Input:  MP_PlatformComponents_Config_01.afm
+				  MP_Mapping_01.map
+		- Output: Q3_MP_AppFeatures_ConfigMax_01.out (compatible/same as type .afm here, as only features are selected, no categorization)
+						selected:	SMS, CS Call, VoIP, InternetAccess, PositionInformation, Acceleration,...
+					%open issue: can/shall we interpret the relations differently depending on their type (and therefore classify the output?); think about it...
+						
+	Algo Q3 in prosa: Find all top-level features that are somehow connected to available bottom layer components
+		- step by step:
+			- for each platform component in ConfBottom1, check if component is included in Mapping
+			- (or: for each relevant mapping, check if component(s) is/are included in ConfBottom1)
+				- for each occurence in mappings file, select the respective top layer feature --> add it to the "selected" list (= the output)
+				- possibly also mark the type of relation (with or without constraint)
+					- a required feature without any constraint overrules a feature with a constraint (i.e., the hint that a constraint is required can be disregarded if another mapping requires the feature (without constraint) anyway)
+
+				
+	Use Cases:
+		Scenario 1: brand new Android device is being announced by Google, such as the Google Nexus running ICS (Android 4.0); what are the supported features? (not too much of a benefit though; one could just read the feature list?)
+					or, better: Nokia just announced a new WP7 Lumia device targeting the lower-end market; using this specification, developer can get a quick estimation what the capabilities of the device are (to have a first judgement of whether it is worth to port to that platform/support it)
+			- given: the specification of a concrete phone/platform (= bottom layer components)
+			- find: all application features that could be utilized by developers
+			
+		Scenario 2: Emporia (our feature phone cooperation partner) is evaluating a new platform, Brew, for its handset product line. Q3 provides a good and quick overview of what will be supported/enabled by that platform
+					or in general: a new limited platform is being planned, what are the limitations a developer has to deal with? (e.g., the display resolution is rather low-res, may not meet expectations/requirements)
+			- given: same as above
+			- find: same as above
+			
+		Main use case of this question is not the direct application of this Q, but it is a required prerequisite for the all-the-more interesting Q4.

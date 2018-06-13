@@ -1,0 +1,19 @@
+%created by ML, v01, 2012-04-05:
+%updated by ML, v02, 2012-04-12:	modified to distinguish between feature/attribute modeling & configuration (1.-4.)
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships (3. Product Configuration)
+S={MP_AppFeatures, Communication, Storage, Input, Output, Services, TextualCommunication, VoiceCommunication, SMS, Call, Phonebook, CallInfo, TextInput, AudioInput, TextOutput, GraphicsOutput, TactileFeedback, VisualIndicator, Torch, AudioOutput, EmergencyProcedure, AlarmClock, SMSToPhonebook, Calculator};
+R={ContextInformation};
+%not necessary to have full configuration though; 2 selected features is alright as well (= having undecided features)
+
+%Attributes	(4. Attribute Configuration)
+%such Attribute Configuration is not supported yet in FaMa (but should be no big deal)
+Phonebook.recSize:					80 	%[byte]	(30chars*2 (name, unicode) + 20chars (number))
+Phonebook.noOfEntries:				100 %[number]
+GraphicsOutput.resolutionWidth:		128 %[px]
+GraphicsOutput.resolutionHeight:	160 %[px]
+GraphicsOutput.colorDepth:			1 	%[bit] 1..blackWhite
+Torch.intensity:					3 	%[cd]
+%undecided attributes should be possible too probably
+

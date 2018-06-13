@@ -1,0 +1,21 @@
+%created by ML, v01, 2012-04-05:
+%updated by ML, v02, 2012-04-12:	modified to distinguish between feature/attribute modeling & configuration (1.-4.)
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships (3. Product Configuration)
+S={MP_PlatformComponents, Radios, Memory, Input, Output, Processors, System, CellularRadio, ROM, RAM, SIM, General, Keyboard, Mike, Display, Vibrator, LED, Speakers, CPU, SOSButton, Battery};
+R={NonCellularRadio, Flash, Sensors, DTMFToneDecoder};
+
+%Attributes	(4. Attribute Configuration)
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+GPS.accuracy: 						10 		%[m]
+CellularRadio.accuracy:				1000	%[m]
+WiFi.accuracy: 						100 	%[m]
+Camera.resolutionWidth: 			2048 	%[px]
+Camera.resolutionHeight: 			1536 	%[px]
+Camera.fps: 						30 		%[fps]
+Camera.autofocus:					yes 	%[yes|no]	%check enum supported?
+Camera.flashlight: 					yes 	%[yes|no]
+Camera.noOfCams:					1 		%[number]
+Display.resolutionWidth:			800 	%[px]
+Display.resolutionHeight: 			480 	%[px]

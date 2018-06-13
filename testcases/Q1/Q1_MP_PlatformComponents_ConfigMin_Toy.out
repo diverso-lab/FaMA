@@ -1,0 +1,18 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Q1 - (required) Platform Capability Question:
+	%Output:
+		O1.1 - required (1:1):
+			Mike; Speakers;
+			
+		O1.2 - required with constraint (1:1):
+			Display and [bottom.colorDepth >= 1];
+			
+		O1.3 - alternatively required (1:N):
+			(GSM or GPRS or UMTS);
+			(GSM or UMTS);
+			(Keyboard or Touch);
+			
+		O1.4 - alternatively required with constraint (1:N): 			
+			(GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= 300];

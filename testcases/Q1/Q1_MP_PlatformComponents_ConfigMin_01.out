@@ -1,0 +1,16 @@
+%created by ML, v01, 2012-03-28:
+%added comments by ML (after chat #7), 2012-04-13:
+
+%Q1 - (required) Platform Capability Question:
+	%Output:
+		required (1:1): 								SIP, Mike, Display
+
+		required with constraint (1:1): 				Camera and [bottom.resolutionWidth >= 640 px] and [bottom.fps >= 25 fps] and [bottom.position == front]
+
+		alternatively required (1:N): 					{GSM or UMTS}
+
+		alternatively required with constraint (1:N): 	(GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= 1024 kbps];	(GPS or CellularRadio or WiFi) and [bottom.accuracy <= 1000 m]
+	%2do: maybe split up Q1 into Q1.1 - Q1.4
+	%Q1.1 is no problem; Q1.2 is different to what's done so far, but feasible/easy;
+	%Q1.3 is kind of a constraint (not sure, maybe DB mixed this up with Q1.4)
+	%Q1.4 difficult (but probably feasible?); make sure in definition that all features have to have this attribute (is it? what if not?)

@@ -1,0 +1,5 @@
+%Relationships
+PlatformFeatures: Input [Radios];
+Radios:[1,2]{Cellular NonCellular};
+Cellular: [1, 2] {GSM GPRS};
+NonCellular: [1, 2] {WIFI BT};

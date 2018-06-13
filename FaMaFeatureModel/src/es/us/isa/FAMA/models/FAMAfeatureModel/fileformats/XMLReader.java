@@ -23,7 +23,7 @@ package es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;
 
 
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.StringReader;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -33,15 +33,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-
 
 //import es.us.isa.FAMA.models.FAMAfeatureModel.Attribute;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Dependency;
@@ -66,25 +62,6 @@ public class XMLReader implements IReader{
 	
 	private Collection<String> featureNames;
 	
-	public VariabilityModel parseStream ( InputStream stream ) throws WrongFormatException {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-
-		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document featureModel = builder.parse( stream );
-			
-			return this.parse( featureModel );
-		} catch (ParserConfigurationException e1){
-			e1.printStackTrace();
-		} catch (SAXException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		throw new IllegalStateException("Error parsing the file");
-	}
-	
 	public VariabilityModel parseFile ( String uri ) throws WrongFormatException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -101,7 +78,7 @@ public class XMLReader implements IReader{
 			e1.printStackTrace();
 		}
 
-		throw new IllegalStateException("Error parsing the file");
+		return null;
 	}
 	
 	/**
@@ -124,7 +101,7 @@ public class XMLReader implements IReader{
 			e1.printStackTrace();
 		}
 
-		throw new IllegalStateException("Error parsing the file");
+		return null;
 	}
 	
 	/**

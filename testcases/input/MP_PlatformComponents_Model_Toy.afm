@@ -1,0 +1,19 @@
+%created by ML, v01, 2012-04-16:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%for Toy Example
+
+%Relationships (1. Feature Model)
+MP_PlatformComponents: [Radios] [Memory] Input Output [Processors] [System];
+Radios: [Cellular] [NonCellularRadio];
+CellularRadio: [GSM] [GPRS] [UMTS];
+NonCellularRadio: [WiFi] [BT];
+Input: [General] [Sensors];
+General: [Keyboard] [Mike];
+Output: [Display] [Vibrator] [LED] [Speakers];
+
+%Attributes	(2. Attribute Model)
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+GPRS.datarate:		Integer[0 to MaxInt], 0, 0;	% 128 [kbps]
+UMTS.datarate:		Integer[0 to MaxInt], 0, 0;	% 2048 [kbps]
+HSPA.datarate:		Integer[0 to MaxInt], 0, 0;	% 14400 [kbps]
+WiFi.datarate:		Integer[0 to MaxInt], 0, 0;	% 11000 [kbps]
+Display.colorDepth:	Integer[0 to 24], 0, 0;		% 1 [bit]

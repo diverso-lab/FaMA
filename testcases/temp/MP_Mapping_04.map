@@ -1,0 +1,52 @@
+%created by ML, v01, 2012-04-05:
+%updated by ML, v02, 2012-04-12:	modified to distinguish between feature/attribute modeling & configuration (1.-4.); no change for Mapping though (is it always abstract?)
+%for CaseStudy 2, Basic Feature Phone
+
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+%Mapping is not supported yet in FaMA --> will be added
+
+SMS requires GSM or UMTS;	% or GPRS(?)
+Call requires GSM or UMTS;
+AudioInput requires Mike
+GraphicsOutput requires Display with [bottom.resolutionHeight >= top.resolutionWidth]
+GraphicsOutput requires Display with [bottom.resolutionHeight >= top.resolutionWidth]
+GraphicsOutput requires Display with [bottom.colorDepth >= top.colorDepth]
+Storage requires RAM;
+Phonebook requires Flash with [bottom.memSize >= top.recSize*top.noOfRecords]	% can we handle such calculations? (if not, can replace it with single attribute)
+Phonebook requires SIM
+CallInfo requires Flash		% shall we put that relation here? or just get rid of CallInfo?
+TextInput requires (Keyboard or Touch)	% if we provide specific mapping file for feature phone domain, then get rid of Touch(?)
+TextOutput requires Display
+TactileFeedback requires Vibrator
+VisualIndicator requires LED
+Torch requires LED with [bottom.intensity >= top.intensity]
+AudioOutput requires Speakers
+EmergencyProcedure requires SOSButton
+EmergencyProcedure requires DTMFToneDecoder	% in CS2, we can claim that DTMFToneDecoder is not provided (Q2);	could model it as requires DTMFToneDecoder or CPU with [clockSpeed >= 100 MHz]; or new DTMFDetector feature on top layer
+AlarmClock requires ClockTimer
+SMSToPhonebook requires SMS and Phonebook	% intra-tree relation (are they supported by default?); probably must rather be specified in respective layer
+HandsfreeMode requires Bluetooth	% precisely speaking it would require (Bluetooth or AudioInput and AudioOutput); this combination ("or + and", and mixing inter-tree and intra-tree features) is not yet supported
+
+%open issue: do we also need distinction of model/configuration for Mapping? (for now, could be sufficient to model them once for whole FM; only mappings containing selected features will be applied anyway)
+
+
+%different types of inter-tree relations:
+%(essentially, there are 4 types overall; 1:1, 1:n, and those two combined with a constraint)
+	% 1-to-1:
+(1)	A requires B		
+	% if B is included in bottomLayer, success. else, "single-feature-missing error".
+(2)	A requires B with [top.x > bottom.y]
+	% if B is included in bottomLayer, and matches the criterion, success. else, "feature-missing error" (with hint which constraint is not met) (maybe distinguish between 'component missing' and 'constraint not met'?)
+	% initial formulation: "A conditionally requires B if [top.x > bottom.y]" - however, this sounds like: if constraint is not met, bottomA is not required; is NOT true though...bottomA is always required, but must meet the requirement!
+	% variation: how about formulation "A requires B and [top.x > bottom.y]"? advantage: doesn't need any new vocabulary, AND is widely understood. (does it transport correct meaning though?)
+
+	% 1-to-N:
+	% (A requires B and C)	
+	% not supported for now; is just syntactic sugar; translate it into separate mapping: A requires B, A requires C
+(3)	A requires (B or C)		
+	% if B or C (or both) included in bottomLayer, success. else (= non included), "group-feature-missing error".
+(4)	A requires (B or C) with [top.x > bottom.y]	
+	% at least one feature must match the criterion;	if B or C (or both) included in bottomLayer, and (at least one) matches the criterion, success. else, "group-feature-missing error" (with hint which constraint is not met)
+
+order of priority: (2), (1), (4), (3)		% will be relevant for relations with conflicting categories

@@ -1,0 +1,205 @@
+%created by ML, v01, 2012-04-05:	CS1, Basic Feature Phone, Emporia
+%created by ML, v02, 2012-07-04:	full definition for actual input to MAYA
+%created by ML, v03, 2012-07-08:	refining full definition for actual input to MAYA
+
+=============================== TOP ======================================
+%Relationships (1. Feature Model)
+AppFeatures: [1, 6] {Communication Storage ContextInformation Input Output Services};
+Communication: [1, 2] {Text Voice Data};
+Text: SMS;
+Voice: Call;
+Data: InternetAccess;
+Storage: [1, 2] {Phonebook CallInfo};
+ContextInformation: PositionInformation;
+Input: [1, 2] {TextInput AudioInput};
+Output: [1, 6] {TextOutput GraphicsOutput TactileFeedback VisualIndicator Torch AudioOutput};
+Services: [1, 4] {EmergencyProcedure AlarmClock SMSToPhonebook Calculator};
+
+%Cross-Tree Constraints:
+EmergencyProcedure requires Call and SMS;	% if AND is not supported here, we could alternatively split it up in two constraints
+SMS requires TextInput and TextOutput;
+SMSToPhonebook requires SMS and Phonebook;
+Call requires AudioInput and AudioOutput;
+
+%Attributes	(2. Attribute Model)
+InternetAccess.datarate:			Integer[0 to MaxInt], 0, 0;	% [kbps]
+Phonebook.recSize:					Integer[0 to 1000], 0, 0;	% [byte]
+Phonebook.noOfRecords:				Integer[0 to 1000], 0, 0;	% [noOfRecords]
+PositionInformation.accuracy:		Integer[1 to 10000], 10000, 10000;		% [m]	
+CallInfo.recSize:					Integer[0 to 1000], 0, 0;	% [byte]
+CallInfo.noOfRecords:				Integer[0 to 1000], 0, 0;	% [noOfRecords]
+GraphicsOutput.resolutionWidth:		Integer[0 to 4000], 0, 0;	% [px]
+GraphicsOutput.resolutionHeight:	Integer[0 to 4000], 0, 0;	% [px]
+GraphicsOutput.colorDepth:			Integer[1 to 24], 1, 0;		% [bit] 1..blackWhite
+TactileFeedback.intensity:			Integer[1 to 10], 0, 0;		% [intensity] 0..off, 1..low, 10..high
+VisualIndicator.color:				Enum? white|red|green
+Torch.intensity:					Integer[0 to 100], 0, 0;	% [cd]
+
+
+=============================== BOTTOM ======================================
+%Relationships (1. Feature Model)
+PlatformFeatures: Radios Memory Input Output Processors System;
+Radios: [1, 2] {Cellular NonCellular};
+Cellular: [1, 2] {GSM GPRS};
+NonCellular: BT;	% not used right now (could map it to Handsfree Mode for example)
+Memory: ROM RAM [Flash] [SIM];
+Input: [1, 2] {General Sensors};
+General: [1, 2] {Keyboard Mic};
+Sensors: [1, 3] {GPS Accelerometer BioMedicalSensor};
+Output: [1, 4] {Display Vibrator LED Speakers};
+Processor: CPU [DTMFToneDecoder];	% (list this component initially as missing? --> OEM has to upgrade HW to support that feature)
+SystemOthers: [SOSButton] ClockTimer Battery;
+
+%Cross-Tree Constraints:
+% N/A
+
+%Attributes	(2. Attribute Model)
+%PlatformFeatures.minApiLevel:	N/A for this low-cost platform (no continuous platform/middleware upgrades); will be relevant for smartphone platforms
+Radios.datarate:	Integer[0 to MaxInt], 0, 0, Inheritable;	% [kbps] - the flag "Inheritable" indicates that this attribute definition is also valid for all its children --> e.g. GPRS, WiFi also have an attribute named "datarate", with the same definition/range
+Memory.memSize:				Integer[0 to 1024*1024], 0, 0;		% [kB]
+GPS.accuracy:				Integer[1 to 1000], 1000, 1000;		% [m]
+Cellular.accuracy:			Integer[1 to 10000], 10000, 10000;	% [m]
+Display.resolutionWidth:	Integer[0 to 4000], 0, 0;			% [px]
+Display.resolutionHeight:	Integer[0 to 4000], 0, 0;			% [px]
+Display.colorDepth:			Integer[1 to 24], 1, 0;				% [bit] 1..blackWhite
+LED.intensity:				Integer[0 to 100], 0, 0;			% [cd]
+CPU.clockSpeed:				Integer[0 to 2048], 0, 0;			% [MHz]
+Battery.capacity:			Integer[0 to 10000], 0, 0;			% [mAh]
+
+
+=============================== MAPPING =====================================
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+%Mapping is not supported yet in FaMA --> will be added
+
+%Q: what if we have mappings with features, that are not in FM? can we simply ignore these features (e.g., Call requires GSM or UMTS, but UMTS may not be part of the FM)? (we could define more general mappings thus)
+
+SMS requires Cellular			% former type (1)
+Call requires GSM or UMTS;		% former type (3);	we probably can't have a Mapping with features that are not in current FM? (as here UMTS)?
+InternetAccess requires (GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= top.datarate];	% former type (4)
+PositionInformation requires (GPS or Cellular or WiFi) and [bottom.accuracy <= top.accuracy];	
+GraphicsOutput requires Display and [bottom.resolutionWidth >= top.resolutionWidth]
+GraphicsOutput requires Display and [bottom.resolutionHeight >= top.resolutionHeight]
+GraphicsOutput requires Display with [bottom.colorDepth >= top.colorDepth]
+Storage requires RAM;
+Phonebook requires Flash and [bottom.memSize >= top.recSize*top.noOfRecords]	% can we handle such calculations? (if not, can replace it with single attribute)
+Phonebook requires SIM
+CallInfo requires Flash		% shall we put that relation here? or just get rid of CallInfo?
+TextInput requires (Keyboard or Touch)	% if we provide specific mapping file for feature phone domain, then get rid of Touch(?)
+TextOutput requires Display
+TactileFeedback requires Vibrator
+VisualIndicator requires LED
+Torch requires LED and [bottom.intensity >= top.intensity]
+AudioOutput requires Speakers
+EmergencyProcedure requires SOSButton
+EmergencyProcedure requires DTMFToneDecoder	% in CS2, we can claim that DTMFToneDecoder is not provided (Q2);	could model it as requires DTMFToneDecoder or CPU with [clockSpeed >= 100 MHz]; or new DTMFDetector feature on top layer
+AlarmClock requires ClockTimer
+
+
+%different types of inter-tree relations:
+%(essentially, there are 4 types overall; 1:1, 1:n, and those two combined with a constraint)
+	% 1-to-1:
+(1)	A requires B		
+	% if B is included in bottomLayer, success. else, "single-feature-missing error".
+(2)	A requires B with [top.x > bottom.y]
+	% if B is included in bottomLayer, and matches the criterion, success. else, "feature-missing error" (with hint which constraint is not met) (maybe distinguish between 'component missing' and 'constraint not met'?)
+	% initial formulation: "A conditionally requires B if [top.x > bottom.y]" - however, this sounds like: if constraint is not met, bottomA is not required; is NOT true though...bottomA is always required, but must meet the requirement!
+	% variation: how about formulation "A requires B and [top.x > bottom.y]"? advantage: doesn't need any new vocabulary, AND is widely understood. (does it transport correct meaning though?)
+
+	% 1-to-N:
+	% (A requires B and C)	
+	% not supported for now; is just syntactic sugar; translate it into separate mapping: A requires B, A requires C
+(3)	A requires (B or C)		
+	% if B or C (or both) included in bottomLayer, success. else (= non included), "group-feature-missing error".
+(4)	A requires (B or C) with [top.x > bottom.y]	
+	% at least one feature must match the criterion;	if B or C (or both) included in bottomLayer, and (at least one) matches the criterion, success. else, "group-feature-missing error" (with hint which constraint is not met)
+
+order of priority: (2), (1), (4), (3)		% will be relevant for relations with conflicting categories
+%david: @jose this won't be included in the first version of the implementation
+
+
+=============================== CONFIG ======================================
+
+%Products (4. Product Configuration)
+%Top Config (full)
+% full config:= parent features may not be explicitly mentioned (but are implicitly selected)
+TopFM_Config1:	S={SMS, Call, Phonebook, CallInfo, TextInput, AudioInput, TextOutput, GraphicsOutput, TactileFeedback, VisualIndicator, Torch, AudioOutput, EmergencyProcedure, AlarmClock, SMSToPhonebook, Calculator};
+
+%Bottom Config (full)
+BottomFM_Config1:	S={GSM, ROM, RAM, Flash, SIM, Keyboard, Mic, Display, Vibrator, LED, Speakers, CPU, DTMFToneDecoder, SOSButton, Battery};
+BottomFM_Config1:	S={GSM, GPRS, ROM, RAM, Flash, SIM, Keyboard, Mic, GPS, Accelerometer, Display, Vibrator, LED, Speakers, CPU, SOSButton, Battery};
+
+
+
+%Attributes	(4. Attribute Configuration)
+%such Attribute Configuration is not supported yet in FaMa (but should be no big deal)
+%Top:
+Phonebook.recSize: 80 % [byte]	(30chars*2 (name, unicode) + 20chars (number))
+Phonebook.noOfEntries:	100
+GraphicsOutput.resolutionWidth: 128;	% [px]
+GraphicsOutput.resolutionHeight: 160;	% [px]
+GraphicsOutput.colorDepth: 1		% [bit] 1..blackWhite
+TactileFeedback.intensity:	5;	% [intensity] 0..off, 1..low, 10..high
+Torch.intensity: 10;	% [cd]
+%additional attribute config (not used for now)
+%InternetAccess.datarate:		50	% [kbps]
+%PositionInformation.accuracy:	100 % [m]
+
+%Bottom:
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+Cellular.accuracy: 1000	% [m]; this is a rough minimum accuracy estimation; to be more precise, we could make it more fine-grained (depending on frequency)...i.e. one value for each child
+RAM.memSize:				512;	% [kB]
+Flash.memSize:				2048;	% [kB]
+Display.resolutionWidth: 800;	% [px]
+Display.resolutionHeight: 480;	% [px]
+LED.intensity: 			20;		% [cd]
+CPU.clockSpeed:			66;		% [MHz]
+Battery.capacity:		1100;	% [mAh]
+%used in BottomFM_Config2:
+GPS.accuracy: 10;	% [m]
+GPRS.datarate:	128;	% [kbps]
+
+======================== MANUAL ANALYSIS ====================================
+
+%Q1 - (required) Platform Capability Question:
+	%Input:
+		TopFM_Config1 (also see Attribute Configuration from above)
+	%Output:
+		Must-Have:
+		Removed:		
+		GroupOptional:	
+		OpenOptional:	
+		Attributes Limitations:
+			
+
+%Q2 - Platform Compatibility Question:
+	%Input:
+		TopFM_Config1
+		BottomFM_Config1
+	%Output:
+		Compatible (= required and provided):
+		Missing:
+		Incompatible (= provided, but constraint not met):
+
+			
+%Q3 - Application Functionality Question:
+	%Input:
+		BottomFM_Config1
+	%Output:
+		enabled:	
+		removed:
+
+		
+%Q4 - Platform Migration Question:
+	%Input:
+		TopFM_Config1
+		(BottomFM_Config1 (not sure yet whether we support second bottom config as input, to compute/highlight the platform differences))
+		BottomFM_Config2
+	%Output:
+		unaffected:
+		enabled, new:
+		incompatible:
+		(%Output Bottom Layer):		% not sure yet whether we provide this additional output - shows the diff between bottom config 1 and 2 (probably separate Q, simply within one layer?)
+			added:
+			removed:
+			unchanged:

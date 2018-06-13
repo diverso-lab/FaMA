@@ -1,0 +1,24 @@
+%created by ML, v01, 2012-04-18:	creating a new toy example (to be used throughout the paper), depicting each type of relation, and distinguishing between feature/attribute modeling & configuration (1.-4.)
+%modified by ML, v02, 2012-05-02:	splitted the output into three suboperations O2.1-O2.3
+%for Toy Example
+
+%Q2 - Platform Compatibility Question:
+	%Output:
+		O2.1 - compatible (= required and provided):
+			Mike; Speakers;		% required and provided
+			Display;		% required and provided and constraint met
+			GSM; GPRS;		% alternatively required
+
+		O2.2 - missing (= required but missing):
+			-
+			%could add (Keyboard or Touch) as example here (would require to remove both component from bottom layer config)
+
+		O2.3 - incompatible (= required and provided, but constraint not met):
+			(GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= 300];	% GPRS is there, but provides lower datarate than 300kbps; other components are missing
+			%would also work for single components, e.g.:	Display and [bottom.colorDepth >= 16];	(would need to update input configurations)
+
+		(O2.4 - provided (all other provided components that are not required for the application): 	just subtract InputConfig - Output)
+
+	%open issue: O2 takes output of O1 as input. Shall we specify it like that, or internally rerun O1 and use this intermediate output as input?
+	%open issue: shall we further categorize/mark the 1:n relations (e.g. alternatively required and provided/missing/don'tCare)
+	%alternative: combine O2.2 and O2.3 to a general "incompatible" question

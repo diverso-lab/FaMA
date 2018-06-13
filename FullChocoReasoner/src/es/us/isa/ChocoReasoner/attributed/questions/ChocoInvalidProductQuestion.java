@@ -51,10 +51,12 @@ public class ChocoInvalidProductQuestion extends ChocoQuestion implements
 
 	private Collection<GenericFeature> feats;
 
+	@Override
 	public Collection<GenericFeature> getInvalidFeatures() {
 		return feats;
 	}
 
+	@Override
 	public void setProduct(Product p) {
 		if (p instanceof AttributedProduct) {
 			product = (AttributedProduct) p;

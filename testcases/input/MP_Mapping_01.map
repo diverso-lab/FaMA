@@ -1,0 +1,41 @@
+%created by ML, v01, 2012-03-13:
+
+%Mapping
+%(valid mapping will be ensured by tool-supported mapping selection in future)
+
+%SMS requires CellularRadio;	% a relation to a parent component is not supported (yet?); could be modeled by creating dependencies to each child;
+Call requires GSM or UMTS;
+VoIP requires (GPRS or UMTS or HSPA or WiFi) if [bottom.datarate >= top.datarate];	% or: VoIP requires InternetAccess
+InternetAccess requires (GPRS or UMTS or HSPA or WiFi) if [bottom.datarate >= top.datarate];
+%VoIP requires SIP and RTP	% not supported for now; could be used as syntactic sugar:= short for two separate relations
+VoIP requires SIP
+PositionInformation requires (GPS or CellularRadio or WiFi) with [bottom.accuracy <= top.accuracy];		% i.e., at least one component must match the criterion (e.g., GPS.accuracy=10m < PositionInformation.accuracy=1000m)
+VoiceAudioInput requires Mike
+PicVideoInput requires Camera with [bottom.resolution >= top.resolution]
+PicVideoInput requires Camera with [bottom.fps >= top.fps]
+PicVideoInput requires Camera with [bottom.position == top.position]	% if impracticable, we could just as well make 2 Camera instances (front, back)
+GraphicsOutput requires Display		% we could also require a minimum resolution for the display; not specified for now
+PicVideoInput requires Camera with [bottom.numOfCams >= top.numOfCams]
+
+
+%different types of inter-tree relations:
+%(essentially, there are 4 types overall; 1:1, 1:n, and those two combined with a constraint)
+%interpretation: top layer feature requires bottom layer feature
+
+	% 1-to-1:
+(1)	A requires B		
+	% if B is included in bottomLayer, success. else, "single-feature-missing error".
+(2)	A requires B with [top.x > bottom.y]
+	% if B is included in bottomLayer, and matches the criterion, success. else, "feature-missing error" (with hint which constraint is not met) (maybe distinguish between 'component missing' and 'constraint not met'?)
+	% initial formulation: "A conditionally requires B if [top.x > bottom.y]" - however, this sounds like: if constraint is not met, bottomA is not required; is NOT true though...bottomA is always required, but must meet the requirement!
+	% variation: how about formulation "A requires B and [top.x > bottom.y]"? advantage: doesn't need any new vocabulary, AND is widely understood. (does it transport correct meaning though?)
+
+	% 1-to-N:
+	% (A requires B and C)	
+	% not supported for now; is just syntactic sugar; translate it into separate mapping: A requires B, A requires C
+(3)	A requires (B or C)		
+	% if B or C (or both) included in bottomLayer, success. else (= non included), "group-feature-missing error".
+(4)	A requires (B or C) with [top.x > bottom.y]	
+	% at least one feature must match the criterion;	if B or C (or both) included in bottomLayer, and (at least one) matches the criterion, success. else, "group-feature-missing error" (with hint which constraint is not met)
+
+order of priority: (2), (1), (4), (3)		% will be relevant for relations with conflicting categories

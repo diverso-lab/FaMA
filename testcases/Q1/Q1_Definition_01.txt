@@ -1,0 +1,53 @@
+%created by ML, v01, 2012-03-16: initial definition
+%updated by ML, v02, 2012-04-16: dividing Q1 into 4 sub-operations O1.1 - O1.4
+
+Q1 - (required) Platform Capability Question:
+	Given a set of selected features for a concrete application, the "Platform Capability Question (Q1)" will identify the required platform components.
+	- Input: ConfTop1, the configuration of selected application functionalities.
+			 Mapping.
+	- Output: ConfBottomMin, the minimally required platform components (categorized by their priority of existence, i.e. mandatory vs. optional vs. conditional).
+	
+	Example / Test Case #1:
+		- Input:  MP_AppFeatures_Config_01.afm
+				  MP_Mapping_01.map
+		- Output: Q1_MP_PlatformComponents_ConfigMin_01.out
+					%categorized output:
+						required (1:1): 								SIP, Mike, Display
+						required with constraint (1:1): 				Camera and [bottom.resolutionWidth >= 640 px] and [bottom.fps >= 25 fps] and [bottom.position == front]
+						alternatively required (1:N): 					{GSM or UMTS}
+						alternatively required with constraint (1:N): 	(GPRS or UMTS or HSPA or WiFi) and [bottom.datarate >= 1024 kbps];	(GPS or CellularRadio or WiFi) and [bottom.accuracy <= 1000 m]					
+					%open issue: we have to clearly define priorities in case a component is eligible for multiple categories (e.g. "required" has higher priority than "alternatively required", and "required with constraint" has higher priority than "required")
+
+	Splitting Q1 into four elementary operations:
+		O1   - PlatformCapabilityQuestion: run O1.1 - O1.4, then resolve conflicts, provide one output
+		O1.1 - RequiredComponents (1:1)
+		O1.2 - RequiredComponentsWithConstraint (1:1)
+		O1.3 - AlternativelyRequiredComponents (1:N)
+		O1.4 - AlternativelyRequiredComponentsWithConstraints (1:N)
+		O1.5 - CombineAndResolveConflicts?
+		%argument for Q1 remaining a single atomic operation: different features can include components multiple times, but with different categories --> need to resolve conflicts so that each component is mentioned in only one category (the one with highest priority)
+							
+	Algo Q1 in prosa:
+		- Select the subset of mappings that apply to ConfTop1
+		- replace the mappings attribute values (e.g. top.datarate) with concrete values from ConfTop1 (e.g. 1024 kbps)
+		- take priorities into account in case a component is eligible for classification in different categories
+		
+		- step by step:
+			foreach mapping in MP_Mapping.map:
+				- if feature is in MP_AppFeatures_Config.afm
+					- identify the required bottom layer components (and their category) (by reading the mapping file)
+					- if relation has a constraint:
+						- if the attribute is instantiated in top level
+							- replace the mappings attribute values (e.g. top.datarate) with concrete values from ConfTop1 (e.g. 1024 kbps)
+					- add the component/group to the appropriate list		
+				  
+
+	Use Cases:
+		Scenario 1: an Android developer, who wants to upload his application to Google Play (aka Android Market)
+			- given: the application requirements (= top level features)
+			- find: what are the minimally required HW components + platform modules (in which version?) to support such an application?
+			- (variation: what is the minimum platform API level required for the desired functionality?)
+			
+		Scenario 2: an OEM (original equipment manufacturer, such as our cooperation partner) of a feature phone wants to migrate to a new platform (due to technology progress, strategical reasons,...)
+			- given: the very basic application functionalities
+			- find: what are the minimally required components for a new platform? (i.e., this question helps the OEM at selecting new platforms)

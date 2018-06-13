@@ -1,0 +1,26 @@
+%created by ML, v01, 2012-04-05:
+%updated by ML, v02, 2012-04-12:	modified to distinguish between feature/attribute modeling & configuration (1.-4.)
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships (1. Feature Model)
+MP_AppFeatures: [Communication] [Storage] [ContextInformation] Input Output [Services];
+Communication: [TextualCommunication] [VoiceCommunication];
+TextualCommunication: [SMS];
+VoiceCommunication: [Call];
+Storage: [Phonebook] [CallInfo];
+Input: [TextInput] [AudioInput];
+Output: [TextOutput] [GraphicsOutput] [TactileFeedback] [VisualIndicator] [Torch] [AudioOutput];
+Services: [EmergencyProcedure] [AlarmClock] [SMSToPhonebook] [Calculator];
+%don't I need other relation types?
+%check syntax
+%cross tree constraints? put them inside here if required
+
+%Attributes	(2. Attribute Model)
+Phonebook.recSize:					Integer[0 to 10000], 0, 0;		% 80 [byte]	(30chars*2 (name, unicode) + 20chars (number))
+Phonebook.noOfEntries:				Integer[0 to 1000], 0, 0;		% 100 [number]
+GraphicsOutput.resolutionWidth:		Integer[0 to MaxInt], 0, 0;		% 128 [px]
+GraphicsOutput.resolutionHeight:	Integer[0 to MaxInt], 0, 0;		% 160 [px]
+GraphicsOutput.colorDepth:			Integer[0 to 24], 0, 0;			% 1 [bit] 1..blackWhite
+Torch.intensity:					Integer[0 to 10], 0, 0;			% 3 [cd]
+
+%Q: is there a way to add/model the unit in FaMa? would be valueable for any meaningful output interpretation

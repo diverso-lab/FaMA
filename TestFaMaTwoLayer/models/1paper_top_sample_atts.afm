@@ -1,0 +1,9 @@
+%Relationships
+AppFeatures: [Communications];
+Communications :[1,3]{Text Voice Data};
+Text: SMS;
+Voice:[1,1]{Call VoIP};
+Data: InternetAccess;
+
+%Constraints
+VoIP REQUIRES InternetAccess;

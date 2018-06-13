@@ -18,10 +18,13 @@
 package es.us.isa.FAMA.models.FAMAfeatureModel.fileformats;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import constraints.BooleanVariable;
 import constraints.PropositionalFormula;
+import es.us.isa.FAMA.models.FAMAfeatureModel.Dependency;
 import es.us.isa.FAMA.models.FAMAfeatureModel.ExcludesDependency;
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
 import es.us.isa.FAMA.models.FAMAfeatureModel.Feature;
@@ -32,7 +35,9 @@ import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
 import es.us.isa.FAMA.models.variabilityModel.parsers.IReader;
 import fm.FeatureGroup;
 import fm.FeatureModel;
+import fm.FeatureModelStatistics;
 import fm.FeatureTreeNode;
+import fm.RootNode;
 import fm.SolitaireFeature;
 import fm.XMLFeatureModel;
 
@@ -151,11 +156,9 @@ public class SPLXReader implements IReader {
 					negs++;
 				}
 				if(feat1==null){
-					String featureName = var.replace("~","").replace("(", "").replace(")", "");
-					feat1=string2features.get(featureName);
+					feat1=string2features.get(var.replace("~",""));
 				}else{
-					String featureName = var.replace("~","").replace("(", "").replace(")", "");
-					feat2=string2features.get(featureName);
+					feat2=string2features.get(var.replace("~",""));
 				}
 			}
 			if(negs==1){

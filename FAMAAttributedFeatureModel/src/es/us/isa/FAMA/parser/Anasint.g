@@ -391,8 +391,16 @@ declaracion_invariante: e:declaracion_expresion;
 
 declaracion_expresion: e:expresion PyC!{## = constraintExpresion(#e);};
 
-expresion : 
-   expresion_nivel_1 (( IFF^ | IMPLIES^) expresion_nivel_1)?  
+expresion:
+	 IDENT REQUIRES^ IDENT
+	| IDENT IFF^ IDENT
+	| expresion_nivel_0
+	
+;
+
+
+expresion_nivel_0 : 
+   expresion_nivel_1 ((IFF^ | IMPLIES^ ) expresion_nivel_1)?  
    ;
    
 expresion_nivel_1 : 
@@ -414,6 +422,7 @@ expresion_nivel_4: expresion_nivel_5
 	;
 	
 expresion_nivel_5: exp_mult ((MAS^ | MENOS^) exp_mult)*;
+
 
 //invariante: exp (MAYOR^ | MENOR^ | MAYOR_IGUAL^ | MENOR_IGUAL^ | IGUAL^ | DISTINTO^) exp;
 	//{## = #(#[INVARIANTE,"INVARIANTE"],##);};

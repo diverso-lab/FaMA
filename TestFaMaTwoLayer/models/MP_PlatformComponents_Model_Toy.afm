@@ -1,0 +1,15 @@
+%Relationships
+MP_PlatformComponents: [Radios] [Memory] Input Output [Processors] [System];
+Radios: [CellularRadio] [NonCellularRadio];
+CellularRadio: [GSM] [GPRS] [UMTS] [HSPA];
+NonCellularRadio: [WiFi] [BT];
+Input: [General] [Sensors];
+General: [Keyboard] [Mike];
+Output: [Display] [Vibrator] [LED] [Speakers];
+
+%Attributes	
+GPRS.datarate:		Integer[0 to 9], 128, 0;	
+UMTS.datarate:		Integer[0 to 9], 2048, 0;	
+HSPA.datarate:		Integer[0 to 9], 14400, 0;	
+WiFi.datarate:		Integer[0 to 9], 11000, 0;	
+Display.colorDepth:	Integer[0 to 24], 1, 0;	

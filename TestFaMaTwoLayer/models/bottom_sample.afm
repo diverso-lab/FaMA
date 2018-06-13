@@ -1,0 +1,3 @@
+%Relationships
+C: [D] [E] X;
+E: [1, 1] {F Y};

@@ -103,4 +103,5 @@ public class Product extends GenericProduct{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 }

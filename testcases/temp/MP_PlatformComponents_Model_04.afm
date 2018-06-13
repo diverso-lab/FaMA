@@ -1,0 +1,30 @@
+%created by ML, v01, 2012-04-05:
+%updated by ML, v02, 2012-04-12:	modified to distinguish between feature/attribute modeling & configuration (1.-4.)
+%for CaseStudy 2, Basic Feature Phone
+
+%Relationships (1. Feature Model)
+MP_PlatformComponents: Radios Memory Input Output Processors System;
+Radios: [Cellular] [NonCellularRadio];
+CellularRadio: [GSM];
+%forConf2: NonCellularRadio: BT;
+Memory: ROM RAM [Flash] [SIM];
+Input: [General] [Sensors];
+General: [Keyboard] [Mike];
+%forConf2: Sensors: GPS Accelerometer BioMedicalSensor;
+Output: [Display] [Vibrator] [LED] [Speakers];
+Processor: [CPU] [DTMFToneDecoder];	% could list this component initially as missing --> OEM has to upgrade HW to support that feature
+SystemOthers: [SOSButton] Battery;
+
+%Attributes	(2. Attribute Model)
+%MP_PlatformComponents.apiLevel: 1;	% there is no comparable thing as apiLevels here (no continuous platform/middleware upgrades)
+GPS.accuracy: 						Integer[0 to 10000], 0, 0;		% 10 [m]
+CellularRadio.accuracy:				Integer[0 to 10000], 0, 0;		% 1000 [m]; this is a rough minimum accuracy estimation; to be more precise, we could make it more fine-grained (depending on frequency)...i.e. one value for each child
+WiFi.accuracy: 						Integer[0 to 10000], 0, 0;		% 100 [m]
+Camera.resolutionWidth: 			Integer[0 to MaxInt], 0, 0;		% 2048 [px]
+Camera.resolutionHeight: 			Integer[0 to MaxInt], 0, 0;		% 1536 [px]
+Camera.fps: 						Integer[0 to 100], 0, 0;		% 30 [fps]
+Camera.autofocus:					Enum[yes|no], no, no;			% yes [yes|no]
+Camera.flashlight: 					Enum[yes|no], no, no;			% yes [yes|no]
+Camera.noOfCams:					Integer[0 to 2], 0, 0;			% 1 [number]
+Display.resolutionWidth:			Integer[0 to MaxInt], 0, 0;		% 800 [px]
+Display.resolutionHeight: 			Integer[0 to MaxInt], 0, 0;		% 480 [px]
