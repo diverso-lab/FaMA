@@ -876,7 +876,6 @@ public class Choco3Reasoner extends FeatureModelReasoner {
 	 * 
 	 * @see es.us.isa.FAMA.Reasoner.FeatureModelReasoner#addConstraint(es.us.isa.FAMA.models.featureModel.Constraint)
 	 */
-	@Override
 	public void addConstraint(es.us.isa.FAMA.models.featureModel.Constraint famaConstraint) {
 		Constraint choco3Constraint = this.choco3Parser.translateToConstraint(famaConstraint.getAST());
 		this.dependencies.put(famaConstraint.getName(), choco3Constraint);
