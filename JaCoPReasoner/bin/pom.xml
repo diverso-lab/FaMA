@@ -140,14 +140,15 @@
 				<extensions>true</extensions>
 				<version>1.4.0</version>
 				<configuration>
-					<manifestLocation>META-INF</manifestLocation>
 					<instructions>
 						<Bundle-SymbolicName>${pom.groupId}.${pom.artifactId}</Bundle-SymbolicName>
-						<Bundle-Name>${pom.artifactId}</Bundle-Name>
+						<Bundle-Name>${pom.name}</Bundle-Name>
 						<Built-By>FaMa Team</Built-By>
 						<Export-Package>es.us.isa.*</Export-Package>
-						<Bundle-Activator>es.us.isa.JaCoP.osgi.Activator</Bundle-Activator>
-						<Import-Package>org.osgi.framework,*;resolution:=optional</Import-Package>
+						<Bundle-Activator>es.us.isa.JaCoP.osgi.Activator
+						</Bundle-Activator>
+						<Import-Package>org.osgi.framework,*;resolution:=optional
+						</Import-Package>
 					</instructions>
 				</configuration>
 			</plugin>
