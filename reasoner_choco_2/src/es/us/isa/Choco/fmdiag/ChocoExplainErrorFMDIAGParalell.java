@@ -47,6 +47,7 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 	Map<String, Constraint> relations = null;
 	//int numberOfThreads = Runtime.getRuntime().availableProcessors();
 	int numberOfThreads = 4;
+	Model base;
 
 	ExecutorService executorService = Executors.newCachedThreadPool();
 
@@ -102,6 +103,11 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 			relations = new HashMap<String, Constraint>();
 			relations.putAll(cons4obs);
 			relations.putAll(chReasoner.getRelations());
+
+		    //////////////////////////////*******************
+			base = new CPModel();
+		    base.addVariables(chReasoner.getVars());
+		    /////////////////////////////********************
 
 			ArrayList<String> S = new ArrayList<String>(chReasoner.getRelations().keySet());
 			ArrayList<String> AC = new ArrayList<String>(relations.keySet());
@@ -267,8 +273,7 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 	}
 
 	private boolean isConsistent(Collection<String> aC) {
-		Model p = new CPModel();
-		p.addVariables(chReasoner.getVars());
+ 	    Model p = base;
 
 		for(String rel:aC){
 			Constraint c = relations.get(rel);
@@ -284,14 +289,11 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 		return s.isFeasible();
 	}
 
-
 	public void setErrors(Collection<Error> colErrors) {
 		this.errors= colErrors;
 	}
 
-
 	public Collection<Error> getErrors() {
 		return errors;
 	}
-
 }
