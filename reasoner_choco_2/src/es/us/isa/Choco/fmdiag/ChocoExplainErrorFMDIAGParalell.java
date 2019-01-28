@@ -47,8 +47,7 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 	Map<String, Constraint> relations = null;
 	//int numberOfThreads = Runtime.getRuntime().availableProcessors();
 	int numberOfThreads = 4;
-	Model base;
-
+	
 	ExecutorService executorService = Executors.newCachedThreadPool();
 
 	public PerformanceResult answer(Reasoner r) throws FAMAException {
@@ -103,11 +102,6 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 			relations = new HashMap<String, Constraint>();
 			relations.putAll(cons4obs);
 			relations.putAll(chReasoner.getRelations());
-
-		    //////////////////////////////*******************
-			base = new CPModel();
-		    base.addVariables(chReasoner.getVars());
-		    /////////////////////////////********************
 
 			ArrayList<String> S = new ArrayList<String>(chReasoner.getRelations().keySet());
 			ArrayList<String> AC = new ArrayList<String>(relations.keySet());
@@ -165,19 +159,26 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 		List<String> D, S, AC;
 		int numberOfSplits;
 		ExecutorService executorService;
+		int consistencyDetails=0;		
+
+		CPModel p = new CPModel();
+
 		public diagThreads(List<String> D, List<String> S,List<String> AC,int numberOfSplits, ExecutorService executorService){
 			this.D=D;
 			this.S=S;
 			this.AC=AC;
 			this.executorService=executorService;
 			this.numberOfSplits=numberOfSplits;
+			p.addVariables(chReasoner.getVars());
 		}
 		
 		@Override
 		public List<String> call() throws Exception {
 			//System.out.println("Executando "+D+","+S+","+AC);
 			//if(!isConsistent(D)&&isConsistent(AC)){
-			if(isConsistent(AC)){
+			this.consistencyDetails = 0;
+
+			if(isConsistent(AC, this)){
 				return new ArrayList<String>();
 			}
 			if(S.size()==1){
@@ -273,8 +274,9 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 	}
 
 	private boolean isConsistent(Collection<String> aC) {
- 	    Model p = base;
-
+		CPModel p = new CPModel();
+		p.addVariables(chReasoner.getVars()); 
+	
 		for(String rel:aC){
 			Constraint c = relations.get(rel);
 
@@ -288,6 +290,26 @@ public class ChocoExplainErrorFMDIAGParalell extends ChocoQuestion implements Ex
 		s.solve();
 		return s.isFeasible();
 	}
+
+
+	private boolean isConsistent(Collection<String> aC, diagThreads currentThread) {
+        CPModel p = currentThread.p;
+	  
+    	for(String rel:aC){
+    		Constraint c = relations.get(rel);
+
+    		if(c==null){
+    			System.out.println("Error");
+    		}
+		
+    		p.addConstraint(c);
+    	}
+    	Solver s = new CPSolver();
+    	s.read(p);
+    	s.solve();
+    	return s.isFeasible(); 	    	
+	}
+
 
 	public void setErrors(Collection<Error> colErrors) {
 		this.errors= colErrors;
