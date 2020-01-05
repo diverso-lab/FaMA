@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,10 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.logicng.configurations.ConfigurationType;
 import org.logicng.formulas.Formula;
 import org.logicng.formulas.FormulaFactory;
 import org.logicng.io.parsers.ParserException;
 import org.logicng.io.parsers.PropositionalParser;
+import org.logicng.transformations.cnf.CNFConfig;
+import org.logicng.transformations.cnf.CNFConfig.Builder;
 import org.sat4j.minisat.constraints.card.MinWatchCard;
 
 //import net.sf.javabdd.BDD;
@@ -344,6 +348,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 			ArrayList<GenericFeature> childrenArray=(ArrayList<GenericFeature>) children;
 			int n = card.getMin();
 			int m = card.getMax();
+			
 			String constraintNoCNF ="~"+variables.get(parent.getName());
 			
 			for (int i=n;i<=m;i++) {
@@ -353,26 +358,49 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 				for(int[] perm_index:partial_permutations_index) {
 					//String[] perm= new String[perm_index.length];
 					constraintNoCNF+="|(";
+					
+					//add the root present
+					constraintNoCNF+=""+variables.get(parent.getName());
+					constraintNoCNF+=" & ";
+					
+					//features que si estan
 					for (int j=0;j<perm_index.length;j++) {
 						constraintNoCNF+=variables.get(childrenArray.get(perm_index[j]).getName());
+						
 						if(!(j==perm_index.length-1)) {
-							constraintNoCNF+="&";
-						}else {
-							constraintNoCNF+=")";
-							
+							constraintNoCNF+=" & ";
 						}
 					}
+					List<Integer> get_not_present_features = get_not_present_features(perm_index,children.size());
+					if(get_not_present_features.size()>0) {
+						constraintNoCNF+=" & ";
+					}
+
+					//feature que no estan
+					for(int j=0;j<get_not_present_features.size();j++) {
+						constraintNoCNF+="~"+variables.get(childrenArray.get(get_not_present_features.get(j)).getName());
+
+						if(!(j==get_not_present_features.size()-1)) {
+							constraintNoCNF+=" & ";
+						}
+					}
+					constraintNoCNF+=")";	
+
 				}
 			}
-			
+			//System.out.println(constraintNoCNF);
 			
 			//Currently using an external library to transform the generated constraints
 			final FormulaFactory f = new FormulaFactory();
+			Builder b = new Builder();
+			b.algorithm(CNFConfig.Algorithm.BDD);
+			f.putConfiguration(new CNFConfig(b));
 			final PropositionalParser p = new PropositionalParser(f);
 			Formula formula;
 			try {
 				formula = p.parse(constraintNoCNF);
 				String fullFormula=formula.cnf().toString();
+				//System.out.println(fullFormula);
 				for(String clause:fullFormula.split("&")) {
 					String translated_clause=clause.trim();
 					translated_clause=translated_clause.replaceAll("~", "-");
@@ -381,6 +409,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 
 					//System.out.println(translated_clause);
 					clauses.add(translated_clause+" 0");
+				//	System.out.println(translated_clause);
 				}
 				
 				
@@ -391,6 +420,25 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 
 	}
 
+	private List<Integer> get_not_present_features(int[] perm_index,int n) {
+		List<Integer> res= new ArrayList<Integer>();
+		for(int i=0;i<n;i++) {
+		    if( !arrayContains(perm_index,i)) {
+		    	res.add(i);
+		    }
+		}
+		return res;
+	}
+
+	public boolean arrayContains(final int[] array, final int key) {
+	    for (final int i : array) {
+	        if (i == key) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
 	public List<int[]> generatePermutation(int n, int r) {
 	    List<int[]> combinations = new ArrayList<int[]>();
 	    helper(combinations, new int[r], 0, n-1, 0);
