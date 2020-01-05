@@ -1,9 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.us.isa</groupId>
 	<artifactId>Sat4jReasoner</artifactId>
-<!-- <packaging>bundle</packaging> -->	
+	<!-- <packaging>bundle</packaging> -->
 	<name>Sat4jReasoner</name>
 	<version>1.0.1</version>
 	<description>Reasoner based on Sat4j (SAT)</description>
@@ -39,6 +40,11 @@
 			<version>1.0</version>
 			<scope>provided</scope>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.logicng</groupId>
+			<artifactId>logicng</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
 	<distributionManagement>
@@ -94,7 +100,7 @@
 					<header>copyrightNotice.txt</header>
 				</configuration>
 				<executions>
-					
+
 				</executions>
 			</plugin>
 			<plugin>
@@ -136,10 +142,8 @@
 					</excludes>
 					<archive>
 						<addMavenDescriptor>false</addMavenDescriptor>
-						<!-- <manifestFile>META-INF/MANIFEST.MF</manifestFile>
-						<manifestEntries>
-							<Built-By>FaMa Team</Built-By>
-						</manifestEntries> -->
+						<!-- <manifestFile>META-INF/MANIFEST.MF</manifestFile> <manifestEntries> 
+							<Built-By>FaMa Team</Built-By> </manifestEntries> -->
 					</archive>
 				</configuration>
 			</plugin>
