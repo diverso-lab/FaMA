@@ -24,8 +24,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import org.logicng.formulas.Formula;
+import org.logicng.formulas.FormulaFactory;
+import org.logicng.io.parsers.ParserException;
+import org.logicng.io.parsers.PropositionalParser;
+import org.sat4j.minisat.constraints.card.MinWatchCard;
 
 //import net.sf.javabdd.BDD;
 //import net.sf.javabdd.JFactory;
@@ -46,10 +53,11 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	 * @uml.associationEnd qualifier="key:java.lang.Object java.lang.String"
 	 */
 	public Map<String, String> variables; // Variables<FeatureName,SATVarNumber>
-	
-	public boolean easeGeneration=false;
+
+	public boolean easeGeneration = false;
 	public String easeGenString;
-	public int easeIncrement=0;
+	public int easeIncrement = 0;
+
 	public Map<String, String> getVariables() {
 		return variables;
 	}
@@ -60,7 +68,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 
 	private Map<String, GenericFeature> featuresMap;
 
-	//private String pathFile;
+	// private String pathFile;
 	public ArrayList<String> clauses; // Clauses
 
 	private int numvar; // Number of variables
@@ -68,7 +76,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	private ArrayList<String> addedClauses;
 
 	private InputStream stream;
-	
+
 	public Sat4jReasoner() {
 		reset();
 	}
@@ -84,7 +92,6 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		addedClauses = new ArrayList<String>();
 		numvar = 1;
 	}
-
 
 	public ArrayList<String> getClauses() {
 		return clauses;
@@ -122,17 +129,16 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		Iterator<String> it = variables.keySet().iterator();
 		while (it.hasNext()) {
 			String varName = it.next();
-			cnf_content += "c var " + variables.get(varName) + " = " + varName
-					+ "\n";
+			cnf_content += "c var " + variables.get(varName) + " = " + varName + "\n";
 		}
 
 		// Start the problem
-		if(!easeGeneration){
-		cnf_content += "p cnf " + variables.size() + " " + clauses.size()
-				+ "\n";
-		}else{
-			//cnf_content += "p cnf " + variables.size() + " " + (clauses.size() + easeIncrement)	+ "\n";
-			cnf_content += "p cnf " + variables.size() + " " + (clauses.size() )	+ "\n";
+		if (!easeGeneration) {
+			cnf_content += "p cnf " + variables.size() + " " + clauses.size() + "\n";
+		} else {
+			// cnf_content += "p cnf " + variables.size() + " " + (clauses.size() +
+			// easeIncrement) + "\n";
+			cnf_content += "p cnf " + variables.size() + " " + (clauses.size()) + "\n";
 
 		}
 		// Clauses
@@ -141,13 +147,13 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 			cnf_content += (String) it.next() + "\n";
 		}
 
-		if(!easeGeneration){
-		// End file
-		cnf_content += "0";
-		}else{
-			this.easeGenString=cnf_content += "0" ;
+		if (!easeGeneration) {
+			// End file
+			cnf_content += "0";
+		} else {
+			this.easeGenString = cnf_content += "0";
 		}
-		stream= new ByteArrayInputStream(cnf_content.getBytes(StandardCharsets.UTF_8));
+		stream = new ByteArrayInputStream(cnf_content.getBytes(StandardCharsets.UTF_8));
 		// Create the .cnf file
 //		File outputFile = null;
 //		try {
@@ -166,15 +172,14 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	@Override
-	public void addCardinality(GenericRelation rel, GenericFeature child,
-			GenericFeature parent, Iterator<Cardinality> cardinalities) {
+	public void addCardinality(GenericRelation rel, GenericFeature child, GenericFeature parent,
+			Iterator<Cardinality> cardinalities) {
 		// TODO Cardinalities are not supported by SAT4j solver
 
 	}
 
 	@Override
-	public void addExcludes(GenericRelation rel, GenericFeature origin,
-			GenericFeature destination) {
+	public void addExcludes(GenericRelation rel, GenericFeature origin, GenericFeature destination) {
 
 		// Get features
 		String cnf_origin = variables.get(origin.getName());
@@ -186,16 +191,14 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	@Override
-	public void addFeature(GenericFeature feature,
-			Collection<Cardinality> cardIt) {
+	public void addFeature(GenericFeature feature, Collection<Cardinality> cardIt) {
 		variables.put(feature.getName(), Integer.toString(numvar));
 		numvar++;
 		featuresMap.put(feature.getName(), feature);
 	}
 
 	@Override
-	public void addMandatory(GenericRelation rel, GenericFeature child,
-			GenericFeature parent) {
+	public void addMandatory(GenericRelation rel, GenericFeature child, GenericFeature parent) {
 		// Get features
 		String cnf_parent = variables.get(parent.getName());
 		String cnf_child = variables.get(child.getName());
@@ -209,8 +212,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	@Override
-	public void addOptional(GenericRelation rel, GenericFeature child,
-			GenericFeature parent) {
+	public void addOptional(GenericRelation rel, GenericFeature child, GenericFeature parent) {
 		// Get features
 		String cnf_parent = variables.get(parent.getName());
 		String cnf_child = variables.get(child.getName());
@@ -222,8 +224,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	@Override
-	public void addRequires(GenericRelation rel, GenericFeature origin,
-			GenericFeature destination) {
+	public void addRequires(GenericRelation rel, GenericFeature origin, GenericFeature destination) {
 
 		// Get features
 		String cnf_origin = variables.get(origin.getName());
@@ -246,8 +247,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	@Override
-	public void addSet(GenericRelation rel, GenericFeature parent,
-			Collection<GenericFeature> children,
+	public void addSet(GenericRelation rel, GenericFeature parent, Collection<GenericFeature> children,
 			Collection<Cardinality> cardinalities) {
 		// TODO: Lanzar un error si no hay una y s�lo una cardinalidad en la
 		// lista
@@ -256,7 +256,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 		Iterator<Cardinality> iter = cardinalities.iterator();
 		Cardinality card = iter.next();
 
-		if (card.getMax() != 1) {
+		if (card.getMin() == 1 && card.getMax() == children.size()) {
 
 			// =============
 			// OR Relation
@@ -287,7 +287,8 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 				cnf_or = "-" + cnf_child + " " + cnf_parent + " 0";
 				clauses.add(cnf_or);
 			}
-		} else {
+
+		} else if (card.getMin() == 1 && card.getMax() == 1) {
 
 			// ======================
 			// ALTERNATIVE Relation
@@ -323,39 +324,99 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 				childrenList.add(cnf_child);
 			}
 
-			for (int i = 0; i < childrenList.size(); i++) // for (int i = 0; i <
-			// childrenList.size();
-			// i++)
-			{
+			for (int i = 0; i < childrenList.size(); i++) {
 				for (int k = i + 1; k < children.size(); k++) // for (int k = 0;
 				// k <
 				// childrenList.size();
 				// k++)
 				{
 					if (i != k) {
-						cnf_alternative = "-" + childrenList.get(i) + " -"
-								+ childrenList.get(k) + " 0";
+						cnf_alternative = "-" + childrenList.get(i) + " -" + childrenList.get(k) + " 0";
 						clauses.add(cnf_alternative);
 					}
 				}
 
-				cnf_alternative = "-" + childrenList.get(i) + " " + cnf_parent
-						+ " 0";
+				cnf_alternative = "-" + childrenList.get(i) + " " + cnf_parent + " 0";
 				clauses.add(cnf_alternative);
+			}
+		} else {// is n to m
+			
+			ArrayList<GenericFeature> childrenArray=(ArrayList<GenericFeature>) children;
+			int n = card.getMin();
+			int m = card.getMax();
+			String constraintNoCNF ="~"+variables.get(parent.getName());
+			
+			for (int i=n;i<=m;i++) {
+				List<int[]> partial_permutations_index=generatePermutation(children.size(),i);
+				//get the data from index
+				//List<String[]> partial_permutations=new ArrayList<String[]>();
+				for(int[] perm_index:partial_permutations_index) {
+					//String[] perm= new String[perm_index.length];
+					constraintNoCNF+="|(";
+					for (int j=0;j<perm_index.length;j++) {
+						constraintNoCNF+=variables.get(childrenArray.get(perm_index[j]).getName());
+						if(!(j==perm_index.length-1)) {
+							constraintNoCNF+="&";
+						}else {
+							constraintNoCNF+=")";
+							
+						}
+					}
+				}
+			}
+			
+			
+			//Currently using an external library to transform the generated constraints
+			final FormulaFactory f = new FormulaFactory();
+			final PropositionalParser p = new PropositionalParser(f);
+			Formula formula;
+			try {
+				formula = p.parse(constraintNoCNF);
+				String fullFormula=formula.cnf().toString();
+				for(String clause:fullFormula.split("&")) {
+					String translated_clause=clause.trim();
+					translated_clause=translated_clause.replaceAll("~", "-");
+					translated_clause=translated_clause.replaceAll("[()]", "");
+					translated_clause=translated_clause.replaceAll("\\| ", "");
+
+					//System.out.println(translated_clause);
+					clauses.add(translated_clause+" 0");
+				}
+				
+				
+			} catch (ParserException e) {
+				e.printStackTrace();
 			}
 		}
 
 	}
 
+	public List<int[]> generatePermutation(int n, int r) {
+	    List<int[]> combinations = new ArrayList<int[]>();
+	    helper(combinations, new int[r], 0, n-1, 0);
+	    return combinations;
+	}
+	
+	private void helper(List<int[]> combinations, int data[], int start, int end, int index) {
+	    if (index == data.length) {
+	        int[] combination = data.clone();
+	        combinations.add(combination);
+	    } else if (start <= end) {
+	        data[index] = start;
+	        helper(combinations, data, start + 1, end, index + 1);
+	        helper(combinations, data, start + 1, end, index);
+	    }
+	}
+	
 	public PerformanceResult ask(Question q) {
 		if (q == null) {
 			throw new FAMAParameterException("questions :Not specified");
 		}
-		
-		PerformanceResult res=new Sat4jResult();
-		
+
+		PerformanceResult res = new Sat4jResult();
+
 		Sat4jQuestion sq = (Sat4jQuestion) q;
-		
+
 		sq.preAnswer(this);
 		res = sq.answer(this);
 		sq.postAnswer(this);
@@ -374,15 +435,14 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	@Override
 	public void applyStagedConfiguration(Configuration conf) {
 		// Added Features
-		Iterator<Entry<VariabilityElement, Integer>> it = conf.getElements()
-				.entrySet().iterator();
+		Iterator<Entry<VariabilityElement, Integer>> it = conf.getElements().entrySet().iterator();
 		while (it.hasNext()) {
 			Entry<VariabilityElement, Integer> entry = it.next();
 			if (entry.getKey() instanceof GenericFeature) {
 				String cnf_var = getCNFVar(entry.getKey().getName());
 				String clause = "";
 				if (entry.getValue() == 0) {
-					clause = "-"+cnf_var + " 0";
+					clause = "-" + cnf_var + " 0";
 				}
 				if (entry.getValue() > 0) {
 					clause = cnf_var + " 0";
@@ -411,7 +471,7 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	@Override
 	public void setHeuristic(Object obj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public InputStream getStream() {
@@ -419,12 +479,11 @@ public class Sat4jReasoner extends FeatureModelReasoner {
 	}
 
 	public String getPartialCNF(int increment) {
-		this.easeGeneration=true;
-		this.easeIncrement=increment;
+		this.easeGeneration = true;
+		this.easeIncrement = increment;
 		createSAT();
-		this.easeGeneration=false;
+		this.easeGeneration = false;
 		return easeGenString;
 	}
-
 
 }
